@@ -1,10 +1,11 @@
 import React from "react";
 import HeroSection from "@/components/HeroSection";
-import FeatureCards from "@/components/FeatureCards";
+import CustomerQuickActions from "@/components/CustomerQuickActions";
+import ServicePillars from "@/components/ServicePillars";
+import UgandaRecyclingGuide from "@/components/UgandaRecyclingGuide";
+import ContainerGuide from "@/components/ContainerGuide";
+import CoverageAreas from "@/components/CoverageAreas";
 import AboutSection from "@/components/AboutSection";
-import ServicesTabs from "@/components/ServicesTabs";
-import WorkProcess from "@/components/WorkProcess";
-import RecentProjects from "@/components/RecentProjects";
 import Testimonials from "@/components/Testimonials";
 import BlogPreview from "@/components/BlogPreview";
 import ContactSection from "@/components/ContactSection";
@@ -12,33 +13,34 @@ import ContactSection from "@/components/ContactSection";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
-      {/* Decongested Full-Width Hero Section */}
-      <div className="w-full">
-        <HeroSection />
-      </div>
+      {/* 1. Hero Section with Interactive Uganda Schedule & Service Finder */}
+      <HeroSection />
 
-      {/* 4 Core Operational Pillars */}
-      <FeatureCards />
+      {/* 2. Self-Service Customer Quick Actions (Schedule, Bill Pay, Missed Pickup, Dumpsters) */}
+      <CustomerQuickActions />
 
-      {/* About Nature Waste Management Ltd & Real Ugandan Heritage */}
+      {/* 3. Core Service Pillars (Residential, Commercial, Roll-Off Skips) */}
+      <ServicePillars />
+
+      {/* 4. Uganda Waste Segregation & Recycling Guide (What Goes Where) */}
+      <UgandaRecyclingGuide />
+
+      {/* 5. Container & Dumpster Sizing Guide (120L to 20m³) */}
+      <ContainerGuide />
+
+      {/* 6. Suburb & District Coverage Areas Across Kampala & Entebbe */}
+      <CoverageAreas />
+
+      {/* 7. Why Nature Waste / NEMA Compliance & GoGreenug Youth Initiative */}
       <AboutSection />
 
-      {/* Interactive Services & Modules Tabs */}
-      <ServicesTabs />
-
-      {/* 3-Step Work Process Flow */}
-      <WorkProcess />
-
-      {/* Recent Operations & Impact Metrics */}
-      <RecentProjects />
-
-      {/* Verified Client Testimonials */}
+      {/* 8. Verified Ugandan Client Testimonials */}
       <Testimonials />
 
-      {/* Environmental Insights & Research */}
+      {/* 9. Environmental Insights, Policy & Research */}
       <BlogPreview />
 
-      {/* Dedicated Contact Section */}
+      {/* 10. Customer Care & Dispatch Inquiries */}
       <ContactSection />
     </main>
   );

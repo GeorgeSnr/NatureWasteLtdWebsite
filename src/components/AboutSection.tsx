@@ -1,99 +1,137 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Award, Users, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import {
+  ShieldCheck,
+  Award,
+  Users,
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
+  Truck,
+  Leaf,
+} from "lucide-react";
 
 export default function AboutSection() {
+  const pillars = [
+    {
+      icon: ShieldCheck,
+      title: "100% NEMA Statutory Compliance",
+      desc: "Fully licensed by the National Environment Management Authority (NEMA) Uganda for domestic, commercial, and industrial waste handling.",
+    },
+    {
+      icon: Users,
+      title: "Youth Environmentalist Leadership",
+      desc: "Founded by Ugandan environmental pioneers, channeling local youth employment and community cleanup campaigns under the GoGreenug banner.",
+    },
+    {
+      icon: Truck,
+      title: "Modern Enclosed Compactor Fleet",
+      desc: "GPS-monitored hydraulic compactor trucks designed to prevent roadside odor, liquid leachate spillage, and missed pickup backlogs.",
+    },
+    {
+      icon: Leaf,
+      title: "Certified Circular Recycling",
+      desc: "State-of-the-art sorting facility at Kitende on Entebbe Road, baling post-consumer PET, HDPE, and paper for regional industrial manufacturing.",
+    },
+  ];
+
   const stats = [
     { value: "120k+", label: "Metric Tons Diverted from Landfills" },
-    { value: "99.4%", label: "Collection Reliability SLA" },
-    { value: "45k+", label: "Bins & Households Covered" },
-    { value: "100%", label: "NEMA Regulatory Compliance" },
+    { value: "99.4%", label: "Collection Route Reliability SLA" },
+    { value: "45k+", label: "Households & Businesses Served" },
+    { value: "100%", label: "Traceable NEMA Chain-of-Custody" },
   ];
 
   return (
-    <section className="w-full bg-white py-16 lg:py-24 px-6 sm:px-12 lg:px-16 select-none relative z-10">
-      <div className="max-w-[1320px] mx-auto">
-        {/* Header Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start mb-12">
+    <section id="about-nema" className="w-full bg-[#0E1A14] text-white py-16 sm:py-20 lg:py-24 select-none relative overflow-hidden">
+      {/* Background Graphic Watermark */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-5 pointer-events-none flex items-center justify-end">
+        <svg viewBox="0 0 400 400" className="w-full h-full fill-current text-white">
+          <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="12" fill="none" />
+          <path d="M120 280 L200 120 L280 280 Z" stroke="currentColor" strokeWidth="12" fill="none" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8">
+        
+        {/* Top Header */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-16">
           <div className="lg:col-span-7 space-y-4">
-            <div className="flex items-center gap-2 text-nature-primary font-extrabold text-xs sm:text-sm uppercase tracking-widest">
-              <span className="text-base sm:text-lg font-black tracking-tight leading-none text-nature-secondary">
-                »»
-              </span>
-              <span>ABOUT NATURE WASTE MANAGEMENT LIMITED</span>
+            <div className="inline-flex items-center gap-2 text-nature-secondary font-extrabold text-xs uppercase tracking-widest bg-white/10 px-3.5 py-1.5 rounded-full">
+              <Award className="w-3.5 h-3.5 text-nature-secondary" />
+              <span>THE NATURE WASTE DIFFERENCE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#141517] leading-[1.15] tracking-tight">
-              Pioneering youth-led sustainable waste solutions across <span className="text-nature-primary">Uganda &amp; East Africa.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-white leading-[1.12] tracking-tight">
+              A Higher Standard of Waste Management For Uganda
             </h2>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+              At Nature Waste Management Limited, we believe reliable sanitation is the bedrock of thriving cities. We combine corporate-grade logistics modeled after industry leaders like Waste Connections with passionate on-the-ground youth environmental stewardship.
+            </p>
           </div>
 
-          <div className="lg:col-span-5 space-y-4 pt-1 mb-6 lg:mb-0">
-            <h3 className="text-base sm:text-[18px] font-bold text-[#141517] leading-snug">
-              Registered and licensed under NEMA Uganda, Nature Waste Management Limited was founded by passionate youth environmentalists to eradicate uncollected refuse in Kampala&apos;s suburbs.
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Headquartered at Kitende, Karl House on Entebbe Road, we deploy selective collection mechanisms for plastics, scrap metals, paper, and biodegradable plant/animal waste. Through our <strong>GoGreenug</strong> initiative, we actively advance Uganda&apos;s Vision 2040 for clean, disease-free, and economically vibrant cities.
+          <div className="lg:col-span-5 bg-white/5 border border-white/15 rounded-2xl p-6 sm:p-8 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-nature-primary flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-white">NEMA Uganda Registered</h3>
+                <span className="text-xs text-nature-secondary font-semibold">
+                  Official Environmental Waste Handler
+                </span>
+              </div>
+            </div>
+            <p className="text-xs text-gray-300 leading-relaxed">
+              Operating under strict National Environment Management Authority guidelines, our protocols ensure every kilogram of refuse is accounted for, sorted, and processed without polluting Lake Victoria or local wetlands.
             </p>
+            <div className="pt-2">
+              <Link
+                href="/features"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-nature-secondary hover:text-white transition-colors"
+              >
+                <span>Read Our Full ESG &amp; Compliance Statement</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Floating CTA over Chamfered Image */}
-        <div className="relative w-full mt-6 mb-16 lg:mb-20">
-          <div className="absolute -top-6 lg:-top-7 left-0 lg:left-[calc(58.333%+1rem)] z-20">
-            <Link
-              href="/features"
-              className="inline-flex items-center gap-3 bg-nature-primary hover:bg-nature-primary-dark text-white font-bold px-7 py-3.5 sm:py-4 text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 shadow-md group"
-            >
-              <span>Discover Our Operations</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <div className="relative w-full overflow-hidden shadow-xl z-10 chamfer-card-lg">
-            <div
-              className="w-full h-[280px] sm:h-[360px] lg:h-[400px] bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1600&q=80')",
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              
-              {/* Overlay pill credentials */}
-              <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-xs text-white">
-                <div className="bg-black/60 backdrop-blur-xs px-3.5 py-1.5 border border-white/20 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-nature-secondary" />
-                  <span>Licensed NEMA Waste Handler</span>
+        {/* 4 Feature Value Pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {pillars.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-nature-secondary/50 transition-all duration-300 space-y-3"
+              >
+                <div className="w-11 h-11 rounded-lg bg-nature-primary text-white flex items-center justify-center">
+                  <Icon className="w-5 h-5" />
                 </div>
-                <div className="bg-black/60 backdrop-blur-xs px-3.5 py-1.5 border border-white/20 flex items-center gap-2">
-                  <Award className="w-4 h-4 text-nature-accent" />
-                  <span>GoGreenug Youth Initiative</span>
-                </div>
-                <div className="bg-black/60 backdrop-blur-xs px-3.5 py-1.5 border border-white/20 flex items-center gap-2">
-                  <Users className="w-4 h-4 text-nature-secondary" />
-                  <span>Suburban &amp; Industrial Reach</span>
-                </div>
+                <h3 className="font-bold text-base text-white">{item.title}</h3>
+                <p className="text-xs text-gray-300 leading-relaxed">{item.desc}</p>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/* 4 Large Outlined Stat Counters */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-end pt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-8 border-t border-white/15">
           {stats.map((stat, idx) => (
-            <div key={idx} className="flex flex-col relative group">
-              <div className="relative inline-block mb-2">
-                <span className="text-5xl sm:text-6xl lg:text-[76px] font-extrabold leading-none tracking-tight block text-outline-gray group-hover:text-nature-primary transition-colors duration-300">
-                  {stat.value}
-                </span>
+            <div key={idx} className="space-y-2">
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-nature-secondary tracking-tight">
+                {stat.value}
               </div>
-              <div className="w-full border-t border-gray-200 my-3" />
-              <span className="text-gray-700 text-sm sm:text-base font-semibold leading-tight">
+              <div className="text-sm font-semibold text-gray-300">
                 {stat.label}
-              </span>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,0 +1,238 @@
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import {
+  CheckCircle2,
+  XCircle,
+  RefreshCw,
+  Leaf,
+  ShieldCheck,
+  ArrowRight,
+  Sparkles,
+  Info,
+} from "lucide-react";
+
+export default function UgandaRecyclingGuide() {
+  const [activeStream, setActiveStream] = useState<"plastics" | "paper" | "organics" | "general">("plastics");
+
+  const streams = {
+    plastics: {
+      title: "Plastics & Polymers (Blue Sack)",
+      tagline: "High-value circular polymer recovery at Kitende Sorting Center",
+      accepted: [
+        "Clean PET drinking water & soda bottles",
+        "HDPE cooking oil containers & yellow jerrycans",
+        "Rigid plastic buckets, basins & crates",
+        "Clean stretch wrap & LDPE polythene packaging",
+      ],
+      notAccepted: [
+        "Single-use thin polythene 'kaveera' bags",
+        "Motor oil containers with chemical residues",
+        "Heavily soiled or mud-caked plastic items",
+        "Styrofoam takeout containers",
+      ],
+      destination: "Baled and optical-sorted at our Kitende facility, then pelletized into industrial grade resin for local packaging manufacturers.",
+    },
+    paper: {
+      title: "Paper & Cardboard (Yellow Sack)",
+      tagline: "Preventing paper pollution & deforestation across Uganda",
+      accepted: [
+        "Flattened corrugated shipping cartons & boxes",
+        "White office documents, invoices & scrap paper",
+        "Newspapers, magazines & school notebooks",
+        "Clean egg trays & cardboard packaging inserts",
+      ],
+      notAccepted: [
+        "Wax-coated food boxes (e.g. frozen food packaging)",
+        "Tissue paper, napkins & contaminated paper towels",
+        "Carbon duplicate paper",
+        "Wet or grease-soaked pizza boxes",
+      ],
+      destination: "Hydraulically compressed into 400kg dense bales and supplied to regional paper mills for recycled brown paper cartons.",
+    },
+    organics: {
+      title: "Organic & Kitchen Waste (Green Sack)",
+      tagline: "Transforming domestic food scraps into organic bio-fertilizer",
+      accepted: [
+        "Fruit and vegetable trimmings (matooke, cassava peels, etc.)",
+        "Leftover cooked food & coffee grounds",
+        "Garden grass clippings, hedge cuttings & leaves",
+        "Raw agricultural and market produce rejects",
+      ],
+      notAccepted: [
+        "Plastic bags or packaging mixed with food",
+        "Pet waste or hazardous animal carcasses",
+        "Large tree stumps or construction lumber",
+        "Synthetic chemicals or pesticides",
+      ],
+      destination: "Aerobically composted at community facilities to produce rich organic humus for urban gardeners and commercial agriculture.",
+    },
+    general: {
+      title: "General Non-Recyclable Waste (Black Sack)",
+      tagline: "Safe, sanitary containment ensuring disease-free neighborhoods",
+      accepted: [
+        "Composite foil snack wrappers (crisps, biscuits)",
+        "Sanitary refuse and bathroom waste",
+        "Broken ceramics, glass and mirror shards (wrapped)",
+        "Worn-out shoes, synthetic textiles & composite refuse",
+      ],
+      notAccepted: [
+        "Explosives, car batteries or chemical solvents",
+        "Untreated clinical infectious hospital waste",
+        "Large demolition concrete rubble (use Skip rental)",
+      ],
+      destination: "Collected in compactor trucks and transferred to licensed municipal engineered landfill sites with zero illegal open dumping.",
+    },
+  };
+
+  const current = streams[activeStream];
+
+  return (
+    <section id="recycling-guide" className="w-full bg-[#F8F9FA] py-16 sm:py-20 lg:py-24 select-none border-y border-gray-200">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div className="inline-flex items-center gap-2 text-nature-primary font-extrabold text-xs uppercase tracking-widest bg-nature-primary/10 px-3.5 py-1.5 rounded-full">
+            <RefreshCw className="w-3.5 h-3.5 text-nature-primary animate-spin-slow" />
+            <span>NEMA UGANDA COMPLIANCE &amp; GOGREENUG</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#141517] tracking-tight leading-tight">
+            What Goes Where? Uganda Waste Segregation Guide
+          </h2>
+          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Waste Connections and Nature Waste believe in making sustainability simple. Follow our color-coded guidelines to ensure maximum recycling efficiency and neighborhood cleanliness.
+          </p>
+        </div>
+
+        {/* 4 Stream Selector Tabs */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
+          <button
+            onClick={() => setActiveStream("plastics")}
+            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+              activeStream === "plastics"
+                ? "bg-blue-600 text-white border-blue-600 shadow-lg scale-[1.02]"
+                : "bg-white text-gray-700 border-gray-200 hover:border-blue-400"
+            }`}
+          >
+            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+              Blue Sack
+            </span>
+            <span className="text-base font-black">Plastics &amp; Bottles</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStream("paper")}
+            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+              activeStream === "paper"
+                ? "bg-amber-600 text-white border-amber-600 shadow-lg scale-[1.02]"
+                : "bg-white text-gray-700 border-gray-200 hover:border-amber-400"
+            }`}
+          >
+            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+              Yellow Sack
+            </span>
+            <span className="text-base font-black">Paper &amp; Cartons</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStream("organics")}
+            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+              activeStream === "organics"
+                ? "bg-nature-primary text-white border-nature-primary shadow-lg scale-[1.02]"
+                : "bg-white text-gray-700 border-gray-200 hover:border-nature-primary"
+            }`}
+          >
+            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+              Green Sack
+            </span>
+            <span className="text-base font-black">Organic Compost</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStream("general")}
+            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+              activeStream === "general"
+                ? "bg-gray-900 text-white border-gray-900 shadow-lg scale-[1.02]"
+                : "bg-white text-gray-700 border-gray-200 hover:border-gray-500"
+            }`}
+          >
+            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+              Black Sack
+            </span>
+            <span className="text-base font-black">General Trash</span>
+          </button>
+        </div>
+
+        {/* Stream Details Card */}
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 sm:p-10 max-w-4xl mx-auto">
+          <div className="border-b border-gray-100 pb-6 mb-6">
+            <h3 className="text-2xl font-black text-[#141517] tracking-tight">
+              {current.title}
+            </h3>
+            <p className="text-sm text-gray-500 mt-1">
+              {current.tagline}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Accepted items */}
+            <div className="bg-green-50/50 border border-green-200 rounded-xl p-5 space-y-3">
+              <div className="flex items-center gap-2 text-nature-primary font-black text-xs uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-nature-primary" />
+                <span>YES - Place in this container:</span>
+              </div>
+              <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
+                {current.accepted.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-nature-primary font-bold">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Not Accepted items */}
+            <div className="bg-red-50/50 border border-red-200 rounded-xl p-5 space-y-3">
+              <div className="flex items-center gap-2 text-red-600 font-black text-xs uppercase tracking-wider">
+                <XCircle className="w-4 h-4 text-red-600" />
+                <span>NO - Do not place in this container:</span>
+              </div>
+              <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
+                {current.notAccepted.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-red-500 font-bold">✕</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Environmental Destination Note */}
+          <div className="mt-8 bg-gray-50 rounded-xl p-4 border border-gray-200 flex items-start gap-3">
+            <Info className="w-5 h-5 text-nature-primary shrink-0 mt-0.5" />
+            <div className="text-xs text-gray-600 leading-relaxed">
+              <strong className="text-gray-900 font-bold block mb-0.5">
+                What happens to this waste?
+              </strong>
+              {current.destination}
+            </div>
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 text-nature-primary hover:text-nature-primary-dark font-extrabold text-xs uppercase tracking-wider group"
+            >
+              <span>Order Color-Coded Recycling Sacks &amp; Bins for Your Home</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}

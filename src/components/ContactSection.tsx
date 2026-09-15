@@ -1,14 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  CheckCircle2,
+  ShieldCheck,
+  AlertCircle,
+  Headphones,
+} from "lucide-react";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [inquiryType, setInquiryType] = useState("residential");
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
-    company: "",
+    area: "Kitende",
     message: "",
   });
 
@@ -18,212 +30,237 @@ export default function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="relative w-full bg-[#181A1C] text-white py-16 sm:py-20 lg:py-24 overflow-hidden select-none"
-    >
-      {/* World Map Dotted Pattern Background */}
-      <div className="absolute inset-0 opacity-15 pointer-events-none overflow-hidden flex items-center justify-center">
-        <svg
-          viewBox="0 0 1000 500"
-          className="w-full h-full object-cover text-white fill-current"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <pattern
-            id="world-dots"
-            x="0"
-            y="0"
-            width="14"
-            height="14"
-            patternUnits="userSpaceOnUse"
-          >
-            <circle cx="2" cy="2" r="1.2" fill="currentColor" opacity="0.4" />
-          </pattern>
-          <rect width="1000" height="500" fill="url(#world-dots)" />
-        </svg>
-      </div>
+    <section id="contact" className="w-full bg-[#141517] text-white py-16 sm:py-20 lg:py-24 select-none relative">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 text-nature-secondary font-extrabold text-xs uppercase tracking-widest bg-white/10 px-3.5 py-1.5 rounded-full">
+            <Headphones className="w-3.5 h-3.5" />
+            <span>UGANDA CUSTOMER CARE &amp; DISPATCH</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-white tracking-tight leading-tight">
+            How Can We Help You Today?
+          </h2>
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+            Whether you are starting a new household trash pickup, requesting a commercial dumpster, or reporting a missed bin, our Kampala operations center is here to assist you.
+          </p>
+        </div>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto px-6 sm:px-12 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Direct Contact Info */}
-          <div className="lg:col-span-6 space-y-8">
-            <div>
-              <div className="flex items-center gap-1.5 text-nature-secondary font-bold text-xs sm:text-sm tracking-widest uppercase">
-                <span className="text-base leading-none">»</span>
-                <span>OFFICIAL CONTACT CHANNELS</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-white tracking-tight leading-[1.12] mt-3">
-                Nature Waste Management Limited
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-3 max-w-xl font-normal">
-                Reach out to our environmental operations team in Kampala for scheduled pickups, commercial container deployment, or community recycling programs.
-              </p>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          
+          {/* Left Column: Direct Customer Touchpoints */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-[#1C1F22] rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
+              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">
+                Direct Contact Channels
+              </h3>
 
-            {/* 4 Contact Tiles */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 pt-2">
-              {/* Location */}
+              {/* Phone dispatch */}
               <div className="flex items-start gap-4">
-                <div className="w-13 h-13 bg-nature-primary shrink-0 flex items-center justify-center text-white chamfer-card-xs">
-                  <MapPin className="w-5 h-5 stroke-[2]" />
+                <div className="w-12 h-12 rounded-xl bg-nature-primary text-white flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Uganda Head Office</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-1">
+                  <h4 className="text-sm font-bold text-white">Call Customer Dispatch</h4>
+                  <div className="mt-1 space-y-0.5">
+                    <a href="tel:+256700890123" className="block text-sm font-bold text-nature-secondary hover:underline">
+                      +256 700 890 123
+                    </a>
+                    <a href="tel:+256312456789" className="block text-xs text-gray-400 hover:text-white">
+                      +256 312 456 789 (Commercial Lines)
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-nature-primary text-white flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-white">Email Inquiries &amp; Tenders</h4>
+                  <a href="mailto:info@naturewasteug.com" className="text-sm font-semibold text-nature-secondary hover:underline block mt-1">
+                    info@naturewasteug.com
+                  </a>
+                  <span className="text-[11px] text-gray-500 block">Typical response time: under 2 hours</span>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-nature-primary text-white flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-white">Headquarters &amp; Sorting Plant</h4>
+                  <p className="text-xs text-gray-300 leading-relaxed mt-1">
                     Kitende, Karl House, Room 9 <br />
                     Entebbe Road, Kampala, Uganda
                   </p>
                 </div>
               </div>
 
-              {/* Phone */}
+              {/* Hours */}
               <div className="flex items-start gap-4">
-                <div className="w-13 h-13 bg-nature-primary shrink-0 flex items-center justify-center text-white chamfer-card-xs">
-                  <Phone className="w-5 h-5 stroke-[2]" />
+                <div className="w-12 h-12 rounded-xl bg-nature-primary text-white flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Direct Dispatch Lines</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-1">
-                    <a href="tel:+256700890123" className="hover:text-white font-semibold block">
-                      +256 700 890 123
-                    </a>
-                    <a href="tel:+256312456789" className="hover:text-white font-semibold block">
-                      +256 312 456 789
-                    </a>
+                  <h4 className="text-sm font-bold text-white">Operating Hours</h4>
+                  <p className="text-xs text-gray-300 leading-relaxed mt-1">
+                    Monday - Friday: 07:00 AM - 06:00 PM <br />
+                    Saturday: 08:00 AM - 04:00 PM <br />
+                    <span className="text-nature-secondary font-bold">24/7 Emergency Fleet Dispatch</span>
                   </p>
                 </div>
               </div>
 
-              {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="w-13 h-13 bg-nature-primary shrink-0 flex items-center justify-center text-white chamfer-card-xs">
-                  <Mail className="w-5 h-5 stroke-[2]" />
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Email Address</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-1">
-                    <a
-                      href="mailto:info@naturewasteug.com"
-                      className="text-nature-secondary hover:underline font-medium block"
-                    >
-                      info@naturewasteug.com
-                    </a>
-                    <span className="text-gray-500 text-[11px]">Official inquiries &amp; tenders</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Hours & License */}
-              <div className="flex items-start gap-4">
-                <div className="w-13 h-13 bg-nature-primary shrink-0 flex items-center justify-center text-white chamfer-card-xs">
-                  <Clock className="w-5 h-5 stroke-[2]" />
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Operations &amp; NEMA</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mt-1">
-                    Mon - Fri: 08:00 AM - 06:00 PM <br />
-                    <span className="text-nature-secondary font-bold">NEMA Reg &amp; Licensed Handler</span>
-                  </p>
-                </div>
+              {/* NEMA Credentials badge */}
+              <div className="pt-2 border-t border-white/10 flex items-center gap-2 text-xs text-nature-secondary font-bold">
+                <ShieldCheck className="w-4 h-4" />
+                <span>NEMA Licensed Waste Handler Uganda</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: High-Contrast Green Interactive Form Card */}
-          <div className="lg:col-span-6 bg-nature-primary p-8 sm:p-10 lg:p-12 relative overflow-hidden shadow-2xl chamfer-card">
-            <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1.2px,transparent_1.2px)] [background-size:12px_12px]" />
+          {/* Right Column: Waste Connections Service & Missed Pickup Form */}
+          <div className="lg:col-span-7 bg-[#1C1F22] rounded-2xl p-6 sm:p-10 border border-white/10">
+            <h3 className="text-2xl font-black text-white tracking-tight mb-2">
+              Send a Service Request
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-400 mb-6">
+              Fill out the details below and our Kampala dispatch coordinator will contact you immediately.
+            </p>
 
-            <div className="relative z-10 space-y-6">
-              <div>
-                <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-                  Request Service or Audit
-                </h3>
-                <p className="text-white/90 text-xs sm:text-sm mt-1.5 font-normal leading-relaxed">
-                  Connect with our team in Kitende, Kampala for tailored waste collection and recycling.
-                </p>
-              </div>
-
-              {submitted ? (
-                <div className="bg-white/10 border border-white/30 p-8 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-nature-secondary text-nature-primary flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-white">Inquiry Received!</h4>
-                  <p className="text-xs sm:text-sm text-white/90 max-w-sm mx-auto">
-                    Thank you, {formData.name}. Our Kampala dispatch center has received your message and will contact you promptly.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({ name: "", email: "", company: "", message: "" });
-                    }}
-                    className="text-xs font-bold uppercase tracking-wider text-white underline pt-2 cursor-pointer"
-                  >
-                    Send another inquiry
-                  </button>
+            {submitted ? (
+              <div className="bg-nature-primary/20 border border-nature-secondary/50 rounded-xl p-8 text-center space-y-4">
+                <div className="w-14 h-14 rounded-full bg-nature-secondary text-[#0B2C1A] flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-8 h-8" />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 pt-1">
+                <h4 className="text-xl font-bold text-white">Request Received!</h4>
+                <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
+                  Thank you, <strong>{formData.name}</strong>. Your ticket has been dispatched to the route supervisor for <strong>{formData.area}</strong>. We will call you at <strong>{formData.phone}</strong> shortly.
+                </p>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({ name: "", phone: "", email: "", area: "Kitende", message: "" });
+                  }}
+                  className="text-xs font-bold uppercase tracking-wider text-nature-secondary underline pt-2 cursor-pointer"
+                >
+                  Submit Another Request
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Inquiry Type Radio / Buttons */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                    I am requesting:
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {[
+                      { id: "residential", label: "Home Pickup" },
+                      { id: "commercial", label: "Business Waste" },
+                      { id: "dumpster", label: "Rent a Skip" },
+                      { id: "missed", label: "Missed Pickup" },
+                    ].map((type) => (
+                      <button
+                        type="button"
+                        key={type.id}
+                        onClick={() => setInquiryType(type.id)}
+                        className={`py-2 px-3 rounded-lg text-xs font-bold transition-all text-center cursor-pointer border ${
+                          inquiryType === type.id
+                            ? "bg-nature-primary text-white border-nature-primary shadow-sm"
+                            : "bg-white/5 text-gray-300 border-white/10 hover:bg-white/10"
+                        }`}
+                      >
+                        {type.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Full Name</label>
                     <input
                       type="text"
                       required
-                      placeholder="Full Name"
+                      placeholder="e.g. Samuel Mukasa"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-white placeholder-white/80 text-sm focus:outline-none focus:border-white focus:bg-white/10 transition-all"
+                      className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-nature-secondary transition-colors"
                     />
                   </div>
 
                   <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Phone Number (Mobile Money or WhatsApp)</label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+256 7XX XXX XXX"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-nature-secondary transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Email Address</label>
                     <input
                       type="email"
                       required
-                      placeholder="Email Address"
+                      placeholder="name@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-white placeholder-white/80 text-sm focus:outline-none focus:border-white focus:bg-white/10 transition-all"
+                      className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-nature-secondary transition-colors"
                     />
                   </div>
 
                   <div>
+                    <label className="block text-xs font-semibold text-gray-300 mb-1">Suburb / Location in Uganda</label>
                     <input
                       type="text"
-                      placeholder="Organization / Residential Suburb (e.g. Makindye, Bugolobi, Kitende)"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-white placeholder-white/80 text-sm focus:outline-none focus:border-white focus:bg-white/10 transition-all"
-                    />
-                  </div>
-
-                  <div>
-                    <textarea
-                      rows={3}
                       required
-                      placeholder="Describe your waste streams, plastic collection, or skip requirements..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-transparent border border-white/30 rounded-none px-4 py-3 text-white placeholder-white/80 text-sm focus:outline-none focus:border-white focus:bg-white/10 transition-all resize-none"
+                      placeholder="e.g. Kitende, Lubowa, Bugolobi..."
+                      value={formData.area}
+                      onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                      className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-nature-secondary transition-colors"
                     />
                   </div>
+                </div>
 
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="relative overflow-hidden bg-[#181A1C] text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-none cursor-pointer shadow-md group inline-flex items-center gap-2 uppercase tracking-wider"
-                    >
-                      <span className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                      <span className="relative z-10 text-white group-hover:text-[#181A1C] transition-colors duration-300 flex items-center gap-2">
-                        <span>Send Message</span>
-                        <Send className="w-4 h-4" />
-                      </span>
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-300 mb-1">Details or Specific Request</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Describe your bin needs, missed pickup date, or skip delivery address..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-nature-secondary transition-colors resize-none"
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-nature-primary hover:bg-nature-primary-dark text-white px-8 py-3.5 rounded-lg font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer"
+                  >
+                    <span>Submit Service Request</span>
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
+
         </div>
+
       </div>
     </section>
   );
