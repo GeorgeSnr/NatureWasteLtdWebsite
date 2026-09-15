@@ -1,11 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface LogoProps {
   variant?: "light" | "dark";
   showTagline?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
+  showText?: boolean;
+  layout?: "horizontal" | "stacked" | "image";
 }
 
 export default function Logo({
@@ -13,94 +16,181 @@ export default function Logo({
   showTagline = false,
   size = "md",
   className = "",
+  showText = true,
+  layout = "horizontal",
 }: LogoProps) {
   const isDark = variant === "dark";
 
-  // Dimensions based on size
-  const iconSizes = {
-    sm: "w-8 h-8",
-    md: "w-10 h-10",
-    lg: "w-12 h-12",
+  // Emblem pixel dimensions
+  const emblemSizes = {
+    sm: { w: 36, h: 36, className: "w-9 h-9" },
+    md: { w: 48, h: 48, className: "w-12 h-12" },
+    lg: { w: 64, h: 64, className: "w-16 h-16" },
+    xl: { w: 84, h: 84, className: "w-21 h-21" },
   };
 
-  const textSizes = {
+  // Stacked/Full image dimensions
+  const imageSizes = {
+    sm: { w: 120, h: 125 },
+    md: { w: 160, h: 165 },
+    lg: { w: 210, h: 218 },
+    xl: { w: 260, h: 270 },
+  };
+
+  const titleSizes = {
     sm: "text-lg",
     md: "text-2xl",
     lg: "text-3xl",
+    xl: "text-4xl",
   };
 
-  return (
-    <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
-      {/* Nature Waste Circular Emblem */}
-      <div className={`relative ${iconSizes[size]} shrink-0 flex items-center justify-center`}>
-        <svg
-          viewBox="0 0 44 44"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full transform transition-transform duration-300 group-hover:rotate-12"
+  // Pure graphic image mode
+  if (layout === "image") {
+    const imgSrc = isDark
+      ? "/images/logo-full-dark.png"
+      : "/images/logo-original-cropped.png";
+
+    return (
+      <Link href="/" className={`inline-block group ${className}`}>
+        <Image
+          src={imgSrc}
+          alt="Nature Waste Management Ltd"
+          width={imageSizes[size].w}
+          height={imageSizes[size].h}
+          priority
+          className="object-contain transition-transform duration-300 group-hover:scale-102"
+        />
+      </Link>
+    );
+  }
+
+  // Stacked layout (centered vertical brand lockup)
+  if (layout === "stacked") {
+    return (
+      <Link
+        href="/"
+        className={`inline-flex flex-col items-center text-center group select-none ${className}`}
+      >
+        <div
+          className={`relative ${emblemSizes[size].className} shrink-0 mb-2 rounded-full overflow-hidden shadow-xs group-hover:scale-105 group-hover:rotate-6 transition-all duration-300`}
         >
-          {/* Outer circular recycling arrows outline */}
-          <circle
-            cx="22"
-            cy="22"
-            r="20"
-            stroke="#0B6B1E"
-            strokeWidth="2.5"
-            strokeDasharray="6 3"
-            className="opacity-70"
+          <Image
+            src="/images/logo-emblem-disc.png"
+            alt="Nature Waste Management Ltd Emblem"
+            width={emblemSizes[size].w}
+            height={emblemSizes[size].h}
+            priority
+            className="w-full h-full object-contain"
           />
-          {/* Circular gradient background ring */}
-          <circle cx="22" cy="22" r="18" fill="#0B6B1E" />
-          
-          {/* Mountain / Eco Ridge polygon (Secondary green) */}
-          <path
-            d="M8 29L16 17L22 24L28 14L36 29H8Z"
-            fill="#9AD44D"
-            opacity="0.9"
-          />
-          
-          {/* Stylized 'N' and 'M' intersecting mark with Yellow accent */}
-          {/* 'N' Stem & Diagonal */}
-          <path
-            d="M14 28V16L21 27V15"
-            stroke="#FFFFFF"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {/* 'M' Arch / Right Peak */}
-          <path
-            d="M23 27L29 16L34 28"
-            stroke="#D7C93A"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          
-          {/* Recycling leaf dot accent */}
-          <circle cx="22" cy="9" r="2.2" fill="#D7C93A" />
-        </svg>
+        </div>
+
+        {showText && (
+          <div className="flex flex-col items-center">
+            <span
+              className={`font-black tracking-tight leading-none ${titleSizes[size]} ${
+                isDark ? "text-white" : "text-[#141517]"
+              }`}
+            >
+              NATURE{" "}
+              <span
+                className={
+                  isDark ? "text-nature-secondary" : "text-nature-primary"
+                }
+              >
+                WASTE
+              </span>
+            </span>
+
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="w-2.5 h-[1.5px] bg-nature-secondary" />
+              <span
+                className={`text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest ${
+                  isDark ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
+                MANAGEMENT LTD
+              </span>
+              <span className="w-2.5 h-[1.5px] bg-nature-secondary" />
+            </div>
+
+            {showTagline && (
+              <span className="text-[11px] font-medium text-gray-400 tracking-wider mt-1.5 italic">
+                Reduce, Reuse, Recycle
+              </span>
+            )}
+          </div>
+        )}
+      </Link>
+    );
+  }
+
+  // Default: Responsive Horizontal Layout (Fits sticky header, navbars, and banners)
+  return (
+    <Link
+      href="/"
+      className={`inline-flex items-center gap-3 group select-none ${className}`}
+    >
+      {/* Real Circular NWM Emblem from logo1.jpg */}
+      <div
+        className={`relative ${emblemSizes[size].className} shrink-0 rounded-full overflow-hidden shadow-xs group-hover:scale-105 group-hover:rotate-6 transition-all duration-300`}
+      >
+        <Image
+          src="/images/logo-emblem-disc.png"
+          alt="Nature Waste Management Ltd Emblem"
+          width={emblemSizes[size].w}
+          height={emblemSizes[size].h}
+          priority
+          className="w-full h-full object-contain"
+        />
       </div>
 
-      <div className="flex flex-col">
-        <div className="flex items-center gap-1.5 leading-none">
-          <span
-            className={`font-black tracking-tight ${textSizes[size]} ${
-              isDark ? "text-white" : "text-[#141517]"
-            }`}
-          >
-            Nature<span className="text-nature-primary">Waste</span>
-          </span>
-          <span className="bg-nature-secondary/25 text-nature-primary text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider">
-            Connect
-          </span>
+      {showText && (
+        <div className="flex flex-col justify-center leading-none">
+          <div className="flex items-center gap-1.5">
+            <span
+              className={`font-black tracking-tight ${titleSizes[size]} ${
+                isDark ? "text-white" : "text-[#141517]"
+              }`}
+            >
+              NATURE{" "}
+              <span
+                className={
+                  isDark ? "text-nature-secondary" : "text-nature-primary"
+                }
+              >
+                WASTE
+              </span>
+            </span>
+            <span
+              className={`hidden sm:inline-block ${
+                isDark
+                  ? "bg-nature-secondary/20 text-nature-secondary"
+                  : "bg-nature-primary/10 text-nature-primary"
+              } text-[9px] font-black uppercase px-1.5 py-0.5 tracking-wider`}
+            >
+              LTD
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 mt-1">
+            <span className="w-2 h-[1.5px] bg-nature-secondary shrink-0" />
+            <span
+              className={`text-[9px] sm:text-[10.5px] font-bold uppercase tracking-widest ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              MANAGEMENT LTD
+            </span>
+            <span className="w-2 h-[1.5px] bg-nature-secondary shrink-0" />
+          </div>
+
+          {showTagline && (
+            <span className="text-[10px] sm:text-[11px] font-semibold text-gray-400 tracking-wider uppercase mt-1">
+              Reduce. Reuse. Recycle.
+            </span>
+          )}
         </div>
-        {showTagline && (
-          <span className="text-[11px] font-semibold text-gray-400 tracking-wider uppercase mt-1">
-            Reduce. Reuse. Recycle.
-          </span>
-        )}
-      </div>
+      )}
     </Link>
   );
 }
