@@ -30,6 +30,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="theme-color" content="#0B6B1E" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-white antialiased text-[#333333] font-sans selection:bg-nature-primary selection:text-white">
         <Header />
