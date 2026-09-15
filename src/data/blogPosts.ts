@@ -12,6 +12,27 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "gogreenug-youth-waste-solutions-kampala",
+    title: "The GoGreenug Initiative: How Youth Environmentalists are Tackling Kampala's Suburban Waste Crisis",
+    excerpt: "Learn how Nature Waste Management Limited was founded by Ugandan youth environmentalists to implement selective waste collection across Kampala's fast-growing suburbs.",
+    date: "September 14, 2026",
+    author: "Nature Waste Leadership Team",
+    category: "Community & Policy",
+    readTime: "4 min read",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80",
+    content: `In response to the rapid accumulation of unmanaged municipal solid waste across Kampala's expanding peri-urban suburbs, a dedicated group of Ugandan youth environmentalists came together to form Nature Waste Management Limited.
+
+Operating from Kitende on Entebbe Road, Nature Waste Management Limited operates under full regulatory licensing from the National Environment Management Authority (NEMA) Uganda. Rather than relying on outdated dumping methods that clog wetlands and drainage channels, the company pioneers selective collection.
+
+Waste Streams Handled Selectively:
+1. Post-Consumer Plastics (PET beverage bottles, HDPE jerrycans, and LDPE films)
+2. Scrap Metals and Aluminum Cans
+3. Waste Paper, Cardboard boxes, and Office Documents
+4. Biodegradable Animal and Plant Waste for Organic Composting and Bio-fertilizers
+
+By pairing community sensitization campaigns with reliable collection schedules, the GoGreenug movement has empowered over 45,000 households and businesses to actively participate in Uganda's Vision 2040 sustainable urban growth.`,
+  },
+  {
     slug: "iot-smart-waste-collection-african-cities",
     title: "How IoT Smart Sensors are Solving Urban Waste Backlogs in Fast-Growing Cities",
     excerpt: "Discover how deploying ultrasonic fill-level sensors on municipal bins reduces empty truck runs by 35% while keeping urban neighborhoods clean and pest-free.",

@@ -9,7 +9,7 @@ export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const categories = ["All", "Smart Cities", "Recycling", "Regulatory & ESG"];
+  const categories = ["All", "Community & Policy", "Smart Cities", "Recycling", "Regulatory & ESG"];
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesCategory =

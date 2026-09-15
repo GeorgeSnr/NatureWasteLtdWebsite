@@ -1,5 +1,4 @@
 import React from "react";
-import VerticalSidebar from "@/components/VerticalSidebar";
 import HeroSection from "@/components/HeroSection";
 import FeatureCards from "@/components/FeatureCards";
 import AboutSection from "@/components/AboutSection";
@@ -13,34 +12,33 @@ import ContactSection from "@/components/ContactSection";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-white">
-      {/* Top Hero Container with Signature Left Vertical Sidebar */}
-      <div className="flex flex-row w-full lg:min-h-[calc(100vh-80px)]">
-        <VerticalSidebar />
+      {/* Decongested Full-Width Hero Section */}
+      <div className="w-full">
         <HeroSection />
       </div>
 
-      {/* 4 Chamfered Feature Cards */}
+      {/* 4 Core Operational Pillars */}
       <FeatureCards />
 
-      {/* About Nature Waste & Outlined Impact Counters */}
+      {/* About Nature Waste Management Ltd & Real Ugandan Heritage */}
       <AboutSection />
 
       {/* Interactive Services & Modules Tabs */}
       <ServicesTabs />
 
-      {/* 3-Step Work Process with Watermark */}
+      {/* 3-Step Work Process Flow */}
       <WorkProcess />
 
-      {/* Recent Operations & Impact Wave Carousel */}
+      {/* Recent Operations & Impact Metrics */}
       <RecentProjects />
 
-      {/* Client Testimonials */}
+      {/* Verified Client Testimonials */}
       <Testimonials />
 
-      {/* Articles & Industry Research Preview */}
+      {/* Environmental Insights & Research */}
       <BlogPreview />
 
-      {/* Contact Channels & High-Contrast Form */}
+      {/* Dedicated Contact Section */}
       <ContactSection />
     </main>
   );
