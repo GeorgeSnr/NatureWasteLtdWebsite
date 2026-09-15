@@ -4,19 +4,20 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Nature Waste Management Ltd | Nature Waste Connect",
+  title: "Nature Waste Management Ltd | Garbage Pickup & Recycling Uganda",
   description:
-    "Next-Gen Waste Management & Circular Economy ERP for Municipalities, Commercial Enterprises, and Sustainable Communities. Reduce. Reuse. Recycle.",
+    "Leading waste management, scheduled residential garbage pickup, commercial roll-off dumpsters, and circular recycling in Kampala, Entebbe Road, and Wakiso, Uganda.",
   keywords: [
     "Nature Waste",
     "Nature Waste Management Ltd",
-    "Nature Waste Connect",
-    "Smart Waste Collection",
-    "Waste ERP Africa",
-    "Circular Economy",
+    "Waste Connections Uganda",
+    "Garbage pickup Kampala",
+    "Dumpster rental Uganda",
+    "Skip hire Kampala",
     "Recycling Uganda",
-    "Recycling Kenya",
-    "IoT Smart Bins",
+    "NEMA licensed waste handler",
+    "Kitende waste collection",
+    "GoGreenug",
   ],
   authors: [{ name: "Nature Waste Management Ltd" }],
 };
@@ -29,15 +30,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#0B6B1E" />
+        <meta name="theme-color" content="#006F51" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white antialiased text-[#333333] font-sans selection:bg-nature-primary selection:text-white">
+      <body className="min-h-screen flex flex-col bg-white antialiased text-[#363636] font-sans selection:bg-[#006F51] selection:text-white">
         <Header />
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />

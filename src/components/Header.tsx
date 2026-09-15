@@ -22,6 +22,9 @@ import {
   Trash2,
   RefreshCw,
   Box,
+  HelpCircle,
+  FileText,
+  Users,
 } from "lucide-react";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
@@ -33,90 +36,97 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const residentialLinks = [
-    { title: "Residential Garbage Pickup", desc: "Weekly scheduled curbside collection for homes & estates", href: "/pricing" },
-    { title: "Household Recycling", desc: "Segregated collection of plastics, cans, and paper", href: "/features" },
-    { title: "Yard & Garden Waste", desc: "Green waste removal & organic composting conversion", href: "/features" },
+    { title: "Residential Garbage Pickup", desc: "Weekly scheduled curbside collection for homes & estates in Kampala and Wakiso", href: "/pricing" },
+    { title: "Household Recycling", desc: "Color-coded sacks for plastics, cans, and clean paper recovery", href: "/#recycling-guide" },
+    { title: "Yard & Garden Waste", desc: "Green waste removal & organic composting conversion in Kitende", href: "/features" },
     { title: "Bulk Trash & Cleanouts", desc: "Furniture, appliances, and large household item hauling", href: "/pricing" },
   ];
 
   const commercialLinks = [
-    { title: "Commercial Waste Collection", desc: "Reliable schedules & bins for retail, dining & corporate", href: "/book-demo" },
-    { title: "Industrial Roll-Off Skips", desc: "7m³ to 20m³ heavy-duty containers for factories", href: "/pricing#calculator" },
-    { title: "Office Paper & Recyclables", desc: "Secure document destruction & cardboard baling", href: "/features" },
-    { title: "NEMA Compliance & ESG Audits", desc: "Verifiable waste disposal certificates & manifests", href: "/features" },
+    { title: "Commercial Waste Collection", desc: "Reliable schedules & containers for retail, dining, hotels & corporate offices", href: "/book-demo" },
+    { title: "Industrial Roll-Off Skips", desc: "7m³ to 20m³ heavy-duty containers for factories & warehouses", href: "/pricing#calculator" },
+    { title: "Commercial Trash Compactors", desc: "High-density balers and compactors to reduce pickup frequency", href: "/features" },
+    { title: "NEMA Compliance & ESG Audits", desc: "Verifiable waste disposal certificates & chain-of-custody manifests", href: "/features" },
   ];
 
   const dumpsterLinks = [
-    { title: "Roll-Off Dumpsters (7m³)", desc: "Ideal for residential cleanouts & landscaping", href: "/pricing#calculator" },
-    { title: "Construction Skips (12m³ - 20m³)", desc: "Heavy demolition, brick, concrete & steel", href: "/pricing#calculator" },
-    { title: "Interactive Sizing Guide", desc: "Compare container volumes and pick your perfect size", href: "/pricing#calculator" },
-    { title: "Fast Kampala Delivery", desc: "Same-day dispatch to Kitende, Lubowa, Kololo & beyond", href: "/#schedule-finder" },
+    { title: "Residential Roll-Offs (7m³)", desc: "Ideal for estate renovations, garage cleanouts & landscaping", href: "/pricing#calculator" },
+    { title: "Construction Skips (12m³ - 20m³)", desc: "Heavy demolition, brick, concrete, timber & scrap metal", href: "/pricing#calculator" },
+    { title: "Interactive Sizing Guide", desc: "Compare container capacities from 120L wheelie bins to 20m³ skips", href: "/pricing#calculator" },
+    { title: "Fast Kampala Delivery", desc: "Same-day dispatch to Kitende, Lubowa, Kololo, Naguru & Entebbe", href: "/#schedule-finder" },
   ];
 
   const sustainabilityLinks = [
-    { title: "The GoGreenug Youth Initiative", desc: "How Ugandan environmentalists lead urban cleanups", href: "/blog/gogreenug-youth-waste-solutions-kampala" },
-    { title: "Circular Plastics Recovery", desc: "99.4% purity sorting and polymer pelletizing", href: "/blog/circular-economy-plastics-recovery-guide" },
+    { title: "The GoGreenug Youth Initiative", desc: "How Ugandan environmentalists lead urban cleanups and community sorting", href: "/blog/gogreenug-youth-waste-solutions-kampala" },
+    { title: "Circular Plastics Recovery", desc: "99.4% purity sorting and polymer pelletizing to reduce Lake Victoria pollution", href: "/blog/circular-economy-plastics-recovery-guide" },
     { title: "Uganda Waste Segregation Guide", desc: "Learn what goes into green, blue, yellow & black sacks", href: "/#recycling-guide" },
-    { title: "NEMA Licensing & Standards", desc: "Full statutory compliance under Ugandan environmental law", href: "/#about-nema" },
+    { title: "NEMA Licensing & Standards", desc: "Full statutory compliance under Ugandan environmental regulations", href: "/#about-nema" },
+  ];
+
+  const companyLinks = [
+    { title: "About Nature Waste", desc: "Our story, Ugandan roots, mission, and environmental vision", href: "/#about-nema" },
+    { title: "Leadership & Values", desc: "Founded and operated by Ugandan youth environmental professionals", href: "/#about-nema" },
+    { title: "Careers & Green Jobs", desc: "Join our Kampala dispatch, driver, mechanics, and sorting teams", href: "/#careers" },
+    { title: "Customer Testimonials", desc: "Read verified feedback from residential & business clients across Uganda", href: "/#testimonials" },
   ];
 
   return (
     <>
-      {/* 1. Top Utility Bar (Waste Connections Customer Care Pattern) */}
-      <div className="bg-[#121416] text-gray-300 text-xs py-2 px-4 sm:px-8 border-b border-white/10 select-none">
+      {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
+      <div className="bg-[#F8F9FA] text-[#363636] text-xs py-2 px-4 sm:px-8 border-b border-[#E5E7EB] select-none">
         <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-3">
-          {/* Left: Location & NEMA Badge */}
-          <div className="flex items-center gap-4 text-gray-300">
-            <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-nature-secondary shrink-0" />
+          {/* Left: Location & NEMA Registration Badge */}
+          <div className="flex items-center gap-4 text-[#555C66]">
+            <div className="flex items-center gap-1.5 font-medium">
+              <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
               <span className="hidden sm:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
               <span className="sm:hidden">Kitende, Kampala</span>
             </div>
-            <div className="hidden md:flex items-center gap-1.5 text-nature-secondary font-semibold">
+            <div className="hidden md:flex items-center gap-1.5 text-[#006F51] font-semibold">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>NEMA Registered &amp; Licensed</span>
+              <span>NEMA Licensed &amp; Registered Waste Handler</span>
             </div>
           </div>
 
-          {/* Right: Quick Self-Service Links */}
+          {/* Right: Quick Customer Links matching Waste Connections */}
           <div className="flex items-center gap-4 text-[11px] sm:text-xs">
             <Link
               href="/#schedule-finder"
-              className="flex items-center gap-1.5 hover:text-nature-secondary transition-colors"
+              className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
             >
-              <Calendar className="w-3.5 h-3.5 text-nature-secondary" />
+              <Calendar className="w-3.5 h-3.5 text-[#006F51]" />
               <span className="font-medium">Pickup Schedule</span>
             </Link>
 
             <Link
-              href="/portal"
-              className="hidden lg:flex items-center gap-1.5 hover:text-nature-secondary transition-colors"
+              href="/#schedule-finder"
+              className="hidden lg:flex items-center gap-1 hover:text-[#006F51] transition-colors"
             >
-              <CreditCard className="w-3.5 h-3.5 text-nature-secondary" />
-              <span>Pay Bill</span>
+              <AlertCircle className="w-3.5 h-3.5 text-[#006F51]" />
+              <span>Missed Pickup</span>
+            </Link>
+
+            <Link
+              href="/portal"
+              className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
+            >
+              <CreditCard className="w-3.5 h-3.5 text-[#006F51]" />
+              <span className="font-medium">Pay My Bill</span>
             </Link>
 
             <Link
               href="/#contact"
-              className="hidden md:flex items-center gap-1.5 hover:text-nature-secondary transition-colors"
+              className="hidden sm:flex items-center gap-1 hover:text-[#006F51] transition-colors"
             >
-              <AlertCircle className="w-3.5 h-3.5 text-nature-secondary" />
-              <span>Missed Pickup?</span>
+              <Phone className="w-3.5 h-3.5 text-[#006F51]" />
+              <span>Customer Care</span>
             </Link>
 
-            <a
-              href="tel:+256700890123"
-              className="flex items-center gap-1.5 font-bold text-white hover:text-nature-secondary transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-nature-secondary" />
-              <span>+256 700 890 123</span>
-            </a>
-
-            <div className="h-3 w-px bg-white/20 hidden sm:block" />
+            <div className="h-3 w-px bg-gray-300 hidden sm:block" />
 
             <Link
               href="/portal"
-              className="hidden sm:flex items-center gap-1.5 text-nature-secondary hover:text-white font-bold transition-colors"
+              className="flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
             >
               <UserCheck className="w-3.5 h-3.5" />
               <span>My Account</span>
@@ -125,45 +135,61 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 2. Main Sticky Navigation */}
-      <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-xs select-none">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 h-[76px] flex items-center justify-between">
-          {/* Logo with Real Emblem from logo1.jpg */}
-          <div className="flex items-center">
-            <Logo size="md" showTagline={false} />
-          </div>
+      {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
+      <header className="sticky top-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#E5E7EB] shadow-sm select-none transition-all">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+          {/* Brand Logo */}
+          <Link href="/" className="shrink-0 flex items-center">
+            <Logo variant="light" size="md" showTagline={false} />
+          </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1">
+          {/* Desktop Navigation Mega Menus */}
+          <nav className="hidden xl:flex items-center gap-1 font-medium text-sm text-[#363636]">
+            
             {/* Residential Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("residential")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors cursor-pointer">
+              <button
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                  activeDropdown === "residential"
+                    ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
+                    : "hover:text-[#006F51] hover:bg-gray-50"
+                }`}
+              >
                 <span>Residential</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#006F51] transition-transform ${activeDropdown === "residential" ? "rotate-180" : ""}`} />
               </button>
 
               {activeDropdown === "residential" && (
-                <div className="absolute top-full left-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 p-3 z-50 transition-all">
-                  <div className="text-[11px] font-extrabold uppercase tracking-wider text-nature-primary px-3 py-1 mb-1">
-                    Home &amp; Estate Services
+                <div className="absolute top-full left-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                    Services for Home
                   </div>
-                  {residentialLinks.map((item) => (
+                  {residentialLinks.map((item, idx) => (
                     <Link
-                      key={item.title}
+                      key={idx}
                       href={item.href}
-                      className="block p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      onClick={() => setActiveDropdown(null)}
                     >
-                      <div className="font-bold text-sm text-[#141517] group-hover:text-nature-primary flex items-center justify-between">
-                        <span>{item.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
+                        {item.title}
                       </div>
-                      <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{item.desc}</div>
                     </Link>
                   ))}
+                  <div className="pt-2 mt-1 border-t border-gray-100">
+                    <Link
+                      href="/pricing"
+                      className="flex items-center justify-between px-3 py-2 text-xs font-bold text-[#006F51] hover:underline"
+                    >
+                      <span>View Residential Rates</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -174,149 +200,209 @@ export default function Header() {
               onMouseEnter={() => setActiveDropdown("commercial")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors cursor-pointer">
+              <button
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                  activeDropdown === "commercial"
+                    ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
+                    : "hover:text-[#006F51] hover:bg-gray-50"
+                }`}
+              >
                 <span>Commercial</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#006F51] transition-transform ${activeDropdown === "commercial" ? "rotate-180" : ""}`} />
               </button>
 
               {activeDropdown === "commercial" && (
-                <div className="absolute top-full left-0 w-84 bg-white rounded-xl shadow-2xl border border-gray-100 p-3 z-50 transition-all">
-                  <div className="text-[11px] font-extrabold uppercase tracking-wider text-nature-primary px-3 py-1 mb-1">
-                    Business &amp; Industrial Solutions
+                <div className="absolute top-full left-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                    Services for Business
                   </div>
-                  {commercialLinks.map((item) => (
+                  {commercialLinks.map((item, idx) => (
                     <Link
-                      key={item.title}
+                      key={idx}
                       href={item.href}
-                      className="block p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      onClick={() => setActiveDropdown(null)}
                     >
-                      <div className="font-bold text-sm text-[#141517] group-hover:text-nature-primary flex items-center justify-between">
-                        <span>{item.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
+                        {item.title}
                       </div>
-                      <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{item.desc}</div>
                     </Link>
                   ))}
+                  <div className="pt-2 mt-1 border-t border-gray-100">
+                    <Link
+                      href="/book-demo"
+                      className="flex items-center justify-between px-3 py-2 text-xs font-bold text-[#006F51] hover:underline"
+                    >
+                      <span>Request Commercial Quote</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Dumpster Rental Dropdown */}
+            {/* Roll-Off Dumpsters Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setActiveDropdown("dumpster")}
+              onMouseEnter={() => setActiveDropdown("dumpsters")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors cursor-pointer">
-                <span>Dumpsters &amp; Skips</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+              <button
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                  activeDropdown === "dumpsters"
+                    ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
+                    : "hover:text-[#006F51] hover:bg-gray-50"
+                }`}
+              >
+                <span>Roll-Off Dumpsters</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#006F51] transition-transform ${activeDropdown === "dumpsters" ? "rotate-180" : ""}`} />
               </button>
 
-              {activeDropdown === "dumpster" && (
-                <div className="absolute top-full left-0 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 p-3 z-50 transition-all">
-                  <div className="text-[11px] font-extrabold uppercase tracking-wider text-nature-primary px-3 py-1 mb-1">
-                    Roll-Off Containers &amp; Skips
+              {activeDropdown === "dumpsters" && (
+                <div className="absolute top-full left-0 w-84 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                    Skip &amp; Container Rentals
                   </div>
-                  {dumpsterLinks.map((item) => (
+                  {dumpsterLinks.map((item, idx) => (
                     <Link
-                      key={item.title}
+                      key={idx}
                       href={item.href}
-                      className="block p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      onClick={() => setActiveDropdown(null)}
                     >
-                      <div className="font-bold text-sm text-[#141517] group-hover:text-nature-primary flex items-center justify-between">
-                        <span>{item.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
+                        {item.title}
                       </div>
-                      <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{item.desc}</div>
                     </Link>
                   ))}
+                  <div className="pt-2 mt-1 border-t border-gray-100">
+                    <Link
+                      href="/pricing#calculator"
+                      className="flex items-center justify-between px-3 py-2 text-xs font-bold text-[#006F51] hover:underline"
+                    >
+                      <span>Interactive Container Sizing Guide</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Sustainability & Policy */}
+            {/* Sustainability Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("sustainability")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors cursor-pointer">
+              <button
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                  activeDropdown === "sustainability"
+                    ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
+                    : "hover:text-[#006F51] hover:bg-gray-50"
+                }`}
+              >
                 <span>Sustainability</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#006F51] transition-transform ${activeDropdown === "sustainability" ? "rotate-180" : ""}`} />
               </button>
 
               {activeDropdown === "sustainability" && (
-                <div className="absolute top-full left-0 w-84 bg-white rounded-xl shadow-2xl border border-gray-100 p-3 z-50 transition-all">
-                  <div className="text-[11px] font-extrabold uppercase tracking-wider text-nature-primary px-3 py-1 mb-1">
-                    GoGreenug &amp; Environmental Protection
+                <div className="absolute top-full left-0 w-84 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                    Green Uganda &amp; Circularity
                   </div>
-                  {sustainabilityLinks.map((item) => (
+                  {sustainabilityLinks.map((item, idx) => (
                     <Link
-                      key={item.title}
+                      key={idx}
                       href={item.href}
-                      className="block p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      onClick={() => setActiveDropdown(null)}
                     >
-                      <div className="font-bold text-sm text-[#141517] group-hover:text-nature-primary flex items-center justify-between">
-                        <span>{item.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
+                        {item.title}
                       </div>
-                      <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{item.desc}</div>
                     </Link>
                   ))}
                 </div>
               )}
             </div>
 
-            {/* Direct Links */}
-            <Link
-              href="/#schedule-finder"
-              className="px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors"
+            {/* Company Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setActiveDropdown("company")}
+              onMouseLeave={() => setActiveDropdown(null)}
             >
-              Schedules
-            </Link>
+              <button
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                  activeDropdown === "company"
+                    ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
+                    : "hover:text-[#006F51] hover:bg-gray-50"
+                }`}
+              >
+                <span>About Us</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#006F51] transition-transform ${activeDropdown === "company" ? "rotate-180" : ""}`} />
+              </button>
 
-            <Link
-              href="/#contact"
-              className="px-3.5 py-2 text-[14.5px] font-bold text-[#141517] hover:text-nature-primary transition-colors"
-            >
-              Contact Us
-            </Link>
+              {activeDropdown === "company" && (
+                <div className="absolute top-full right-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                    Our Ugandan Company
+                  </div>
+                  {companyLinks.map((item, idx) => (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
+                        {item.title}
+                      </div>
+                      <div className="text-xs text-gray-500 line-clamp-1">{item.desc}</div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </nav>
 
-          {/* Right Action CTAs */}
+          {/* Right: Phone link & High-Visibility Yellow CTA Button (Waste Connections signature) */}
           <div className="flex items-center gap-3">
-            {/* Search Trigger */}
+            {/* Phone Number Callout */}
+            <a
+              href="tel:+256700890123"
+              className="hidden lg:flex items-center gap-2 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3 py-2 rounded-md hover:bg-gray-50 transition-colors"
+            >
+              <Phone className="w-4 h-4 text-[#006F51]" />
+              <span>+256 700 890 123</span>
+            </a>
+
+            {/* Search Icon Trigger */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-gray-700 hover:text-nature-primary hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
-              aria-label="Search"
+              className="p-2 text-gray-600 hover:text-[#006F51] hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Search site"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Client Portal Button */}
-            <Link
-              href="/portal"
-              className="hidden sm:inline-flex items-center gap-2 border border-gray-300 hover:border-nature-primary hover:text-nature-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#141517] rounded-md transition-colors shadow-2xs"
-            >
-              <UserCheck className="w-3.5 h-3.5 text-nature-primary" />
-              <span>Customer Portal</span>
-            </Link>
-
-            {/* Waste Connections Primary Quote CTA */}
+            {/* Signature Waste Connections Yellow Button: "Get Prices" */}
             <Link
               href="/#schedule-finder"
-              className="inline-flex items-center gap-2 bg-nature-primary hover:bg-nature-primary-dark text-white px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all active:scale-95 group"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 active:scale-95 shrink-0"
             >
-              <span>Get Prices</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              Get Prices
             </Link>
 
-            {/* Mobile Drawer Hamburger */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setDrawerOpen(true)}
-              className="p-2 text-gray-800 hover:text-nature-primary rounded-md xl:hidden cursor-pointer"
-              aria-label="Open Mobile Menu"
+              className="xl:hidden p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Open Navigation Menu"
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -324,135 +410,186 @@ export default function Header() {
         </div>
       </header>
 
-      {/* 3. Mobile Navigation Drawer */}
+      {/* 3. Full Mobile Navigation Drawer */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-[100] flex justify-end">
+        <div className="fixed inset-0 z-50 flex select-none">
+          {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-2xs transition-opacity"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
             onClick={() => setDrawerOpen(false)}
           />
 
-          <div className="relative w-full max-w-md bg-[#181A1C] text-white h-full shadow-2xl z-10 flex flex-col justify-between p-6 sm:p-8 overflow-y-auto">
-            <div>
-              {/* Top Drawer Header */}
-              <div className="flex items-center justify-between pb-6 border-b border-white/10">
-                <Logo variant="dark" size="md" />
-                <button
-                  onClick={() => setDrawerOpen(false)}
-                  className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
-                  aria-label="Close Drawer"
-                >
-                  <X className="w-6 h-6" />
-                </button>
+          {/* Drawer Body */}
+          <div className="relative ml-auto w-full max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
+            {/* Top Bar */}
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+              <Logo variant="light" size="sm" showTagline={false} />
+              <button
+                onClick={() => setDrawerOpen(false)}
+                className="p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* CTA Button */}
+            <div className="p-4 border-b border-gray-100 bg-[#F8F9FA]">
+              <Link
+                href="/#schedule-finder"
+                onClick={() => setDrawerOpen(false)}
+                className="w-full block text-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-sm py-3 rounded-full shadow-sm"
+              >
+                Get Prices &amp; Start Service
+              </Link>
+            </div>
+
+            {/* Quick Customer Links */}
+            <div className="grid grid-cols-2 gap-2 p-4 border-b border-gray-200 bg-white text-xs">
+              <Link
+                href="/portal"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center gap-2 p-2.5 rounded-lg bg-[#E9F4F0] text-[#006F51] font-semibold"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>Pay My Bill</span>
+              </Link>
+              <Link
+                href="/#schedule-finder"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center gap-2 p-2.5 rounded-lg bg-[#E9F4F0] text-[#006F51] font-semibold"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Schedule</span>
+              </Link>
+              <Link
+                href="/#schedule-finder"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 text-gray-700 font-medium"
+              >
+                <AlertCircle className="w-4 h-4 text-[#006F51]" />
+                <span>Missed Pickup</span>
+              </Link>
+              <Link
+                href="/portal"
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 text-gray-700 font-medium"
+              >
+                <UserCheck className="w-4 h-4 text-[#006F51]" />
+                <span>My Account</span>
+              </Link>
+            </div>
+
+            {/* Mobile Nav Links */}
+            <div className="p-4 space-y-4 flex-1">
+              {/* Residential */}
+              <div>
+                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
+                  Residential
+                </div>
+                <div className="space-y-1 pl-2">
+                  {residentialLinks.map((item, idx) => (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
 
-              {/* Navigation Items */}
-              <div className="py-6 space-y-5">
-                <div>
-                  <div className="text-xs uppercase font-extrabold tracking-widest text-nature-secondary mb-2">
-                    Services
-                  </div>
-                  <div className="space-y-2">
-                    <Link
-                      href="/pricing"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block text-lg font-bold text-gray-200 hover:text-nature-secondary transition-colors"
-                    >
-                      Residential Waste Pickup
-                    </Link>
-                    <Link
-                      href="/book-demo"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block text-lg font-bold text-gray-200 hover:text-nature-secondary transition-colors"
-                    >
-                      Commercial Dumpsters
-                    </Link>
-                    <Link
-                      href="/pricing#calculator"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block text-lg font-bold text-gray-200 hover:text-nature-secondary transition-colors"
-                    >
-                      Roll-Off Skip Rental
-                    </Link>
-                    <Link
-                      href="/features"
-                      onClick={() => setDrawerOpen(false)}
-                      className="block text-lg font-bold text-gray-200 hover:text-nature-secondary transition-colors"
-                    >
-                      Plastics &amp; Metal Recycling
-                    </Link>
-                  </div>
+              {/* Commercial */}
+              <div>
+                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
+                  Commercial
                 </div>
-
-                <div className="pt-4 border-t border-white/10">
-                  <div className="text-xs uppercase font-extrabold tracking-widest text-nature-secondary mb-2">
-                    Self-Service &amp; Account
-                  </div>
-                  <div className="space-y-2">
+                <div className="space-y-1 pl-2">
+                  {commercialLinks.map((item, idx) => (
                     <Link
-                      href="/#schedule-finder"
+                      key={idx}
+                      href={item.href}
                       onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-2 text-base text-gray-200 hover:text-white"
+                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
                     >
-                      <Calendar className="w-4 h-4 text-nature-secondary" />
-                      <span>Check Pickup Schedule</span>
+                      {item.title}
                     </Link>
-                    <Link
-                      href="/portal"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-2 text-base text-gray-200 hover:text-white"
-                    >
-                      <CreditCard className="w-4 h-4 text-nature-secondary" />
-                      <span>Pay My Bill / Mobile Money</span>
-                    </Link>
-                    <Link
-                      href="/portal"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-2 text-base text-gray-200 hover:text-white"
-                    >
-                      <UserCheck className="w-4 h-4 text-nature-secondary" />
-                      <span>Client &amp; Fleet Operations Portal</span>
-                    </Link>
-                    <Link
-                      href="/#contact"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-2 text-base text-gray-200 hover:text-white"
-                    >
-                      <AlertCircle className="w-4 h-4 text-nature-secondary" />
-                      <span>Report Missed Pickup</span>
-                    </Link>
-                  </div>
+                  ))}
                 </div>
+              </div>
 
-                <div className="pt-4 border-t border-white/10 text-xs text-gray-400 space-y-2">
-                  <div className="flex items-start gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-nature-secondary shrink-0 mt-0.5" />
-                    <span>Kitende, Karl House, Room 9, Entebbe Road, Kampala, Uganda</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-nature-secondary shrink-0" />
-                    <a href="tel:+256700890123" className="text-white font-bold">
-                      +256 700 890 123
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-nature-secondary shrink-0" />
-                    <span>NEMA Licensed Waste Handler</span>
-                  </div>
+              {/* Roll-Off Dumpsters */}
+              <div>
+                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
+                  Roll-Off Dumpsters
+                </div>
+                <div className="space-y-1 pl-2">
+                  {dumpsterLinks.map((item, idx) => (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sustainability */}
+              <div>
+                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
+                  Sustainability
+                </div>
+                <div className="space-y-1 pl-2">
+                  {sustainabilityLinks.map((item, idx) => (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Company */}
+              <div>
+                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
+                  Company
+                </div>
+                <div className="space-y-1 pl-2">
+                  {companyLinks.map((item, idx) => (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      onClick={() => setDrawerOpen(false)}
+                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Bottom Drawer CTA */}
-            <div className="pt-6 border-t border-white/10 space-y-3">
-              <Link
-                href="/#schedule-finder"
-                onClick={() => setDrawerOpen(false)}
-                className="w-full text-center bg-nature-primary hover:bg-nature-primary-dark text-white py-3 rounded-md font-bold uppercase tracking-wider text-xs shadow-md flex items-center justify-center gap-2 transition-all"
+            {/* Mobile Footer Contact */}
+            <div className="p-4 border-t border-gray-200 bg-[#F8F9FA] space-y-2 text-xs text-gray-600">
+              <a
+                href="tel:+256700890123"
+                className="flex items-center gap-2 font-bold text-[#006F51]"
               >
-                <span>Get Prices &amp; Start Service</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <Phone className="w-4 h-4" />
+                <span>Call Kampala: +256 700 890 123</span>
+              </a>
+              <div className="flex items-start gap-2 text-gray-500">
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-gray-400" />
+                <span>Kitende, Karl House, Room 9, Entebbe Road</span>
+              </div>
             </div>
           </div>
         </div>

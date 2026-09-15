@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ShieldCheck,
   Award,
@@ -19,7 +18,7 @@ export default function AboutSection() {
     {
       icon: ShieldCheck,
       title: "100% NEMA Statutory Compliance",
-      desc: "Fully licensed by the National Environment Management Authority (NEMA) Uganda for domestic, commercial, and industrial waste handling.",
+      desc: "Fully registered and licensed by the National Environment Management Authority (NEMA) Uganda for domestic, commercial, and industrial waste handling.",
     },
     {
       icon: Users,
@@ -34,7 +33,7 @@ export default function AboutSection() {
     {
       icon: Leaf,
       title: "Certified Circular Recycling",
-      desc: "State-of-the-art sorting facility at Kitende on Entebbe Road, baling post-consumer PET, HDPE, and paper for regional industrial manufacturing.",
+      desc: "Sorting and recovery facility at Kitende on Entebbe Road, baling post-consumer PET, HDPE, and paper for regional manufacturing.",
     },
   ];
 
@@ -46,51 +45,43 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about-nema" className="w-full bg-[#0E1A14] text-white py-16 sm:py-20 lg:py-24 select-none relative overflow-hidden">
-      {/* Background Graphic Watermark */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-5 pointer-events-none flex items-center justify-end">
-        <svg viewBox="0 0 400 400" className="w-full h-full fill-current text-white">
-          <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="12" fill="none" />
-          <path d="M120 280 L200 120 L280 280 Z" stroke="currentColor" strokeWidth="12" fill="none" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8">
+    <section id="about-nema" className="w-full bg-white text-[#212529] py-16 sm:py-20 lg:py-24 select-none border-b border-[#E5E7EB]">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
         
         {/* Top Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-16">
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 text-nature-secondary font-extrabold text-xs uppercase tracking-widest bg-white/10 px-3.5 py-1.5 rounded-full">
-              <Award className="w-3.5 h-3.5 text-nature-secondary" />
+            <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3.5 py-1.5 rounded-full">
+              <Award className="w-3.5 h-3.5" />
               <span>THE NATURE WASTE DIFFERENCE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-white leading-[1.12] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-[#1A1D20] leading-[1.12] tracking-tight">
               A Higher Standard of Waste Management For Uganda
             </h2>
-            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-              At Nature Waste Management Limited, we believe reliable sanitation is the bedrock of thriving cities. We combine corporate-grade logistics modeled after industry leaders like Waste Connections with passionate on-the-ground youth environmental stewardship.
+            <p className="text-[#555C66] text-sm sm:text-base leading-relaxed">
+              At Nature Waste Management Limited, we believe reliable sanitation is the bedrock of thriving communities. We combine corporate-grade logistics modeled after industry leaders like Waste Connections with passionate on-the-ground youth environmental stewardship.
             </p>
           </div>
 
-          <div className="lg:col-span-5 bg-white/5 border border-white/15 rounded-2xl p-6 sm:p-8 space-y-4">
+          <div className="lg:col-span-5 bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-nature-primary flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-base text-white">NEMA Uganda Registered</h3>
-                <span className="text-xs text-nature-secondary font-semibold">
-                  Official Environmental Waste Handler
+                <h3 className="font-bold text-base text-[#1A1D20]">NEMA Uganda Registered</h3>
+                <span className="text-xs text-[#006F51] font-semibold">
+                  Official Statutory Waste Handler
                 </span>
               </div>
             </div>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Operating under strict National Environment Management Authority guidelines, our protocols ensure every kilogram of refuse is accounted for, sorted, and processed without polluting Lake Victoria or local wetlands.
+            <p className="text-xs text-[#555C66] leading-relaxed">
+              Operating under strict National Environment Management Authority guidelines, our protocols ensure every kilogram of refuse is accounted for, sorted, and processed without polluting Lake Victoria or local wetland corridors.
             </p>
             <div className="pt-2">
               <Link
                 href="/features"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-nature-secondary hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#006F51] hover:underline"
               >
                 <span>Read Our Full ESG &amp; Compliance Statement</span>
                 <ArrowRight className="w-4 h-4" />
@@ -99,37 +90,43 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* 4 Feature Value Pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {pillars.map((item, idx) => {
-            const Icon = item.icon;
+        {/* 4 Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {pillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
             return (
               <div
                 key={idx}
-                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-nature-secondary/50 transition-all duration-300 space-y-3"
+                className="p-6 rounded-2xl bg-[#F8F9FA] border border-[#E5E7EB] hover:bg-white hover:border-[#006F51] hover:shadow-md transition-all duration-200 space-y-3 group"
               >
-                <div className="w-11 h-11 rounded-lg bg-nature-primary text-white flex items-center justify-center">
-                  <Icon className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-xl bg-white border border-[#E5E7EB] text-[#006F51] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#E9F4F0] transition-all">
+                  <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-base text-white">{item.title}</h3>
-                <p className="text-xs text-gray-300 leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-base text-[#1A1D20] group-hover:text-[#006F51] transition-colors">
+                  {pillar.title}
+                </h3>
+                <p className="text-xs text-[#555C66] leading-relaxed font-normal">
+                  {pillar.desc}
+                </p>
               </div>
             );
           })}
         </div>
 
-        {/* 4 Large Outlined Stat Counters */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-8 border-t border-white/15">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="space-y-2">
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-nature-secondary tracking-tight">
-                {stat.value}
+        {/* Impact Statistics */}
+        <div className="rounded-2xl bg-[#006F51] text-white p-8 sm:p-12 shadow-lg">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-white/20">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="pt-4 sm:pt-0 sm:px-4 space-y-1">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FFCE00]">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-gray-200 font-medium">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-sm font-semibold text-gray-300">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>
