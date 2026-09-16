@@ -171,10 +171,10 @@ export default function ScheduleFinder() {
                 Sign Up for {currentArea.name} Route
               </Link>
               <a
-                href={`tel:${(currentArea.hotline || "+256700890123").replace(/\s+/g, "")}`}
+                href={`tel:${(currentArea.hotline || "+256766532915").replace(/\s+/g, "")}`}
                 className="bg-[#F8F9FA] hover:bg-gray-200 text-[#1A1D20] px-6 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors border border-gray-200"
               >
-                Call Route Supervisor ({(currentArea.hotline || "+256 700 890 123")})
+                Call Route Supervisor ({(currentArea.hotline || "+256 766 532915")})
               </a>
             </div>
           </div>

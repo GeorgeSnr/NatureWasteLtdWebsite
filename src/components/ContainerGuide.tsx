@@ -156,10 +156,10 @@ export default function ContainerGuide() {
             </Link>
 
             <a
-              href="tel:+256700890123"
+              href="tel:+256766532915"
               className="border border-white/20 hover:border-white text-white px-5 py-3 rounded font-bold text-xs uppercase tracking-wider transition-colors"
             >
-              Call: +256 700 890 123
+              Call: +256 766 532915
             </a>
           </div>
         </div>

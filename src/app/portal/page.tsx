@@ -20,8 +20,10 @@ import {
   Cpu,
   BarChart3,
   Sliders,
+  Smartphone,
 } from "lucide-react";
 import Logo from "@/components/Logo";
+import GooglePlayButton from "@/components/GooglePlayButton";
 
 export default function PortalPage() {
   const [roleView, setRoleView] = useState<"client" | "fleet">("client");
@@ -322,6 +324,27 @@ export default function PortalPage() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* NatureWaste Connect Mobile App Banner for Clients */}
+            <div className="bg-white p-6 sm:p-7 border border-[#E5E7EB] shadow-xs rounded flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                  <Smartphone className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="inline-block text-[10px] font-extrabold uppercase tracking-wider text-[#006F51] bg-[#E9F4F0] px-2 py-0.5 rounded mb-1">
+                    Available on Android
+                  </div>
+                  <h4 className="text-lg font-bold text-[#1A1D20]">
+                    Download the NatureWaste Connect App
+                  </h4>
+                  <p className="text-xs text-[#555C66]">
+                    Real-time compactor truck tracking, push route alerts, and instant Mobile Money bill settlements right on your phone.
+                  </p>
+                </div>
+              </div>
+              <GooglePlayButton variant="dark" size="md" className="shrink-0 shadow-md" />
             </div>
           </div>
         ) : (

@@ -30,11 +30,11 @@ export default function SavingsCtaBanner() {
             </Link>
 
             <a
-              href="tel:+256700890123"
+              href="tel:+256766532915"
               className="bg-white hover:bg-gray-50 border border-[#006F51]/30 text-[#006F51] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded transition-colors flex items-center gap-2"
             >
               <Phone className="w-4 h-4 text-[#006F51]" />
-              <span>+256 700 890 123</span>
+              <span>+256 766 532915</span>
             </a>
           </div>
 

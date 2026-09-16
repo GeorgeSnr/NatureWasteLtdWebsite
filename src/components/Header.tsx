@@ -27,9 +27,12 @@ import {
   FileText,
   Users,
   MessageSquare,
+  Smartphone,
+  Download,
 } from "lucide-react";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
+import GooglePlayButton, { GooglePlayIcon } from "./GooglePlayButton";
 
 export default function Header() {
   const pathname = usePathname();
@@ -163,6 +166,16 @@ export default function Header() {
               <Phone className="w-3.5 h-3.5 text-[#006F51]" />
               <span>Customer Care</span>
             </Link>
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-1.5 font-bold text-emerald-800 bg-emerald-100/70 hover:bg-emerald-100 px-2.5 py-0.5 rounded border border-emerald-200 transition-colors"
+            >
+              <GooglePlayIcon className="w-3.5 h-3.5" />
+              <span>Get App</span>
+            </a>
 
             <div className="h-3 w-px bg-gray-300 hidden sm:block" />
 
@@ -421,11 +434,11 @@ export default function Header() {
           <div className="flex items-center gap-3">
             {/* Phone Number Callout */}
             <a
-              href="tel:+256700890123"
+              href="tel:+256766532915"
               className="hidden lg:flex items-center gap-2 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3 py-2 rounded-sm hover:bg-gray-50 transition-colors"
             >
               <Phone className="w-4 h-4 text-[#006F51]" />
-              <span>+256 700 890 123</span>
+              <span>+256 766 532915</span>
             </a>
 
             {/* Search Icon Trigger */}
@@ -518,14 +531,14 @@ export default function Header() {
                 </Link>
                 <div className="grid grid-cols-2 gap-2">
                   <a
-                    href="tel:+256700890123"
+                    href="tel:+256766532915"
                     className="flex items-center justify-center gap-1.5 border border-[#006F51] text-[#006F51] hover:bg-[#E9F4F0] font-bold text-[11px] uppercase tracking-wider py-2 px-2.5 rounded transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     <span>Call Us</span>
                   </a>
                   <a
-                    href="https://wa.me/256700890123"
+                    href="https://wa.me/256766532915"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-[11px] uppercase tracking-wider py-2 px-2.5 rounded transition-colors"
@@ -537,8 +550,8 @@ export default function Header() {
               </div>
 
               {/* 4. Quick Customer Action Tiles (Top Utility Bar items) */}
-              <div className="p-4 border-b border-gray-200 bg-gray-50/80">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2.5">
+              <div className="p-4 border-b border-gray-200 bg-gray-50/80 space-y-3">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
                   Customer Self-Service
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs">
@@ -575,6 +588,32 @@ export default function Header() {
                     <span>Client Portal</span>
                   </Link>
                 </div>
+
+                {/* NatureWaste Connect Google Play App Download Card */}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 text-white hover:from-black hover:to-gray-900 transition-all border border-gray-700 shadow-sm group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-md bg-white/10 flex items-center justify-center shrink-0 border border-white/10 group-hover:bg-white/20 transition-colors">
+                      <GooglePlayIcon className="w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="text-[10px] uppercase font-semibold text-emerald-400 tracking-wider">
+                        Official Android App
+                      </span>
+                      <span className="text-xs font-bold leading-snug">
+                        NatureWaste Connect
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 text-[11px] font-bold text-white bg-[#006F51] hover:bg-[#008763] px-2.5 py-1.5 rounded transition-colors shrink-0">
+                    <span>Install</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                </a>
               </div>
 
               {/* 5. Main Top Bar Menu Categories (Accordion Navigation) */}
@@ -839,11 +878,11 @@ export default function Header() {
               {/* 7. Mobile Footer Contact Card */}
               <div className="p-4 border-t border-gray-200 bg-[#F8F9FA] space-y-2 text-xs text-gray-600">
                 <a
-                  href="tel:+256700890123"
+                  href="tel:+256766532915"
                   className="flex items-center gap-2 font-bold text-[#006F51]"
                 >
                   <Phone className="w-4 h-4 text-[#006F51]" />
-                  <span>Call Dispatch: +256 700 890 123</span>
+                  <span>Call Dispatch: +256 766 532915</span>
                 </a>
                 <div className="flex items-start gap-2 text-gray-500">
                   <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-gray-400" />

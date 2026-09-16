@@ -18,7 +18,7 @@ export const ugandaCoverageAreas: SuburbCoverage[] = [
     recyclingDay: "Every Wednesday",
     servicesAvailable: ["Residential Curbside", "Commercial Waste", "Roll-off Skips", "Plastics Recycling"],
     contactPerson: "Kitende Dispatch Desk",
-    hotline: "+256 700 890 123",
+    hotline: "+256 766 532915",
   },
   {
     id: "lubowa",

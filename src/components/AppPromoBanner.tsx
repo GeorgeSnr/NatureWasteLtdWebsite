@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, Bell, Smartphone, ArrowRight, MessageSquare } from "lucide-react";
+import { CheckCircle2, Bell, Smartphone, ArrowRight, MessageSquare, Download } from "lucide-react";
+import GooglePlayButton from "@/components/GooglePlayButton";
 
 export default function AppPromoBanner() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -24,7 +25,7 @@ export default function AppPromoBanner() {
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
-                Customer Notification Service
+                Customer Notification Service &amp; Mobile App
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#1A1D20] tracking-tight">
                 Never Miss Your Collection Day Again!
@@ -32,7 +33,7 @@ export default function AppPromoBanner() {
             </div>
 
             <p className="text-[#555C66] text-sm sm:text-base leading-relaxed">
-              With Nature Waste SMS &amp; WhatsApp Route Alerts, staying on top of your waste schedule has never been simpler.
+              With the <strong>NatureWaste Connect</strong> mobile app, SMS &amp; WhatsApp Route Alerts, staying on top of your waste schedule and bill payments has never been simpler.
             </p>
 
             <ul className="space-y-3.5 text-sm text-[#363636]">
@@ -54,7 +55,7 @@ export default function AppPromoBanner() {
                 <div className="w-5 h-5 rounded-full bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0 mt-0.5">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
-                <span><strong>Material sorting assistance</strong> via our quick SMS lookup to ensure proper segregation.</span>
+                <span><strong>Material sorting assistance &amp; Mobile Money pay</strong> right from your smartphone.</span>
               </li>
             </ul>
 
@@ -68,7 +69,7 @@ export default function AppPromoBanner() {
                 <form onSubmit={handleSubmit} className="flex items-center gap-2">
                   <input
                     type="tel"
-                    placeholder="Enter phone (e.g. 0700 890 123)"
+                    placeholder="Enter phone (e.g. 0766 532 915)"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
@@ -87,39 +88,47 @@ export default function AppPromoBanner() {
             {/* WhatsApp Link */}
             <div className="pt-1">
               <a
-                href="https://wa.me/256700890123"
+                href="https://wa.me/256766532915"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#006F51] hover:underline"
               >
                 <MessageSquare className="w-4 h-4 text-[#10B981]" />
-                <span>Prefer WhatsApp? Chat with our Kitende Dispatch Office</span>
+                <span>Prefer WhatsApp? Chat with our Kitende Dispatch Office (+256 766 532915)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
-          {/* Right Visual Frame */}
+          {/* Right Visual Frame: NatureWaste Connect App Showcase */}
           <div className="lg:col-span-5">
             <div className="bg-white rounded border border-[#E5E7EB] p-7 shadow-xs text-center space-y-5 max-w-md mx-auto">
-              <div className="w-12 h-12 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mx-auto">
-                <Smartphone className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-2xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mx-auto shadow-inner">
+                <Smartphone className="w-7 h-7" />
               </div>
               <div className="space-y-1.5">
-                <h3 className="text-lg font-bold text-[#1A1D20]">
-                  Nature Waste Self-Service
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#006F51] bg-[#E9F4F0] px-2.5 py-0.5 rounded-full inline-block">
+                  Official Android App
+                </span>
+                <h3 className="text-xl font-bold text-[#1A1D20]">
+                  NatureWaste Connect
                 </h3>
                 <p className="text-xs text-[#555C66] leading-relaxed">
-                  Manage your subscription, pay via MTN Mobile Money or Airtel Money, view your collection calendar, and report missed pickups 24/7.
+                  Manage pickups, track collection trucks in real-time, order recycling sacks, and pay via MTN / Airtel Mobile Money.
                 </p>
               </div>
 
-              <div className="space-y-2.5 pt-2">
+              {/* Official Google Play Store Button */}
+              <div className="pt-1 flex justify-center">
+                <GooglePlayButton variant="dark" size="md" className="w-full justify-center shadow-md hover:scale-[1.02]" />
+              </div>
+
+              <div className="space-y-2 pt-2 border-t border-gray-100">
                 <Link
                   href="/portal"
                   className="w-full block bg-[#006F51] hover:bg-[#004D38] text-white py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
                 >
-                  Log In to Customer Portal
+                  Log In to Web Portal
                 </Link>
                 <a
                   href="#schedule-finder"

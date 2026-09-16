@@ -12,8 +12,11 @@ import {
   CheckCircle2,
   Calendar,
   CreditCard,
+  MessageSquare,
+  Smartphone,
 } from "lucide-react";
 import Logo from "./Logo";
+import GooglePlayButton, { GooglePlayIcon } from "./GooglePlayButton";
 
 export default function Footer() {
   return (
@@ -36,10 +39,10 @@ export default function Footer() {
 
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="tel:+256700890123"
+              href="tel:+256766532915"
               className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded transition-colors"
             >
-              Call: +256 700 890 123
+              Call: +256 766 532915
             </a>
             <Link
               href="/#schedule-finder"
@@ -48,6 +51,7 @@ export default function Footer() {
               <span>Get Prices &amp; Schedule</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+            <GooglePlayButton variant="outline" size="sm" />
           </div>
         </div>
       </div>
@@ -91,6 +95,17 @@ export default function Footer() {
                 <Link href="/#contact" className="hover:text-[#FFCE00] transition-colors">
                   Contact Customer Care
                 </Link>
+              </li>
+              <li className="pt-1.5">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold transition-colors"
+                >
+                  <GooglePlayIcon className="w-3.5 h-3.5" />
+                  <span>NatureWaste Connect (Android)</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -224,8 +239,19 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#FFCE00] shrink-0" />
-                <a href="tel:+256700890123" className="hover:text-white font-semibold">
-                  +256 700 890 123
+                <a href="tel:+256766532915" className="hover:text-white font-semibold">
+                  +256 766 532915
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-[#25D366] shrink-0" />
+                <a
+                  href="https://wa.me/256766532915"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#25D366] font-semibold"
+                >
+                  WhatsApp: +256 766 532915
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -253,6 +279,7 @@ export default function Footer() {
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-3">
+            <GooglePlayButton variant="light" size="sm" />
             <Link
               href="/#schedule-finder"
               className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded transition-colors"

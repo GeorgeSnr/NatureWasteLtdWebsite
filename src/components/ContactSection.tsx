@@ -9,9 +9,11 @@ import {
   Send,
   CheckCircle2,
   ShieldCheck,
-  AlertCircle,
   Headphones,
+  MessageSquare,
+  Smartphone,
 } from "lucide-react";
+import GooglePlayButton from "./GooglePlayButton";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -64,12 +66,34 @@ export default function ContactSection() {
                 <div>
                   <h4 className="text-sm font-bold text-[#1A1D20]">Call Customer Dispatch</h4>
                   <div className="mt-1 space-y-0.5">
-                    <a href="tel:+256700890123" className="block text-sm font-bold text-[#006F51] hover:underline">
-                      +256 700 890 123
+                    <a href="tel:+256766532915" className="block text-sm font-bold text-[#006F51] hover:underline">
+                      +256 766 532915
                     </a>
                     <a href="tel:+256312456789" className="block text-xs text-gray-500 hover:text-[#006F51]">
                       +256 312 456 789 (Commercial Lines)
                     </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* WhatsApp Support */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-sm bg-emerald-50 text-[#10B981] flex items-center justify-center shrink-0 border border-[#10B981]/20">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[#1A1D20]">WhatsApp Dispatch &amp; Route Chat</h4>
+                  <div className="mt-1">
+                    <a
+                      href="https://wa.me/256766532915"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#10B981] hover:underline"
+                    >
+                      <span>+256 766 532915</span>
+                      <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Online</span>
+                    </a>
+                    <span className="text-[11px] text-gray-500 block">Instant photo quoting &amp; missed pickup alerts</span>
                   </div>
                 </div>
               </div>
@@ -116,6 +140,20 @@ export default function ContactSection() {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Mobile App Download Promo Card */}
+            <div className="p-5 rounded bg-white border border-[#E5E7EB] shadow-xs space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                  <Smartphone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-[#1A1D20]">NatureWaste Connect App</h4>
+                  <p className="text-xs text-gray-500">Self-service, live tracking &amp; Mobile Money</p>
+                </div>
+              </div>
+              <GooglePlayButton variant="dark" size="sm" className="w-full justify-center" />
             </div>
 
             {/* Quick Regulatory Badge */}
@@ -195,7 +233,7 @@ export default function ContactSection() {
                     <input
                       type="tel"
                       required
-                      placeholder="e.g. +256 700 890 123"
+                      placeholder="e.g. +256 766 532 915"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"

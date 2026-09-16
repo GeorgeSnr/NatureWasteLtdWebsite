@@ -22,6 +22,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { GooglePlayIcon } from "./GooglePlayButton";
 
 // Real waste management operational imagery from Entebbe & Uganda
 const entebbeWasteSlides = [
@@ -132,11 +133,23 @@ export default function HeroSection() {
 
               {/* Phone Direct Link */}
               <a
-                href="tel:+256700890123"
+                href="tel:+256766532915"
                 className="inline-flex items-center gap-2.5 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-4 py-3 rounded border border-[#006F51]/20 bg-white hover:bg-[#F4F9F6] transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#006F51]" />
-                <span>+256 700 890 123</span>
+                <span>+256 766 532915</span>
+              </a>
+
+              {/* Google Play App Link */}
+              <a
+                href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-gray-700 hover:text-black px-4 py-3 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-xs"
+                title="Download NatureWaste Connect on Google Play"
+              >
+                <GooglePlayIcon className="w-4 h-4" />
+                <span>Get Android App</span>
               </a>
             </div>
 
@@ -149,7 +162,7 @@ export default function HeroSection() {
                 </div>
               </div>
               <a
-                href="tel:+256700890123"
+                href="tel:+256766532915"
                 className="text-xs font-bold text-[#006F51] hover:underline flex items-center gap-1 shrink-0"
               >
                 <span>Call Now</span>

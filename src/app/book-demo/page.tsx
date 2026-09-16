@@ -276,7 +276,7 @@ export default function BookDemoPage() {
             <div className="bg-[#E9F4F0] border border-[#006F51]/30 p-6 text-xs text-[#006F51] rounded-sm shadow-xs">
               <div className="font-bold uppercase tracking-wider mb-1">Guaranteed Response</div>
               <p className="text-gray-700 leading-relaxed">
-                Our central dispatch team will confirm your meeting within 4 hours. For emergency medical or chemical waste assistance, call our 24/7 hotline directly: <strong>+256 700 890 123</strong>.
+                Our central dispatch team will confirm your meeting within 4 hours. For emergency medical or chemical waste assistance, call our 24/7 hotline directly: <strong>+256 766 532915</strong>.
               </p>
             </div>
           </div>

@@ -10,10 +10,10 @@ export default function VerticalSidebar() {
         <div className="writing-mode-vertical rotate-180 flex items-center gap-1.5 whitespace-nowrap">
           <span className="font-semibold text-gray-500">Call.</span>
           <a
-            href="tel:+256700890123"
+            href="tel:+256766532915"
             className="font-bold hover:text-nature-primary transition-colors tracking-wide"
           >
-            +256 700 890 123
+            +256 766 532915
           </a>
         </div>
 
