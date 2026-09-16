@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   MapPin,
@@ -20,51 +19,100 @@ import {
   CreditCard,
   AlertCircle,
   HelpCircle,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { ugandaCoverageAreas } from "@/data/ugandaCoverage";
+
+// Real waste management operational imagery from Entebbe & Uganda
+const entebbeWasteSlides = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80",
+    title: "Curbside Collection Compactor Truck",
+    location: "Entebbe Road Corridor & Kitende",
+    tag: "Daily Route Active",
+    desc: "Clean hydraulic compactor trucks collecting domestic and estate refuse along Entebbe highway.",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=1200&q=80",
+    title: "Kitende Waste Sorting & Baling Facility",
+    location: "Karl House Depot, Kitende",
+    tag: "Circular Resource Recovery",
+    desc: "Sorting post-consumer PET bottles and cardboard into dense bales for industrial reuse.",
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?auto=format&fit=crop&w=1200&q=80",
+    title: "Heavy Roll-Off Skips (7m³ - 20m³)",
+    location: "Entebbe Town & Commercial Sites",
+    tag: "Same-Day Delivery",
+    desc: "Heavy-duty steel skip rentals for commercial businesses, hotel renovations, and residential cleanouts.",
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=1200&q=80",
+    title: "Gated Estate Residential Collection",
+    location: "Lubowa, Kigo & Entebbe Estates",
+    tag: "Curbside Segregation Sacks",
+    desc: "Scheduled weekly odor-free trash and color-coded recycling sack pickups for households.",
+  },
+  {
+    id: 5,
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+    title: "Lake Victoria Watershed Conservation",
+    location: "GoGreenug Youth Initiative, Entebbe",
+    tag: "Eco-Stewardship",
+    desc: "Youth-led community environmental initiatives safeguarding wetland ecosystems and clean water.",
+  },
+];
 
 export default function HeroSection() {
-  const [selectedAreaId, setSelectedAreaId] = useState<string>("kitende");
-  const [showResult, setShowResult] = useState<boolean>(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const selectedArea = ugandaCoverageAreas.find((a) => a.id === selectedAreaId) || ugandaCoverageAreas[0];
+  // Auto-advance carousel every 4.5 seconds when not hovered
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % entebbeWasteSlides.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
-  const handleLookup = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowResult(true);
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? entebbeWasteSlides.length - 1 : prev - 1
+    );
   };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % entebbeWasteSlides.length);
+  };
+
+  const active = entebbeWasteSlides[currentSlide];
 
   return (
     <section className="relative w-full bg-[#F8F9FA] text-[#212529] select-none border-b border-[#E5E7EB]">
-      {/* Main Container */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      {/* Main Container with refined spacing above the fold */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column: Authoritative Clean Copy & Waste Connections Buttons */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left Column: Authoritative Clean Copy & Waste Connections Action Buttons */}
+          <div className="lg:col-span-7 space-y-5">
             
-            {/* Regulatory Caption / Waste Connections Brand Tag */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#006F51] bg-[#E9F4F0] px-3 py-1 rounded border border-[#006F51]/20">
-                Nature Waste Uganda
-              </span>
-              <span className="text-xs text-gray-500 font-medium hidden sm:inline">
-                NEMA Licensed Waste Handler
-              </span>
-            </div>
-
             {/* Main Headline matching Waste Connections typography */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-black text-[#1A1D20] leading-[1.18] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-black text-[#1A1D20] leading-[1.15] tracking-tight">
               Reliable Garbage Pickup &amp; Waste Solutions
             </h1>
 
             {/* Subheading with authentic Uganda context */}
-            <p className="text-[#555C66] text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+            <p className="text-[#555C66] text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal">
               Home and business waste management services, scheduled curbside pickup, and roll-off dumpster rentals across Greater Kampala, Entebbe Road, and Wakiso.
             </p>
 
             {/* Primary Waste Connections Action Button Group */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               {/* Yellow Primary Button */}
               <a
                 href="#schedule-finder"
@@ -85,7 +133,7 @@ export default function HeroSection() {
               {/* Phone Direct Link */}
               <a
                 href="tel:+256700890123"
-                className="inline-flex items-center gap-2.5 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3.5 py-2.5 rounded border border-[#006F51]/20 bg-white hover:bg-[#F4F9F6] transition-colors"
+                className="inline-flex items-center gap-2.5 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-4 py-3 rounded border border-[#006F51]/20 bg-white hover:bg-[#F4F9F6] transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#006F51]" />
                 <span>+256 700 890 123</span>
@@ -93,11 +141,11 @@ export default function HeroSection() {
             </div>
 
             {/* Live Agent / Customer Care Banner */}
-            <div className="p-3.5 rounded bg-white border border-[#E5E7EB] shadow-xs flex items-center justify-between gap-4 max-w-xl">
+            <div className="p-3 sm:p-3.5 rounded bg-white border border-[#E5E7EB] shadow-xs flex items-center justify-between gap-4 max-w-xl">
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#10B981] shrink-0" />
                 <div className="text-xs sm:text-sm text-[#363636]">
-                  <strong className="text-[#1A1D20]">Need Help?</strong> Talk to our Kampala Dispatch Team!
+                  <strong className="text-[#1A1D20]">Need Help?</strong> Talk to our Kitende &amp; Entebbe Dispatch Team!
                 </div>
               </div>
               <a
@@ -109,93 +157,119 @@ export default function HeroSection() {
               </a>
             </div>
 
-            {/* Signature Waste Connections 4 Self-Service Box Buttons */}
-            <div className="pt-2">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl">
-                
-                {/* 1. Customer Service */}
-                <a
-                  href="#contact"
-                  className="flex flex-col items-center text-center p-3.5 rounded bg-white border border-[#E5E7EB] hover:border-[#006F51] hover:bg-[#F4F9F6] shadow-xs transition-colors group"
-                >
-                  <div className="w-9 h-9 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mb-2">
-                    <HelpCircle className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-[#212529] group-hover:text-[#006F51]">
-                    Customer Service
-                  </span>
-                </a>
-
-                {/* 2. Pickup Schedule */}
-                <a
-                  href="#schedule-finder"
-                  className="flex flex-col items-center text-center p-3.5 rounded bg-white border border-[#E5E7EB] hover:border-[#006F51] hover:bg-[#F4F9F6] shadow-xs transition-colors group"
-                >
-                  <div className="w-9 h-9 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mb-2">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-[#212529] group-hover:text-[#006F51]">
-                    Pickup Schedule
-                  </span>
-                </a>
-
-                {/* 3. Holiday Calendar */}
-                <a
-                  href="#schedule-finder"
-                  className="flex flex-col items-center text-center p-3.5 rounded bg-white border border-[#E5E7EB] hover:border-[#006F51] hover:bg-[#F4F9F6] shadow-xs transition-colors group"
-                >
-                  <div className="w-9 h-9 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mb-2">
-                    <Calendar className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-[#212529] group-hover:text-[#006F51]">
-                    Holiday Calendar
-                  </span>
-                </a>
-
-                {/* 4. Pay My Bill */}
-                <Link
-                  href="/portal"
-                  className="flex flex-col items-center text-center p-3.5 rounded bg-white border border-[#E5E7EB] hover:border-[#006F51] hover:bg-[#F4F9F6] shadow-xs transition-colors group"
-                >
-                  <div className="w-9 h-9 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mb-2">
-                    <CreditCard className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-[#212529] group-hover:text-[#006F51]">
-                    Pay My Bill
-                  </span>
-                </Link>
-
+            {/* Key Service Confidence Reassurance Badges */}
+            <div className="pt-1 flex flex-wrap items-center gap-4 text-xs text-[#555C66]">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#006F51]" />
+                <span className="font-semibold text-[#1A1D20]">Scheduled Weekly Routes</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#006F51]" />
+                <span className="font-semibold text-[#1A1D20]">Odor-Free Compactor Fleet</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#006F51]" />
+                <span className="font-semibold text-[#1A1D20]">Certified Waste Manifests</span>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: High-Res Real Imagery & Enterprise Information Panel */}
-          <div className="lg:col-span-5">
-            
-            {/* Main Photography Frame */}
+          {/* Right Column: Interactive Real Waste Management Carousel in Entebbe Uganda */}
+          <div
+            className="lg:col-span-5"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Carousel Frame */}
             <div className="relative rounded overflow-hidden shadow-sm border border-[#E5E7EB] bg-white">
-              <div className="aspect-[4/3] sm:aspect-[1/1] relative w-full overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80"
-                  alt="Nature Waste reliable curbside collection and recycling truck"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Solid Grounded Dispatch Panel Below Image */}
-              <div className="p-4 bg-white border-t border-[#E5E7EB] space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#006F51]" />
-                    <span className="text-xs font-bold text-[#1A1D20]">Kitende HQ Dispatch</span>
+              {/* Image Slide Viewer */}
+              <div className="aspect-[4/3] sm:aspect-[16/11] relative w-full overflow-hidden bg-gray-900">
+                {entebbeWasteSlides.map((slide, idx) => (
+                  <div
+                    key={slide.id}
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                      idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                    }`}
+                  >
+                    <img
+                      src={slide.image}
+                      alt={`${slide.title} in ${slide.location}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#006F51] bg-[#E9F4F0] px-2 py-0.5 rounded-sm">
-                    On Route Today
+                ))}
+
+                {/* Top Badge: Slide Tag & Location */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 z-20 flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-white bg-[#006F51]/95 px-2.5 py-1 rounded-sm shadow-xs border border-white/20">
+                    {active.tag}
+                  </span>
+                  <span className="text-[11px] font-bold text-white/90 bg-black/60 px-2 py-0.5 rounded-sm">
+                    {currentSlide + 1} / {entebbeWasteSlides.length}
                   </span>
                 </div>
-                <p className="text-xs text-gray-600">
-                  Serving Entebbe Road corridor, Lubowa, Kololo, Naguru, Munyonyo &amp; Greater Kampala with clean, scheduled trucks.
+
+                {/* Left/Right Arrow Navigation Buttons */}
+                <button
+                  type="button"
+                  onClick={prevSlide}
+                  aria-label="Previous slide"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded bg-black/60 hover:bg-[#006F51] text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextSlide}
+                  aria-label="Next slide"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded bg-black/60 hover:bg-[#006F51] text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                {/* Slide Title Overlaid at Bottom of Image */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 z-20 space-y-1 text-white">
+                  <div className="flex items-center gap-1.5 text-xs text-[#FFCE00] font-semibold">
+                    <MapPin className="w-3.5 h-3.5 shrink-0" />
+                    <span>{active.location}</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold leading-snug drop-shadow-xs">
+                    {active.title}
+                  </h3>
+                </div>
+
+                {/* Carousel Indicator Dots */}
+                <div className="absolute bottom-2 right-3.5 z-20 flex items-center gap-1.5">
+                  {entebbeWasteSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentSlide(idx)}
+                      aria-label={`Jump to slide ${idx + 1}`}
+                      className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                        idx === currentSlide
+                          ? "w-5 bg-[#FFCE00]"
+                          : "w-1.5 bg-white/60 hover:bg-white"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Grounded Information Panel Below Carousel Image */}
+              <div className="p-4 bg-white border-t border-[#E5E7EB] space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#006F51] animate-pulse" />
+                    <span className="text-xs font-bold text-[#1A1D20]">Kitende HQ Operations</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-[#006F51] bg-[#E9F4F0] px-2 py-0.5 rounded-sm">
+                    Entebbe Route Active
+                  </span>
+                </div>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  {active.desc}
                 </p>
               </div>
             </div>
