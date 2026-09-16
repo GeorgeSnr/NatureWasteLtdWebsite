@@ -113,20 +113,20 @@ export default function HeroSection() {
             </p>
 
             {/* Primary Waste Connections Action Button Group */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
               {/* Yellow Primary Button */}
               <a
                 href="#schedule-finder"
-                className="inline-flex items-center justify-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-7 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs group"
+                className="inline-flex items-center justify-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-5 sm:px-7 py-3 sm:py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs group"
               >
                 <span>Start Service</span>
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform" />
               </a>
 
               {/* Green Secondary Button */}
               <a
                 href="#schedule-finder"
-                className="inline-flex items-center justify-center bg-[#006F51] hover:bg-[#004D38] text-white px-7 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
+                className="inline-flex items-center justify-center bg-[#006F51] hover:bg-[#004D38] text-white px-5 sm:px-7 py-3 sm:py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
               >
                 <span>Get Prices</span>
               </a>
@@ -134,22 +134,53 @@ export default function HeroSection() {
               {/* Phone Direct Link */}
               <a
                 href="tel:+256766532915"
-                className="inline-flex items-center gap-2.5 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-4 py-3 rounded border border-[#006F51]/20 bg-white hover:bg-[#F4F9F6] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3.5 sm:px-4 py-3 rounded border border-[#006F51]/20 bg-white hover:bg-[#F4F9F6] transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#006F51]" />
                 <span>+256 766 532915</span>
               </a>
 
-              {/* Google Play App Link */}
+              {/* Google Play App Link (Visible across all screen sizes) */}
               <a
                 href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-gray-700 hover:text-black px-4 py-3 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 text-xs font-bold text-gray-900 hover:text-[#006F51] px-3.5 sm:px-4 py-3 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-xs"
                 title="Download NatureWaste Connect on Google Play"
               >
                 <GooglePlayIcon className="w-4 h-4" />
                 <span>Get Android App</span>
+              </a>
+            </div>
+
+            {/* Mobile-Only Dedicated Quick App Download Card */}
+            <div className="sm:hidden w-full pt-1">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white border border-gray-700 shadow-sm active:scale-[0.99] transition-transform"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-9 h-9 rounded-md bg-white/10 flex items-center justify-center shrink-0 border border-white/10">
+                    <GooglePlayIcon className="w-5 h-5" />
+                  </div>
+                  <div className="flex flex-col min-w-0 text-left">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] uppercase font-bold text-[#FFCE00] tracking-wider">
+                        Official App
+                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    </div>
+                    <span className="text-xs font-bold truncate text-white">
+                      NatureWaste Connect
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-[11px] font-bold text-[#1A1D20] bg-[#FFCE00] hover:bg-[#E5B800] px-3 py-1.5 rounded transition-colors shrink-0 shadow-xs">
+                  <span>Install</span>
+                  <ArrowRight className="w-3 h-3" />
+                </div>
               </a>
             </div>
 

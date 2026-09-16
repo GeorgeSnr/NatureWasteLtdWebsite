@@ -171,10 +171,12 @@ export default function Header() {
               href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-1.5 font-bold text-emerald-800 bg-emerald-100/70 hover:bg-emerald-100 px-2.5 py-0.5 rounded border border-emerald-200 transition-colors"
+              className="flex items-center gap-1 font-bold text-emerald-800 bg-emerald-100/80 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition-colors shrink-0 text-[10px] sm:text-[11px]"
+              title="Download NatureWaste Connect on Google Play"
             >
-              <GooglePlayIcon className="w-3.5 h-3.5" />
-              <span>Get App</span>
+              <GooglePlayIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span className="hidden xs:inline">Get App</span>
+              <span className="xs:hidden">App</span>
             </a>
 
             <div className="h-3 w-px bg-gray-300 hidden sm:block" />
