@@ -62,7 +62,7 @@ export default function PortalPage() {
   return (
     <div className="bg-[#F4F5F7] min-h-screen">
       {/* Portal Top Bar */}
-      <div className="bg-[#14191E] text-white border-b border-white/10 px-6 sm:px-12 py-4">
+      <div className="bg-[#14191E] text-white border-b border-white/10 px-4 sm:px-12 py-3 sm:py-4">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Logo variant="dark" size="sm" />
@@ -72,10 +72,10 @@ export default function PortalPage() {
           </div>
 
           {/* Role View Toggle */}
-          <div className="flex items-center gap-1 bg-white/5 p-1 border border-white/10 rounded-sm">
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-1 bg-white/5 p-1 border border-white/10 rounded-sm w-full sm:w-auto">
             <button
               onClick={() => setRoleView("client")}
-              className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-sm ${
+              className={`px-2 sm:px-4 py-1.5 text-[11px] sm:text-xs text-center font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-sm ${
                 roleView === "client"
                   ? "bg-[#006F51] text-white shadow-xs"
                   : "text-gray-300 hover:text-white"
@@ -85,7 +85,7 @@ export default function PortalPage() {
             </button>
             <button
               onClick={() => setRoleView("fleet")}
-              className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-sm ${
+              className={`px-2 sm:px-4 py-1.5 text-[11px] sm:text-xs text-center font-bold uppercase tracking-wider transition-colors cursor-pointer rounded-sm ${
                 roleView === "fleet"
                   ? "bg-[#006F51] text-white shadow-xs"
                   : "text-gray-300 hover:text-white"
@@ -98,7 +98,7 @@ export default function PortalPage() {
       </div>
 
       {/* Main Portal Body */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 py-8 sm:py-10 space-y-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-12 py-6 sm:py-10 space-y-6 sm:space-y-8">
         {roleView === "client" ? (
           /* ======================================================== */
           /* RESIDENT & COMMERCIAL CLIENT VIEW                        */
@@ -415,7 +415,7 @@ export default function PortalPage() {
 
               {/* Table */}
               <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs">
+                <table className="w-full min-w-[640px] text-left border-collapse text-xs">
                   <thead className="bg-[#1A1D20] text-white text-[11px] uppercase tracking-wider">
                     <tr>
                       <th className="p-4">Bin Node ID</th>

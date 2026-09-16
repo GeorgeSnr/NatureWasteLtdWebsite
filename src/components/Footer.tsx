@@ -17,7 +17,7 @@ import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#1A2026] text-white select-none">
+    <footer className="w-full bg-[#1A2026] text-white select-none overflow-hidden">
       
       {/* 1. Top Pre-Footer Callout Bar (Waste Connections Pattern) */}
       <div className="bg-[#14191E] border-b border-white/10 py-8 px-4 sm:px-8">

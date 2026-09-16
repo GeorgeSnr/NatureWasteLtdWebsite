@@ -25,9 +25,9 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
   const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
 
   return (
-    <article className="bg-white min-h-screen pb-20">
+    <article className="bg-white min-h-screen pb-20 overflow-x-hidden">
       {/* Header Banner */}
-      <div className="bg-[#14191E] text-white py-14 sm:py-18 px-6 sm:px-12 lg:px-16 border-b border-white/10">
+      <div className="bg-[#14191E] text-white py-12 sm:py-18 px-4 sm:px-12 lg:px-16 border-b border-white/10">
         <div className="max-w-4xl mx-auto space-y-6">
           <Link
             href="/blog"
@@ -65,8 +65,8 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
       </div>
 
       {/* Main Image */}
-      <div className="max-w-4xl mx-auto px-6 sm:px-12 lg:px-16 -mt-8 sm:-mt-12 relative z-10">
-        <div className="w-full h-[280px] sm:h-[420px] border border-[#E5E7EB] rounded overflow-hidden shadow-xs bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-12 lg:px-16 -mt-8 sm:-mt-12 relative z-10">
+        <div className="w-full h-[240px] sm:h-[420px] border border-[#E5E7EB] rounded overflow-hidden shadow-xs bg-white">
           <div
             className="w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url('${post.image}')` }}
@@ -75,7 +75,7 @@ export default async function BlogPostDetail({ params }: BlogPostPageProps) {
       </div>
 
       {/* Article Body */}
-      <div className="max-w-3xl mx-auto px-6 sm:px-12 lg:px-16 py-12">
+      <div className="max-w-3xl mx-auto px-4 sm:px-12 lg:px-16 py-10 sm:py-12">
         <div className="prose prose-lg max-w-none text-[#212529] leading-relaxed space-y-6 text-base sm:text-lg">
           <p className="text-base sm:text-lg font-medium text-[#1A1D20] leading-relaxed border-l-4 border-[#006F51] pl-4 py-1 italic bg-[#F8F9FA]">
             {post.excerpt}

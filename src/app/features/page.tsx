@@ -23,7 +23,7 @@ export default function FeaturesPage() {
   const [simFillLevel, setSimFillLevel] = useState(76);
 
   return (
-    <div className="mx-auto flex max-w-[1440px] min-h-screen bg-white">
+    <div className="mx-auto flex w-full max-w-[1440px] min-h-screen bg-white overflow-x-hidden">
       {/* Sticky Left Sub-Navigation */}
       <aside className="sticky top-[80px] hidden h-[calc(100vh-80px)] w-[280px] flex-col border-r border-[#E5E7EB] bg-[#F8F9FA] p-4 gap-2 lg:flex shrink-0 select-none">
         <div className="mb-6 px-4 pt-2">
@@ -104,7 +104,7 @@ export default function FeaturesPage() {
       </aside>
 
       {/* Main Features Content */}
-      <main className="flex-1 overflow-x-hidden px-6 sm:px-10 lg:px-12 py-12">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden px-4 sm:px-10 lg:px-12 py-8 sm:py-12">
         {/* Header Intro */}
         <section className="mb-16">
           <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">

@@ -21,9 +21,9 @@ export default function BlogPage() {
   });
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen overflow-x-hidden">
       {/* Blog Hero Banner */}
-      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-6 sm:px-12 lg:px-16 py-16 text-center">
+      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-4 sm:px-12 lg:px-16 py-12 sm:py-16 text-center overflow-hidden">
         <div className="max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             Research, Insights &amp; Policy
@@ -38,7 +38,7 @@ export default function BlogPage() {
       </section>
 
       {/* Filter & Search Bar */}
-      <div className="max-w-[1320px] mx-auto px-6 sm:px-12 lg:px-16 pt-12 pb-6">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-12 lg:px-16 pt-8 sm:pt-12 pb-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#E5E7EB] pb-6">
           {/* Category Tabs */}
           <div className="flex flex-wrap gap-2">
@@ -46,7 +46,7 @@ export default function BlogPage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
                   selectedCategory === cat
                     ? "bg-[#006F51] text-white shadow-xs"
                     : "bg-[#F8F9FA] border border-[#E5E7EB] text-[#1A1D20] hover:bg-gray-100"
@@ -72,7 +72,7 @@ export default function BlogPage() {
       </div>
 
       {/* Blog Articles Grid */}
-      <div className="max-w-[1320px] mx-auto px-6 sm:px-12 lg:px-16 pb-24">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-12 lg:px-16 pb-16 sm:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map((post) => (
             <Link

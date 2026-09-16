@@ -5,10 +5,9 @@ import { industriesData } from "@/data/industries";
 
 export default function IndustriesPage() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen overflow-x-hidden">
       {/* Top Banner */}
-      {/* Top Banner */}
-      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-6 sm:px-12 lg:px-16 py-16 lg:py-20 text-center">
+      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-4 sm:px-12 lg:px-16 py-12 sm:py-16 lg:py-20 text-center overflow-hidden">
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             Specialized Waste Management Solutions
@@ -23,7 +22,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* Industries List */}
-      <div className="max-w-[1320px] mx-auto px-6 sm:px-12 lg:px-16 py-16 space-y-20">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-12 lg:px-16 py-12 sm:py-16 space-y-16 sm:space-y-20">
         {industriesData.map((ind, idx) => {
           const isReversed = idx % 2 === 1;
           return (

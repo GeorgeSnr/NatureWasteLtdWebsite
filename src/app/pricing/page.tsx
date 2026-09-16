@@ -27,7 +27,7 @@ export default function PricingPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Top Banner */}
-      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-6 sm:px-12 lg:px-16 py-16 lg:py-20 text-center">
+      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-4 sm:px-12 lg:px-16 py-12 sm:py-16 lg:py-20 text-center overflow-hidden">
         <div className="max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             Predictable &amp; Scalable Rates
@@ -247,7 +247,7 @@ export default function PricingPage() {
       </section>
 
       {/* Feature Specification Matrix */}
-      <section className="bg-white px-6 sm:px-12 lg:px-16 py-16">
+      <section className="bg-white px-4 sm:px-12 lg:px-16 py-12 sm:py-16 overflow-hidden">
         <div className="max-w-[1200px] mx-auto">
           <div className="mb-12 text-center">
             <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20]">
@@ -259,7 +259,7 @@ export default function PricingPage() {
           </div>
 
           <div className="overflow-x-auto border border-[#E5E7EB] shadow-xs rounded">
-            <table className="w-full border-collapse">
+            <table className="w-full min-w-[640px] border-collapse">
               <thead>
                 <tr className="bg-[#1A1D20] text-white">
                   <th className="border-r border-white/10 p-4 text-left text-xs font-bold uppercase tracking-wider">

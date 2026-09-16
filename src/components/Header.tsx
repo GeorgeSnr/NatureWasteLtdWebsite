@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -14,6 +14,7 @@ import {
   AlertCircle,
   ShieldCheck,
   ChevronDown,
+  ChevronRight,
   UserCheck,
   MapPin,
   Clock,
@@ -25,6 +26,7 @@ import {
   HelpCircle,
   FileText,
   Users,
+  MessageSquare,
 } from "lucide-react";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
@@ -34,6 +36,46 @@ export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  // Accordion state for mobile navigation categories
+  const [mobileSections, setMobileSections] = useState<Record<string, boolean>>({
+    residential: true,
+    commercial: false,
+    dumpsters: false,
+    sustainability: false,
+    company: false,
+  });
+
+  const toggleMobileSection = (key: string) => {
+    setMobileSections((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll and handle escape key when drawer is open
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDrawerOpen(false);
+    };
+
+    if (drawerOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [drawerOpen]);
 
   const residentialLinks = [
     { title: "Residential Garbage Pickup", desc: "Weekly scheduled curbside collection for homes & estates in Kampala and Wakiso", href: "/pricing" },
@@ -73,10 +115,10 @@ export default function Header() {
   return (
     <>
       {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
-      <div className="bg-[#F8F9FA] text-[#363636] text-xs py-2 px-4 sm:px-8 border-b border-[#E5E7EB] select-none">
-        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-[#F8F9FA] text-[#363636] text-xs py-2 px-3 sm:px-8 border-b border-[#E5E7EB] overflow-hidden">
+        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3">
           {/* Left: Location & NEMA Registration Badge */}
-          <div className="flex items-center gap-4 text-[#555C66]">
+          <div className="flex items-center gap-2 sm:gap-4 text-[#555C66] text-[11px] sm:text-xs">
             <div className="flex items-center gap-1.5 font-medium">
               <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
               <span className="hidden sm:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
@@ -89,7 +131,7 @@ export default function Header() {
           </div>
 
           {/* Right: Quick Customer Links matching Waste Connections */}
-          <div className="flex items-center gap-4 text-[11px] sm:text-xs">
+          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs">
             <Link
               href="/#schedule-finder"
               className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
@@ -126,7 +168,7 @@ export default function Header() {
 
             <Link
               href="/portal"
-              className="flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
+              className="hidden xs:flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
             >
               <UserCheck className="w-3.5 h-3.5" />
               <span>My Account</span>
@@ -136,11 +178,16 @@ export default function Header() {
       </div>
 
       {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
-      <header className="sticky top-0 z-40 bg-white border-b border-[#E5E7EB] shadow-xs select-none">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
-          {/* Brand Logo */}
-          <Link href="/" className="shrink-0 flex items-center">
-            <Logo variant="light" size="md" showTagline={false} />
+      <header className="sticky top-0 z-40 bg-white border-b border-[#E5E7EB] shadow-xs">
+        <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+          {/* Brand Logo - compact on mobile so it never forces header overflow */}
+          <Link href="/" className="shrink min-w-0 flex items-center">
+            <div className="sm:hidden">
+              <Logo variant="light" size="sm" showTagline={false} />
+            </div>
+            <div className="hidden sm:block">
+              <Logo variant="light" size="md" showTagline={false} />
+            </div>
           </Link>
 
           {/* Desktop Navigation Mega Menus */}
@@ -393,18 +440,23 @@ export default function Header() {
             {/* Signature Waste Connections Yellow Button: "Get Prices" */}
             <Link
               href="/#schedule-finder"
-              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-5 sm:px-6 py-2.5 rounded transition-colors shrink-0"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-[11px] sm:text-xs uppercase tracking-wider px-2.5 sm:px-6 py-1.5 sm:py-2.5 rounded transition-colors shrink-0"
             >
               Get Prices
             </Link>
 
             {/* Mobile Hamburger Toggle */}
             <button
-              onClick={() => setDrawerOpen(true)}
-              className="xl:hidden p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-sm transition-colors"
-              aria-label="Open Navigation Menu"
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setDrawerOpen((prev) => !prev);
+              }}
+              className="xl:hidden p-1.5 sm:p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-md transition-colors"
+              aria-label="Toggle Navigation Menu"
+              aria-expanded={drawerOpen}
             >
-              <Menu className="w-6 h-6" />
+              {drawerOpen ? <X className="w-6 h-6 text-[#006F51]" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -412,183 +464,395 @@ export default function Header() {
 
       {/* 3. Full Mobile Navigation Drawer */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-50 flex select-none">
+        <div className="fixed inset-0 z-[100] overflow-hidden">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/60 transition-opacity"
-            onClick={() => setDrawerOpen(false)}
+            className="fixed inset-0 bg-black/60 transition-opacity backdrop-blur-xs"
+            onClick={(e) => {
+              e.stopPropagation();
+              setDrawerOpen(false);
+            }}
+            aria-hidden="true"
           />
 
-          {/* Drawer Body */}
-          <div className="relative ml-auto w-full max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
-            {/* Top Bar */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-              <Logo variant="light" size="sm" showTagline={false} />
-              <button
-                onClick={() => setDrawerOpen(false)}
-                className="p-2 text-gray-600 hover:text-gray-900 rounded-sm hover:bg-gray-100"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+          {/* Drawer Sliding Container */}
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+            <div
+              className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* 1. Drawer Header */}
+              <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white sticky top-0 z-20">
+                <Logo variant="light" size="sm" showTagline={false} />
+                <button
+                  type="button"
+                  onClick={() => setDrawerOpen(false)}
+                  className="w-9 h-9 flex items-center justify-center text-gray-500 hover:text-[#006F51] rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Close Navigation Menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-            {/* CTA Button */}
-            <div className="p-4 border-b border-gray-100 bg-[#F8F9FA]">
-              <Link
-                href="/#schedule-finder"
-                onClick={() => setDrawerOpen(false)}
-                className="w-full block text-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider py-3 rounded transition-colors"
-              >
-                Get Prices &amp; Start Service
-              </Link>
-            </div>
-
-            {/* Quick Customer Links */}
-            <div className="grid grid-cols-2 gap-2 p-4 border-b border-gray-200 bg-white text-xs">
-              <Link
-                href="/portal"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-sm bg-[#E9F4F0] text-[#006F51] font-semibold"
-              >
-                <CreditCard className="w-4 h-4" />
-                <span>Pay My Bill</span>
-              </Link>
-              <Link
-                href="/#schedule-finder"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-sm bg-[#E9F4F0] text-[#006F51] font-semibold"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Schedule</span>
-              </Link>
-              <Link
-                href="/#schedule-finder"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-sm bg-gray-50 text-gray-700 font-medium"
-              >
-                <AlertCircle className="w-4 h-4 text-[#006F51]" />
-                <span>Missed Pickup</span>
-              </Link>
-              <Link
-                href="/portal"
-                onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-sm bg-gray-50 text-gray-700 font-medium"
-              >
-                <UserCheck className="w-4 h-4 text-[#006F51]" />
-                <span>My Account</span>
-              </Link>
-            </div>
-
-            {/* Mobile Nav Links */}
-            <div className="p-4 space-y-4 flex-1">
-              {/* Residential */}
-              <div>
-                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
-                  Residential
+              {/* 2. Top Utility Bar Highlights on Mobile */}
+              <div className="px-4 py-2 bg-[#F8F9FA] border-b border-gray-200 flex items-center justify-between text-xs text-[#555C66]">
+                <div className="flex items-center gap-1.5 font-medium">
+                  <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
+                  <span>Kitende, Entebbe Rd</span>
                 </div>
-                <div className="space-y-1 pl-2">
-                  {residentialLinks.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+                <div className="flex items-center gap-1 text-[#006F51] font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>NEMA Licensed</span>
                 </div>
               </div>
 
-              {/* Commercial */}
-              <div>
-                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
-                  Commercial
-                </div>
-                <div className="space-y-1 pl-2">
-                  {commercialLinks.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Roll-Off Dumpsters */}
-              <div>
-                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
-                  Roll-Off Dumpsters
-                </div>
-                <div className="space-y-1 pl-2">
-                  {dumpsterLinks.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+              {/* 3. Primary CTA Actions */}
+              <div className="p-4 border-b border-gray-100 bg-white space-y-2">
+                <Link
+                  href="/#schedule-finder"
+                  onClick={() => setDrawerOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider py-3 px-4 rounded transition-colors shadow-xs text-center"
+                >
+                  <span>Get Prices &amp; Start Service</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href="tel:+256700890123"
+                    className="flex items-center justify-center gap-1.5 border border-[#006F51] text-[#006F51] hover:bg-[#E9F4F0] font-bold text-[11px] uppercase tracking-wider py-2 px-2.5 rounded transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Call Us</span>
+                  </a>
+                  <a
+                    href="https://wa.me/256700890123"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-[11px] uppercase tracking-wider py-2 px-2.5 rounded transition-colors"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>WhatsApp</span>
+                  </a>
                 </div>
               </div>
 
-              {/* Sustainability */}
-              <div>
-                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
-                  Sustainability
+              {/* 4. Quick Customer Action Tiles (Top Utility Bar items) */}
+              <div className="p-4 border-b border-gray-200 bg-gray-50/80">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2.5">
+                  Customer Self-Service
                 </div>
-                <div className="space-y-1 pl-2">
-                  {sustainabilityLinks.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <Link
+                    href="/portal"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded border border-emerald-100 bg-[#E9F4F0] text-[#006F51] font-semibold hover:bg-emerald-100/60 transition-colors"
+                  >
+                    <CreditCard className="w-4 h-4 shrink-0 text-[#006F51]" />
+                    <span>Pay My Bill</span>
+                  </Link>
+                  <Link
+                    href="/#schedule-finder"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded border border-emerald-100 bg-[#E9F4F0] text-[#006F51] font-semibold hover:bg-emerald-100/60 transition-colors"
+                  >
+                    <Calendar className="w-4 h-4 shrink-0 text-[#006F51]" />
+                    <span>Pickup Schedule</span>
+                  </Link>
+                  <Link
+                    href="/#schedule-finder"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                  >
+                    <AlertCircle className="w-4 h-4 shrink-0 text-[#006F51]" />
+                    <span>Missed Pickup</span>
+                  </Link>
+                  <Link
+                    href="/portal"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                  >
+                    <UserCheck className="w-4 h-4 shrink-0 text-[#006F51]" />
+                    <span>Client Portal</span>
+                  </Link>
                 </div>
               </div>
 
-              {/* Company */}
-              <div>
-                <div className="font-bold text-xs uppercase tracking-wider text-[#006F51] mb-2">
-                  Company
+              {/* 5. Main Top Bar Menu Categories (Accordion Navigation) */}
+              <div className="p-4 space-y-3 flex-1">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                  Navigation Menu
                 </div>
-                <div className="space-y-1 pl-2">
-                  {companyLinks.map((item, idx) => (
-                    <Link
-                      key={idx}
-                      href={item.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className="block py-1.5 text-sm text-gray-700 hover:text-[#006F51]"
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+
+                {/* Section 1: Residential */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection("residential")}
+                    className="w-full flex items-center justify-between p-3 text-left font-bold text-sm text-[#212529] hover:bg-gray-50 bg-white transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#006F51]" />
+                      <span>Residential Services</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                        mobileSections.residential ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileSections.residential && (
+                    <div className="bg-[#F8F9FA] p-2 space-y-1 border-t border-gray-100">
+                      {residentialLinks.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block p-2 rounded text-xs text-gray-700 hover:text-[#006F51] hover:bg-white transition-colors"
+                        >
+                          <div className="font-semibold">{item.title}</div>
+                          <div className="text-[11px] text-gray-500 line-clamp-1">{item.desc}</div>
+                        </Link>
+                      ))}
+                      <div className="pt-2 mt-1 border-t border-gray-200">
+                        <Link
+                          href="/pricing"
+                          onClick={() => setDrawerOpen(false)}
+                          className="flex items-center justify-between px-2 py-1 text-xs font-bold text-[#006F51] hover:underline"
+                        >
+                          <span>View Residential Rates</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Section 2: Commercial */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection("commercial")}
+                    className="w-full flex items-center justify-between p-3 text-left font-bold text-sm text-[#212529] hover:bg-gray-50 bg-white transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#006F51]" />
+                      <span>Commercial Services</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                        mobileSections.commercial ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileSections.commercial && (
+                    <div className="bg-[#F8F9FA] p-2 space-y-1 border-t border-gray-100">
+                      {commercialLinks.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block p-2 rounded text-xs text-gray-700 hover:text-[#006F51] hover:bg-white transition-colors"
+                        >
+                          <div className="font-semibold">{item.title}</div>
+                          <div className="text-[11px] text-gray-500 line-clamp-1">{item.desc}</div>
+                        </Link>
+                      ))}
+                      <div className="pt-2 mt-1 border-t border-gray-200">
+                        <Link
+                          href="/book-demo"
+                          onClick={() => setDrawerOpen(false)}
+                          className="flex items-center justify-between px-2 py-1 text-xs font-bold text-[#006F51] hover:underline"
+                        >
+                          <span>Request Commercial Quote</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Section 3: Roll-Off Dumpsters */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection("dumpsters")}
+                    className="w-full flex items-center justify-between p-3 text-left font-bold text-sm text-[#212529] hover:bg-gray-50 bg-white transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#006F51]" />
+                      <span>Roll-Off Dumpsters</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                        mobileSections.dumpsters ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileSections.dumpsters && (
+                    <div className="bg-[#F8F9FA] p-2 space-y-1 border-t border-gray-100">
+                      {dumpsterLinks.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block p-2 rounded text-xs text-gray-700 hover:text-[#006F51] hover:bg-white transition-colors"
+                        >
+                          <div className="font-semibold">{item.title}</div>
+                          <div className="text-[11px] text-gray-500 line-clamp-1">{item.desc}</div>
+                        </Link>
+                      ))}
+                      <div className="pt-2 mt-1 border-t border-gray-200">
+                        <Link
+                          href="/pricing#calculator"
+                          onClick={() => setDrawerOpen(false)}
+                          className="flex items-center justify-between px-2 py-1 text-xs font-bold text-[#006F51] hover:underline"
+                        >
+                          <span>Interactive Container Calculator</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Section 4: Sustainability */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection("sustainability")}
+                    className="w-full flex items-center justify-between p-3 text-left font-bold text-sm text-[#212529] hover:bg-gray-50 bg-white transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#006F51]" />
+                      <span>Sustainability &amp; GoGreenug</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                        mobileSections.sustainability ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileSections.sustainability && (
+                    <div className="bg-[#F8F9FA] p-2 space-y-1 border-t border-gray-100">
+                      {sustainabilityLinks.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block p-2 rounded text-xs text-gray-700 hover:text-[#006F51] hover:bg-white transition-colors"
+                        >
+                          <div className="font-semibold">{item.title}</div>
+                          <div className="text-[11px] text-gray-500 line-clamp-1">{item.desc}</div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Section 5: Company & About Us */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggleMobileSection("company")}
+                    className="w-full flex items-center justify-between p-3 text-left font-bold text-sm text-[#212529] hover:bg-gray-50 bg-white transition-colors"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#006F51]" />
+                      <span>About Us &amp; Company</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                        mobileSections.company ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {mobileSections.company && (
+                    <div className="bg-[#F8F9FA] p-2 space-y-1 border-t border-gray-100">
+                      {companyLinks.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.href}
+                          onClick={() => setDrawerOpen(false)}
+                          className="block p-2 rounded text-xs text-gray-700 hover:text-[#006F51] hover:bg-white transition-colors"
+                        >
+                          <div className="font-semibold">{item.title}</div>
+                          <div className="text-[11px] text-gray-500 line-clamp-1">{item.desc}</div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 6. Direct Main Page Links */}
+                <div className="pt-3 border-t border-gray-200 space-y-1">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                    Core Site Pages
+                  </div>
+                  <Link
+                    href="/features"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between py-2 px-2.5 rounded hover:bg-gray-50 text-sm font-medium text-gray-800 hover:text-[#006F51] transition-colors"
+                  >
+                    <span>All Features &amp; Smart Tech</span>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                  </Link>
+                  <Link
+                    href="/industries"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between py-2 px-2.5 rounded hover:bg-gray-50 text-sm font-medium text-gray-800 hover:text-[#006F51] transition-colors"
+                  >
+                    <span>Industries We Serve</span>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between py-2 px-2.5 rounded hover:bg-gray-50 text-sm font-medium text-gray-800 hover:text-[#006F51] transition-colors"
+                  >
+                    <span>Rates &amp; Skip Calculator</span>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                  </Link>
+                  <Link
+                    href="/blog"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between py-2 px-2.5 rounded hover:bg-gray-50 text-sm font-medium text-gray-800 hover:text-[#006F51] transition-colors"
+                  >
+                    <span>Circular Economy Blog</span>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                  </Link>
+                  <Link
+                    href="/#contact"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between py-2 px-2.5 rounded hover:bg-gray-50 text-sm font-medium text-gray-800 hover:text-[#006F51] transition-colors"
+                  >
+                    <span>Contact &amp; Customer Care</span>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                  </Link>
                 </div>
               </div>
-            </div>
 
-            {/* Mobile Footer Contact */}
-            <div className="p-4 border-t border-gray-200 bg-[#F8F9FA] space-y-2 text-xs text-gray-600">
-              <a
-                href="tel:+256700890123"
-                className="flex items-center gap-2 font-bold text-[#006F51]"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Call Kampala: +256 700 890 123</span>
-              </a>
-              <div className="flex items-start gap-2 text-gray-500">
-                <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-gray-400" />
-                <span>Kitende, Karl House, Room 9, Entebbe Road</span>
+              {/* 7. Mobile Footer Contact Card */}
+              <div className="p-4 border-t border-gray-200 bg-[#F8F9FA] space-y-2 text-xs text-gray-600">
+                <a
+                  href="tel:+256700890123"
+                  className="flex items-center gap-2 font-bold text-[#006F51]"
+                >
+                  <Phone className="w-4 h-4 text-[#006F51]" />
+                  <span>Call Dispatch: +256 700 890 123</span>
+                </a>
+                <div className="flex items-start gap-2 text-gray-500">
+                  <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-gray-400" />
+                  <span>Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
+                </div>
+                <div className="text-[11px] text-gray-500 pt-1 border-t border-gray-200 flex items-center justify-between">
+                  <span>Licensed by NEMA Uganda</span>
+                  <span className="font-semibold text-[#006F51]">Mon – Sat: 7am – 6pm</span>
+                </div>
               </div>
             </div>
           </div>
