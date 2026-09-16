@@ -21,7 +21,7 @@ export default function ServicePillars() {
       ],
       link: "/pricing",
       buttonText: "Go to Residential Services",
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: "commercial",

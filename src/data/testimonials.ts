@@ -23,7 +23,7 @@ export const testimonials: TestimonialItem[] = [
     name: "Beatrice Namuli",
     role: "Head of ESG & Sustainability",
     organization: "East African Breweries Logistics",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80",
+    avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80",
     content: "Meeting our Zero-Waste-to-Landfill mandate was a massive headache before Nature Waste Management Ltd stepped in. Their automated weighbridge audit logs provide verified data for our annual sustainability report.",
     rating: 5,
   },

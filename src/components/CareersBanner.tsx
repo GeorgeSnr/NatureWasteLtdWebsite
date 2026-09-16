@@ -22,7 +22,7 @@ export default function CareersBanner() {
             </div>
 
             <p className="text-gray-100 text-sm sm:text-base leading-relaxed max-w-xl">
-              We have current openings for <strong>Drivers</strong>, <strong>Heavy Mechanics</strong>, <strong>Customer Service Representatives</strong>, and <strong>Collection Helpers</strong>. At Nature Waste, we are proud to be a youth-led Ugandan company with a culture built on safety, dignity, and career advancement.
+              We have current openings for <strong>Drivers</strong>, <strong>Heavy Mechanics</strong>, <strong>Customer Service Representatives</strong>, and <strong>Collection Helpers</strong>. At Nature Waste Management Ltd, we are proud to be a youth-led Ugandan company with a culture built on safety, dignity, and career advancement.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-200">
@@ -58,8 +58,8 @@ export default function CareersBanner() {
           {/* Right Image */}
           <div className="lg:col-span-5 h-full min-h-[340px] relative">
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
-              alt="Smiling Nature Waste Uganda employee"
+              src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+              alt="Nature Waste Management Ltd Ugandan team member in safety gear"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#006F51] via-transparent to-transparent lg:hidden" />
