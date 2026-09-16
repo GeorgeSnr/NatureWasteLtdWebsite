@@ -34,7 +34,7 @@ export default function ScheduleFinder() {
         
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3.5 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded border border-[#006F51]/20">
             <Calendar className="w-3.5 h-3.5" />
             <span>Interactive Pickup Schedule Finder</span>
           </div>
@@ -47,29 +47,29 @@ export default function ScheduleFinder() {
         </div>
 
         {/* Schedule Finder Card */}
-        <div className="max-w-4xl mx-auto bg-[#F8F9FA] rounded-2xl border border-[#E5E7EB] p-6 sm:p-10 shadow-lg space-y-8">
+        <div className="max-w-4xl mx-auto bg-[#F8F9FA] rounded border border-[#E5E7EB] p-6 sm:p-8 shadow-xs space-y-6">
           
           {/* Search / Selection Bar */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <label className="text-xs font-bold text-gray-700 uppercase tracking-wider block">
               Select or Search Your Suburb:
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Type suburb name (e.g. Lubowa, Kololo, Munyonyo)..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-sm focus:outline-none focus:border-[#006F51]"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded text-xs focus:outline-none focus:border-[#006F51]"
                 />
               </div>
 
               <select
                 value={selectedId}
                 onChange={(e) => setSelectedId(e.target.value)}
-                className="px-4 py-3 bg-white border border-gray-300 rounded-xl text-sm font-semibold text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
+                className="px-4 py-2.5 bg-white border border-gray-300 rounded text-xs font-semibold text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
               >
                 {ugandaCoverageAreas.map((area) => (
                   <option key={area.id} value={area.id}>
@@ -81,14 +81,14 @@ export default function ScheduleFinder() {
           </div>
 
           {/* Result Card for Selected Area */}
-          <div className="bg-white rounded-xl border border-[#E5E7EB] p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="bg-white rounded border border-[#E5E7EB] p-6 sm:p-8 space-y-6 shadow-xs">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-5">
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="text-2xl font-black text-[#1A1D20]">
                     {currentArea.name}
                   </h3>
-                  <span className="text-xs font-semibold text-[#006F51] bg-[#E9F4F0] px-2.5 py-0.5 rounded-full">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#006F51] bg-[#E9F4F0] px-2.5 py-0.5 rounded-sm">
                     {currentArea.division}
                   </span>
                 </div>
@@ -108,7 +108,7 @@ export default function ScheduleFinder() {
 
             {/* Schedule Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-100 space-y-1">
+              <div className="p-4 rounded bg-[#F8F9FA] border border-gray-200 space-y-1">
                 <div className="flex items-center gap-1.5 text-[#006F51] font-bold">
                   <Calendar className="w-4 h-4" />
                   <span>Scheduled Pickup Days</span>
@@ -119,7 +119,7 @@ export default function ScheduleFinder() {
                 <div className="text-gray-500 text-[11px]">Recycling: {currentArea.recyclingDay}</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-100 space-y-1">
+              <div className="p-4 rounded bg-[#F8F9FA] border border-gray-200 space-y-1">
                 <div className="flex items-center gap-1.5 text-[#006F51] font-bold">
                   <Truck className="w-4 h-4" />
                   <span>Available Services</span>
@@ -130,7 +130,7 @@ export default function ScheduleFinder() {
                 <div className="text-gray-500 text-[11px]">{currentArea.servicesAvailable?.slice(1).join(", ")}</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-100 space-y-1">
+              <div className="p-4 rounded bg-[#F8F9FA] border border-gray-200 space-y-1">
                 <div className="flex items-center gap-1.5 text-[#006F51] font-bold">
                   <Phone className="w-4 h-4" />
                   <span>Route Dispatch Direct</span>
@@ -166,13 +166,13 @@ export default function ScheduleFinder() {
             <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-gray-100">
               <Link
                 href="/pricing"
-                className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
+                className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-6 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
               >
                 Sign Up for {currentArea.name} Route
               </Link>
               <a
                 href={`tel:${(currentArea.hotline || "+256700890123").replace(/\s+/g, "")}`}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1A1D20] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all"
+                className="bg-[#F8F9FA] hover:bg-gray-200 text-[#1A1D20] px-6 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors border border-gray-200"
               >
                 Call Route Supervisor ({(currentArea.hotline || "+256 700 890 123")})
               </a>

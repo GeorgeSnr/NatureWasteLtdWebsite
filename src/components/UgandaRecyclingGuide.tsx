@@ -94,11 +94,11 @@ export default function UgandaRecyclingGuide() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 text-nature-primary font-extrabold text-xs uppercase tracking-widest bg-nature-primary/10 px-3.5 py-1.5 rounded-full">
-            <RefreshCw className="w-3.5 h-3.5 text-nature-primary animate-spin-slow" />
-            <span>NEMA UGANDA COMPLIANCE &amp; GOGREENUG</span>
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded border border-[#006F51]/20">
+            <RefreshCw className="w-3.5 h-3.5 text-[#006F51]" />
+            <span>NEMA Uganda Compliance &amp; GoGreenug</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#141517] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1A1D20] tracking-tight leading-tight">
             What Goes Where? Uganda Waste Segregation Guide
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
@@ -107,86 +107,86 @@ export default function UgandaRecyclingGuide() {
         </div>
 
         {/* 4 Stream Selector Tabs */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-8">
           <button
             onClick={() => setActiveStream("plastics")}
-            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+            className={`p-3.5 rounded border text-left cursor-pointer transition-colors shadow-xs ${
               activeStream === "plastics"
-                ? "bg-blue-600 text-white border-blue-600 shadow-lg scale-[1.02]"
+                ? "bg-blue-700 text-white border-blue-700"
                 : "bg-white text-gray-700 border-gray-200 hover:border-blue-400"
             }`}
           >
-            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+            <span className="block text-[11px] opacity-90 uppercase tracking-wider font-bold">
               Blue Sack
             </span>
-            <span className="text-base font-black">Plastics &amp; Bottles</span>
+            <span className="text-sm sm:text-base font-bold">Plastics &amp; Bottles</span>
           </button>
 
           <button
             onClick={() => setActiveStream("paper")}
-            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+            className={`p-3.5 rounded border text-left cursor-pointer transition-colors shadow-xs ${
               activeStream === "paper"
-                ? "bg-amber-600 text-white border-amber-600 shadow-lg scale-[1.02]"
+                ? "bg-amber-600 text-white border-amber-600"
                 : "bg-white text-gray-700 border-gray-200 hover:border-amber-400"
             }`}
           >
-            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+            <span className="block text-[11px] opacity-90 uppercase tracking-wider font-bold">
               Yellow Sack
             </span>
-            <span className="text-base font-black">Paper &amp; Cartons</span>
+            <span className="text-sm sm:text-base font-bold">Paper &amp; Cartons</span>
           </button>
 
           <button
             onClick={() => setActiveStream("organics")}
-            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+            className={`p-3.5 rounded border text-left cursor-pointer transition-colors shadow-xs ${
               activeStream === "organics"
-                ? "bg-nature-primary text-white border-nature-primary shadow-lg scale-[1.02]"
-                : "bg-white text-gray-700 border-gray-200 hover:border-nature-primary"
+                ? "bg-[#006F51] text-white border-[#006F51]"
+                : "bg-white text-gray-700 border-gray-200 hover:border-[#006F51]"
             }`}
           >
-            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+            <span className="block text-[11px] opacity-90 uppercase tracking-wider font-bold">
               Green Sack
             </span>
-            <span className="text-base font-black">Organic Compost</span>
+            <span className="text-sm sm:text-base font-bold">Organic Compost</span>
           </button>
 
           <button
             onClick={() => setActiveStream("general")}
-            className={`p-4 rounded-xl font-bold text-xs sm:text-sm transition-all border text-left cursor-pointer ${
+            className={`p-3.5 rounded border text-left cursor-pointer transition-colors shadow-xs ${
               activeStream === "general"
-                ? "bg-gray-900 text-white border-gray-900 shadow-lg scale-[1.02]"
+                ? "bg-[#1A1D20] text-white border-[#1A1D20]"
                 : "bg-white text-gray-700 border-gray-200 hover:border-gray-500"
             }`}
           >
-            <span className="block text-[11px] opacity-80 uppercase tracking-widest font-black">
+            <span className="block text-[11px] opacity-90 uppercase tracking-wider font-bold">
               Black Sack
             </span>
-            <span className="text-base font-black">General Trash</span>
+            <span className="text-sm sm:text-base font-bold">General Trash</span>
           </button>
         </div>
 
         {/* Stream Details Card */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 sm:p-10 max-w-4xl mx-auto">
-          <div className="border-b border-gray-100 pb-6 mb-6">
-            <h3 className="text-2xl font-black text-[#141517] tracking-tight">
+        <div className="bg-white rounded border border-[#E5E7EB] shadow-xs p-6 sm:p-8 max-w-4xl mx-auto">
+          <div className="border-b border-gray-100 pb-5 mb-6">
+            <h3 className="text-xl sm:text-2xl font-black text-[#1A1D20] tracking-tight">
               {current.title}
             </h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
               {current.tagline}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Accepted items */}
-            <div className="bg-green-50/50 border border-green-200 rounded-xl p-5 space-y-3">
-              <div className="flex items-center gap-2 text-nature-primary font-black text-xs uppercase tracking-wider">
-                <CheckCircle2 className="w-4 h-4 text-nature-primary" />
+            <div className="bg-[#F4F9F6] border border-[#006F51]/20 rounded p-5 space-y-3">
+              <div className="flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-[#006F51]" />
                 <span>YES - Place in this container:</span>
               </div>
               <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
                 {current.accepted.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="text-nature-primary font-bold">✓</span>
+                    <span className="text-[#006F51] font-bold">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -194,8 +194,8 @@ export default function UgandaRecyclingGuide() {
             </div>
 
             {/* Not Accepted items */}
-            <div className="bg-red-50/50 border border-red-200 rounded-xl p-5 space-y-3">
-              <div className="flex items-center gap-2 text-red-600 font-black text-xs uppercase tracking-wider">
+            <div className="bg-red-50/50 border border-red-200 rounded p-5 space-y-3">
+              <div className="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-wider">
                 <XCircle className="w-4 h-4 text-red-600" />
                 <span>NO - Do not place in this container:</span>
               </div>
@@ -211,8 +211,8 @@ export default function UgandaRecyclingGuide() {
           </div>
 
           {/* Environmental Destination Note */}
-          <div className="mt-8 bg-gray-50 rounded-xl p-4 border border-gray-200 flex items-start gap-3">
-            <Info className="w-5 h-5 text-nature-primary shrink-0 mt-0.5" />
+          <div className="mt-6 bg-[#F8F9FA] rounded p-4 border border-gray-200 flex items-start gap-3">
+            <Info className="w-5 h-5 text-[#006F51] shrink-0 mt-0.5" />
             <div className="text-xs text-gray-600 leading-relaxed">
               <strong className="text-gray-900 font-bold block mb-0.5">
                 What happens to this waste?
@@ -224,10 +224,10 @@ export default function UgandaRecyclingGuide() {
           <div className="mt-6 text-center">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-nature-primary hover:text-nature-primary-dark font-extrabold text-xs uppercase tracking-wider group"
+              className="inline-flex items-center gap-2 text-[#006F51] hover:text-[#004D38] font-bold text-xs uppercase tracking-wider group"
             >
               <span>Order Color-Coded Recycling Sacks &amp; Bins for Your Home</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
         </div>

@@ -30,14 +30,14 @@ export default function CoverageAreas() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 text-nature-primary font-extrabold text-xs uppercase tracking-widest bg-nature-primary/10 px-3.5 py-1.5 rounded-full mb-3">
+            <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded border border-[#006F51]/20 mb-3">
               <MapPin className="w-3.5 h-3.5" />
-              <span>COMMUNITIES WE SERVE IN UGANDA</span>
+              <span>Communities We Serve In Uganda</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#141517] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#1A1D20] tracking-tight">
               Locally Operated, Community Dedicated
             </h2>
-            <p className="text-gray-600 text-sm mt-1 max-w-xl">
+            <p className="text-[#555C66] text-sm mt-1 max-w-xl">
               Our fleet operates dedicated collection corridors across the greater Kampala metropolitan area, Wakiso district, and Entebbe municipality.
             </p>
           </div>
@@ -50,35 +50,35 @@ export default function CoverageAreas() {
               placeholder="Search your suburb (e.g. Lubowa, Kololo)..."
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold focus:outline-none focus:border-nature-primary focus:bg-white transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded text-xs font-semibold focus:outline-none focus:border-[#006F51] transition-colors"
             />
           </div>
         </div>
 
         {/* Coverage Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredAreas.map((area) => (
             <div
               key={area.id}
-              className="bg-white rounded-xl border border-gray-200 p-6 shadow-xs hover:shadow-xl hover:border-nature-primary transition-all duration-300 flex flex-col justify-between"
+              className="bg-white rounded border border-[#E5E7EB] p-5 shadow-xs hover:shadow-sm hover:border-[#006F51] transition-all duration-200 flex flex-col justify-between"
             >
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 <div className="flex items-start justify-between gap-2 border-b border-gray-100 pb-3">
                   <div>
-                    <h3 className="font-black text-base text-[#141517]">
+                    <h3 className="font-bold text-base text-[#1A1D20]">
                       {area.name}
                     </h3>
-                    <div className="text-xs text-nature-primary font-bold mt-0.5">
+                    <div className="text-xs text-[#006F51] font-semibold mt-0.5">
                       {area.division}
                     </div>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-green-50 text-nature-primary flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
                     <Truck className="w-4 h-4" />
                   </div>
                 </div>
 
                 <div className="space-y-2 text-xs">
-                  <div className="flex items-center justify-between text-gray-600">
+                  <div className="flex items-center justify-between text-[#555C66]">
                     <span className="flex items-center gap-1.5 font-medium">
                       <Clock className="w-3.5 h-3.5 text-gray-400" />
                       Trash Days:
@@ -86,7 +86,7 @@ export default function CoverageAreas() {
                     <strong className="text-gray-900 font-bold">{area.pickupDays}</strong>
                   </div>
 
-                  <div className="flex items-center justify-between text-gray-600">
+                  <div className="flex items-center justify-between text-[#555C66]">
                     <span className="flex items-center gap-1.5 font-medium">
                       <Calendar className="w-3.5 h-3.5 text-gray-400" />
                       Recycling:
@@ -94,12 +94,12 @@ export default function CoverageAreas() {
                     <strong className="text-gray-900 font-bold">{area.recyclingDay}</strong>
                   </div>
 
-                  <div className="flex items-center justify-between text-gray-600 pt-1">
+                  <div className="flex items-center justify-between text-[#555C66] pt-1">
                     <span className="flex items-center gap-1.5 font-medium">
                       <Phone className="w-3.5 h-3.5 text-gray-400" />
                       Hotline:
                     </span>
-                    <a href={`tel:${area.hotline.replace(/\s+/g, '')}`} className="font-bold text-nature-primary hover:underline">
+                    <a href={`tel:${area.hotline.replace(/\s+/g, '')}`} className="font-bold text-[#006F51] hover:underline">
                       {area.hotline}
                     </a>
                   </div>
@@ -113,13 +113,13 @@ export default function CoverageAreas() {
                 </div>
               </div>
 
-              <div className="mt-5 pt-3">
+              <div className="mt-4 pt-3 border-t border-gray-50">
                 <Link
                   href="/pricing"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-nature-primary hover:text-nature-primary-dark group"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#006F51] hover:underline group"
                 >
                   <span>Start Service in {area.name.split(" ")[0]}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </div>
             </div>

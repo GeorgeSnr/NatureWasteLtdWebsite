@@ -51,16 +51,15 @@ export default function ResidentialServicesSection() {
           
           {/* Left: Residential Customer Image */}
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-[#E5E7EB] bg-white">
+            <div className="rounded overflow-hidden shadow-xs border border-[#E5E7EB] bg-white">
               <img
                 src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=1000&q=80"
                 alt="Nature Waste residential customer placing clean sorted recyclables into bin"
-                className="w-full h-[520px] object-cover"
+                className="w-full h-[380px] sm:h-[420px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-sm">
-                <div className="flex items-center gap-2 text-[#006F51] font-bold text-xs mb-1">
+              <div className="p-4 bg-white border-t border-[#E5E7EB] space-y-1">
+                <div className="flex items-center gap-2 text-[#006F51] font-bold text-xs">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Free Recycling Sacks Included</span>
                 </div>
@@ -72,29 +71,29 @@ export default function ResidentialServicesSection() {
           </div>
 
           {/* Right: 3 Residential Cards */}
-          <div className="lg:col-span-7 space-y-5 order-1 lg:order-2">
+          <div className="lg:col-span-7 space-y-4 order-1 lg:order-2">
             {cards.map((card, idx) => {
               const Icon = card.icon;
               return (
                 <Link
                   key={idx}
                   href={card.href}
-                  className="block p-6 sm:p-7 rounded-2xl bg-[#F8F9FA] border border-[#E5E7EB] hover:border-[#006F51] hover:bg-white hover:shadow-lg transition-all duration-200 group"
+                  className="block p-5 sm:p-6 rounded bg-[#F8F9FA] border border-[#E5E7EB] hover:border-[#006F51] hover:bg-white hover:shadow-xs transition-all duration-200 group"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-[#E5E7EB] text-[#006F51] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-[#E9F4F0] transition-all">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-10 h-10 rounded bg-white border border-[#E5E7EB] text-[#006F51] flex items-center justify-center shrink-0 group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <div className="space-y-2 flex-1">
-                      <h3 className="text-lg sm:text-xl font-bold text-[#1A1D20] group-hover:text-[#006F51] transition-colors">
+                    <div className="space-y-1.5 flex-1">
+                      <h3 className="text-base sm:text-lg font-bold text-[#1A1D20] group-hover:text-[#006F51] transition-colors">
                         {card.title}
                       </h3>
                       <p className="text-[#555C66] text-xs sm:text-sm leading-relaxed">
                         {card.desc}
                       </p>
-                      <div className="pt-2 flex items-center gap-1.5 text-xs font-bold text-[#006F51] group-hover:underline">
+                      <div className="pt-1 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#006F51] group-hover:underline">
                         <span>{card.linkText}</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                       </div>
                     </div>
                   </div>
@@ -105,7 +104,7 @@ export default function ResidentialServicesSection() {
             <div className="pt-2">
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center bg-[#006F51] hover:bg-[#004D38] text-white px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm active:scale-95"
+                className="inline-flex items-center justify-center bg-[#006F51] hover:bg-[#004D38] text-white px-7 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
               >
                 <span>All Residential Services</span>
               </Link>

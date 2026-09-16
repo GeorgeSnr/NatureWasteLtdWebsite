@@ -27,23 +27,23 @@ export default function PricingPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Top Banner */}
-      <section className="border-b border-[#c5c6cd] bg-white px-6 sm:px-12 lg:px-16 py-16 lg:py-20 text-center">
+      <section className="border-b border-[#E5E7EB] bg-[#F8F9FA] px-6 sm:px-12 lg:px-16 py-16 lg:py-20 text-center">
         <div className="max-w-3xl mx-auto space-y-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-nature-primary">
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             Predictable &amp; Scalable Rates
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-black leading-[1.1] tracking-tight text-[#091426]">
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-black leading-[1.1] tracking-tight text-[#1A1D20]">
             Architected for Every Community Scale
           </h1>
-          <p className="text-base text-gray-600 leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-[#555C66] leading-relaxed max-w-xl mx-auto">
             Transparent waste collection and smart ERP subscription tiers for single households, corporate complexes, and full municipal territories.
           </p>
 
           {/* Billing Switcher */}
           <div className="pt-6 flex items-center justify-center gap-3">
             <span
-              className={`text-sm font-bold ${
-                !annualBilling ? "text-[#141517]" : "text-gray-400"
+              className={`text-xs uppercase tracking-wider font-bold ${
+                !annualBilling ? "text-[#1A1D20]" : "text-gray-400"
               }`}
             >
               Monthly Billing
@@ -51,21 +51,21 @@ export default function PricingPage() {
             <button
               type="button"
               onClick={() => setAnnualBilling(!annualBilling)}
-              className="relative w-14 h-8 bg-nature-primary rounded-full p-1 cursor-pointer transition-colors"
+              className="relative w-12 h-6 bg-[#006F51] rounded-full p-0.5 cursor-pointer transition-colors"
             >
               <div
-                className={`w-6 h-6 bg-white rounded-full transition-transform ${
+                className={`w-5 h-5 bg-white rounded-full transition-transform ${
                   annualBilling ? "translate-x-6" : "translate-x-0"
                 }`}
               />
             </button>
             <span
-              className={`text-sm font-bold flex items-center gap-1.5 ${
-                annualBilling ? "text-[#141517]" : "text-gray-400"
+              className={`text-xs uppercase tracking-wider font-bold flex items-center gap-1.5 ${
+                annualBilling ? "text-[#1A1D20]" : "text-gray-400"
               }`}
             >
               Annual Plan
-              <span className="bg-nature-secondary text-nature-primary text-[10px] font-black uppercase px-2 py-0.5 rounded-full">
+              <span className="bg-[#FFCE00] text-[#1A1D20] text-[10px] font-black uppercase px-2 py-0.5 rounded-sm">
                 Save 20%
               </span>
             </span>
@@ -79,14 +79,14 @@ export default function PricingPage() {
             return (
               <div
                 key={plan.id}
-                className={`flex flex-col text-left transition-all duration-300 ${
+                className={`flex flex-col text-left transition-all duration-200 rounded ${
                   plan.popular
-                    ? "relative z-10 scale-105 border-2 border-nature-primary bg-white shadow-2xl chamfer-card"
-                    : "border border-[#c5c6cd] bg-white shadow-xs chamfer-card"
+                    ? "relative z-10 border-2 border-[#006F51] bg-white shadow-md"
+                    : "border border-[#E5E7EB] bg-white shadow-xs"
                 }`}
               >
                 {plan.popular && (
-                  <div className="bg-nature-primary text-white text-center py-1.5 text-xs font-black uppercase tracking-widest">
+                  <div className="bg-[#006F51] text-white text-center py-2 text-xs font-bold uppercase tracking-wider rounded-t-sm">
                     {plan.badge}
                   </div>
                 )}
@@ -95,40 +95,40 @@ export default function PricingPage() {
                   <div>
                     <div className="mb-6">
                       {!plan.popular && (
-                        <span className="text-[11px] font-extrabold uppercase text-gray-400 tracking-wider">
+                        <span className="text-[11px] font-bold uppercase text-gray-500 tracking-wider">
                           {plan.badge}
                         </span>
                       )}
-                      <h3 className="text-[24px] font-black text-[#091426] mt-0.5">
+                      <h3 className="text-2xl font-black text-[#1A1D20] mt-0.5">
                         {plan.name}
                       </h3>
-                      <p className="text-[13px] text-gray-500 mt-1">
+                      <p className="text-xs text-[#555C66] mt-1">
                         {plan.description}
                       </p>
                     </div>
 
-                    <div className="mb-8">
+                    <div className="mb-8 pb-6 border-b border-[#E5E7EB]">
                       {typeof price === "number" ? (
                         <div className="flex items-baseline">
-                          <span className="text-[44px] font-black leading-none text-[#091426]">
+                          <span className="text-[40px] font-black leading-none text-[#1A1D20]">
                             ${price}
                           </span>
-                          <span className="ml-1 text-[12px] font-bold uppercase text-gray-400">
+                          <span className="ml-1.5 text-xs font-bold uppercase text-gray-500">
                             / month
                           </span>
                         </div>
                       ) : (
-                        <span className="text-[40px] font-black leading-none text-[#091426]">
+                        <span className="text-[36px] font-black leading-none text-[#1A1D20]">
                           Custom
                         </span>
                       )}
                     </div>
 
-                    <ul className="mb-8 space-y-3.5">
+                    <ul className="mb-8 space-y-3">
                       {plan.features.map((f, fIdx) => (
-                        <li key={fIdx} className="flex items-start gap-3">
-                          <CheckCircle2 className="h-4 w-4 text-nature-primary shrink-0 mt-0.5" />
-                          <span className="text-[13px] text-[#191C1E] font-medium">
+                        <li key={fIdx} className="flex items-start gap-2.5">
+                          <CheckCircle2 className="h-4 w-4 text-[#006F51] shrink-0 mt-0.5" />
+                          <span className="text-xs text-[#333A42] font-medium leading-relaxed">
                             {f}
                           </span>
                         </li>
@@ -138,10 +138,10 @@ export default function PricingPage() {
 
                   <Link
                     href={plan.ctaLink}
-                    className={`w-full py-3.5 text-center text-[12px] font-black uppercase tracking-widest transition-all ${
+                    className={`w-full py-3.5 text-center text-xs font-bold uppercase tracking-wider transition-colors rounded-sm ${
                       plan.popular
-                        ? "bg-nature-primary text-white hover:bg-nature-primary-dark shadow-md"
-                        : "border border-[#c5c6cd] text-[#091426] hover:bg-gray-100"
+                        ? "bg-[#006F51] hover:bg-[#005a42] text-white shadow-xs"
+                        : "border border-[#006F51] text-[#006F51] hover:bg-[#E9F4F0]"
                     }`}
                   >
                     {plan.cta}
@@ -154,17 +154,17 @@ export default function PricingPage() {
       </section>
 
       {/* Interactive Waste Cost Estimator Calculator */}
-      <section className="bg-[#F7F9FB] px-6 sm:px-12 lg:px-16 py-16 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto bg-white p-8 sm:p-10 border border-gray-200 shadow-sm chamfer-card">
-          <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
-            <div className="w-10 h-10 rounded bg-nature-primary text-white flex items-center justify-center">
+      <section className="bg-[#F8F9FA] px-6 sm:px-12 lg:px-16 py-16 border-b border-[#E5E7EB]">
+        <div className="max-w-4xl mx-auto bg-white p-8 sm:p-10 border border-[#E5E7EB] shadow-xs rounded">
+          <div className="flex items-center gap-3 mb-6 border-b border-[#E5E7EB] pb-4">
+            <div className="w-10 h-10 rounded-sm bg-[#006F51] text-white flex items-center justify-center">
               <Calculator className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-xl sm:text-2xl font-black text-[#141517]">
+              <h3 className="text-xl sm:text-2xl font-black text-[#1A1D20]">
                 Interactive Commercial Waste Cost Estimator
               </h3>
-              <p className="text-xs sm:text-sm text-gray-500">
+              <p className="text-xs sm:text-sm text-[#555C66]">
                 Customize your container size and collection schedule for an instant estimate.
               </p>
             </div>
@@ -173,13 +173,13 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
             {/* Bin Selection */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-2">
+              <label className="block text-xs font-bold uppercase text-[#555C66] mb-2 tracking-wider">
                 Container Type
               </label>
               <select
                 value={binType}
                 onChange={(e) => setBinType(e.target.value)}
-                className="w-full bg-[#f8fafc] border border-gray-300 px-3 py-2.5 text-sm font-semibold text-[#141517] focus:outline-none focus:border-nature-primary"
+                className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3 py-2.5 text-xs font-semibold text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
               >
                 <option value="120">120L Standard Wheelie Bin</option>
                 <option value="240">240L Heavy-Duty Wheelie Bin</option>
@@ -190,7 +190,7 @@ export default function PricingPage() {
 
             {/* Bin Count */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-2">
+              <label className="block text-xs font-bold uppercase text-[#555C66] mb-2 tracking-wider">
                 Number of Containers: {binCount}
               </label>
               <input
@@ -199,19 +199,19 @@ export default function PricingPage() {
                 max="20"
                 value={binCount}
                 onChange={(e) => setBinCount(Number(e.target.value))}
-                className="w-full accent-nature-primary mt-2"
+                className="w-full accent-[#006F51] mt-2"
               />
             </div>
 
             {/* Frequency */}
             <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-2">
+              <label className="block text-xs font-bold uppercase text-[#555C66] mb-2 tracking-wider">
                 Pickup Frequency
               </label>
               <select
                 value={frequency}
                 onChange={(e) => setFrequency(Number(e.target.value))}
-                className="w-full bg-[#f8fafc] border border-gray-300 px-3 py-2.5 text-sm font-semibold text-[#141517] focus:outline-none focus:border-nature-primary"
+                className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3 py-2.5 text-xs font-semibold text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
               >
                 <option value={1}>1x per week</option>
                 <option value={2}>2x per week (Recommended)</option>
@@ -222,12 +222,12 @@ export default function PricingPage() {
           </div>
 
           {/* Calculator Output */}
-          <div className="bg-[#181A1C] text-white p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="bg-[#1A1D20] text-white p-6 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <span className="text-xs uppercase tracking-wider text-gray-400">
+              <span className="text-xs uppercase tracking-wider text-gray-400 font-bold">
                 Estimated Monthly Rate
               </span>
-              <div className="text-3xl sm:text-4xl font-black text-nature-secondary mt-0.5">
+              <div className="text-3xl sm:text-4xl font-black text-[#FFCE00] mt-0.5">
                 ${calculatedMonthly} <span className="text-xs text-gray-300 font-normal">/ month</span>
               </div>
               <p className="text-[11px] text-gray-400 mt-1">
@@ -237,7 +237,7 @@ export default function PricingPage() {
 
             <Link
               href={`/book-demo?quote=${calculatedMonthly}&bins=${binCount}&type=${binType}&freq=${frequency}`}
-              className="bg-nature-primary hover:bg-nature-primary-dark text-white px-6 py-3 text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-2"
             >
               <span>Lock In This Rate</span>
               <ArrowRight className="w-4 h-4" />
@@ -250,28 +250,28 @@ export default function PricingPage() {
       <section className="bg-white px-6 sm:px-12 lg:px-16 py-16">
         <div className="max-w-[1200px] mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-[28px] sm:text-[32px] font-black text-[#091426]">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20]">
               Detailed Module Specification Matrix
             </h2>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-xs sm:text-sm text-[#555C66]">
               Deep architectural comparison across service tiers.
             </p>
           </div>
 
-          <div className="overflow-x-auto border border-gray-200 shadow-xs">
+          <div className="overflow-x-auto border border-[#E5E7EB] shadow-xs rounded">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-[#091426] text-white">
-                  <th className="border-r border-[#1E293B] p-4 text-left text-[12px] font-semibold uppercase tracking-[0.05em]">
+                <tr className="bg-[#1A1D20] text-white">
+                  <th className="border-r border-white/10 p-4 text-left text-xs font-bold uppercase tracking-wider">
                     Module Ecosystem
                   </th>
-                  <th className="border-r border-[#1E293B] p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="border-r border-white/10 p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Residential Connect
                   </th>
-                  <th className="border-r border-[#1E293B] p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="border-r border-white/10 p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Commercial Business
                   </th>
-                  <th className="p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Municipal &amp; Enterprise
                   </th>
                 </tr>
@@ -279,9 +279,9 @@ export default function PricingPage() {
               <tbody className="bg-white">
                 {featureComparison.map((cat, cIdx) => (
                   <React.Fragment key={cIdx}>
-                    <tr className="border-b border-[#c5c6cd] bg-[#f2f4f6]">
+                    <tr className="border-b border-[#E5E7EB] bg-[#F8F9FA]">
                       <td
-                        className="p-3 text-[12px] font-bold uppercase tracking-[0.05em] text-[#091426]"
+                        className="p-3 text-xs font-bold uppercase tracking-wider text-[#1A1D20]"
                         colSpan={4}
                       >
                         {cat.category}
@@ -290,13 +290,13 @@ export default function PricingPage() {
                     {cat.items.map((item, iIdx) => (
                       <tr
                         key={iIdx}
-                        className="border-b border-[#c5c6cd] even:bg-[#f8fafc] text-sm"
+                        className="border-b border-[#E5E7EB] even:bg-[#F8F9FA]/50 text-xs"
                       >
-                        <td className="p-4 font-medium text-[#141517]">{item.name}</td>
+                        <td className="p-4 font-medium text-[#1A1D20]">{item.name}</td>
                         <td className="p-4 text-center">
                           {typeof item.residential === "boolean" ? (
                             item.residential ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )
@@ -309,7 +309,7 @@ export default function PricingPage() {
                         <td className="p-4 text-center">
                           {typeof item.commercial === "boolean" ? (
                             item.commercial ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )
@@ -322,7 +322,7 @@ export default function PricingPage() {
                         <td className="p-4 text-center">
                           {typeof item.enterprise === "boolean" ? (
                             item.enterprise ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )

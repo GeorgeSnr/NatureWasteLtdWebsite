@@ -63,7 +63,7 @@ export default function ServicePillars() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3.5 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded border border-[#006F51]/20">
             <span>Our Service Solutions</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-[#1A1D20] tracking-tight leading-tight">
@@ -75,24 +75,24 @@ export default function ServicePillars() {
         </div>
 
         {/* 3 Core Pillar Cards (Matching Waste Connections sec_service-cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {pillars.map((pillar) => (
             <div
               key={pillar.id}
-              className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:border-[#006F51]"
+              className="bg-white rounded border border-[#E5E7EB] overflow-hidden shadow-xs hover:shadow-md hover:border-[#006F51] transition-all duration-200 flex flex-col justify-between group"
             >
               <div>
                 {/* Photo Header */}
                 <div className="relative h-52 w-full overflow-hidden bg-gray-100">
                   <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full bg-cover bg-center"
                     style={{ backgroundImage: `url('${pillar.image}')` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
                   
-                  {/* Category Pill */}
+                  {/* Category Tag */}
                   <div className="absolute top-4 left-4">
-                    <span className={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm ${pillar.tagColor}`}>
+                    <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs ${pillar.tagColor}`}>
                       {pillar.tag}
                     </span>
                   </div>
@@ -111,7 +111,7 @@ export default function ServicePillars() {
                     {pillar.desc}
                   </p>
 
-                  <div className="border-t border-gray-100 pt-4 space-y-2.5">
+                  <div className="border-t border-[#F0F2F5] pt-4 space-y-2.5">
                     <div className="text-[11px] font-bold uppercase tracking-wider text-gray-400">
                       Key Highlights:
                     </div>
@@ -129,7 +129,7 @@ export default function ServicePillars() {
               <div className="p-6 pt-0">
                 <Link
                   href={pillar.link}
-                  className="w-full bg-[#F8F9FA] hover:bg-[#006F51] text-[#1A1D20] hover:text-white py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 border border-[#E5E7EB] hover:border-[#006F51] group-hover:shadow-sm"
+                  className="w-full bg-[#F8F9FA] hover:bg-[#006F51] text-[#1A1D20] hover:text-white py-3 px-4 rounded font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 border border-[#E5E7EB] hover:border-[#006F51]"
                 >
                   <span>{pillar.buttonText}</span>
                   <ArrowRight className="w-4 h-4" />

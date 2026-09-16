@@ -8,16 +8,16 @@ export default function CareersBanner() {
   return (
     <section id="careers" className="w-full bg-white py-16 sm:py-20 select-none border-b border-[#E5E7EB]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
-        <div className="rounded-3xl bg-[#006F51] text-white overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-12 items-center">
+        <div className="rounded bg-[#006F51] text-white overflow-hidden shadow-sm grid grid-cols-1 lg:grid-cols-12 items-center">
           
           {/* Left Content */}
           <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#FFCE00]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#FFCE00]">
                 Grow Your Career in Uganda
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-                JOIN OUR <span className="text-[#FFCE00]">TEAM!</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                Join Our Team
               </h2>
             </div>
 
@@ -47,10 +47,10 @@ export default function CareersBanner() {
             <div className="pt-2">
               <a
                 href="mailto:careers@naturewasteug.com"
-                className="inline-flex items-center justify-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-8 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all duration-200 shadow-md active:scale-95 group"
+                className="inline-flex items-center justify-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider transition-colors group"
               >
                 <span>Search Job Openings</span>
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
           </div>

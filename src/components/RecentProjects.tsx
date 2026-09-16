@@ -32,7 +32,7 @@ export default function RecentProjects() {
               </span>
               <span>RECENT OPERATIONS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#141517] leading-tight tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#1A1D20] leading-tight tracking-tight">
               Powered by Nature Waste Connect
             </h2>
           </div>
@@ -43,7 +43,7 @@ export default function RecentProjects() {
               type="button"
               onClick={scrollLeft}
               aria-label="Previous Operation"
-              className="w-11 h-11 bg-[#EAEBED] hover:bg-nature-primary text-[#141517] hover:text-white transition-colors duration-300 flex items-center justify-center cursor-pointer group shadow-xs"
+              className="w-11 h-11 bg-[#EAEBED] hover:bg-nature-primary text-[#1A1D20] hover:text-white transition-colors duration-300 flex items-center justify-center cursor-pointer group shadow-xs"
             >
               <ArrowLeft className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-0.5" />
             </button>
@@ -51,7 +51,7 @@ export default function RecentProjects() {
               type="button"
               onClick={scrollRight}
               aria-label="Next Operation"
-              className="w-11 h-11 bg-[#EAEBED] hover:bg-nature-primary text-[#141517] hover:text-white transition-colors duration-300 flex items-center justify-center cursor-pointer group shadow-xs"
+              className="w-11 h-11 bg-[#EAEBED] hover:bg-nature-primary text-[#1A1D20] hover:text-white transition-colors duration-300 flex items-center justify-center cursor-pointer group shadow-xs"
             >
               <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
@@ -109,20 +109,20 @@ export default function RecentProjects() {
                 {/* Card Information */}
                 <div className="relative z-10 p-6 sm:p-7 flex flex-col justify-end space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="inline-block bg-nature-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-xs tracking-wide">
+                    <span className="inline-block bg-[#006F51] text-white text-xs font-bold px-2.5 py-1 rounded-sm uppercase tracking-wider">
                       {item.category}
                     </span>
-                    <span className="inline-block bg-nature-secondary/90 text-[#074E15] text-[11px] font-extrabold px-2.5 py-0.5 rounded-full">
+                    <span className="inline-block bg-[#FFCE00] text-[#1A1D20] text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-wider">
                       {item.impact}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between gap-4 pt-1">
-                    <h3 className="text-xl sm:text-[24px] font-extrabold text-white leading-tight tracking-tight drop-shadow-xs group-hover:text-nature-secondary transition-colors">
+                    <h3 className="text-xl sm:text-[22px] font-bold text-white leading-tight tracking-tight group-hover:text-[#FFCE00] transition-colors">
                       {item.title}
                     </h3>
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 bg-nature-primary text-white rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-md">
-                      <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <div className="w-9 h-9 bg-[#006F51] text-white rounded-sm flex items-center justify-center shrink-0 transition-colors group-hover:bg-[#004D38]">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
 
@@ -156,13 +156,10 @@ export default function RecentProjects() {
             <div className="shrink-0">
               <Link
                 href="/book-demo"
-                className="relative overflow-hidden bg-white text-[#141517] font-extrabold text-sm sm:text-base px-7 py-3.5 sm:px-8 sm:py-4 cursor-pointer shadow-md group inline-flex"
+                className="bg-white hover:bg-[#FFCE00] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-7 py-3.5 rounded-sm transition-colors cursor-pointer shadow-sm inline-flex items-center gap-2"
               >
-                <span className="absolute inset-0 bg-[#141517] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                <span className="relative z-10 text-[#141517] group-hover:text-white transition-colors duration-300 flex items-center gap-3">
-                  <span>Schedule Waste Audit</span>
-                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+                <span>Schedule Waste Audit</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

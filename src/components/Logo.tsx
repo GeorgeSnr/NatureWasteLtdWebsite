@@ -58,7 +58,7 @@ export default function Logo({
           width={imageSizes[size].w}
           height={imageSizes[size].h}
           priority
-          className="object-contain transition-transform duration-300 group-hover:scale-102"
+          className="object-contain"
         />
       </Link>
     );
@@ -72,7 +72,7 @@ export default function Logo({
         className={`inline-flex flex-col items-center text-center group select-none ${className}`}
       >
         <div
-          className={`relative ${emblemSizes[size].className} shrink-0 mb-2 rounded-full overflow-hidden shadow-xs group-hover:scale-105 group-hover:rotate-6 transition-all duration-300`}
+          className={`relative ${emblemSizes[size].className} shrink-0 mb-2 rounded-full overflow-hidden shadow-xs transition-opacity duration-200 group-hover:opacity-95`}
         >
           <Image
             src="/images/logo-emblem-disc.png"
@@ -88,7 +88,7 @@ export default function Logo({
           <div className="flex flex-col items-center">
             <span
               className={`font-black tracking-tight leading-none ${titleSizes[size]} ${
-                isDark ? "text-white" : "text-[#141517]"
+                isDark ? "text-white" : "text-[#1A1D20]"
               }`}
             >
               NATURE{" "}
@@ -132,7 +132,7 @@ export default function Logo({
     >
       {/* Real Circular NWM Emblem from logo1.jpg */}
       <div
-        className={`relative ${emblemSizes[size].className} shrink-0 rounded-full overflow-hidden shadow-xs group-hover:scale-105 group-hover:rotate-6 transition-all duration-300`}
+        className={`relative ${emblemSizes[size].className} shrink-0 rounded-full overflow-hidden shadow-xs transition-opacity duration-200 group-hover:opacity-95`}
       >
         <Image
           src="/images/logo-emblem-disc.png"
@@ -149,7 +149,7 @@ export default function Logo({
           <div className="flex items-center gap-1.5">
             <span
               className={`font-black tracking-tight ${titleSizes[size]} ${
-                isDark ? "text-white" : "text-[#141517]"
+                isDark ? "text-white" : "text-[#1A1D20]"
               }`}
             >
               NATURE{" "}

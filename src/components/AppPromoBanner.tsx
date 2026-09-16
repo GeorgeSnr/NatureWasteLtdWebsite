@@ -61,7 +61,7 @@ export default function AppPromoBanner() {
             {/* Quick SMS Signup Box */}
             <div className="pt-2 max-w-md">
               {submitted ? (
-                <div className="p-4 rounded-xl bg-[#E9F4F0] text-[#006F51] font-semibold text-sm border border-[#006F51]/20">
+                <div className="p-3.5 rounded bg-[#E9F4F0] text-[#006F51] font-semibold text-xs border border-[#006F51]/20">
                   Thank you! Your phone has been registered for Kampala route reminders.
                 </div>
               ) : (
@@ -72,11 +72,11 @@ export default function AppPromoBanner() {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
-                    className="flex-1 px-4 py-3 rounded-full border border-gray-300 text-sm focus:outline-none focus:border-[#006F51]"
+                    className="flex-1 px-4 py-2.5 rounded border border-gray-300 text-xs focus:outline-none focus:border-[#006F51]"
                   />
                   <button
                     type="submit"
-                    className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs sm:text-sm px-6 py-3 rounded-full shrink-0 shadow-sm transition-colors"
+                    className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded shrink-0 transition-colors"
                   >
                     Subscribe Alerts
                   </button>
@@ -101,12 +101,12 @@ export default function AppPromoBanner() {
 
           {/* Right Visual Frame */}
           <div className="lg:col-span-5">
-            <div className="bg-white rounded-2xl border border-[#E5E7EB] p-8 shadow-lg text-center space-y-6 max-w-md mx-auto">
-              <div className="w-16 h-16 rounded-2xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mx-auto">
-                <Smartphone className="w-8 h-8" />
+            <div className="bg-white rounded border border-[#E5E7EB] p-7 shadow-xs text-center space-y-5 max-w-md mx-auto">
+              <div className="w-12 h-12 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mx-auto">
+                <Smartphone className="w-6 h-6" />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold text-[#1A1D20]">
+              <div className="space-y-1.5">
+                <h3 className="text-lg font-bold text-[#1A1D20]">
                   Nature Waste Self-Service
                 </h3>
                 <p className="text-xs text-[#555C66] leading-relaxed">
@@ -114,16 +114,16 @@ export default function AppPromoBanner() {
                 </p>
               </div>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-2">
                 <Link
                   href="/portal"
-                  className="w-full block bg-[#006F51] hover:bg-[#004D38] text-white py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+                  className="w-full block bg-[#006F51] hover:bg-[#004D38] text-white py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   Log In to Customer Portal
                 </Link>
                 <a
                   href="#schedule-finder"
-                  className="w-full block bg-gray-50 hover:bg-gray-100 text-[#363636] py-3 rounded-full font-semibold text-xs transition-colors border border-gray-200"
+                  className="w-full block bg-[#F8F9FA] hover:bg-gray-100 text-[#363636] py-2.5 rounded font-semibold text-xs transition-colors border border-gray-200"
                 >
                   View Route Schedule Online
                 </a>

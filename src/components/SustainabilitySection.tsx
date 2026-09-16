@@ -53,22 +53,22 @@ export default function SustainabilitySection() {
         </div>
 
         {/* 3 Pillar Cards (Exact Waste Connections sec_hcenter-3cards layout) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {cards.map((card, idx) => {
             const Icon = card.icon;
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:border-[#006F51]"
+                className="bg-white rounded border border-[#E5E7EB] overflow-hidden shadow-xs hover:border-[#006F51] hover:shadow-md transition-all duration-200 flex flex-col justify-between group"
               >
                 <div>
                   {/* Photo Header */}
                   <div className="relative h-48 w-full overflow-hidden bg-gray-100">
                     <div
-                      className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full bg-cover bg-center"
                       style={{ backgroundImage: `url('${card.image}')` }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   </div>
 
                   {/* Body Content */}
@@ -77,7 +77,7 @@ export default function SustainabilitySection() {
                       <h3 className="text-xl font-bold text-[#1A1D20]">
                         {card.title}
                       </h3>
-                      <span className="text-xs font-semibold text-[#006F51] bg-[#E9F4F0] px-2.5 py-0.5 rounded-full">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#006F51] bg-[#E9F4F0] px-2.5 py-0.5 rounded-sm">
                         {card.tag}
                       </span>
                     </div>
@@ -92,10 +92,10 @@ export default function SustainabilitySection() {
                 <div className="p-6 sm:p-7 pt-0">
                   <Link
                     href={card.href}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#006F51] group-hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#006F51] group-hover:underline"
                   >
                     <span>{card.linkText}</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>
               </div>

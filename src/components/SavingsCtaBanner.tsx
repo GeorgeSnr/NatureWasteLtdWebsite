@@ -24,14 +24,14 @@ export default function SavingsCtaBanner() {
           <div className="flex flex-wrap items-center justify-center lg:justify-end gap-4 shrink-0">
             <Link
               href="/#schedule-finder"
-              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-sm px-8 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded transition-colors"
             >
               Get a Quote
             </Link>
 
             <a
               href="tel:+256700890123"
-              className="bg-white hover:bg-gray-50 border border-[#006F51]/30 text-[#006F51] font-bold text-sm px-6 py-3.5 rounded-full shadow-xs hover:shadow transition-all duration-200 flex items-center gap-2"
+              className="bg-white hover:bg-gray-50 border border-[#006F51]/30 text-[#006F51] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded transition-colors flex items-center gap-2"
             >
               <Phone className="w-4 h-4 text-[#006F51]" />
               <span>+256 700 890 123</span>

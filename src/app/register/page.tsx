@@ -30,30 +30,30 @@ export default function RegisterPage() {
         <div className="inline-block mb-4">
           <Logo size="lg" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-black text-[#141517] tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20] tracking-tight">
           Create Your Platform Account
         </h2>
-        <p className="text-xs sm:text-sm text-gray-500 mt-1">
+        <p className="text-xs sm:text-sm text-[#555C66] mt-1">
           Start your 14-day free trial on Nature Waste Connect. No credit card required.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
-        <div className="bg-white py-8 px-6 shadow-xl border border-gray-200 sm:px-10 chamfer-card">
+        <div className="bg-white py-8 px-6 shadow-xs border border-[#E5E7EB] sm:px-10 rounded">
           {registered ? (
             <div className="text-center py-8 space-y-4">
-              <div className="w-14 h-14 rounded-full bg-nature-primary text-white flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-8 h-8" />
+              <div className="w-12 h-12 rounded-sm bg-[#006F51] text-white flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-7 h-7" />
               </div>
-              <h3 className="text-2xl font-black text-[#141517]">
+              <h3 className="text-xl font-bold text-[#1A1D20]">
                 Welcome to Nature Waste Connect!
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs text-[#555C66]">
                 Setting up your sandbox environment and redirecting to your Live Web Portal...
               </p>
               <div className="pt-2">
-                <div className="h-1.5 w-full bg-gray-200 overflow-hidden rounded-full">
-                  <div className="h-full bg-nature-primary animate-pulse" />
+                <div className="h-1.5 w-full bg-gray-200 overflow-hidden rounded-sm">
+                  <div className="h-full bg-[#006F51]" />
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Plan Picker */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1.5">
                   Select Trial Tier
                 </label>
                 <div className="grid grid-cols-3 gap-2 text-xs font-bold">
@@ -74,9 +74,9 @@ export default function RegisterPage() {
                       key={p.id}
                       type="button"
                       onClick={() => setPlan(p.id)}
-                      className={`py-2 px-1 border text-center transition-colors cursor-pointer ${
+                      className={`py-2 px-1 border rounded-sm text-center font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer ${
                         plan === p.id
-                          ? "border-nature-primary bg-nature-primary/10 text-nature-primary"
+                          ? "border-[#006F51] bg-[#E9F4F0] text-[#006F51]"
                           : "border-gray-200 text-gray-600 hover:bg-gray-50"
                       }`}
                     >
@@ -87,7 +87,7 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1">
                   Full Name *
                 </label>
                 <input
@@ -96,12 +96,12 @@ export default function RegisterPage() {
                   placeholder="Arthur Byaruhanga"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-[#f8fafc] border border-gray-300 px-4 py-3 text-sm text-[#141517] focus:outline-none focus:border-nature-primary"
+                  className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1">
                   Company / Property Name *
                 </label>
                 <input
@@ -110,13 +110,13 @@ export default function RegisterPage() {
                   placeholder="e.g. Victoria Heights or Nile Breweries"
                   value={organization}
                   onChange={(e) => setOrganization(e.target.value)}
-                  className="w-full bg-[#f8fafc] border border-gray-300 px-4 py-3 text-sm text-[#141517] focus:outline-none focus:border-nature-primary"
+                  className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1">
                     Corporate Email *
                   </label>
                   <input
@@ -125,12 +125,12 @@ export default function RegisterPage() {
                     placeholder="arthur@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#f8fafc] border border-gray-300 px-4 py-3 text-sm text-[#141517] focus:outline-none focus:border-nature-primary"
+                    className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1">
                     Phone / Mobile Money *
                   </label>
                   <input
@@ -139,13 +139,13 @@ export default function RegisterPage() {
                     placeholder="+256 700 000 000"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#f8fafc] border border-gray-300 px-4 py-3 text-sm text-[#141517] focus:outline-none focus:border-nature-primary"
+                    className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1">
                   Create Password *
                 </label>
                 <input
@@ -154,23 +154,23 @@ export default function RegisterPage() {
                   placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-[#f8fafc] border border-gray-300 px-4 py-3 text-sm text-[#141517] focus:outline-none focus:border-nature-primary"
+                  className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-nature-primary hover:bg-nature-primary-dark text-white py-3.5 font-bold uppercase text-xs tracking-widest transition-all shadow-md cursor-pointer"
+                  className="w-full bg-[#006F51] hover:bg-[#005a42] text-white py-3.5 font-bold uppercase text-xs tracking-wider rounded-sm transition-colors shadow-xs cursor-pointer"
                 >
                   Start 14-Day Free Trial
                 </button>
               </div>
 
               <div className="pt-3 text-center">
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-[#555C66]">
                   Already registered?{" "}
-                  <Link href="/portal" className="text-nature-primary font-bold hover:underline">
+                  <Link href="/portal" className="text-[#006F51] font-bold hover:underline">
                     Access Portal Directly
                   </Link>
                 </span>

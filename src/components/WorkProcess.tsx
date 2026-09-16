@@ -40,10 +40,10 @@ export default function WorkProcess() {
             return (
               <div
                 key={step.num}
-                className="bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300 group cursor-pointer relative overflow-hidden chamfer-card-sm min-h-[260px]"
+                className="bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#006F51] border border-gray-200 transition-colors group cursor-pointer relative overflow-hidden rounded-sm min-h-[260px]"
               >
                 <div>
-                  <h4 className="text-lg sm:text-xl font-bold text-[#141517] leading-snug mb-5 group-hover:text-nature-primary transition-colors">
+                  <h4 className="text-lg sm:text-xl font-bold text-[#1A1D20] leading-snug mb-5 group-hover:text-[#006F51] transition-colors">
                     {step.title}
                   </h4>
                   <div className="flex items-center justify-between mb-4">

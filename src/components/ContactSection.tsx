@@ -35,11 +35,11 @@ export default function ContactSection() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3.5 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             <Headphones className="w-3.5 h-3.5" />
             <span>UGANDA CUSTOMER CARE &amp; DISPATCH</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-[#1A1D20] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-[#1A1D20] tracking-tight leading-tight">
             How Can We Help You Today?
           </h2>
           <p className="text-[#555C66] text-sm sm:text-base leading-relaxed">
@@ -51,14 +51,14 @@ export default function ContactSection() {
           
           {/* Left Column: Direct Customer Touchpoints */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-[#F8F9FA] rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] space-y-6 shadow-sm">
-              <h3 className="text-xl font-bold text-[#1A1D20] border-b border-gray-200 pb-4">
+            <div className="bg-[#F8F9FA] rounded p-6 sm:p-8 border border-[#E5E7EB] space-y-6 shadow-xs">
+              <h3 className="text-lg font-bold text-[#1A1D20] border-b border-gray-200 pb-3">
                 Direct Contact Channels
               </h3>
 
               {/* Phone dispatch */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0 border border-[#006F51]/20">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -76,7 +76,7 @@ export default function ContactSection() {
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0 border border-[#006F51]/20">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -90,7 +90,7 @@ export default function ContactSection() {
 
               {/* Location */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0 border border-[#006F51]/20">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
@@ -104,7 +104,7 @@ export default function ContactSection() {
 
               {/* Working Hours */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center shrink-0 border border-[#006F51]/20">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -119,7 +119,7 @@ export default function ContactSection() {
             </div>
 
             {/* Quick Regulatory Badge */}
-            <div className="p-4 rounded-xl bg-[#E9F4F0] border border-[#006F51]/20 flex items-center gap-3">
+            <div className="p-4 rounded-sm bg-[#E9F4F0] border border-[#006F51]/20 flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-[#006F51] shrink-0" />
               <div className="text-xs text-[#006F51]">
                 <strong>NEMA Licensed:</strong> Valid statutory waste transportation and processing license for Kampala and Wakiso districts.
@@ -128,13 +128,13 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: Contact & Service Request Form */}
-          <div className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-[#E5E7EB] shadow-md space-y-6">
+          <div className="lg:col-span-7 bg-white rounded p-6 sm:p-8 border border-[#E5E7EB] shadow-xs space-y-6">
             <h3 className="text-xl font-bold text-[#1A1D20]">
               Send an Online Inquiry or Request Pricing
             </h3>
 
             {submitted ? (
-              <div className="p-6 rounded-xl bg-[#E9F4F0] text-center space-y-3 border border-[#006F51]/30">
+              <div className="p-6 rounded-sm bg-[#E9F4F0] text-center space-y-3 border border-[#006F51]/30">
                 <CheckCircle2 className="w-10 h-10 text-[#006F51] mx-auto" />
                 <h4 className="text-lg font-bold text-[#006F51]">Inquiry Received</h4>
                 <p className="text-xs text-gray-700 max-w-md mx-auto">
@@ -151,7 +151,7 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 {/* Inquiry Type Radio / Pill selector */}
                 <div className="space-y-2">
-                  <label className="font-bold text-gray-700 block">
+                  <label className="font-bold text-gray-700 block text-xs uppercase tracking-wider">
                     What service are you inquiring about?
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -165,7 +165,7 @@ export default function ContactSection() {
                         type="button"
                         key={type.id}
                         onClick={() => setInquiryType(type.id)}
-                        className={`p-2.5 rounded-lg border text-center font-bold transition-colors ${
+                        className={`p-2.5 rounded-sm border text-center font-bold text-xs uppercase tracking-wide transition-colors ${
                           inquiryType === type.id
                             ? "bg-[#006F51] text-white border-[#006F51]"
                             : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100"
@@ -186,7 +186,7 @@ export default function ContactSection() {
                       placeholder="e.g. John Mukasa"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                     />
                   </div>
 
@@ -198,7 +198,7 @@ export default function ContactSection() {
                       placeholder="e.g. +256 700 890 123"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                     />
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export default function ContactSection() {
                       placeholder="e.g. john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                     />
                   </div>
 
@@ -220,7 +220,7 @@ export default function ContactSection() {
                     <select
                       value={formData.area}
                       onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                     >
                       <option value="Kitende">Kitende (Entebbe Road)</option>
                       <option value="Lubowa">Lubowa / Seguku</option>
@@ -242,13 +242,13 @@ export default function ContactSection() {
                     placeholder="Tell us about your collection requirements, number of bins, or skip size..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2"
+                  className="btn-yellow w-full py-3.5 flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>Submit Inquiry to Dispatch</span>

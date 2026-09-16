@@ -20,15 +20,15 @@ export default function VerticalSidebar() {
         <div className="writing-mode-vertical rotate-180 flex items-center gap-1.5 whitespace-nowrap">
           <span className="font-semibold text-gray-500">Email.</span>
           <a
-            href="mailto:info@naturewaste.co"
-            className="font-bold hover:text-nature-primary transition-colors tracking-wide"
+            href="mailto:info@naturewasteug.com"
+            className="font-bold hover:text-[#006F51] transition-colors tracking-wide"
           >
-            info@naturewaste.co
+            info@naturewasteug.com
           </a>
         </div>
       </div>
 
-      {/* Decorative Brand Triangular Chevron at bottom */}
+      {/* Corporate Brand Accent at bottom */}
       <div className="w-full relative h-[60px] flex items-end overflow-hidden mt-auto">
         <svg
           viewBox="0 0 80 60"
@@ -37,11 +37,11 @@ export default function VerticalSidebar() {
           className="w-full h-full"
         >
           {/* Main green triangle */}
-          <path d="M0 60L40 20L80 60H0Z" fill="#0B6B1E" />
+          <path d="M0 60L40 20L80 60H0Z" fill="#006F51" />
           {/* Layered secondary green triangle */}
-          <path d="M0 60L40 35L80 60H0Z" fill="#9AD44D" />
+          <path d="M0 60L40 35L80 60H0Z" fill="#E9F4F0" />
           {/* Accent yellow peak dot */}
-          <circle cx="40" cy="20" r="3" fill="#D7C93A" />
+          <circle cx="40" cy="20" r="3" fill="#FFCE00" />
         </svg>
       </div>
     </aside>

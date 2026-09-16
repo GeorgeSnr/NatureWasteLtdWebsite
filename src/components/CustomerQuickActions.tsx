@@ -50,31 +50,31 @@ export default function CustomerQuickActions() {
   ];
 
   return (
-    <section className="relative z-20 -mt-8 max-w-[1400px] mx-auto px-4 sm:px-8 select-none">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+    <section className="relative z-20 -mt-6 max-w-[1400px] mx-auto px-4 sm:px-8 select-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {actions.map((item) => {
           const Icon = item.icon;
           return (
             <Link
               key={item.title}
               href={item.link}
-              className={`bg-white rounded-xl p-6 shadow-xl border border-gray-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group ${item.accent}`}
+              className="bg-white rounded border border-[#E5E7EB] p-5 shadow-xs hover:border-[#006F51] hover:shadow-sm transition-all duration-200 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-lg bg-[#F0F7F2] text-nature-primary flex items-center justify-center mb-4 group-hover:bg-nature-primary group-hover:text-white transition-colors duration-300">
-                  <Icon className="w-6 h-6 stroke-[2]" />
+                <div className="w-10 h-10 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center mb-3 group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                  <Icon className="w-5 h-5 stroke-[2]" />
                 </div>
-                <h3 className="text-base font-bold text-[#141517] tracking-tight group-hover:text-nature-primary transition-colors">
+                <h3 className="text-sm sm:text-base font-bold text-[#1A1D20] tracking-tight group-hover:text-[#006F51] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-xs text-gray-500 mt-2 leading-relaxed font-normal">
+                <p className="text-xs text-[#555C66] mt-1.5 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-nature-primary">
+              <div className="mt-4 pt-3 border-t border-[#F0F2F5] flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#006F51]">
                 <span>{item.cta}</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
             </Link>
           );

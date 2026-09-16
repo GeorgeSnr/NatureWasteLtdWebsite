@@ -136,8 +136,8 @@ export default function Header() {
       </div>
 
       {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
-      <header className="sticky top-0 z-40 bg-white/98 backdrop-blur-md border-b border-[#E5E7EB] shadow-sm select-none transition-all">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-40 bg-white border-b border-[#E5E7EB] shadow-xs select-none">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
           {/* Brand Logo */}
           <Link href="/" className="shrink-0 flex items-center">
             <Logo variant="light" size="md" showTagline={false} />
@@ -153,7 +153,7 @@ export default function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-sm transition-colors ${
                   activeDropdown === "residential"
                     ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
                     : "hover:text-[#006F51] hover:bg-gray-50"
@@ -164,7 +164,7 @@ export default function Header() {
               </button>
 
               {activeDropdown === "residential" && (
-                <div className="absolute top-full left-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                <div className="absolute top-full left-0 w-80 bg-white border border-[#D1D5DB] rounded-sm shadow-lg p-2 space-y-1 z-50">
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
                     Services for Home
                   </div>
@@ -172,7 +172,7 @@ export default function Header() {
                     <Link
                       key={idx}
                       href={item.href}
-                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      className="block p-2.5 rounded-sm hover:bg-[#F4F9F6] transition-colors group"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
@@ -201,7 +201,7 @@ export default function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-sm transition-colors ${
                   activeDropdown === "commercial"
                     ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
                     : "hover:text-[#006F51] hover:bg-gray-50"
@@ -212,7 +212,7 @@ export default function Header() {
               </button>
 
               {activeDropdown === "commercial" && (
-                <div className="absolute top-full left-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                <div className="absolute top-full left-0 w-80 bg-white border border-[#D1D5DB] rounded-sm shadow-lg p-2 space-y-1 z-50">
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
                     Services for Business
                   </div>
@@ -220,7 +220,7 @@ export default function Header() {
                     <Link
                       key={idx}
                       href={item.href}
-                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      className="block p-2.5 rounded-sm hover:bg-[#F4F9F6] transition-colors group"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
@@ -249,7 +249,7 @@ export default function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-sm transition-colors ${
                   activeDropdown === "dumpsters"
                     ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
                     : "hover:text-[#006F51] hover:bg-gray-50"
@@ -260,7 +260,7 @@ export default function Header() {
               </button>
 
               {activeDropdown === "dumpsters" && (
-                <div className="absolute top-full left-0 w-84 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                <div className="absolute top-full left-0 w-84 bg-white border border-[#D1D5DB] rounded-sm shadow-lg p-2 space-y-1 z-50">
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
                     Skip &amp; Container Rentals
                   </div>
@@ -268,7 +268,7 @@ export default function Header() {
                     <Link
                       key={idx}
                       href={item.href}
-                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      className="block p-2.5 rounded-sm hover:bg-[#F4F9F6] transition-colors group"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
@@ -297,7 +297,7 @@ export default function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-sm transition-colors ${
                   activeDropdown === "sustainability"
                     ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
                     : "hover:text-[#006F51] hover:bg-gray-50"
@@ -308,7 +308,7 @@ export default function Header() {
               </button>
 
               {activeDropdown === "sustainability" && (
-                <div className="absolute top-full left-0 w-84 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                <div className="absolute top-full left-0 w-84 bg-white border border-[#D1D5DB] rounded-sm shadow-lg p-2 space-y-1 z-50">
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
                     Green Uganda &amp; Circularity
                   </div>
@@ -316,7 +316,7 @@ export default function Header() {
                     <Link
                       key={idx}
                       href={item.href}
-                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      className="block p-2.5 rounded-sm hover:bg-[#F4F9F6] transition-colors group"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
@@ -336,7 +336,7 @@ export default function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-sm transition-colors ${
                   activeDropdown === "company"
                     ? "text-[#006F51] bg-[#E9F4F0] font-semibold"
                     : "hover:text-[#006F51] hover:bg-gray-50"
@@ -347,7 +347,7 @@ export default function Header() {
               </button>
 
               {activeDropdown === "company" && (
-                <div className="absolute top-full right-0 w-80 bg-white border border-[#E5E7EB] rounded-xl shadow-xl p-3 space-y-1 z-50">
+                <div className="absolute top-full right-0 w-80 bg-white border border-[#D1D5DB] rounded-sm shadow-lg p-2 space-y-1 z-50">
                   <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
                     Our Ugandan Company
                   </div>
@@ -355,7 +355,7 @@ export default function Header() {
                     <Link
                       key={idx}
                       href={item.href}
-                      className="block p-2.5 rounded-lg hover:bg-[#E9F4F0] transition-colors group"
+                      className="block p-2.5 rounded-sm hover:bg-[#F4F9F6] transition-colors group"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className="font-semibold text-sm text-[#212529] group-hover:text-[#006F51]">
@@ -375,7 +375,7 @@ export default function Header() {
             {/* Phone Number Callout */}
             <a
               href="tel:+256700890123"
-              className="hidden lg:flex items-center gap-2 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3 py-2 rounded-md hover:bg-gray-50 transition-colors"
+              className="hidden lg:flex items-center gap-2 text-xs font-bold text-[#006F51] hover:text-[#004D38] px-3 py-2 rounded-sm hover:bg-gray-50 transition-colors"
             >
               <Phone className="w-4 h-4 text-[#006F51]" />
               <span>+256 700 890 123</span>
@@ -384,7 +384,7 @@ export default function Header() {
             {/* Search Icon Trigger */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-gray-600 hover:text-[#006F51] hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 text-gray-600 hover:text-[#006F51] hover:bg-gray-100 rounded-sm transition-colors"
               aria-label="Search site"
             >
               <Search className="w-4 h-4" />
@@ -393,7 +393,7 @@ export default function Header() {
             {/* Signature Waste Connections Yellow Button: "Get Prices" */}
             <Link
               href="/#schedule-finder"
-              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 active:scale-95 shrink-0"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-5 sm:px-6 py-2.5 rounded transition-colors shrink-0"
             >
               Get Prices
             </Link>
@@ -401,7 +401,7 @@ export default function Header() {
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setDrawerOpen(true)}
-              className="xl:hidden p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-lg transition-colors"
+              className="xl:hidden p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-sm transition-colors"
               aria-label="Open Navigation Menu"
             >
               <Menu className="w-6 h-6" />
@@ -415,7 +415,7 @@ export default function Header() {
         <div className="fixed inset-0 z-50 flex select-none">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-black/60 transition-opacity"
             onClick={() => setDrawerOpen(false)}
           />
 
@@ -426,7 +426,7 @@ export default function Header() {
               <Logo variant="light" size="sm" showTagline={false} />
               <button
                 onClick={() => setDrawerOpen(false)}
-                className="p-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-100"
+                className="p-2 text-gray-600 hover:text-gray-900 rounded-sm hover:bg-gray-100"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -437,7 +437,7 @@ export default function Header() {
               <Link
                 href="/#schedule-finder"
                 onClick={() => setDrawerOpen(false)}
-                className="w-full block text-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-sm py-3 rounded-full shadow-sm"
+                className="w-full block text-center bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider py-3 rounded transition-colors"
               >
                 Get Prices &amp; Start Service
               </Link>
@@ -448,7 +448,7 @@ export default function Header() {
               <Link
                 href="/portal"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-lg bg-[#E9F4F0] text-[#006F51] font-semibold"
+                className="flex items-center gap-2 p-2.5 rounded-sm bg-[#E9F4F0] text-[#006F51] font-semibold"
               >
                 <CreditCard className="w-4 h-4" />
                 <span>Pay My Bill</span>
@@ -456,7 +456,7 @@ export default function Header() {
               <Link
                 href="/#schedule-finder"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-lg bg-[#E9F4F0] text-[#006F51] font-semibold"
+                className="flex items-center gap-2 p-2.5 rounded-sm bg-[#E9F4F0] text-[#006F51] font-semibold"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Schedule</span>
@@ -464,7 +464,7 @@ export default function Header() {
               <Link
                 href="/#schedule-finder"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 text-gray-700 font-medium"
+                className="flex items-center gap-2 p-2.5 rounded-sm bg-gray-50 text-gray-700 font-medium"
               >
                 <AlertCircle className="w-4 h-4 text-[#006F51]" />
                 <span>Missed Pickup</span>
@@ -472,7 +472,7 @@ export default function Header() {
               <Link
                 href="/portal"
                 onClick={() => setDrawerOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 text-gray-700 font-medium"
+                className="flex items-center gap-2 p-2.5 rounded-sm bg-gray-50 text-gray-700 font-medium"
               >
                 <UserCheck className="w-4 h-4 text-[#006F51]" />
                 <span>My Account</span>

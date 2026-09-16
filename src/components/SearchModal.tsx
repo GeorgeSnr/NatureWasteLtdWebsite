@@ -51,18 +51,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     : searchableItems.slice(0, 6);
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-none border border-gray-200 overflow-hidden">
+    <div className="fixed inset-0 z-[110] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/75 animate-fadeIn">
+      <div className="w-full max-w-2xl bg-white shadow-xl rounded border border-gray-200 overflow-hidden">
         {/* Search input header */}
         <div className="flex items-center px-6 py-4 border-b border-gray-100 gap-3">
-          <Search className="w-5 h-5 text-nature-primary shrink-0" />
+          <Search className="w-5 h-5 text-[#006F51] shrink-0" />
           <input
             type="text"
             placeholder="Search modules, industries, pricing, waste solutions..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
-            className="flex-1 bg-transparent text-[#141517] placeholder-gray-400 text-base sm:text-lg focus:outline-none"
+            className="flex-1 bg-transparent text-[#1A1D20] placeholder-gray-400 text-sm sm:text-base focus:outline-none"
           />
           <button
             onClick={onClose}
@@ -73,27 +73,27 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
 
         {/* Search Results list */}
-        <div className="max-h-[380px] overflow-y-auto p-4 space-y-2">
+        <div className="max-h-[380px] overflow-y-auto p-4 space-y-1.5">
           {filtered.length > 0 ? (
             filtered.map((item, idx) => (
               <Link
                 key={idx}
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center justify-between p-3.5 hover:bg-nature-card border border-transparent hover:border-nature-primary/20 transition-all group"
+                className="flex items-center justify-between p-3 hover:bg-[#F8F9FA] border border-transparent hover:border-[#006F51]/20 rounded-sm transition-colors group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded bg-nature-primary/10 text-nature-primary flex items-center justify-center group-hover:bg-nature-primary group-hover:text-white transition-colors">
+                  <div className="w-8 h-8 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                     {item.type === "Module" ? <Layers className="w-4 h-4" /> : <Tag className="w-4 h-4" />}
                   </div>
                   <div>
-                    <h4 className="text-sm sm:text-base font-bold text-[#141517] group-hover:text-nature-primary transition-colors">
+                    <h4 className="text-sm font-bold text-[#1A1D20] group-hover:text-[#006F51] transition-colors">
                       {item.title}
                     </h4>
                     <span className="text-xs text-gray-500 font-medium">Category: {item.type}</span>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-nature-primary group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#006F51] group-hover:translate-x-0.5 transition-all" />
               </Link>
             ))
           ) : (

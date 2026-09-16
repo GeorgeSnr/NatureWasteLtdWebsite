@@ -17,7 +17,7 @@ export default function BlogPreview() {
               <span className="text-base leading-none text-nature-secondary">»</span>
               <span>UPDATE &amp; INSIGHTS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#141517] tracking-tight leading-[1.15] mt-3">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#1A1D20] tracking-tight leading-[1.15] mt-3">
               Articles &amp; insights for <br className="hidden sm:inline" /> waste &amp; sustainability leaders
             </h2>
           </div>
@@ -25,13 +25,10 @@ export default function BlogPreview() {
           <div className="shrink-0">
             <Link
               href="/blog"
-              className="relative overflow-hidden bg-nature-primary text-white font-extrabold text-sm sm:text-base px-7 py-3.5 sm:px-8 sm:py-4 cursor-pointer shadow-md group inline-flex"
+              className="bg-[#006F51] hover:bg-[#004D38] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-sm transition-colors cursor-pointer inline-flex items-center gap-2"
             >
-              <span className="absolute inset-0 bg-[#141517] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-              <span className="relative z-10 text-white flex items-center gap-3">
-                <span>View All Posts</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
+              <span>View All Posts</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -41,7 +38,7 @@ export default function BlogPreview() {
           {/* Featured Large Card (Left Column) */}
           <Link
             href={`/blog/${featured.slug}`}
-            className="lg:col-span-6 group overflow-hidden cursor-pointer min-h-[360px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-end shadow-xs hover:shadow-2xl transition-shadow duration-300 relative chamfer-card"
+            className="lg:col-span-6 group overflow-hidden cursor-pointer min-h-[360px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-end border border-gray-200 rounded-sm hover:border-[#006F51] transition-colors relative"
           >
             {/* Background image */}
             <div
@@ -88,13 +85,13 @@ export default function BlogPreview() {
                   <div>
                     <div className="flex items-center gap-2 text-gray-500 text-xs sm:text-sm font-medium">
                       <span>
-                        By <strong className="text-[#141517] font-bold">{post.author}</strong>
+                        By <strong className="text-[#1A1D20] font-bold">{post.author}</strong>
                       </span>
                       <span>•</span>
                       <span>{post.date}</span>
                     </div>
 
-                    <h4 className="text-base sm:text-lg font-black text-[#141517] leading-snug tracking-tight mt-2 group-hover:text-nature-primary transition-colors duration-300 line-clamp-2">
+                    <h4 className="text-base sm:text-lg font-black text-[#1A1D20] leading-snug tracking-tight mt-2 group-hover:text-nature-primary transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h4>
 
@@ -110,8 +107,8 @@ export default function BlogPreview() {
                   </div>
                 </div>
 
-                {/* Right image with chamfer cut */}
-                <div className="w-full sm:w-[200px] lg:w-[220px] shrink-0 h-[180px] sm:h-auto relative overflow-hidden chamfer-card-sm">
+                {/* Right image */}
+                <div className="w-full sm:w-[200px] lg:w-[220px] shrink-0 h-[180px] sm:h-auto relative overflow-hidden">
                   <div
                     className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                     style={{ backgroundImage: `url('${post.image}')` }}

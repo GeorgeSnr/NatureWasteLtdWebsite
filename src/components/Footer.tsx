@@ -23,8 +23,8 @@ export default function Footer() {
       <div className="bg-[#14191E] border-b border-white/10 py-8 px-4 sm:px-8">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <div className="w-12 h-12 rounded-xl bg-[#006F51] text-white flex items-center justify-center shrink-0">
-              <Phone className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-sm bg-[#006F51] text-white flex items-center justify-center shrink-0">
+              <Phone className="w-5 h-5" />
             </div>
             <div>
               <h3 className="font-bold text-lg text-white">Need to Start Waste Service in Uganda?</h3>
@@ -37,13 +37,13 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-3">
             <a
               href="tel:+256700890123"
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-full transition-colors"
+              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded transition-colors"
             >
               Call: +256 700 890 123
             </a>
             <Link
               href="/#schedule-finder"
-              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-full shadow-md transition-all flex items-center gap-2"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded transition-colors flex items-center gap-2"
             >
               <span>Get Prices &amp; Schedule</span>
               <ArrowRight className="w-4 h-4" />
@@ -235,7 +235,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="pt-2">
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FFCE00] bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#FFCE00] bg-white/5 border border-white/10 px-2.5 py-1 rounded-sm">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>NEMA Lic #WM/2024/098</span>
                 </div>
@@ -255,13 +255,13 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/#schedule-finder"
-              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-full transition-all"
+              className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded transition-colors"
             >
               Start Service
             </Link>
             <Link
               href="/book-demo"
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-full transition-all"
+              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded transition-colors"
             >
               Request Quote
             </Link>

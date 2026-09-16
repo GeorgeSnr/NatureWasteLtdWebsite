@@ -55,7 +55,7 @@ export default function FeatureCards() {
 
               {/* Card Titles & Body */}
               <div className="relative z-10 space-y-3">
-                <h3 className="text-xl lg:text-[22px] font-bold text-[#141517] group-hover:text-white transition-colors duration-300 leading-snug">
+                <h3 className="text-xl lg:text-[22px] font-bold text-[#1A1D20] group-hover:text-white transition-colors duration-300 leading-snug">
                   {card.title}
                 </h3>
                 <p className="text-gray-500 group-hover:text-white/90 transition-colors duration-300 text-sm leading-relaxed font-normal">

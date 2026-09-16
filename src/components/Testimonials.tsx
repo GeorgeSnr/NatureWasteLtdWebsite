@@ -58,21 +58,21 @@ export default function Testimonials() {
         </div>
 
         {/* Reviews Grid (Matching Waste Connections 5.0 Star Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {reviews.map((review, idx) => (
             <div
               key={idx}
-              className="bg-[#F8F9FA] rounded-2xl border border-[#E5E7EB] p-6 flex flex-col justify-between hover:bg-white hover:border-[#006F51] hover:shadow-lg transition-all duration-200"
+              className="bg-[#F8F9FA] rounded border border-[#E5E7EB] p-5 flex flex-col justify-between hover:bg-white hover:border-[#006F51] hover:shadow-xs transition-all duration-200"
             >
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* 5.0 Rating Header */}
-                <div className="flex items-center gap-3">
-                  <div className="text-2xl font-black text-[#1A1D20]">
+                <div className="flex items-center gap-2.5">
+                  <div className="text-xl font-black text-[#1A1D20]">
                     {review.rating}
                   </div>
                   <div className="flex items-center gap-0.5 text-[#FFCE00]">
                     {[...Array(5)].map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-[#FFCE00] stroke-[#FFCE00]" />
+                      <Star key={s} className="w-3.5 h-3.5 fill-[#FFCE00] stroke-[#FFCE00]" />
                     ))}
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export default function Testimonials() {
               </div>
 
               {/* Author Info */}
-              <div className="pt-6 border-t border-gray-200 mt-6 flex items-center justify-between">
+              <div className="pt-4 border-t border-gray-200 mt-5 flex items-center justify-between">
                 <div>
                   <div className="font-bold text-sm text-[#1A1D20]">
                     {review.name}
@@ -98,7 +98,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Google Verified Review Icon */}
-                <div className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xs font-bold text-[#4285F4] shrink-0 shadow-xs">
+                <div className="w-7 h-7 rounded-sm bg-white border border-gray-200 flex items-center justify-center text-xs font-bold text-[#4285F4] shrink-0 shadow-xs">
                   G
                 </div>
               </div>
@@ -107,10 +107,10 @@ export default function Testimonials() {
         </div>
 
         {/* Bottom CTA Button */}
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center">
           <Link
             href="/#about-nema"
-            className="inline-flex items-center justify-center bg-white hover:bg-gray-50 border border-gray-300 hover:border-[#006F51] text-[#1A1D20] px-7 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-xs"
+            className="inline-flex items-center justify-center bg-white hover:bg-gray-50 border border-gray-300 hover:border-[#006F51] text-[#1A1D20] px-7 py-3 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
           >
             <span>More About Nature Waste</span>
             <ArrowRight className="w-4 h-4 ml-2 text-[#006F51]" />

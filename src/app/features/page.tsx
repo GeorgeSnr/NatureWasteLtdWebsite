@@ -25,12 +25,12 @@ export default function FeaturesPage() {
   return (
     <div className="mx-auto flex max-w-[1440px] min-h-screen bg-white">
       {/* Sticky Left Sub-Navigation */}
-      <aside className="sticky top-[80px] hidden h-[calc(100vh-80px)] w-[280px] flex-col border-r border-[#c5c6cd] bg-[#f2f4f6] p-4 gap-2 lg:flex shrink-0 select-none">
+      <aside className="sticky top-[80px] hidden h-[calc(100vh-80px)] w-[280px] flex-col border-r border-[#E5E7EB] bg-[#F8F9FA] p-4 gap-2 lg:flex shrink-0 select-none">
         <div className="mb-6 px-4 pt-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-nature-primary">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
             Platform Modules
           </span>
-          <h2 className="text-[18px] font-bold text-[#091426] mt-0.5">
+          <h2 className="text-lg font-bold text-[#1A1D20] mt-0.5">
             Nature Waste Connect
           </h2>
         </div>
@@ -38,10 +38,10 @@ export default function FeaturesPage() {
         <a
           href="#smart-collection"
           onClick={() => setActiveTab("smart-collection")}
-          className={`flex items-center gap-3 rounded-full px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.05em] transition-all ${
+          className={`flex items-center gap-3 rounded-sm px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === "smart-collection"
-              ? "bg-nature-primary text-white shadow-xs"
-              : "text-[#45474C] hover:bg-[#e6e8ea]"
+              ? "bg-[#006F51] text-white shadow-xs"
+              : "text-[#555C66] hover:bg-[#E5E7EB]"
           }`}
         >
           <Cpu className="h-4 w-4" />
@@ -51,10 +51,10 @@ export default function FeaturesPage() {
         <a
           href="#material-recovery"
           onClick={() => setActiveTab("material-recovery")}
-          className={`flex items-center gap-3 rounded-full px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.05em] transition-all ${
+          className={`flex items-center gap-3 rounded-sm px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === "material-recovery"
-              ? "bg-nature-primary text-white shadow-xs"
-              : "text-[#45474C] hover:bg-[#e6e8ea]"
+              ? "bg-[#006F51] text-white shadow-xs"
+              : "text-[#555C66] hover:bg-[#E5E7EB]"
           }`}
         >
           <Recycle className="h-4 w-4" />
@@ -64,10 +64,10 @@ export default function FeaturesPage() {
         <a
           href="#fleet-telematics"
           onClick={() => setActiveTab("fleet-telematics")}
-          className={`flex items-center gap-3 rounded-full px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.05em] transition-all ${
+          className={`flex items-center gap-3 rounded-sm px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === "fleet-telematics"
-              ? "bg-nature-primary text-white shadow-xs"
-              : "text-[#45474C] hover:bg-[#e6e8ea]"
+              ? "bg-[#006F51] text-white shadow-xs"
+              : "text-[#555C66] hover:bg-[#E5E7EB]"
           }`}
         >
           <Truck className="h-4 w-4" />
@@ -77,26 +77,26 @@ export default function FeaturesPage() {
         <a
           href="#matrix"
           onClick={() => setActiveTab("matrix")}
-          className={`flex items-center gap-3 rounded-full px-4 py-3 text-[12px] font-semibold uppercase tracking-[0.05em] transition-all ${
+          className={`flex items-center gap-3 rounded-sm px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === "matrix"
-              ? "bg-nature-primary text-white shadow-xs"
-              : "text-[#45474C] hover:bg-[#e6e8ea]"
+              ? "bg-[#006F51] text-white shadow-xs"
+              : "text-[#555C66] hover:bg-[#E5E7EB]"
           }`}
         >
           <Table className="h-4 w-4" />
           Feature Matrix
         </a>
 
-        <div className="mt-auto p-4 bg-white border border-gray-200 rounded-sm">
-          <div className="text-xs font-bold text-[#141517] mb-1">
+        <div className="mt-auto p-4 bg-white border border-[#E5E7EB] rounded-sm">
+          <div className="text-xs font-bold text-[#1A1D20] mb-1">
             Need an on-site waste audit?
           </div>
-          <p className="text-[11px] text-gray-500 mb-3">
+          <p className="text-[11px] text-[#555C66] mb-3">
             Our environmental engineers will assess your container needs.
           </p>
           <Link
             href="/book-demo"
-            className="w-full block text-center bg-nature-primary text-white py-2 text-xs font-bold uppercase tracking-wider hover:bg-nature-primary-dark transition-colors"
+            className="w-full block text-center bg-[#006F51] hover:bg-[#005a42] text-white py-2 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors"
           >
             Book Free Audit
           </Link>
@@ -107,13 +107,13 @@ export default function FeaturesPage() {
       <main className="flex-1 overflow-x-hidden px-6 sm:px-10 lg:px-12 py-12">
         {/* Header Intro */}
         <section className="mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-nature-primary">
+          <div className="inline-flex items-center gap-2 text-[#006F51] font-bold text-xs uppercase tracking-wider bg-[#E9F4F0] px-3 py-1 rounded-sm border border-[#006F51]/20">
             Full System Architecture
-          </span>
-          <h1 className="mt-2 mb-4 text-[36px] sm:text-[46px] font-black leading-[1.15] tracking-tight text-[#091426]">
+          </div>
+          <h1 className="mt-3 mb-4 text-3xl sm:text-4xl lg:text-[42px] font-black leading-[1.15] tracking-tight text-[#1A1D20]">
             Precision Engineering for Modern Waste Logistics
           </h1>
-          <p className="max-w-3xl text-[16px] text-gray-600 leading-relaxed">
+          <p className="max-w-3xl text-sm sm:text-base text-[#555C66] leading-relaxed">
             Nature Waste Connect unifies every phase of the urban and industrial waste lifecycle.
             From IoT bin fill alerts to municipal compactor truck routing, MRF weighbridge ticketing,
             and NEMA-certified chain-of-custody compliance.
@@ -124,10 +124,10 @@ export default function FeaturesPage() {
         <section id="smart-collection" className="mb-20 scroll-mt-24">
           <div className="mb-8 flex items-baseline justify-between">
             <div>
-              <span className="text-[12px] font-bold uppercase tracking-[0.05em] text-nature-primary">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
                 Precision Scheduling &amp; IoT
               </span>
-              <h2 className="mt-2 text-[28px] sm:text-[32px] font-black leading-[1.2] text-[#091426]">
+              <h2 className="mt-1.5 text-2xl sm:text-3xl font-black leading-[1.2] text-[#1A1D20]">
                 Smart Collection &amp; Dynamic Dispatch
               </h2>
             </div>
@@ -135,18 +135,18 @@ export default function FeaturesPage() {
 
           <div className="grid grid-cols-12 gap-6">
             {/* Interactive Schedule Chart */}
-            <div className="col-span-12 border border-[#c5c6cd] bg-white p-6 lg:col-span-8 shadow-xs">
-              <div className="mb-6 flex items-center justify-between border-b border-[#c5c6cd] pb-4">
+            <div className="col-span-12 border border-[#E5E7EB] bg-white p-6 lg:col-span-8 shadow-xs rounded">
+              <div className="mb-6 flex items-center justify-between border-b border-[#E5E7EB] pb-4">
                 <div>
-                  <h3 className="text-[18px] font-bold text-[#091426]">
+                  <h3 className="text-lg font-bold text-[#1A1D20]">
                     Dispatch Schedule: Sector Kampala-Central Fleet
                   </h3>
-                  <span className="text-xs text-gray-500 font-mono">
+                  <span className="text-xs text-[#555C66] font-mono">
                     Live Status: 8 Trucks Active • 1,420 Bins Polled
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">
+                  <span className="px-2.5 py-1 bg-[#E9F4F0] text-[#006F51] text-xs font-bold rounded-sm border border-[#006F51]/20">
                     Route Optimized
                   </span>
                 </div>
@@ -154,12 +154,12 @@ export default function FeaturesPage() {
 
               {/* Gantt / Schedule Timeline */}
               <div className="overflow-x-auto">
-                <div className="min-w-[650px] text-[13px] font-mono">
-                  <div className="flex border-b border-[#c5c6cd] bg-[#f2f4f6] py-2">
-                    <div className="w-1/3 px-4 font-bold text-[#141517]">
+                <div className="min-w-[650px] text-xs font-mono">
+                  <div className="flex border-b border-[#E5E7EB] bg-[#F8F9FA] py-2.5">
+                    <div className="w-1/3 px-4 font-bold text-[#1A1D20] uppercase tracking-wider text-[11px]">
                       Zone / Waste Stream
                     </div>
-                    <div className="flex w-2/3 justify-between px-4 text-[#45474C] font-semibold">
+                    <div className="flex w-2/3 justify-between px-4 text-[#555C66] font-semibold text-[11px]">
                       <span>06:00 AM</span>
                       <span>09:00 AM</span>
                       <span>12:00 PM</span>
@@ -169,13 +169,13 @@ export default function FeaturesPage() {
                   </div>
 
                   {/* Row 1 */}
-                  <div className="flex items-center border-b border-[#c5c6cd] py-3.5 bg-white">
-                    <div className="w-1/3 px-4 text-[#141517] font-medium">
+                  <div className="flex items-center border-b border-[#E5E7EB] py-3.5 bg-white">
+                    <div className="w-1/3 px-4 text-[#1A1D20] font-medium">
                       CBD Commercial Street Bins
                     </div>
                     <div className="relative w-2/3 px-4">
                       <div
-                        className="h-6 rounded bg-nature-primary flex items-center px-2 text-[10px] text-white font-bold"
+                        className="h-6 rounded-sm bg-[#006F51] flex items-center px-2 text-[10px] text-white font-bold"
                         style={{ width: "45%", marginLeft: "0%" }}
                       >
                         Compactor 04 (Completed)
@@ -184,13 +184,13 @@ export default function FeaturesPage() {
                   </div>
 
                   {/* Row 2 */}
-                  <div className="flex items-center border-b border-[#c5c6cd] py-3.5 bg-[#f8fafc]">
-                    <div className="w-1/3 px-4 text-[#141517] font-medium">
+                  <div className="flex items-center border-b border-[#E5E7EB] py-3.5 bg-[#F8F9FA]/60">
+                    <div className="w-1/3 px-4 text-[#1A1D20] font-medium">
                       Industrial Park Scrap &amp; Cardboard
                     </div>
                     <div className="relative w-2/3 px-4">
                       <div
-                        className="h-6 rounded bg-nature-secondary flex items-center px-2 text-[10px] text-[#074E15] font-black"
+                        className="h-6 rounded-sm bg-[#FFCE00] flex items-center px-2 text-[10px] text-[#1A1D20] font-bold"
                         style={{ width: "35%", marginLeft: "35%" }}
                       >
                         Hydraulic Roll-off (In Progress)
@@ -199,13 +199,13 @@ export default function FeaturesPage() {
                   </div>
 
                   {/* Row 3 */}
-                  <div className="flex items-center border-b border-[#c5c6cd] py-3.5 bg-white">
-                    <div className="w-1/3 px-4 text-[#141517] font-medium">
+                  <div className="flex items-center border-b border-[#E5E7EB] py-3.5 bg-white">
+                    <div className="w-1/3 px-4 text-[#1A1D20] font-medium">
                       Nakasero Hospital Biohazard
                     </div>
                     <div className="relative w-2/3 px-4">
                       <div
-                        className="h-6 rounded bg-[#BA1A1A] flex items-center px-2 text-[10px] text-white font-bold"
+                        className="h-6 rounded-sm bg-[#BA1A1A] flex items-center px-2 text-[10px] text-white font-bold"
                         style={{ width: "25%", marginLeft: "65%" }}
                       >
                         Clinical Van 02 (Dispatched)
@@ -214,13 +214,13 @@ export default function FeaturesPage() {
                   </div>
 
                   {/* Row 4 */}
-                  <div className="flex items-center py-3.5 bg-[#f8fafc]">
-                    <div className="w-1/3 px-4 text-[#141517] font-medium">
+                  <div className="flex items-center py-3.5 bg-[#F8F9FA]/60">
+                    <div className="w-1/3 px-4 text-[#1A1D20] font-medium">
                       Residential Green Estates
                     </div>
                     <div className="relative w-2/3 px-4">
                       <div
-                        className="h-6 rounded bg-[#181A1C] flex items-center px-2 text-[10px] text-white font-bold"
+                        className="h-6 rounded-sm bg-[#1A1D20] flex items-center px-2 text-[10px] text-white font-bold"
                         style={{ width: "50%", marginLeft: "45%" }}
                       >
                         Organic Waste Crew (Queued)
@@ -233,20 +233,20 @@ export default function FeaturesPage() {
 
             {/* Side Highlights & Interactive Fill Gauge */}
             <div className="col-span-12 flex flex-col gap-6 lg:col-span-4">
-              <div className="flex-1 border border-[#c5c6cd] bg-white p-6 shadow-xs">
+              <div className="flex-1 border border-[#E5E7EB] bg-white p-6 shadow-xs rounded">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-nature-primary">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
                     Live IoT Bin Simulator
                   </span>
                   <Sliders className="w-4 h-4 text-gray-400" />
                 </div>
-                <h4 className="text-[17px] font-bold text-[#091426] mb-2">
+                <h4 className="text-base font-bold text-[#1A1D20] mb-2">
                   Ultrasonic Sensor Telemetry
                 </h4>
                 <div className="space-y-3">
                   <div className="flex justify-between text-xs font-mono">
-                    <span>Fill Percentage:</span>
-                    <span className="font-bold text-nature-primary">{simFillLevel}%</span>
+                    <span className="text-[#555C66]">Fill Percentage:</span>
+                    <span className="font-bold text-[#006F51]">{simFillLevel}%</span>
                   </div>
                   <input
                     type="range"
@@ -254,10 +254,10 @@ export default function FeaturesPage() {
                     max="100"
                     value={simFillLevel}
                     onChange={(e) => setSimFillLevel(Number(e.target.value))}
-                    className="w-full accent-nature-primary"
+                    className="w-full accent-[#006F51]"
                   />
                   <div
-                    className={`p-3 text-xs font-medium border ${
+                    className={`p-3 text-xs font-medium border rounded-sm ${
                       simFillLevel > 80
                         ? "bg-red-50 text-red-800 border-red-200"
                         : simFillLevel > 60
@@ -274,14 +274,14 @@ export default function FeaturesPage() {
                 </div>
               </div>
 
-              <div className="flex-1 border border-[#c5c6cd] bg-white p-6 shadow-xs">
-                <div className="mb-3 text-nature-primary">
-                  <Calendar className="w-7 h-7" />
+              <div className="flex-1 border border-[#E5E7EB] bg-white p-6 shadow-xs rounded">
+                <div className="mb-3 text-[#006F51]">
+                  <Calendar className="w-6 h-6" />
                 </div>
-                <h4 className="text-[17px] font-bold text-[#091426] mb-1">
+                <h4 className="text-base font-bold text-[#1A1D20] mb-1">
                   Dynamic Route Sequencing
                 </h4>
-                <p className="text-[13px] text-gray-500 leading-relaxed">
+                <p className="text-xs text-[#555C66] leading-relaxed">
                   Eliminate dead mileage. Algorithms skip half-empty containers and consolidate truck routes to save 34% in fleet diesel.
                 </p>
               </div>
@@ -292,32 +292,32 @@ export default function FeaturesPage() {
         {/* SECTION 2: Material Recovery Facility (MRF) & Weighbridge */}
         <section
           id="material-recovery"
-          className="mb-20 -mx-6 sm:-mx-10 lg:-mx-12 border-y border-[#c5c6cd] bg-[#f2f4f6] px-6 sm:px-10 lg:px-12 py-16 scroll-mt-24"
+          className="mb-20 -mx-6 sm:-mx-10 lg:-mx-12 border-y border-[#E5E7EB] bg-[#F8F9FA] px-6 sm:px-10 lg:px-12 py-16 scroll-mt-24"
         >
           <div className="max-w-[1440px] mx-auto">
             <div className="mb-10">
-              <span className="text-[12px] font-bold uppercase tracking-[0.05em] text-nature-primary">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
                 Circular Economics
               </span>
-              <h2 className="mt-2 text-[28px] sm:text-[32px] font-black leading-[1.2] text-[#091426]">
+              <h2 className="mt-1.5 text-2xl sm:text-3xl font-black leading-[1.2] text-[#1A1D20]">
                 Material Recovery Facility (MRF) &amp; Weighbridge
               </h2>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {/* Card 1: Weighbridge Log */}
-              <div className="overflow-hidden border border-[#c5c6cd] bg-white shadow-xs">
-                <div className="border-b border-[#c5c6cd] bg-[#e6e8ea] p-4 flex justify-between items-center">
-                  <h3 className="text-[17px] font-bold text-[#091426]">
+              <div className="overflow-hidden border border-[#E5E7EB] bg-white shadow-xs rounded">
+                <div className="border-b border-[#E5E7EB] bg-[#F8F9FA] p-4 flex justify-between items-center">
+                  <h3 className="text-base font-bold text-[#1A1D20]">
                     Intake Weighbridge Scale
                   </h3>
-                  <span className="text-[11px] font-mono bg-white px-2 py-0.5 rounded text-nature-primary font-bold">
+                  <span className="text-[11px] font-mono bg-[#E9F4F0] px-2 py-0.5 rounded-sm text-[#006F51] font-bold border border-[#006F51]/20">
                     Scale 01 Live
                   </span>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-[12px] font-mono">
-                    <thead className="bg-[#091426] text-[10px] uppercase tracking-widest text-white">
+                  <table className="w-full border-collapse text-xs font-mono">
+                    <thead className="bg-[#1A1D20] text-[10px] uppercase tracking-widest text-white">
                       <tr>
                         <th className="p-3 text-left">Ticket #</th>
                         <th className="p-3 text-left">Material</th>
@@ -326,112 +326,112 @@ export default function FeaturesPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b border-gray-100 bg-[#f8fafc]">
-                        <td className="p-3 font-bold">TK-9821</td>
-                        <td className="p-3">Clear PET Bottles</td>
-                        <td className="p-3 text-right font-bold text-nature-primary">
+                      <tr className="border-b border-[#E5E7EB] bg-[#F8F9FA]/40">
+                        <td className="p-3 font-bold text-[#1A1D20]">TK-9821</td>
+                        <td className="p-3 text-[#333A42]">Clear PET Bottles</td>
+                        <td className="p-3 text-right font-bold text-[#006F51]">
                           4,850 kg
                         </td>
-                        <td className="p-3 text-right">$0.32</td>
+                        <td className="p-3 text-right text-[#555C66]">$0.32</td>
                       </tr>
-                      <tr className="border-b border-gray-100 bg-white">
-                        <td className="p-3 font-bold">TK-9822</td>
-                        <td className="p-3">Corrugated Cardboard</td>
-                        <td className="p-3 text-right font-bold text-nature-primary">
+                      <tr className="border-b border-[#E5E7EB] bg-white">
+                        <td className="p-3 font-bold text-[#1A1D20]">TK-9822</td>
+                        <td className="p-3 text-[#333A42]">Corrugated Cardboard</td>
+                        <td className="p-3 text-right font-bold text-[#006F51]">
                           8,200 kg
                         </td>
-                        <td className="p-3 text-right">$0.18</td>
+                        <td className="p-3 text-right text-[#555C66]">$0.18</td>
                       </tr>
-                      <tr className="border-b border-gray-100 bg-[#f8fafc]">
-                        <td className="p-3 font-bold">TK-9823</td>
-                        <td className="p-3">Rigid HDPE Containers</td>
-                        <td className="p-3 text-right font-bold text-nature-primary">
+                      <tr className="border-b border-[#E5E7EB] bg-[#F8F9FA]/40">
+                        <td className="p-3 font-bold text-[#1A1D20]">TK-9823</td>
+                        <td className="p-3 text-[#333A42]">Rigid HDPE Containers</td>
+                        <td className="p-3 text-right font-bold text-[#006F51]">
                           2,410 kg
                         </td>
-                        <td className="p-3 text-right">$0.45</td>
+                        <td className="p-3 text-right text-[#555C66]">$0.45</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div className="p-4 text-[13px] text-gray-600 bg-white border-t border-gray-100">
+                <div className="p-4 text-xs text-[#555C66] bg-white border-t border-[#E5E7EB] leading-relaxed">
                   Direct digital integration with Mettler Toledo and Avery weighbridge scales. Automatic deduction of tare vehicle weight.
                 </div>
               </div>
 
               {/* Card 2: Waste Stream Diversion Progress */}
-              <div className="flex flex-col justify-between border border-[#c5c6cd] bg-white p-6 shadow-xs">
+              <div className="flex flex-col justify-between border border-[#E5E7EB] bg-white p-6 shadow-xs rounded">
                 <div>
-                  <h3 className="mb-4 text-[18px] font-bold text-[#091426]">
+                  <h3 className="mb-4 text-base font-bold text-[#1A1D20]">
                     Landfill Diversion Targets
                   </h3>
                   <div className="space-y-4">
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-[11px] font-bold uppercase">
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-[#1A1D20]">
                         <span>Post-Consumer Plastics</span>
-                        <span className="text-nature-primary">94% Target</span>
+                        <span className="text-[#006F51]">94% Target</span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-[#e6e8ea]">
-                        <div className="h-full bg-nature-primary" style={{ width: "94%" }} />
+                      <div className="h-2 w-full overflow-hidden rounded-sm bg-[#E5E7EB]">
+                        <div className="h-full bg-[#006F51]" style={{ width: "94%" }} />
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-[11px] font-bold uppercase">
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-[#1A1D20]">
                         <span>Industrial Cardboard</span>
-                        <span className="text-nature-secondary font-black">98% Target</span>
+                        <span className="text-[#B38F00] font-black">98% Target</span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-[#e6e8ea]">
-                        <div className="h-full bg-nature-secondary" style={{ width: "98%" }} />
+                      <div className="h-2 w-full overflow-hidden rounded-sm bg-[#E5E7EB]">
+                        <div className="h-full bg-[#FFCE00]" style={{ width: "98%" }} />
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-[11px] font-bold uppercase">
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-[#1A1D20]">
                         <span>Organic Food Waste</span>
-                        <span className="text-[#D7C93A] font-black">82% Target</span>
+                        <span className="text-[#006F51] font-bold">82% Target</span>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-[#e6e8ea]">
-                        <div className="h-full bg-nature-accent" style={{ width: "82%" }} />
+                      <div className="h-2 w-full overflow-hidden rounded-sm bg-[#E5E7EB]">
+                        <div className="h-full bg-[#006F51]/70" style={{ width: "82%" }} />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-6 border-t border-[#c5c6cd] pt-4">
-                  <p className="text-[13px] italic text-gray-600">
+                <div className="mt-6 border-t border-[#E5E7EB] pt-4">
+                  <p className="text-xs italic text-[#555C66]">
                     &ldquo;Certified carbon avoidance accreditation issued on every baled ton.&rdquo;
                   </p>
                 </div>
               </div>
 
               {/* Card 3: MRF Recovery Features */}
-              <div className="border border-[#c5c6cd] bg-white p-6 shadow-xs flex flex-col justify-between">
+              <div className="border border-[#E5E7EB] bg-white p-6 shadow-xs rounded flex flex-col justify-between">
                 <div>
-                  <h3 className="mb-4 text-[18px] font-bold text-[#091426]">
+                  <h3 className="mb-4 text-base font-bold text-[#1A1D20]">
                     Baled Inventory Traceability
                   </h3>
-                  <div className="flex h-36 items-center justify-center bg-gradient-to-br from-nature-primary/10 to-nature-secondary/15 p-6 mb-4">
+                  <div className="flex h-36 items-center justify-center bg-[#F8F9FA] border border-[#E5E7EB] rounded-sm p-6 mb-4">
                     <div className="text-center">
-                      <BarChart3 className="w-10 h-10 text-nature-primary mx-auto mb-1" />
-                      <span className="text-2xl font-black text-[#141517]">
+                      <BarChart3 className="w-8 h-8 text-[#006F51] mx-auto mb-1" />
+                      <span className="text-2xl font-black text-[#1A1D20]">
                         428 Bales Ready
                       </span>
-                      <p className="text-xs text-gray-500">QR-tagged &amp; graded for shipment</p>
+                      <p className="text-xs text-[#555C66]">QR-tagged &amp; graded for shipment</p>
                     </div>
                   </div>
 
-                  <ul className="space-y-2 text-[13px] text-gray-600">
+                  <ul className="space-y-2.5 text-xs text-[#555C66]">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-nature-primary shrink-0" />
-                      Traceable Polymer Resin Batches
+                      <CheckCircle2 className="w-4 h-4 text-[#006F51] shrink-0" />
+                      <span>Traceable Polymer Resin Batches</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-nature-primary shrink-0" />
-                      Buyer Purchase Order Matching
+                      <CheckCircle2 className="w-4 h-4 text-[#006F51] shrink-0" />
+                      <span>Buyer Purchase Order Matching</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-nature-primary shrink-0" />
-                      Automated Revenue Splitting
+                      <CheckCircle2 className="w-4 h-4 text-[#006F51] shrink-0" />
+                      <span>Automated Revenue Splitting</span>
                     </li>
                   </ul>
                 </div>
@@ -444,41 +444,41 @@ export default function FeaturesPage() {
         <section id="fleet-telematics" className="mb-20 scroll-mt-24">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-[12px] font-bold uppercase tracking-[0.05em] text-nature-primary">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
                 On-Road Operations
               </span>
-              <h2 className="mt-2 mb-4 text-[28px] sm:text-[32px] font-black leading-[1.2] text-[#091426]">
+              <h2 className="mt-1.5 mb-4 text-2xl sm:text-3xl font-black leading-[1.2] text-[#1A1D20]">
                 Fleet Telematics &amp; Hydraulic Health
               </h2>
-              <p className="mb-6 text-[15px] text-gray-600 leading-relaxed">
+              <p className="mb-6 text-sm sm:text-base text-[#555C66] leading-relaxed">
                 Connect your garbage trucks, compactor hydraulics, and driver tablets in real-time.
                 Prevent costly roadside breakdowns with predictive sensor diagnostics.
               </p>
 
               <div className="space-y-4">
                 <div className="flex gap-4">
-                  <div className="flex h-fit rounded bg-nature-primary p-3 text-white">
+                  <div className="flex h-fit rounded-sm bg-[#006F51] p-3 text-white">
                     <Truck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-[16px] font-bold text-[#091426]">
+                    <h4 className="text-base font-bold text-[#1A1D20]">
                       Compactor Hydraulic &amp; PTO Sensors
                     </h4>
-                    <p className="text-[13px] text-gray-500">
+                    <p className="text-xs text-[#555C66] mt-0.5">
                       Monitor cycle pressures, packing blade wear, and prevent hydraulic pump blowout.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex h-fit rounded bg-nature-primary p-3 text-white">
+                  <div className="flex h-fit rounded-sm bg-[#006F51] p-3 text-white">
                     <Layers className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-[16px] font-bold text-[#091426]">
+                    <h4 className="text-base font-bold text-[#1A1D20]">
                       Fuel Anti-Theft &amp; Idling Telematics
                     </h4>
-                    <p className="text-[13px] text-gray-500">
+                    <p className="text-xs text-[#555C66] mt-0.5">
                       Ultrasonic tank sensors flag suspicious siphoning events and log engine idling time.
                     </p>
                   </div>
@@ -487,23 +487,20 @@ export default function FeaturesPage() {
             </div>
 
             {/* Mobile-First Driver Preview Card */}
-            <div className="relative">
-              <div className="absolute -inset-4 -rotate-2 rounded-xl bg-nature-secondary/20" />
-              <div className="relative z-10 border border-[#c5c6cd] bg-white p-8 text-center shadow-xl chamfer-card">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-nature-primary text-white">
-                  <Truck className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-black text-[#141517]">
-                  Nature Waste Driver App
-                </h3>
-                <p className="text-sm font-medium text-gray-600 mt-1">
-                  Available for Android &amp; Rugged Vehicle Terminals
-                </p>
-                <div className="mt-4 pt-4 border-t border-gray-100 flex justify-center gap-6 text-xs text-gray-500 font-mono">
-                  <span>Offline Sync ✓</span>
-                  <span>Turn-by-Turn GPS ✓</span>
-                  <span>Photo Proof ✓</span>
-                </div>
+            <div className="border border-[#E5E7EB] bg-[#F8F9FA] p-8 text-center shadow-xs rounded">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-sm bg-[#006F51] text-white">
+                <Truck className="h-7 w-7" />
+              </div>
+              <h3 className="text-xl font-bold text-[#1A1D20]">
+                Nature Waste Driver App
+              </h3>
+              <p className="text-xs text-[#555C66] mt-1">
+                Available for Android &amp; Rugged Vehicle Terminals
+              </p>
+              <div className="mt-4 pt-4 border-t border-[#E5E7EB] flex justify-center gap-6 text-xs text-[#555C66] font-mono">
+                <span>Offline Sync ✓</span>
+                <span>Turn-by-Turn GPS ✓</span>
+                <span>Photo Proof ✓</span>
               </div>
             </div>
           </div>
@@ -512,31 +509,31 @@ export default function FeaturesPage() {
         {/* SECTION 4: Enterprise Feature Matrix Table */}
         <section id="matrix" className="mb-16 scroll-mt-24">
           <div className="mb-10 text-center">
-            <span className="text-xs font-bold uppercase tracking-widest text-nature-primary">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
               Full Comparison
             </span>
-            <h2 className="text-[28px] sm:text-[34px] font-black text-[#091426] mt-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20] mt-1.5">
               Enterprise Feature Matrix
             </h2>
-            <p className="mt-2 text-sm text-gray-500 max-w-xl mx-auto">
+            <p className="mt-2 text-xs sm:text-sm text-[#555C66] max-w-xl mx-auto">
               Compare modules across Residential, Commercial Business, and Municipal Enterprise tiers.
             </p>
           </div>
 
-          <div className="overflow-x-auto shadow-sm border border-gray-200">
+          <div className="overflow-x-auto shadow-xs border border-[#E5E7EB] rounded">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="bg-[#091426] text-white">
-                  <th className="border-r border-[#1E293B] p-4 text-left text-[12px] font-semibold uppercase tracking-[0.05em]">
+                <tr className="bg-[#1A1D20] text-white">
+                  <th className="border-r border-white/10 p-4 text-left text-xs font-bold uppercase tracking-wider">
                     Module Ecosystem
                   </th>
-                  <th className="border-r border-[#1E293B] p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="border-r border-white/10 p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Residential Connect
                   </th>
-                  <th className="border-r border-[#1E293B] p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="border-r border-white/10 p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Commercial Business
                   </th>
-                  <th className="p-4 text-center text-[12px] font-semibold uppercase tracking-[0.05em]">
+                  <th className="p-4 text-center text-xs font-bold uppercase tracking-wider">
                     Municipal &amp; Enterprise
                   </th>
                 </tr>
@@ -544,9 +541,9 @@ export default function FeaturesPage() {
               <tbody className="bg-white">
                 {featureComparison.map((cat, cIdx) => (
                   <React.Fragment key={cIdx}>
-                    <tr className="border-b border-[#c5c6cd] bg-[#f2f4f6]">
+                    <tr className="border-b border-[#E5E7EB] bg-[#F8F9FA]">
                       <td
-                        className="p-3 text-[12px] font-bold uppercase tracking-[0.05em] text-[#091426]"
+                        className="p-3 text-xs font-bold uppercase tracking-wider text-[#1A1D20]"
                         colSpan={4}
                       >
                         {cat.category}
@@ -555,13 +552,13 @@ export default function FeaturesPage() {
                     {cat.items.map((item, iIdx) => (
                       <tr
                         key={iIdx}
-                        className="border-b border-[#c5c6cd] even:bg-[#f8fafc] text-sm"
+                        className="border-b border-[#E5E7EB] even:bg-[#F8F9FA]/50 text-xs"
                       >
-                        <td className="p-4 font-medium text-[#141517]">{item.name}</td>
+                        <td className="p-4 font-medium text-[#1A1D20]">{item.name}</td>
                         <td className="p-4 text-center">
                           {typeof item.residential === "boolean" ? (
                             item.residential ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )
@@ -574,7 +571,7 @@ export default function FeaturesPage() {
                         <td className="p-4 text-center">
                           {typeof item.commercial === "boolean" ? (
                             item.commercial ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )
@@ -587,7 +584,7 @@ export default function FeaturesPage() {
                         <td className="p-4 text-center">
                           {typeof item.enterprise === "boolean" ? (
                             item.enterprise ? (
-                              <CheckCircle2 className="w-5 h-5 text-nature-primary mx-auto" />
+                              <CheckCircle2 className="w-4 h-4 text-[#006F51] mx-auto" />
                             ) : (
                               <span className="text-gray-400">—</span>
                             )
