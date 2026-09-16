@@ -51,7 +51,7 @@ const entebbeWasteSlides = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&w=1200&q=80",
     title: "Gated Estate Residential Collection",
     location: "Lubowa, Kigo & Entebbe Estates",
     tag: "Curbside Segregation Sacks",

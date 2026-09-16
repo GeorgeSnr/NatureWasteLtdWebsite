@@ -53,8 +53,8 @@ export default function ResidentialServicesSection() {
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="rounded overflow-hidden shadow-xs border border-[#E5E7EB] bg-white">
               <img
-                src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=1000&q=80"
-                alt="Nature Waste residential customer placing clean sorted recyclables into bin"
+                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1000&q=80"
+                alt="Nature Waste Ugandan residential customer using eco-friendly recycling services"
                 className="w-full h-[380px] sm:h-[420px] object-cover"
               />
               

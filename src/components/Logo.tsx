@@ -161,15 +161,6 @@ export default function Logo({
                 WASTE
               </span>
             </span>
-            <span
-              className={`hidden sm:inline-block ${
-                isDark
-                  ? "bg-nature-secondary/20 text-nature-secondary"
-                  : "bg-nature-primary/10 text-nature-primary"
-              } text-[9px] font-black uppercase px-1.5 py-0.5 tracking-wider`}
-            >
-              LTD
-            </span>
           </div>
 
           <div className="flex items-center gap-1.5 mt-1">
