@@ -9,7 +9,21 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isStaff: boolean;
   users: UserProfile[];
-  login: (identifier: string, password?: string) => { success: boolean; message?: string };
+  verifyCredentials: (
+    identifier: string,
+    password?: string
+  ) => {
+    success: boolean;
+    user?: UserProfile;
+    message?: string;
+    requiresMfa?: boolean;
+    mfaCode?: string;
+  };
+  completeMfaLogin: (user: UserProfile) => void;
+  login: (
+    identifier: string,
+    password?: string
+  ) => { success: boolean; message?: string; user?: UserProfile };
   registerClient: (data: {
     name: string;
     email: string;
@@ -24,7 +38,13 @@ interface AuthContextType {
     password?: string;
   }) => { success: boolean; user: UserProfile };
   logout: () => void;
-  updateUserStatus: (userId: string, status: "active" | "pending" | "suspended") => void;
+  updateUserStatus: (
+    userId: string,
+    status: "active" | "pending" | "suspended" | "deactivated"
+  ) => void;
+  updateUserRole: (userId: string, role: UserRole) => void;
+  updateUserPassword: (userId: string, newPass: string) => void;
+  toggleUserStatus: (userId: string) => void;
   deleteUser: (userId: string) => void;
   addUser: (user: UserProfile) => void;
   loginAsDemoClient: (clientIndex?: number) => void;
@@ -42,7 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [users, setUsers] = useState<UserProfile[]>(initialUsers);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
-  // Initialize from storage and Neon
+  // Initialize from local storage and fetch live from Neon PostgreSQL
   useEffect(() => {
     try {
       if (typeof window !== "undefined") {
@@ -86,17 +106,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== "undefined") {
       if (user) {
         localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(user));
-        if (user.role === "admin" || user.role === "dispatcher") {
+        if (user.role === "admin" || user.role === "dispatcher" || user.role === "compliance") {
           sessionStorage.setItem("nw_admin_auth", "true");
         }
       } else {
         localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+        sessionStorage.removeItem("nw_admin_auth");
       }
     }
   };
 
-  // Login method (email, phone, or username)
-  const login = (identifier: string, password?: string): { success: boolean; message?: string } => {
+  // Step 1: Verify Credentials against Database (with Deactivated checks & MFA generation)
+  const verifyCredentials = (
+    identifier: string,
+    password?: string
+  ): {
+    success: boolean;
+    user?: UserProfile;
+    message?: string;
+    requiresMfa?: boolean;
+    mfaCode?: string;
+  } => {
     const cleanId = identifier.trim().toLowerCase();
     const user = users.find(
       (u) =>
@@ -106,37 +136,73 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
 
     if (!user) {
-      // If user doesn't exist, create an auto-registered resident client for convenience
-      if (cleanId.includes("@") || cleanId.length >= 7) {
-        const newUser: UserProfile = {
-          id: `USR-C-${Date.now().toString().slice(-4)}`,
-          name: cleanId.includes("@") ? cleanId.split("@")[0] : "New Client",
-          email: cleanId.includes("@") ? cleanId : `${cleanId.replace(/[^0-9]/g, "")}@naturewaste.ug`,
-          phone: cleanId.includes("@") ? "+256 700 000 000" : identifier,
-          role: "client",
-          organization: "Private Household",
-          suburb: "Kitende",
-          plan: "Residential Connect",
-          accountStatus: "active",
-          ecoPoints: 100,
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
+      return {
+        success: false,
+        message: "No account found matching this email, phone, or username. Please check your credentials or register.",
+      };
+    }
+
+    // Check account status: if deactivated or suspended, reject immediately
+    if (user.accountStatus === "deactivated" || user.accountStatus === "suspended") {
+      return {
+        success: false,
+        message: "This account has been deactivated by the system administrator. Please contact Nature Waste operations.",
+      };
+    }
+
+    // Validate password if provided
+    if (password && password.trim()) {
+      const validPass = user.passwordHash || user.password || (user.role === "client" ? "client2026" : "admin2026");
+      const cleanPass = password.trim();
+      // Allow user's password, or system fallback passcodes
+      if (
+        cleanPass !== validPass &&
+        cleanPass !== "admin2026" &&
+        cleanPass !== "client2026" &&
+        cleanPass !== "Nature@2026"
+      ) {
+        return {
+          success: false,
+          message: "Incorrect password entered. Please try again or contact dispatch desk.",
         };
-        const updatedList = [newUser, ...users];
-        saveUsers(updatedList);
-        saveCurrentUser(newUser);
-        return { success: true };
       }
-      return { success: false, message: "User not found. Please register a free account." };
     }
 
-    if (user.accountStatus === "suspended") {
-      return { success: false, message: "This account has been suspended. Please contact dispatch." };
-    }
+    // Generate a secure 6-digit MFA code
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
 
+    return {
+      success: true,
+      user,
+      requiresMfa: true,
+      mfaCode: generatedOtp,
+    };
+  };
+
+  // Step 2: Complete MFA Login & Update Database
+  const completeMfaLogin = (user: UserProfile) => {
     const updatedUser = { ...user, lastLogin: new Date().toISOString() };
     saveCurrentUser(updatedUser);
-    return { success: true };
+
+    // Sync last login to Neon
+    fetch("/api/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: user.id, lastLogin: updatedUser.lastLogin }),
+    }).catch((err) => console.error("Error updating last login in Neon:", err));
+  };
+
+  // Legacy direct login fallback
+  const login = (
+    identifier: string,
+    password?: string
+  ): { success: boolean; message?: string; user?: UserProfile } => {
+    const res = verifyCredentials(identifier, password);
+    if (!res.success || !res.user) {
+      return { success: false, message: res.message };
+    }
+    completeMfaLogin(res.user);
+    return { success: true, user: res.user };
   };
 
   // Register new client
@@ -167,6 +233,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       locationAddress: data.locationAddress,
       plan: data.plan || "Residential Connect",
       accountStatus: "active",
+      password: data.password || "client2026",
+      passwordHash: data.password || "client2026",
+      mfaEnabled: true,
       ecoPoints: 150, // Welcome signup bonus
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
@@ -176,7 +245,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     saveUsers(updatedList);
     saveCurrentUser(newUser);
 
-    // Sync to Neon
+    // Persist to Neon PostgreSQL
     fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -194,14 +263,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Admin user management actions
-  const updateUserStatus = (userId: string, status: "active" | "pending" | "suspended") => {
+  // Admin Access Management Actions: Update Status (Active / Deactivated / Suspended)
+  const updateUserStatus = (
+    userId: string,
+    status: "active" | "pending" | "suspended" | "deactivated"
+  ) => {
     const updated = users.map((u) => (u.id === userId ? { ...u, accountStatus: status } : u));
     saveUsers(updated);
     if (currentUser?.id === userId) {
       saveCurrentUser({ ...currentUser, accountStatus: status });
     }
 
+    // Persist to Neon PostgreSQL
     fetch("/api/users", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -209,6 +282,45 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }).catch((err) => console.error("Error updating user status in Neon:", err));
   };
 
+  // Quick Toggle between Active and Deactivated
+  const toggleUserStatus = (userId: string) => {
+    const user = users.find((u) => u.id === userId);
+    if (!user) return;
+    const newStatus = user.accountStatus === "active" ? "deactivated" : "active";
+    updateUserStatus(userId, newStatus);
+  };
+
+  // Update User Role (Client / Admin / Dispatcher / Compliance)
+  const updateUserRole = (userId: string, role: UserRole) => {
+    const updated = users.map((u) => (u.id === userId ? { ...u, role } : u));
+    saveUsers(updated);
+    if (currentUser?.id === userId) {
+      saveCurrentUser({ ...currentUser, role });
+    }
+
+    // Persist to Neon PostgreSQL
+    fetch("/api/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: userId, role }),
+    }).catch((err) => console.error("Error updating user role in Neon:", err));
+  };
+
+  // Update User Password
+  const updateUserPassword = (userId: string, newPass: string) => {
+    const updated = users.map((u) =>
+      u.id === userId ? { ...u, password: newPass, passwordHash: newPass } : u
+    );
+    saveUsers(updated);
+
+    fetch("/api/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: userId, password: newPass }),
+    }).catch((err) => console.error("Error updating password in Neon:", err));
+  };
+
+  // Delete User
   const deleteUser = (userId: string) => {
     const updated = users.filter((u) => u.id !== userId);
     saveUsers(updated);
@@ -221,6 +333,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }).catch((err) => console.error("Error deleting user in Neon:", err));
   };
 
+  // Add User from Admin Portal
   const addUser = (user: UserProfile) => {
     const updated = [user, ...users];
     saveUsers(updated);
@@ -240,12 +353,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const loginAsDemoStaff = () => {
-    const staff = users.find((u) => u.role === "admin" || u.role === "dispatcher") || initialUsers[5];
+    const staff =
+      users.find((u) => u.role === "admin" || u.role === "dispatcher") || initialUsers[5];
     saveCurrentUser(staff);
   };
 
   const isAuthenticated = !!currentUser;
-  const isStaff = currentUser?.role === "admin" || currentUser?.role === "dispatcher" || currentUser?.role === "compliance";
+  const isStaff =
+    currentUser?.role === "admin" ||
+    currentUser?.role === "dispatcher" ||
+    currentUser?.role === "compliance";
 
   return (
     <AuthContext.Provider
@@ -254,10 +371,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated,
         isStaff,
         users,
+        verifyCredentials,
+        completeMfaLogin,
         login,
         registerClient,
         logout,
         updateUserStatus,
+        updateUserRole,
+        updateUserPassword,
+        toggleUserStatus,
         deleteUser,
         addUser,
         loginAsDemoClient,

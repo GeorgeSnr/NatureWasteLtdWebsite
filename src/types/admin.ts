@@ -64,7 +64,10 @@ export interface UserProfile {
   longitude?: number;
   locationAddress?: string;
   plan?: string;
-  accountStatus: "active" | "pending" | "suspended";
+  accountStatus: "active" | "pending" | "suspended" | "deactivated";
+  password?: string;
+  passwordHash?: string;
+  mfaEnabled?: boolean;
   ecoPoints?: number;
   assignedBinId?: string;
   createdAt: string;

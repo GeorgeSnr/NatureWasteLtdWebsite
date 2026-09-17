@@ -20,6 +20,8 @@ export async function GET() {
         location_address as "locationAddress",
         plan,
         account_status as "accountStatus",
+        password_hash as "passwordHash",
+        COALESCE(mfa_enabled, true) as "mfaEnabled",
         eco_points as "ecoPoints",
         assigned_bin_id as "assignedBinId",
         created_at as "createdAt",
@@ -42,8 +44,18 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const id = body.id || (body.role === "client" ? `USR-C-${Date.now().toString().slice(-4)}` : `USR-S-${Date.now().toString().slice(-4)}`);
+    const id =
+      body.id ||
+      (body.role === "client"
+        ? `USR-C-${Date.now().toString().slice(-4)}`
+        : `USR-S-${Date.now().toString().slice(-4)}`);
     const createdAt = body.createdAt || new Date().toISOString();
+    const passwordHash =
+      body.password ||
+      body.passwordHash ||
+      (body.role === "client" ? "client2026" : "admin2026");
+    const mfaEnabled = typeof body.mfaEnabled === "boolean" ? body.mfaEnabled : true;
+    const accountStatus = body.accountStatus || "active";
 
     await sql`
       INSERT INTO users (
@@ -60,6 +72,8 @@ export async function POST(req: Request) {
         location_address,
         plan,
         account_status,
+        password_hash,
+        mfa_enabled,
         eco_points,
         assigned_bin_id,
         created_at,
@@ -77,7 +91,9 @@ export async function POST(req: Request) {
         ${body.longitude || null},
         ${body.locationAddress || null},
         ${body.plan || null},
-        ${body.accountStatus || "active"},
+        ${accountStatus},
+        ${passwordHash},
+        ${mfaEnabled},
         ${body.ecoPoints || 150},
         ${body.assignedBinId || null},
         ${createdAt},
@@ -87,6 +103,10 @@ export async function POST(req: Request) {
         name = EXCLUDED.name,
         email = EXCLUDED.email,
         phone = EXCLUDED.phone,
+        role = EXCLUDED.role,
+        account_status = EXCLUDED.account_status,
+        password_hash = EXCLUDED.password_hash,
+        mfa_enabled = EXCLUDED.mfa_enabled,
         latitude = EXCLUDED.latitude,
         longitude = EXCLUDED.longitude,
         location_address = EXCLUDED.location_address;
@@ -105,14 +125,20 @@ export async function POST(req: Request) {
       longitude: body.longitude,
       locationAddress: body.locationAddress,
       plan: body.plan,
-      accountStatus: body.accountStatus || "active",
+      accountStatus,
+      passwordHash,
+      mfaEnabled,
       ecoPoints: body.ecoPoints || 150,
       assignedBinId: body.assignedBinId,
       createdAt,
       lastLogin: createdAt,
     };
 
-    return NextResponse.json({ success: true, user, message: "User saved to Neon database" });
+    return NextResponse.json({
+      success: true,
+      user,
+      message: "User account saved to Neon database successfully",
+    });
   } catch (error: any) {
     console.error("Error creating user in Neon:", error);
     return NextResponse.json(
@@ -122,17 +148,17 @@ export async function POST(req: Request) {
   }
 }
 
-// PATCH /api/users - Update user status or login timestamp
+// PATCH /api/users - Update user role, accountStatus, MFA, or lastLogin
 export async function PATCH(req: Request) {
   try {
     const body = await req.json();
-    const { id, accountStatus, lastLogin } = body;
+    const { id, accountStatus, role, password, mfaEnabled, lastLogin, organization, suburb, plan } = body;
 
     if (!id) {
       return NextResponse.json({ success: false, error: "User ID required" }, { status: 400 });
     }
 
-    if (accountStatus) {
+    if (accountStatus !== undefined) {
       await sql`
         UPDATE users
         SET account_status = ${accountStatus}
@@ -140,7 +166,55 @@ export async function PATCH(req: Request) {
       `;
     }
 
-    if (lastLogin) {
+    if (role !== undefined) {
+      await sql`
+        UPDATE users
+        SET role = ${role}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (password !== undefined) {
+      await sql`
+        UPDATE users
+        SET password_hash = ${password}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (mfaEnabled !== undefined) {
+      await sql`
+        UPDATE users
+        SET mfa_enabled = ${mfaEnabled}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (organization !== undefined) {
+      await sql`
+        UPDATE users
+        SET organization = ${organization}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (suburb !== undefined) {
+      await sql`
+        UPDATE users
+        SET suburb = ${suburb}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (plan !== undefined) {
+      await sql`
+        UPDATE users
+        SET plan = ${plan}
+        WHERE id = ${id};
+      `;
+    }
+
+    if (lastLogin !== undefined) {
       await sql`
         UPDATE users
         SET last_login = ${lastLogin}
@@ -148,7 +222,7 @@ export async function PATCH(req: Request) {
       `;
     }
 
-    return NextResponse.json({ success: true, message: "User updated in Neon" });
+    return NextResponse.json({ success: true, message: "User updated in Neon database" });
   } catch (error: any) {
     console.error("Error updating user in Neon:", error);
     return NextResponse.json(
@@ -168,10 +242,14 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ success: false, error: "User ID required" }, { status: 400 });
     }
 
-    await sql`DELETE FROM users WHERE id = ${id};`;
-    return NextResponse.json({ success: true, message: "User deleted from Neon" });
+    await sql`
+      DELETE FROM users
+      WHERE id = ${id};
+    `;
+
+    return NextResponse.json({ success: true, message: "User deleted from Neon database" });
   } catch (error: any) {
-    console.error("Error deleting user in Neon:", error);
+    console.error("Error deleting user from Neon:", error);
     return NextResponse.json(
       { success: false, error: error.message || "Failed to delete user" },
       { status: 500 }

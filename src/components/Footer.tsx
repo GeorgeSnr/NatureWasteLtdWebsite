@@ -97,9 +97,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-[#FFCE00] transition-colors font-bold text-gray-300 flex items-center gap-1.5">
+                <Link href="/login" className="hover:text-[#FFCE00] transition-colors font-semibold text-gray-300 flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#006F51]" />
-                  <span>Admin &amp; Dispatch Portal</span>
+                  <span>Operations &amp; Client Sign In</span>
                 </Link>
               </li>
               <li className="pt-1.5">

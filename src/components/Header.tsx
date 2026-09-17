@@ -29,6 +29,7 @@ import {
   MessageSquare,
   Smartphone,
   Download,
+  LogOut,
 } from "lucide-react";
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
@@ -37,7 +38,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const pathname = usePathname();
-  const { currentUser, isAuthenticated } = useAuth();
+  const { currentUser, isAuthenticated, logout } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -186,37 +187,39 @@ export default function Header() {
 
               <div className="h-3.5 w-px bg-gray-300 hidden sm:block" />
 
-              {/* Group 3: Client Account & Admin Portal */}
+              {/* Group 3: Unified General Sign In & Account Portal */}
               <div className="flex items-center gap-2">
                 {isAuthenticated && currentUser ? (
-                  <Link
-                    href="/portal"
-                    className="flex items-center gap-1.5 font-bold text-[#006F51] bg-[#E9F4F0] hover:bg-emerald-100/80 px-2.5 py-0.5 rounded border border-[#006F51]/20 transition-colors"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span>{currentUser.name.split(" ")[0]}</span>
-                    <span className="hidden sm:inline text-[10px] uppercase font-black text-emerald-800 bg-emerald-200/60 px-1 rounded">
-                      Account
-                    </span>
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href={currentUser.role === "client" ? "/portal" : "/admin"}
+                      className="flex items-center gap-1.5 font-bold text-[#006F51] bg-[#E9F4F0] hover:bg-emerald-100/80 px-2.5 py-1 rounded border border-[#006F51]/20 transition-colors shadow-2xs"
+                      title={currentUser.role === "client" ? "Open Client Account Portal" : "Open Operations Console"}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>{currentUser.name.split(" ")[0]}</span>
+                      <span className="hidden sm:inline text-[10px] uppercase font-black text-emerald-800 bg-emerald-200/60 px-1.5 py-0.5 rounded">
+                        {currentUser.role === "client" ? "Portal" : "Console"}
+                      </span>
+                    </Link>
+                    <button
+                      onClick={() => logout()}
+                      className="hidden sm:inline-block text-[11px] text-gray-500 hover:text-red-600 font-semibold transition-colors cursor-pointer"
+                      title="Sign Out"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
                 ) : (
                   <Link
-                    href="/portal"
-                    className="flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
+                    href="/login"
+                    className="flex items-center gap-1.5 font-bold text-gray-800 hover:text-[#006F51] bg-white hover:bg-gray-50 px-3 py-1 rounded border border-gray-300 transition-colors text-[11px] shadow-2xs"
+                    title="Sign in to your account"
                   >
-                    <UserCheck className="w-3.5 h-3.5" />
-                    <span>Client Sign In</span>
+                    <UserCheck className="w-3.5 h-3.5 text-[#006F51]" />
+                    <span>Sign In</span>
                   </Link>
                 )}
-
-                <Link
-                  href="/admin"
-                  className="hidden sm:flex items-center gap-1 font-bold text-gray-700 hover:text-[#006F51] transition-colors bg-white hover:bg-gray-100 px-2 py-0.5 rounded border border-gray-300 text-[10px] sm:text-[11px]"
-                  title="Internal Operations & Dispatch Portal"
-                >
-                  <ShieldCheck className="w-3 h-3 text-[#006F51]" />
-                  <span>Admin</span>
-                </Link>
               </div>
             </div>
           </div>
@@ -490,6 +493,16 @@ export default function Header() {
               Get Prices
             </Link>
 
+            {/* Mobile Quick Sign In Button */}
+            <Link
+              href={isAuthenticated && currentUser ? (currentUser.role === "client" ? "/portal" : "/admin") : "/login"}
+              className="xl:hidden p-1.5 sm:p-2 text-gray-700 hover:text-[#006F51] hover:bg-gray-100 rounded-md transition-colors"
+              title={isAuthenticated ? "Open Account Portal" : "Sign In"}
+              aria-label="Account Access"
+            >
+              <UserCheck className="w-5 h-5 text-[#006F51]" />
+            </Link>
+
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
@@ -550,6 +563,61 @@ export default function Header() {
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>NEMA Licensed</span>
                 </div>
+              </div>
+
+              {/* Account Authentication & Portal Card */}
+              <div className="p-3.5 bg-[#F0FDF4] border-b border-emerald-100 flex items-center justify-between">
+                {isAuthenticated && currentUser ? (
+                  <>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-[#006F51] text-white flex items-center justify-center font-black text-xs">
+                        {currentUser.name[0]}
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs text-gray-900 leading-tight">
+                          {currentUser.name}
+                        </div>
+                        <div className="text-[10px] text-emerald-700 font-semibold uppercase tracking-wider">
+                          {currentUser.role} Account
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href={currentUser.role === "client" ? "/portal" : "/admin"}
+                        onClick={() => setDrawerOpen(false)}
+                        className="px-3 py-1.5 bg-[#006F51] text-white text-xs font-bold rounded hover:bg-[#005a41] transition-colors shadow-2xs"
+                      >
+                        {currentUser.role === "client" ? "My Portal" : "Admin Console"}
+                      </Link>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setDrawerOpen(false);
+                        }}
+                        className="p-1.5 text-gray-400 hover:text-red-600 transition-colors"
+                        title="Sign Out"
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <div className="font-bold text-xs text-gray-900">Account Access</div>
+                      <div className="text-[10px] text-gray-500">Clients &amp; Internal Staff</div>
+                    </div>
+                    <Link
+                      href="/login"
+                      onClick={() => setDrawerOpen(false)}
+                      className="px-3.5 py-1.5 bg-[#006F51] hover:bg-[#005a41] text-white text-xs font-bold rounded flex items-center gap-1.5 shadow-2xs transition-colors"
+                    >
+                      <UserCheck className="w-3.5 h-3.5" />
+                      <span>Sign In</span>
+                    </Link>
+                  </>
+                )}
               </div>
 
               {/* 3. Primary CTA Actions */}
@@ -613,12 +681,12 @@ export default function Header() {
                     <span>Missed Pickup</span>
                   </Link>
                   <Link
-                    href="/portal"
+                    href={isAuthenticated && currentUser ? (currentUser.role === "client" ? "/portal" : "/admin") : "/login"}
                     onClick={() => setDrawerOpen(false)}
                     className="flex items-center gap-2 p-2.5 rounded border border-gray-200 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors"
                   >
                     <UserCheck className="w-4 h-4 shrink-0 text-[#006F51]" />
-                    <span>Client Portal</span>
+                    <span>{isAuthenticated && currentUser ? (currentUser.role === "client" ? "My Account" : "Operations Console") : "Sign In Portal"}</span>
                   </Link>
                 </div>
 
