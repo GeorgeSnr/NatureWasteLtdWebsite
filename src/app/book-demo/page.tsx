@@ -12,7 +12,10 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
+import { useWebsiteData } from "@/context/WebsiteDataContext";
+
 export default function BookDemoPage() {
+  const { submitRequest } = useWebsiteData();
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -28,6 +31,20 @@ export default function BookDemoPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitRequest({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      organization: formData.company,
+      type: "demo_booking",
+      title: `On-Site Waste Audit & IoT Demo (${formData.company})`,
+      volumeOrTier: `${formData.wasteVolume} MT/mo (${formData.sector})`,
+      preferredDate: formData.date,
+      message: `${formData.notes ? `${formData.notes} | ` : ""}Smart Bins interest: ${formData.smartBins}`,
+      priority: "high",
+      status: "new",
+      assignedTo: "Enterprise Solutions Engineer",
+    });
     setSubmitted(true);
   };
 

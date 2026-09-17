@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, CheckCircle2, ShieldCheck } from "lucide-react";
 import Logo from "@/components/Logo";
+import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { submitRequest } = useWebsiteData();
   const [plan, setPlan] = useState("commercial");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,6 +20,19 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitRequest({
+      name: fullName,
+      email: email,
+      phone: phone,
+      organization: organization,
+      type: "trial_registration",
+      title: `14-Day Free Trial Signup (${plan.toUpperCase()})`,
+      volumeOrTier: `${plan.toUpperCase()} Tier`,
+      message: `Account registration for ${organization}. Password initialized.`,
+      priority: "normal",
+      status: "new",
+      assignedTo: "Client Onboarding Team",
+    });
     setRegistered(true);
     setTimeout(() => {
       router.push("/portal");

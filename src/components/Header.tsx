@@ -190,6 +190,17 @@ export default function Header() {
                 <UserCheck className="w-3.5 h-3.5" />
                 <span>My Account</span>
               </Link>
+
+              <div className="h-3 w-px bg-gray-300 hidden md:block" />
+
+              <Link
+                href="/admin"
+                className="hidden md:flex items-center gap-1 font-bold text-gray-700 hover:text-[#006F51] transition-colors bg-gray-100 hover:bg-emerald-50 px-2 py-0.5 rounded border border-gray-200"
+                title="Dispatch Staff Portal"
+              >
+                <ShieldCheck className="w-3 h-3 text-[#006F51]" />
+                <span>Admin Portal</span>
+              </Link>
             </div>
           </div>
         </div>

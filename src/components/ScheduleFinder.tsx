@@ -13,20 +13,30 @@ import {
   ArrowRight,
   ShieldCheck,
 } from "lucide-react";
-import { ugandaCoverageAreas } from "@/data/ugandaCoverage";
+import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function ScheduleFinder() {
+  const { coverageAreas } = useWebsiteData();
   const [selectedId, setSelectedId] = useState<string>("kitende");
   const [query, setQuery] = useState<string>("");
 
-  const filteredAreas = ugandaCoverageAreas.filter(
+  const filteredAreas = coverageAreas.filter(
     (a) =>
       a.name.toLowerCase().includes(query.toLowerCase()) ||
       a.division.toLowerCase().includes(query.toLowerCase())
   );
 
   const currentArea =
-    ugandaCoverageAreas.find((a) => a.id === selectedId) || ugandaCoverageAreas[0];
+    coverageAreas.find((a) => a.id === selectedId) || coverageAreas[0] || {
+      id: "kitende",
+      name: "Kitende",
+      division: "Entebbe Road Corridor",
+      pickupDays: "Tuesdays & Fridays",
+      recyclingDay: "Every Wednesday",
+      hotline: "+256 766 532915",
+      contactPerson: "Dispatch Desk",
+      servicesAvailable: ["Residential", "Recycling"],
+    };
 
   return (
     <section id="schedule-finder" className="w-full bg-white py-16 sm:py-20 select-none border-b border-[#E5E7EB]">
@@ -71,7 +81,7 @@ export default function ScheduleFinder() {
                 onChange={(e) => setSelectedId(e.target.value)}
                 className="px-4 py-2.5 bg-white border border-gray-300 rounded text-xs font-semibold text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
               >
-                {ugandaCoverageAreas.map((area) => (
+                {coverageAreas.map((area) => (
                   <option key={area.id} value={area.id}>
                     {area.name} ({area.division})
                   </option>

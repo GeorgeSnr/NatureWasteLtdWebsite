@@ -3,42 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import { Star, ArrowRight } from "lucide-react";
+import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function Testimonials() {
-  const reviews = [
-    {
-      name: "Eng. Brian Kigozi",
-      role: "Estate Chairman, Lubowa Hill Gardens",
-      suburb: "Lubowa, Wakiso",
-      rating: "5.0",
-      content:
-        "Awesome company to work with! We have over 65 homes in our Lubowa gated estate on their weekly curbside schedule. We never have to worry about odor or missed pickups. Their driver team is always courteous and punctual.",
-    },
-    {
-      name: "Christine Namubiru",
-      role: "Operations Manager, Lake Victoria Serena Resort",
-      suburb: "Kigo, Entebbe Road",
-      rating: "5.0",
-      content:
-        "I have been using Nature Waste for over 3 years. I am very pleased with their responsiveness and compliance manifests. Our dedicated account manager helped us configure segregation bins for our food waste and recyclables.",
-    },
-    {
-      name: "David Mukasa",
-      role: "Managing Director, Mukwano Poly-Packaging",
-      suburb: "Namanve Industrial Park",
-      rating: "5.0",
-      content:
-        "We rent their 15m³ heavy-duty roll-off skips for our factory offcuts and plastic scrap. Same-day swap-outs and certified NEMA dumping manifests make them our permanent waste management partner.",
-    },
-    {
-      name: "Sarah Akello",
-      role: "Homeowner & Environmental Advocate",
-      suburb: "Kitende, Entebbe Road",
-      rating: "5.0",
-      content:
-        "Great company! The SMS collection day alerts are a lifesaver. Unlike previous local haulers who left spilled trash on the road, Nature Waste leaves our driveway spotless every single Tuesday.",
-    },
-  ];
+  const { customerReviews } = useWebsiteData();
 
   return (
     <section id="testimonials" className="w-full bg-white py-16 sm:py-20 select-none border-b border-[#E5E7EB]">
@@ -59,19 +27,19 @@ export default function Testimonials() {
 
         {/* Reviews Grid (Matching Waste Connections 5.0 Star Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {reviews.map((review, idx) => (
+          {customerReviews.slice(0, 4).map((review) => (
             <div
-              key={idx}
+              key={review.id}
               className="bg-[#F8F9FA] rounded border border-[#E5E7EB] p-5 flex flex-col justify-between hover:bg-white hover:border-[#006F51] hover:shadow-xs transition-all duration-200"
             >
               <div className="space-y-3">
-                {/* 5.0 Rating Header */}
+                {/* Rating Header */}
                 <div className="flex items-center gap-2.5">
                   <div className="text-xl font-black text-[#1A1D20]">
-                    {review.rating}
+                    {(review.rating || 5).toFixed(1)}
                   </div>
                   <div className="flex items-center gap-0.5 text-[#FFCE00]">
-                    {[...Array(5)].map((_, s) => (
+                    {[...Array(review.rating || 5)].map((_, s) => (
                       <Star key={s} className="w-3.5 h-3.5 fill-[#FFCE00] stroke-[#FFCE00]" />
                     ))}
                   </div>
@@ -93,7 +61,7 @@ export default function Testimonials() {
                     {review.role}
                   </div>
                   <div className="text-[11px] font-semibold text-[#006F51]">
-                    {review.suburb}
+                    {review.organization}
                   </div>
                 </div>
 

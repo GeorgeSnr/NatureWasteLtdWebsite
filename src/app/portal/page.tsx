@@ -24,8 +24,10 @@ import {
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import GooglePlayButton from "@/components/GooglePlayButton";
+import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function PortalPage() {
+  const { submitRequest } = useWebsiteData();
   const [roleView, setRoleView] = useState<"client" | "fleet">("client");
 
   // Client states
@@ -34,6 +36,7 @@ export default function PortalPage() {
   const [pickupDate, setPickupDate] = useState("2026-09-18");
   const [ecoPoints, setEcoPoints] = useState(340);
   const [bagsOrdered, setBagsOrdered] = useState(false);
+  const [pickupInstructions, setPickupInstructions] = useState("");
 
   // Fleet states
   const [dispatchedTruck, setDispatchedTruck] = useState<string | null>(null);
@@ -57,6 +60,19 @@ export default function PortalPage() {
 
   const handleSchedulePickup = (e: React.FormEvent) => {
     e.preventDefault();
+    submitRequest({
+      name: "Logged Resident Client",
+      phone: "+256 770 000 000",
+      suburb: "Kampala Central",
+      type: "on_demand_pickup",
+      title: `On-Demand Pickup: ${pickupType}`,
+      volumeOrTier: pickupType,
+      preferredDate: pickupDate,
+      message: pickupInstructions || "Scheduled via Resident Web Portal",
+      priority: "normal",
+      status: "new",
+      assignedTo: "Fleet Dispatch Lead",
+    });
     setPickupScheduled(true);
     setEcoPoints((prev) => prev + 25);
   };
@@ -238,6 +254,8 @@ export default function PortalPage() {
                       </label>
                       <input
                         type="text"
+                        value={pickupInstructions}
+                        onChange={(e) => setPickupInstructions(e.target.value)}
                         placeholder="e.g. Leave by security gate or loading ramp 2"
                         className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51] font-medium"
                       />

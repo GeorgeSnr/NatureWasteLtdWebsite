@@ -14,8 +14,10 @@ import {
   Smartphone,
 } from "lucide-react";
 import GooglePlayButton from "./GooglePlayButton";
+import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function ContactSection() {
+  const { companySettings, submitRequest } = useWebsiteData();
   const [submitted, setSubmitted] = useState(false);
   const [inquiryType, setInquiryType] = useState("residential");
   const [formData, setFormData] = useState({
@@ -28,6 +30,32 @@ export default function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    submitRequest({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email || undefined,
+      suburb: formData.area,
+      type:
+        inquiryType === "missed"
+          ? "missed_pickup"
+          : inquiryType === "dumpster"
+          ? "dumpster_rental"
+          : inquiryType === "commercial"
+          ? "commercial_inquiry"
+          : "residential_inquiry",
+      title:
+        inquiryType === "missed"
+          ? `Missed Pickup Report - ${formData.area}`
+          : inquiryType === "dumpster"
+          ? `Roll-Off Skip Rental - ${formData.area}`
+          : inquiryType === "commercial"
+          ? `Commercial Waste Proposal - ${formData.area}`
+          : `Household Garbage Pickup - ${formData.area}`,
+      message: formData.message,
+      priority: inquiryType === "missed" ? "urgent" : "normal",
+      status: "new",
+      assignedTo: `${formData.area} Dispatch Team`,
+    });
     setSubmitted(true);
   };
 
@@ -66,12 +94,14 @@ export default function ContactSection() {
                 <div>
                   <h4 className="text-sm font-bold text-[#1A1D20]">Call Customer Dispatch</h4>
                   <div className="mt-1 space-y-0.5">
-                    <a href="tel:+256766532915" className="block text-sm font-bold text-[#006F51] hover:underline">
-                      +256 766 532915
+                    <a href={`tel:${companySettings.phonePrimary.replace(/\s+/g, "")}`} className="block text-sm font-bold text-[#006F51] hover:underline">
+                      {companySettings.phonePrimary}
                     </a>
-                    <a href="tel:+256312456789" className="block text-xs text-gray-500 hover:text-[#006F51]">
-                      +256 312 456 789 (Commercial Lines)
-                    </a>
+                    {companySettings.phoneCommercial && (
+                      <a href={`tel:${companySettings.phoneCommercial.replace(/\s+/g, "")}`} className="block text-xs text-gray-500 hover:text-[#006F51]">
+                        {companySettings.phoneCommercial} (Commercial Lines)
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -85,12 +115,12 @@ export default function ContactSection() {
                   <h4 className="text-sm font-bold text-[#1A1D20]">WhatsApp Dispatch &amp; Route Chat</h4>
                   <div className="mt-1">
                     <a
-                      href="https://wa.me/256766532915"
+                      href={`https://wa.me/${companySettings.whatsappNumber.replace(/[^0-9]/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-sm font-bold text-[#10B981] hover:underline"
                     >
-                      <span>+256 766 532915</span>
+                      <span>{companySettings.whatsappNumber}</span>
                       <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Online</span>
                     </a>
                     <span className="text-[11px] text-gray-500 block">Instant photo quoting &amp; missed pickup alerts</span>
@@ -105,8 +135,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-[#1A1D20]">Email Inquiries &amp; Tenders</h4>
-                  <a href="mailto:info@naturewasteug.com" className="text-sm font-semibold text-[#006F51] hover:underline block mt-1">
-                    info@naturewasteug.com
+                  <a href={`mailto:${companySettings.emailPrimary}`} className="text-sm font-semibold text-[#006F51] hover:underline block mt-1">
+                    {companySettings.emailPrimary}
                   </a>
                   <span className="text-[11px] text-gray-500 block">Typical response time: under 2 hours</span>
                 </div>
@@ -120,8 +150,8 @@ export default function ContactSection() {
                 <div>
                   <h4 className="text-sm font-bold text-[#1A1D20]">Headquarters &amp; Sorting Plant</h4>
                   <p className="text-xs text-[#555C66] leading-relaxed mt-1">
-                    Kitende, Karl House, Room 9 <br />
-                    Entebbe Road, Kampala, Uganda
+                    {companySettings.addressLine1} <br />
+                    {companySettings.addressLine2}
                   </p>
                 </div>
               </div>
@@ -134,9 +164,9 @@ export default function ContactSection() {
                 <div>
                   <h4 className="text-sm font-bold text-[#1A1D20]">Operational Hours</h4>
                   <p className="text-xs text-[#555C66] leading-relaxed mt-1">
-                    Monday – Friday: 7:00 AM – 6:00 PM <br />
-                    Saturday: 8:00 AM – 3:00 PM <br />
-                    Sunday &amp; Holidays: Emergency Dispatch Only
+                    {companySettings.hoursWeekday} <br />
+                    {companySettings.hoursSaturday} <br />
+                    {companySettings.hoursSunday}
                   </p>
                 </div>
               </div>

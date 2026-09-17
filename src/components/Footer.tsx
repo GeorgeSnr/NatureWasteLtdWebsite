@@ -96,6 +96,12 @@ export default function Footer() {
                   Contact Customer Care
                 </Link>
               </li>
+              <li>
+                <Link href="/admin" className="hover:text-[#FFCE00] transition-colors font-bold text-gray-300 flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#006F51]" />
+                  <span>Admin &amp; Dispatch Portal</span>
+                </Link>
+              </li>
               <li className="pt-1.5">
                 <a
                   href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
@@ -311,6 +317,10 @@ export default function Footer() {
             <span>&bull;</span>
             <Link href="/#about-nema" className="hover:text-gray-300 transition-colors">
               NEMA Statutory Notice
+            </Link>
+            <span>&bull;</span>
+            <Link href="/admin" className="hover:text-[#FFCE00] transition-colors font-semibold text-gray-400">
+              Staff Portal
             </Link>
           </div>
         </div>

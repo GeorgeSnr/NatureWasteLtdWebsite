@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import WhatsAppBot from "@/components/WhatsAppBot";
+import { WebsiteDataProvider } from "@/context/WebsiteDataContext";
+import MainLayoutWrapper from "@/components/MainLayoutWrapper";
 
 export const metadata: Metadata = {
   title: "Nature Waste Management Ltd | Garbage Pickup & Recycling Uganda",
@@ -40,10 +39,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white antialiased text-[#363636] font-sans selection:bg-[#006F51] selection:text-white w-full max-w-full overflow-x-clip">
-        <Header />
-        <div className="flex-1 flex flex-col w-full max-w-full overflow-x-clip">{children}</div>
-        <Footer />
-        <WhatsAppBot />
+        <WebsiteDataProvider>
+          <MainLayoutWrapper>{children}</MainLayoutWrapper>
+        </WebsiteDataProvider>
       </body>
     </html>
   );
