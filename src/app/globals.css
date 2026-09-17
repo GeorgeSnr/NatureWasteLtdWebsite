@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
     width: 100%;
   }
@@ -16,7 +16,7 @@
     text-rendering: optimizeLegibility;
     color: #363636;
     background-color: #ffffff;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
     width: 100%;
   }

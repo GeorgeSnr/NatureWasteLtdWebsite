@@ -140,12 +140,12 @@ export default function HeroSection() {
                 <span>+256 766 532915</span>
               </a>
 
-              {/* Google Play App Link (Visible across all screen sizes) */}
+              {/* Google Play App Link (Hidden on mobile since dedicated Install Official App card is below) */}
               <a
                 href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold text-gray-900 hover:text-[#006F51] px-3.5 sm:px-4 py-3 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-xs"
+                className="hidden sm:inline-flex items-center gap-2 text-xs font-bold text-gray-900 hover:text-[#006F51] px-3.5 sm:px-4 py-3 rounded border border-gray-300 bg-white hover:bg-gray-50 transition-colors shadow-xs"
                 title="Download NatureWaste Connect on Google Play"
               >
                 <GooglePlayIcon className="w-4 h-4" />

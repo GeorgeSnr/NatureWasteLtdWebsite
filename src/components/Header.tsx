@@ -117,84 +117,86 @@ export default function Header() {
 
   return (
     <>
-      {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
-      <div className="bg-[#F8F9FA] text-[#363636] text-xs py-2 px-3 sm:px-8 border-b border-[#E5E7EB] overflow-hidden">
-        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-          {/* Left: Location & NEMA Registration Badge */}
-          <div className="flex items-center gap-2 sm:gap-4 text-[#555C66] text-[11px] sm:text-xs">
-            <div className="flex items-center gap-1.5 font-medium">
-              <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
-              <span className="hidden sm:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
-              <span className="sm:hidden">Kitende, Kampala</span>
+      {/* Sticky Top Bar & Navigation Wrapper: Stays pinned to top on mobile and desktop */}
+      <div className="sticky top-0 z-40 w-full bg-white shadow-xs">
+        {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
+        <div className="bg-[#F8F9FA] text-[#363636] text-xs py-1.5 sm:py-2 px-3 sm:px-8 border-b border-[#E5E7EB] overflow-hidden">
+          <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+            {/* Left: Location & NEMA Registration Badge */}
+            <div className="flex items-center gap-2 sm:gap-4 text-[#555C66] text-[11px] sm:text-xs">
+              <div className="flex items-center gap-1.5 font-medium">
+                <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
+                <span className="hidden sm:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
+                <span className="sm:hidden">Kitende, Kampala</span>
+              </div>
+              <div className="hidden md:flex items-center gap-1.5 text-[#006F51] font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>NEMA Licensed &amp; Registered Waste Handler</span>
+              </div>
             </div>
-            <div className="hidden md:flex items-center gap-1.5 text-[#006F51] font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>NEMA Licensed &amp; Registered Waste Handler</span>
+
+            {/* Right: Quick Customer Links matching Waste Connections */}
+            <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs">
+              <Link
+                href="/#schedule-finder"
+                className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
+              >
+                <Calendar className="w-3.5 h-3.5 text-[#006F51]" />
+                <span className="font-medium">Pickup Schedule</span>
+              </Link>
+
+              <Link
+                href="/#schedule-finder"
+                className="hidden lg:flex items-center gap-1 hover:text-[#006F51] transition-colors"
+              >
+                <AlertCircle className="w-3.5 h-3.5 text-[#006F51]" />
+                <span>Missed Pickup</span>
+              </Link>
+
+              <Link
+                href="/portal"
+                className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
+              >
+                <CreditCard className="w-3.5 h-3.5 text-[#006F51]" />
+                <span className="font-medium">Pay My Bill</span>
+              </Link>
+
+              <Link
+                href="/#contact"
+                className="hidden sm:flex items-center gap-1 hover:text-[#006F51] transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#006F51]" />
+                <span>Customer Care</span>
+              </Link>
+
+              <a
+                href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 font-bold text-emerald-800 bg-emerald-100/80 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition-colors shrink-0 text-[10px] sm:text-[11px]"
+                title="Download NatureWaste Connect on Google Play"
+              >
+                <GooglePlayIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span className="hidden xs:inline">Get App</span>
+                <span className="xs:hidden">App</span>
+              </a>
+
+              <div className="h-3 w-px bg-gray-300 hidden sm:block" />
+
+              <Link
+                href="/portal"
+                className="hidden xs:flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>My Account</span>
+              </Link>
             </div>
-          </div>
-
-          {/* Right: Quick Customer Links matching Waste Connections */}
-          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs">
-            <Link
-              href="/#schedule-finder"
-              className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
-            >
-              <Calendar className="w-3.5 h-3.5 text-[#006F51]" />
-              <span className="font-medium">Pickup Schedule</span>
-            </Link>
-
-            <Link
-              href="/#schedule-finder"
-              className="hidden lg:flex items-center gap-1 hover:text-[#006F51] transition-colors"
-            >
-              <AlertCircle className="w-3.5 h-3.5 text-[#006F51]" />
-              <span>Missed Pickup</span>
-            </Link>
-
-            <Link
-              href="/portal"
-              className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
-            >
-              <CreditCard className="w-3.5 h-3.5 text-[#006F51]" />
-              <span className="font-medium">Pay My Bill</span>
-            </Link>
-
-            <Link
-              href="/#contact"
-              className="hidden sm:flex items-center gap-1 hover:text-[#006F51] transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#006F51]" />
-              <span>Customer Care</span>
-            </Link>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 font-bold text-emerald-800 bg-emerald-100/80 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition-colors shrink-0 text-[10px] sm:text-[11px]"
-              title="Download NatureWaste Connect on Google Play"
-            >
-              <GooglePlayIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              <span className="hidden xs:inline">Get App</span>
-              <span className="xs:hidden">App</span>
-            </a>
-
-            <div className="h-3 w-px bg-gray-300 hidden sm:block" />
-
-            <Link
-              href="/portal"
-              className="hidden xs:flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
-            >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>My Account</span>
-            </Link>
           </div>
         </div>
-      </div>
 
-      {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
-      <header className="sticky top-0 z-40 bg-white border-b border-[#E5E7EB] shadow-xs">
-        <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+        {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
+        <header className="bg-white border-b border-[#E5E7EB]">
+          <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Logo - compact on mobile so it never forces header overflow */}
           <Link href="/" className="shrink min-w-0 flex items-center">
             <div className="sm:hidden">
@@ -476,6 +478,7 @@ export default function Header() {
           </div>
         </div>
       </header>
+    </div>
 
       {/* 3. Full Mobile Navigation Drawer */}
       {drawerOpen && (
