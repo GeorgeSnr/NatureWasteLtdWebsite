@@ -131,3 +131,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #004D38;
 }
+
+/* Sleek visible scrollbar for admin portal sidebar */
+.dark-admin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.dark-admin-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dark-admin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark-admin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+
+.dark-admin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #006F51;
+}

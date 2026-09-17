@@ -287,85 +287,84 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}
 
       <aside
-        className={`fixed md:sticky top-0 inset-y-0 left-0 z-50 w-72 bg-[#14191E] text-white flex flex-col justify-between transition-transform duration-200 ease-in-out md:translate-x-0 ${
+        className={`fixed md:sticky top-0 inset-y-0 left-0 z-50 w-72 h-screen max-h-screen bg-[#14191E] text-white flex flex-col overflow-hidden transition-transform duration-200 ease-in-out md:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ height: "100vh" }}
       >
         {/* Top Branding */}
-        <div>
-          <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between">
-            <Link href="/admin" onClick={() => setSidebarOpen(false)}>
-              <div className="flex flex-col">
-                <Logo variant="dark" size="sm" showTagline={false} />
-                <div className="flex items-center gap-1.5 mt-1.5 pl-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFCE00]" />
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFCE00]">
-                    ADMIN CONTROL PORTAL
-                  </span>
-                </div>
+        <div className="shrink-0 p-4 sm:p-5 border-b border-white/10 flex items-center justify-between">
+          <Link href="/admin" onClick={() => setSidebarOpen(false)}>
+            <div className="flex flex-col">
+              <Logo variant="dark" size="sm" showTagline={false} />
+              <div className="flex items-center gap-1.5 mt-1.5 pl-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFCE00]" />
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFCE00]">
+                  ADMIN CONTROL PORTAL
+                </span>
               </div>
-            </Link>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="md:hidden text-gray-400 hover:text-white p-1 rounded-sm"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Nav List */}
-          <nav className="p-3 space-y-5 overflow-y-auto max-h-[calc(100vh-190px)]">
-            {navSections.map((sec, sIdx) => (
-              <div key={sIdx} className="space-y-1">
-                <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  {sec.label}
-                </div>
-                {sec.items.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setSidebarOpen(false)}
-                      className={`group flex items-center justify-between px-3 py-2 rounded-sm text-xs font-semibold transition-colors cursor-pointer ${
-                        isActive
-                          ? "bg-[#006F51] text-white shadow-xs font-bold"
-                          : "text-gray-300 hover:bg-white/5 hover:text-white"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div
-                          className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 transition-colors ${
-                            isActive
-                              ? "bg-[#FFCE00] text-[#1A1D20]"
-                              : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-white/10"
-                          }`}
-                        >
-                          <Icon className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="truncate">{item.name}</span>
-                      </div>
-                      {item.badge && (
-                        <span
-                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-sm shrink-0 ${
-                            item.badgeColor || "bg-white/10 text-gray-300"
-                          }`}
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
-              </div>
-            ))}
-          </nav>
+            </div>
+          </Link>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="md:hidden text-gray-400 hover:text-white p-1 rounded-sm cursor-pointer"
+            aria-label="Close sidebar"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
+        {/* Nav List */}
+        <nav className="flex-1 min-h-0 overflow-y-auto px-3 py-3.5 space-y-5 dark-admin-scrollbar overscroll-contain">
+          {navSections.map((sec, sIdx) => (
+            <div key={sIdx} className="space-y-1">
+              <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                {sec.label}
+              </div>
+              {sec.items.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`group flex items-center justify-between px-3 py-2 rounded-sm text-xs font-semibold transition-colors cursor-pointer ${
+                      isActive
+                        ? "bg-[#006F51] text-white shadow-xs font-bold"
+                        : "text-gray-300 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div
+                        className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 transition-colors ${
+                          isActive
+                            ? "bg-[#FFCE00] text-[#1A1D20]"
+                            : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-white/10"
+                        }`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="truncate">{item.name}</span>
+                    </div>
+                    {item.badge && (
+                      <span
+                        className={`text-[10px] font-extrabold px-2 py-0.5 rounded-sm shrink-0 ${
+                          item.badgeColor || "bg-white/10 text-gray-300"
+                        }`}
+                      >
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
+          <div className="h-4 shrink-0" aria-hidden="true" />
+        </nav>
+
         {/* Bottom Actions & User Profile */}
-        <div className="p-4 border-t border-white/10 bg-[#0F1317] space-y-3">
+        <div className="shrink-0 p-3.5 border-t border-white/10 bg-[#0F1317] space-y-2.5">
           <Link
             href="/"
             target="_blank"
