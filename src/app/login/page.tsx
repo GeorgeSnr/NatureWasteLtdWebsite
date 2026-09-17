@@ -199,16 +199,16 @@ export default function LoginPage() {
         </Link>
         <div className="inline-flex items-center gap-2 bg-[#006F51] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-xs">
           <KeyRound className="w-3.5 h-3.5" />
-          <span>Unified Access &amp; MFA Gateway</span>
+          <span>Sign In &amp; MFA Verification</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20] tracking-tight">
           {step === "credentials" ? "Sign In to Your Account" : "Security Verification"}
         </h2>
-        <p className="text-xs text-gray-500">
-          {step === "credentials"
-            ? "Secure portal for residential clients, commercial accounts, and operations staff."
-            : "Two-factor authentication is active on your Nature Waste account."}
-        </p>
+        {step === "mfa" && (
+          <p className="text-xs text-gray-500">
+            Two-factor authentication is active on your Nature Waste account.
+          </p>
+        )}
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

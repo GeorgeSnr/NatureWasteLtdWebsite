@@ -741,7 +741,7 @@ export default function AdminRequestsPage() {
             <option value="dumpster_rental">Skip / Roll-Off Rentals</option>
             <option value="demo_booking">Demo &amp; Waste Audits</option>
             <option value="commercial_inquiry">Commercial Waste Inquiries</option>
-            <option value="trial_registration">Trial Registrations</option>
+            <option value="trial_registration">Client Registrations</option>
             <option value="on_demand_pickup">On-Demand Bulky Pickups</option>
             <option value="residential_inquiry">Residential Inquiries</option>
           </select>

@@ -99,7 +99,7 @@ export const initialClientRequests: ClientRequest[] = [
   {
     id: "REQ-2026-005",
     type: "trial_registration",
-    title: "Residential Connect 14-Day Free Trial",
+    title: "Residential Connect Client Registration",
     name: "Grace Nabatanzi",
     phone: "+256 706 554 321",
     email: "grace.nabatanzi@gmail.com",

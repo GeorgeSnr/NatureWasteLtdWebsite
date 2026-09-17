@@ -30,7 +30,7 @@ export default function RegisterPage() {
       name: fullName,
       email: email,
       phone: phone,
-      organization: organization || "Trial Client",
+      organization: organization || "Private Household",
       suburb: location?.address ? location.address.split("/")[0].trim() : "Kitende",
       latitude: location?.latitude,
       longitude: location?.longitude,
@@ -43,14 +43,14 @@ export default function RegisterPage() {
       name: fullName,
       email: email,
       phone: phone,
-      organization: organization,
+      organization: organization || "Private Household",
       latitude: location?.latitude,
       longitude: location?.longitude,
       locationAddress: location?.address,
-      type: "trial_registration",
-      title: `14-Day Free Trial Signup (${plan.toUpperCase()})`,
+      type: "client_registration" as any,
+      title: `Client Account Registration (${plan.toUpperCase()})`,
       volumeOrTier: `${plan.toUpperCase()} Tier`,
-      message: `Account registration for ${organization}. Password initialized. GPS: ${location ? `${location.latitude}, ${location.longitude}` : "None"}.`,
+      message: `Account registration for ${organization || fullName}. Service category: ${plan}. GPS: ${location ? `${location.latitude}, ${location.longitude}` : "None"}.`,
       priority: "normal",
       status: "new",
       assignedTo: "Client Onboarding Team",
@@ -68,10 +68,10 @@ export default function RegisterPage() {
           <Logo size="lg" />
         </div>
         <h2 className="text-2xl sm:text-3xl font-black text-[#1A1D20] tracking-tight">
-          Create Your Platform Account
+          Create Your Client Account
         </h2>
         <p className="text-xs sm:text-sm text-[#555C66] mt-1">
-          Start your 14-day free trial on Nature Waste Connect. No credit card required.
+          Create an account to manage pickup schedules, track collection trucks, and pay only for services ordered.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export default function RegisterPage() {
                 Welcome to Nature Waste Connect!
               </h3>
               <p className="text-xs text-[#555C66]">
-                Setting up your sandbox environment and redirecting to your Live Web Portal...
+                Your account is ready. Redirecting to your Client Portal...
               </p>
               <div className="pt-2">
                 <div className="h-1.5 w-full bg-gray-200 overflow-hidden rounded-sm">
@@ -99,7 +99,7 @@ export default function RegisterPage() {
               {/* Plan Picker */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#555C66] mb-1.5">
-                  Select Trial Tier
+                  Select Service Category
                 </label>
                 <div className="grid grid-cols-3 gap-2 text-xs font-bold">
                   {[
@@ -208,17 +208,18 @@ export default function RegisterPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#006F51] hover:bg-[#005a42] text-white py-3.5 font-bold uppercase text-xs tracking-wider rounded-sm transition-colors shadow-xs cursor-pointer"
+                  className="w-full bg-[#006F51] hover:bg-[#005a42] text-white py-3.5 font-bold uppercase text-xs tracking-wider rounded-sm transition-colors shadow-xs cursor-pointer flex items-center justify-center gap-2"
                 >
-                  Start 14-Day Free Trial
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Create Account</span>
                 </button>
               </div>
 
               <div className="pt-3 text-center">
                 <span className="text-xs text-[#555C66]">
-                  Already registered?{" "}
-                  <Link href="/portal" className="text-[#006F51] font-bold hover:underline">
-                    Access Portal Directly
+                  Already have an account?{" "}
+                  <Link href="/login" className="text-[#006F51] font-bold hover:underline">
+                    Sign In Here
                   </Link>
                 </span>
               </div>
