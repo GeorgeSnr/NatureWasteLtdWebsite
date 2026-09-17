@@ -213,7 +213,7 @@ export default function AdminAccessManagementPage() {
       </div>
 
       {savedSuccess && (
-        <div className="p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-lg text-xs font-bold flex items-center gap-2 shadow-2xs">
+        <div className="p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-sm text-xs font-bold flex items-center gap-2 shadow-2xs">
           <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{savedSuccess}</span>
         </div>
@@ -221,7 +221,7 @@ export default function AdminAccessManagementPage() {
 
       {/* 2. Metric KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Total Operators
@@ -231,12 +231,12 @@ export default function AdminAccessManagementPage() {
               Internal Staff Accounts
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-purple-50 text-purple-700 flex items-center justify-center">
             <Shield className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               System Admins
@@ -246,12 +246,12 @@ export default function AdminAccessManagementPage() {
               Full Privileges &amp; Settings
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-800 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-purple-50 text-purple-800 flex items-center justify-center">
             <Lock className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Route Dispatchers
@@ -261,12 +261,12 @@ export default function AdminAccessManagementPage() {
               Live Compactor Route Control
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-blue-50 text-blue-700 flex items-center justify-center">
             <UserCheck className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Deactivated / Blocked
@@ -276,14 +276,14 @@ export default function AdminAccessManagementPage() {
               Staff Access Revoked
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-red-50 text-red-600 flex items-center justify-center">
             <PowerOff className="w-6 h-6" />
           </div>
         </div>
       </div>
 
       {/* 3. Filter Tabs & Search */}
-      <div className="bg-white p-4 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white p-4 rounded border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Operators", count: staffUsers.length },
@@ -295,7 +295,7 @@ export default function AdminAccessManagementPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${
+              className={`px-3.5 py-2 rounded-sm text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${
                 activeTab === tab.id
                   ? tab.id === "deactivated"
                     ? "bg-red-600 text-white shadow-xs"
@@ -305,7 +305,7 @@ export default function AdminAccessManagementPage() {
             >
               <span>{tab.label}</span>
               <span
-                className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
+                className={`text-[10px] font-black px-1.5 py-0.2 rounded-sm ${
                   activeTab === tab.id ? "bg-white/20 text-white" : "bg-gray-200 text-gray-700"
                 }`}
               >
@@ -322,13 +322,13 @@ export default function AdminAccessManagementPage() {
             placeholder="Search operator by name, email, role..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#F8F9FA] border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+            className="w-full pl-10 pr-4 py-2 bg-[#F8F9FA] border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
           />
         </div>
       </div>
 
       {/* 4. Staff Users Table */}
-      <div className="bg-white rounded-xl border border-[#E5E7EB] shadow-xs overflow-hidden">
+      <div className="bg-white rounded border border-[#E5E7EB] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[920px] text-left border-collapse text-xs">
             <thead className="bg-[#14191E] text-white text-[11px] uppercase tracking-wider">
@@ -497,9 +497,9 @@ export default function AdminAccessManagementPage() {
 
       {/* 5. User Profile & Privileges Modal */}
       {selectedUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div
-            className="bg-white rounded-xl border border-[#E5E7EB] shadow-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto flex flex-col"
+            className="bg-white rounded border border-[#E5E7EB] shadow-lg w-full max-w-xl max-h-[90vh] overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#14191E] text-white sticky top-0 z-10">
@@ -507,13 +507,13 @@ export default function AdminAccessManagementPage() {
                 <span className="font-mono text-sm font-black text-[#FFCE00]">
                   {selectedUser.id}
                 </span>
-                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${getRoleBadge(selectedUser.role)}`}>
+                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm ${getRoleBadge(selectedUser.role)}`}>
                   {selectedUser.role} Account
                 </span>
               </div>
               <button
                 onClick={() => setSelectedUser(null)}
-                className="p-1 text-gray-400 hover:text-white rounded cursor-pointer"
+                className="p-1 text-gray-400 hover:text-white rounded-sm cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -534,7 +534,7 @@ export default function AdminAccessManagementPage() {
               </div>
 
               {/* Privileges & Access Controls */}
-              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-4">
+              <div className="p-4 bg-gray-50 rounded border border-gray-200 space-y-4">
                 <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                   <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-purple-800">
                     <Shield className="w-4 h-4" />
@@ -555,7 +555,7 @@ export default function AdminAccessManagementPage() {
                         updateUserRole(selectedUser.id, newRole);
                         setSelectedUser({ ...selectedUser, role: newRole });
                       }}
-                      className="w-full px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-bold focus:outline-none focus:border-[#006F51]"
+                      className="w-full px-3 py-1.5 bg-white border border-gray-300 rounded-sm text-xs font-bold focus:outline-none focus:border-[#006F51]"
                     >
                       <option value="admin">System Administrator</option>
                       <option value="dispatcher">Route Dispatcher</option>
@@ -565,87 +565,58 @@ export default function AdminAccessManagementPage() {
 
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-600 mb-1">
-                      Account Status
+                      Account Status (Kill-Switch)
                     </label>
-                    <select
-                      value={selectedUser.accountStatus}
-                      onChange={(e) => {
-                        const newStatus = e.target.value as any;
-                        updateUserStatus(selectedUser.id, newStatus);
-                        setSelectedUser({ ...selectedUser, accountStatus: newStatus });
-                      }}
-                      className={`w-full px-3 py-1.5 rounded-lg border text-xs font-bold focus:outline-none ${
-                        selectedUser.accountStatus === "active"
-                          ? "bg-emerald-50 text-emerald-800 border-emerald-300"
-                          : "bg-red-50 text-red-800 border-red-300"
-                      }`}
-                    >
-                      <option value="active">Active (Access Granted)</option>
-                      <option value="deactivated">Deactivated (Access Revoked)</option>
-                      <option value="suspended">Suspended</option>
-                    </select>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          toggleUserStatus(selectedUser.id);
+                          const next = selectedUser.accountStatus === "deactivated" ? "active" : "deactivated";
+                          setSelectedUser({ ...selectedUser, accountStatus: next });
+                        }}
+                        className={`flex-1 py-1.5 px-3 rounded-sm font-bold uppercase text-[11px] transition-colors cursor-pointer flex items-center justify-center gap-1.5 ${
+                          selectedUser.accountStatus === "deactivated"
+                            ? "bg-red-600 hover:bg-red-700 text-white"
+                            : "bg-emerald-700 hover:bg-emerald-800 text-white"
+                        }`}
+                      >
+                        <PowerOff className="w-3.5 h-3.5" />
+                        <span>{selectedUser.accountStatus === "deactivated" ? "Deactivated" : "Active"}</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {/* Reset Password */}
+                {/* Password Reset Section */}
                 <div className="pt-2 border-t border-gray-200">
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-600 mb-1">
-                    Reset Staff Passcode
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <div className="relative flex-1">
-                      <Key className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-                      <input
-                        type="text"
-                        placeholder="Enter new operator password..."
-                        value={newPasswordInput}
-                        onChange={(e) => setNewPasswordInput(e.target.value)}
-                        className="w-full pl-8 pr-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
-                      />
-                    </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-600 block mb-1.5">
+                    Reset Operator Passcode
+                  </span>
+                  <div className="flex gap-2">
+                    <input
+                      type="password"
+                      placeholder="Enter new operator password..."
+                      value={newPasswordInput}
+                      onChange={(e) => setNewPasswordInput(e.target.value)}
+                      className="flex-1 px-3 py-1.5 bg-white border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
+                    />
                     <button
+                      type="button"
                       onClick={() => handlePasswordReset(selectedUser.id)}
-                      disabled={!newPasswordInput.trim()}
-                      className="px-3 py-1.5 bg-[#006F51] disabled:bg-gray-300 hover:bg-[#005a42] text-white font-bold rounded-lg text-xs transition-colors cursor-pointer shrink-0"
+                      className="bg-[#1A1D20] hover:bg-black text-white px-4 py-1.5 rounded-sm font-bold uppercase text-[11px] cursor-pointer transition-colors shrink-0"
                     >
-                      Save Passcode
+                      Update
                     </button>
                   </div>
-                  {passwordUpdateMsg && (
-                    <div className="mt-1.5 text-[11px] font-bold text-emerald-700 flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>{passwordUpdateMsg}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-3 bg-emerald-50/70 rounded-lg border border-emerald-200 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-emerald-900 font-bold">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>2FA Multi-Factor Authentication Active</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded font-black uppercase">
-                    Mandatory
-                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="p-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-              <button
-                onClick={() => {
-                  if (confirm(`Remove operator access for ${selectedUser.name}?`)) {
-                    deleteUser(selectedUser.id);
-                    setSelectedUser(null);
-                  }
-                }}
-                className="text-red-600 hover:text-red-800 text-xs font-bold uppercase tracking-wider cursor-pointer"
-              >
-                Delete Account
-              </button>
+            <div className="p-4 border-t border-[#E5E7EB] bg-gray-50 flex justify-end">
               <button
                 onClick={() => setSelectedUser(null)}
-                className="bg-[#1A1D20] text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
+                className="bg-[#1A1D20] text-white px-5 py-2 rounded-sm text-xs font-bold uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
               >
                 Close Privileges
               </button>
@@ -656,9 +627,9 @@ export default function AdminAccessManagementPage() {
 
       {/* 6. Create Staff Operator Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div
-            className="bg-white rounded-xl border border-[#E5E7EB] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
+            className="bg-white rounded border border-[#E5E7EB] shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-5 border-b border-[#E5E7EB] flex items-center justify-between bg-purple-900 text-white sticky top-0 z-10">
@@ -685,7 +656,7 @@ export default function AdminAccessManagementPage() {
                     placeholder="e.g. Geoffrey Magezi"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-purple-600"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-purple-600"
                   />
                 </div>
 
@@ -696,7 +667,7 @@ export default function AdminAccessManagementPage() {
                   <select
                     value={form.role}
                     onChange={(e) => setForm({ ...form, role: e.target.value as any })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs font-bold focus:outline-none focus:border-purple-600"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs font-bold focus:outline-none focus:border-purple-600"
                   >
                     <option value="dispatcher">Route Dispatcher</option>
                     <option value="compliance">NEMA Compliance Officer</option>
@@ -708,84 +679,60 @@ export default function AdminAccessManagementPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Staff Email Address *
+                    Email Address *
                   </label>
                   <input
                     type="email"
                     required
-                    placeholder="e.g. dispatch@naturewaste.ug"
+                    placeholder="e.g. geoffrey@naturewaste.ug"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-purple-600"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-purple-600"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Phone Hotline *
+                    Phone Number *
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="+256 766 532915"
+                    placeholder="+256 700 000 000"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-purple-600"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-purple-600"
                   />
                 </div>
               </div>
 
-              {/* Password and Initial Status */}
-              <div className="grid grid-cols-2 gap-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Initial Passcode *
+                    Division / Office Location
                   </label>
-                  <div className="relative">
-                    <Key className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="text"
-                      required
-                      value={form.password}
-                      onChange={(e) => setForm({ ...form, password: e.target.value })}
-                      placeholder="admin2026"
-                      className="w-full pl-8 pr-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-mono focus:outline-none focus:border-purple-600"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="e.g. Karl House Room 9, Kitende"
+                    value={form.organization}
+                    onChange={(e) => setForm({ ...form, organization: e.target.value })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-purple-600"
+                  />
                 </div>
 
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                    Initial Status *
+                    Initial Account Password *
                   </label>
-                  <select
-                    value={form.accountStatus}
-                    onChange={(e) =>
-                      setForm({ ...form, accountStatus: e.target.value as "active" | "deactivated" })
-                    }
-                    className={`w-full px-3 py-1.5 rounded-lg border text-xs font-bold focus:outline-none ${
-                      form.accountStatus === "active"
-                        ? "bg-emerald-50 text-emerald-800 border-emerald-300"
-                        : "bg-red-50 text-red-800 border-red-300"
-                    }`}
-                  >
-                    <option value="active">Active (Permit Sign In)</option>
-                    <option value="deactivated">Deactivated (Block Sign In)</option>
-                  </select>
+                  <input
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    value={form.password}
+                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-purple-600"
+                  />
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                  Assigned Operating Station
-                </label>
-                <input
-                  type="text"
-                  placeholder="Kitende Headquarters, Entebbe Road"
-                  value={form.suburb}
-                  onChange={(e) => setForm({ ...form, suburb: e.target.value })}
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-purple-600"
-                />
               </div>
 
               <div className="pt-3 border-t border-gray-200 flex items-center justify-end gap-3">
@@ -798,10 +745,10 @@ export default function AdminAccessManagementPage() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-purple-800 hover:bg-purple-900 text-white px-5 py-2.5 rounded-lg font-bold uppercase text-xs tracking-wider transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  className="bg-purple-800 hover:bg-purple-900 text-white px-5 py-2.5 rounded font-bold uppercase text-xs tracking-wider transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <Save className="w-3.5 h-3.5" />
-                  <span>Save Operator to Neon</span>
+                  <span>Create Operator in Neon</span>
                 </button>
               </div>
             </form>

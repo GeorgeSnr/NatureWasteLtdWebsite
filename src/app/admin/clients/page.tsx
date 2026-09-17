@@ -201,7 +201,7 @@ export default function AdminClientsPage() {
 
       {/* 2. Client Metrics KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Total Clients
@@ -211,12 +211,12 @@ export default function AdminClientsPage() {
               Active Customer Accounts
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-[#E9F4F0] text-[#006F51] flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center">
             <UserCheck className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Residential Homes
@@ -228,12 +228,12 @@ export default function AdminClientsPage() {
               Wheelie Bin Curbside Pickup
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-blue-50 text-blue-700 flex items-center justify-center">
             <Home className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               Commercial Clients
@@ -245,12 +245,12 @@ export default function AdminClientsPage() {
               Hotels, Offices &amp; Factories
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-purple-50 text-purple-700 flex items-center justify-center">
             <Briefcase className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
           <div>
             <div className="text-xs font-bold uppercase text-gray-500 tracking-wider">
               GPS Gate Pinned
@@ -262,33 +262,33 @@ export default function AdminClientsPage() {
               Compactor Route Nav Ready
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-sm bg-amber-50 text-amber-700 flex items-center justify-center">
             <MapPin className="w-6 h-6" />
           </div>
         </div>
       </div>
 
       {/* 3. Filter Tabs & Search */}
-      <div className="bg-white p-4 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white p-4 rounded border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Clients", count: allClients.length },
             { id: "residential", label: "Residential", count: residentialClients.length },
             { id: "commercial", label: "Commercial", count: commercialClients.length },
-            { id: "gps", label: "GPS Pinned Gates", count: gpsTaggedClients.length },
+            { id: "gps", label: "GPS Pinned", count: gpsTaggedClients.length },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveFilter(tab.id as any)}
-              className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${
+              className={`px-3.5 py-2 rounded-sm text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${
                 activeFilter === tab.id
                   ? "bg-[#006F51] text-white shadow-xs"
-                  : "text-gray-600 hover:bg-gray-100"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               <span>{tab.label}</span>
               <span
-                className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
+                className={`text-[10px] font-black px-1.5 py-0.2 rounded-sm ${
                   activeFilter === tab.id ? "bg-white/20 text-white" : "bg-gray-200 text-gray-700"
                 }`}
               >
@@ -305,13 +305,13 @@ export default function AdminClientsPage() {
             placeholder="Search clients by name, phone, estate..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#F8F9FA] border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+            className="w-full pl-10 pr-4 py-2 bg-[#F8F9FA] border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
           />
         </div>
       </div>
 
       {/* 4. Clients Table */}
-      <div className="bg-white rounded-xl border border-[#E5E7EB] shadow-xs overflow-hidden">
+      <div className="bg-white rounded border border-[#E5E7EB] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[920px] text-left border-collapse text-xs">
             <thead className="bg-[#14191E] text-white text-[11px] uppercase tracking-wider">
@@ -453,7 +453,7 @@ export default function AdminClientsPage() {
       {selectedClient && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
           <div
-            className="bg-white rounded-xl border border-[#E5E7EB] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
+            className="bg-white rounded border border-[#E5E7EB] shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#14191E] text-white sticky top-0 z-10">
@@ -605,9 +605,9 @@ export default function AdminClientsPage() {
 
       {/* 6. Onboard New Client Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div
-            className="bg-white rounded-xl border border-[#E5E7EB] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
+            className="bg-white rounded border border-[#E5E7EB] shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#006F51] text-white sticky top-0 z-10">
@@ -637,7 +637,7 @@ export default function AdminClientsPage() {
                     placeholder="e.g. Ronald Mugisha"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
 
@@ -650,7 +650,7 @@ export default function AdminClientsPage() {
                     placeholder="e.g. Pearl Court / Private Compound"
                     value={form.organization}
                     onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
               </div>
@@ -666,7 +666,7 @@ export default function AdminClientsPage() {
                     placeholder="e.g. ronald@example.com"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
 
@@ -680,7 +680,7 @@ export default function AdminClientsPage() {
                     placeholder="+256 700 000 000"
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
                   />
                 </div>
               </div>
@@ -693,7 +693,7 @@ export default function AdminClientsPage() {
                   <select
                     value={form.suburb}
                     onChange={(e) => setForm({ ...form, suburb: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51]"
                   >
                     <option value="Kitende">Kitende</option>
                     <option value="Lubowa">Lubowa</option>
@@ -714,7 +714,7 @@ export default function AdminClientsPage() {
                   <select
                     value={form.plan}
                     onChange={(e) => setForm({ ...form, plan: e.target.value })}
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold focus:outline-none focus:border-[#006F51]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-sm text-xs font-semibold focus:outline-none focus:border-[#006F51]"
                   >
                     <option value="Residential Connect (120L Wheelie Bin)">
                       Residential Connect (120L Wheelie Bin)
@@ -758,7 +758,7 @@ export default function AdminClientsPage() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-[#006F51] hover:bg-[#005a42] text-white px-5 py-2.5 rounded-lg font-bold uppercase text-xs tracking-wider transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  className="bg-[#006F51] hover:bg-[#005a42] text-white px-5 py-2.5 rounded font-bold uppercase text-xs tracking-wider transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>Register Client to Neon</span>

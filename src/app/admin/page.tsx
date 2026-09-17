@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       {/* 1. Header Welcome Bar */}
-      <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="bg-white p-6 sm:p-8 rounded border border-[#E5E7EB] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#006F51] mb-1">
             <ShieldCheck className="w-4 h-4" />
@@ -89,14 +89,14 @@ export default function AdminDashboardPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/admin/requests"
-            className="bg-[#006F51] hover:bg-[#005a42] text-white px-5 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center gap-2"
+            className="bg-[#006F51] hover:bg-[#005a42] text-white px-5 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs flex items-center gap-2"
           >
             <Inbox className="w-4 h-4" />
             <span>Manage Inquiries ({requests.length})</span>
           </Link>
           <button
             onClick={toggleBanner}
-            className={`px-4 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all border cursor-pointer flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors border cursor-pointer flex items-center gap-2 ${
               announcement.enabled
                 ? "bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] border-amber-300"
                 : "bg-gray-100 hover:bg-gray-200 text-gray-700 border-gray-300"
@@ -110,7 +110,7 @@ export default function AdminDashboardPage() {
 
       {/* 2. Urgent Alerts Banner (if any urgent requests) */}
       {urgentRequests.length > 0 && (
-        <div className="bg-red-50 border border-red-200 p-4 rounded-xl shadow-xs flex items-center justify-between gap-4">
+        <div className="bg-red-50 border border-red-200 p-4 rounded shadow-xs flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-red-600 shrink-0" />
             <div className="text-xs text-red-900">
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
       {/* 3. Metric KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Metric 1: Inquiries Queue */}
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <span className="text-[11px] font-bold uppercase tracking-wider">Inquiries Inbox</span>
             <Inbox className="w-4 h-4 text-[#006F51]" />
@@ -148,7 +148,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 2: Registered Clients */}
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <span className="text-[11px] font-bold uppercase tracking-wider">Clients Directory</span>
             <Users className="w-4 h-4 text-emerald-600" />
@@ -168,7 +168,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 3: Coverage Zones */}
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <span className="text-[11px] font-bold uppercase tracking-wider">Coverage Zones</span>
             <MapPin className="w-4 h-4 text-[#006F51]" />
@@ -186,7 +186,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 4: Circular Diversion */}
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <span className="text-[11px] font-bold uppercase tracking-wider">Waste Diversion</span>
             <TrendingUp className="w-4 h-4 text-[#FFCE00]" />
@@ -201,7 +201,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Metric 5: Pricing Subscriptions */}
-        <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
+        <div className="bg-white p-5 rounded border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <span className="text-[11px] font-bold uppercase tracking-wider">Pricing Plans</span>
             <CreditCard className="w-4 h-4 text-[#006F51]" />
@@ -220,7 +220,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* 4. Recent Incoming Client Requests Table */}
-      <div className="bg-white rounded-xl border border-[#E5E7EB] shadow-xs overflow-hidden">
+      <div className="bg-white rounded border border-[#E5E7EB] shadow-xs overflow-hidden">
         <div className="p-5 sm:p-6 border-b border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
@@ -228,7 +228,7 @@ export default function AdminDashboardPage() {
                 Live Intake Stream
               </span>
               {newRequests.length > 0 && (
-                <span className="bg-[#006F51] text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                <span className="bg-[#006F51] text-white text-[10px] font-black px-2 py-0.5 rounded-sm">
                   {newRequests.length} unhandled
                 </span>
               )}
@@ -266,7 +266,7 @@ export default function AdminDashboardPage() {
                   <td className="p-4">
                     <div className="font-mono font-bold text-[#1A1D20]">{req.id}</div>
                     <span
-                      className={`inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-md mt-1 ${
+                      className={`inline-block text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm mt-1 ${
                         req.priority === "urgent"
                           ? "bg-red-100 text-red-800"
                           : req.priority === "high"
@@ -297,7 +297,7 @@ export default function AdminDashboardPage() {
                     <div className="font-bold text-gray-800">{req.suburb || "Kampala"}</div>
                     <div className="text-gray-500 text-[10px] line-clamp-1">{req.address || "Area Route"}</div>
                     {typeof req.latitude === "number" && typeof req.longitude === "number" && (
-                      <div className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#006F51] font-bold bg-[#E9F4F0] px-1.5 py-0.2 rounded border border-[#006F51]/20">
+                      <div className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#006F51] font-bold bg-[#E9F4F0] px-1.5 py-0.2 rounded-sm border border-[#006F51]/20">
                         <MapPin className="w-2.5 h-2.5" />
                         <span>GPS Tagged</span>
                       </div>
@@ -308,7 +308,7 @@ export default function AdminDashboardPage() {
                     <select
                       value={req.status}
                       onChange={(e) => updateRequestStatus(req.id, e.target.value as RequestStatus)}
-                      className={`text-xs px-2.5 py-1 rounded-lg border font-bold cursor-pointer focus:outline-none ${statusBadge(
+                      className={`text-xs px-2.5 py-1 rounded-sm border font-bold cursor-pointer focus:outline-none ${statusBadge(
                         req.status
                       )}`}
                     >
@@ -328,14 +328,14 @@ export default function AdminDashboardPage() {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-md transition-colors shadow-2xs"
+                        className="p-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-sm transition-colors shadow-2xs"
                         title="Open WhatsApp Chat"
                       >
                         <MessageSquare className="w-3.5 h-3.5" />
                       </a>
                       <a
                         href={`tel:${req.phone.replace(/\s+/g, "")}`}
-                        className="p-1.5 bg-[#006F51] hover:bg-[#004D38] text-white rounded-md transition-colors shadow-2xs"
+                        className="p-1.5 bg-[#006F51] hover:bg-[#004D38] text-white rounded-sm transition-colors shadow-2xs"
                         title="Call Client"
                       >
                         <Phone className="w-3.5 h-3.5" />
@@ -366,14 +366,14 @@ export default function AdminDashboardPage() {
           {/* Card 0: Registered Clients & Users Database */}
           <Link
             href="/admin/users"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-blue-500 hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-blue-50 text-blue-700 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <Users className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-blue-100 text-blue-800">
                   {users.length} Users
                 </span>
               </div>
@@ -386,22 +386,22 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-blue-700">
               <span>Manage Database</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 1: Announcement Banner */}
           <Link
             href="/admin/announcement"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <Bell className="w-4 h-4" />
                 </div>
                 <span
-                  className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                  className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm ${
                     announcement.enabled ? "bg-emerald-100 text-emerald-800" : "bg-gray-100 text-gray-600"
                   }`}
                 >
@@ -417,21 +417,21 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Edit Notice</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 2: Coverage Areas & Schedules */}
           <Link
             href="/admin/coverage"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-blue-50 text-blue-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-blue-50 text-blue-800">
                   {coverageAreas.length} Zones
                 </span>
               </div>
@@ -444,21 +444,21 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Manage Suburbs</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 3: Pricing Plans */}
           <Link
             href="/admin/pricing"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <CreditCard className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-50 text-amber-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-amber-50 text-amber-800">
                   {pricingList.length} Plans
                 </span>
               </div>
@@ -471,21 +471,21 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Update Rates</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 4: Circular Blog */}
           <Link
             href="/admin/blog"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <FileText className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-emerald-50 text-emerald-800">
                   {articles.length} Published
                 </span>
               </div>
@@ -498,21 +498,21 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Publish Article</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 5: Testimonials */}
           <Link
             href="/admin/testimonials"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-purple-50 text-purple-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-purple-50 text-purple-800">
                   5.0 ★ Rated
                 </span>
               </div>
@@ -525,21 +525,21 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Manage Reviews</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
 
           {/* Card 6: Company & Hotlines */}
           <Link
             href="/admin/settings"
-            className="bg-white p-5 rounded-xl border border-[#E5E7EB] hover:border-[#006F51] hover:shadow-md transition-all group flex flex-col justify-between"
+            className="bg-white p-5 rounded border border-[#E5E7EB] hover:border-[#006F51] transition-colors group flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="w-9 h-9 rounded-lg bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 rounded-sm bg-[#E9F4F0] text-[#006F51] flex items-center justify-center group-hover:bg-[#006F51] group-hover:text-white transition-colors">
                   <Phone className="w-4 h-4" />
                 </div>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-gray-100 text-gray-800">
+                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm bg-gray-100 text-gray-800">
                   Kitende HQ
                 </span>
               </div>
@@ -552,7 +552,7 @@ export default function AdminDashboardPage() {
             </div>
             <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#006F51]">
               <span>Edit Settings</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </Link>
         </div>

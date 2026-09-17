@@ -127,7 +127,7 @@ export default function LiveLocationPicker({
             type="button"
             onClick={detectLocation}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#E9F4F0] hover:bg-emerald-100/80 border border-[#006F51]/30 rounded-lg text-xs font-bold text-[#006F51] transition-all cursor-pointer shadow-2xs group"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#E9F4F0] hover:bg-[#d8ece4] border border-[#006F51]/30 rounded text-xs font-bold text-[#006F51] transition-colors cursor-pointer shadow-xs"
           >
             {loading ? (
               <>
@@ -136,15 +136,15 @@ export default function LiveLocationPicker({
               </>
             ) : (
               <>
-                <Navigation className="w-4 h-4 text-[#006F51] group-hover:scale-110 transition-transform" />
-                <span>📍 Capture Live GPS Pin for Truck Dispatch</span>
+                <Navigation className="w-4 h-4 text-[#006F51]" />
+                <span>Capture Live GPS Pin for Truck Dispatch</span>
               </>
             )}
           </button>
-          {helperText && <p className="text-[11px] text-gray-500 leading-snug">{helperText}</p>}
+          {helperText && <p className="text-[11px] text-[#555C66] leading-snug">{helperText}</p>}
         </div>
       ) : (
-        <div className="p-3 bg-emerald-50/90 border border-emerald-300 rounded-xl space-y-2">
+        <div className="p-3 bg-emerald-50 border border-emerald-300 rounded space-y-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#006F51] shrink-0 mt-0.5" />
@@ -163,7 +163,7 @@ export default function LiveLocationPicker({
                 type="button"
                 onClick={detectLocation}
                 disabled={loading}
-                className="p-1 text-emerald-700 hover:text-[#006F51] rounded hover:bg-emerald-100 transition-colors"
+                className="p-1 text-emerald-700 hover:text-[#006F51] rounded-sm hover:bg-emerald-100 transition-colors"
                 title="Refresh GPS Fix"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
@@ -172,7 +172,7 @@ export default function LiveLocationPicker({
                 href={`https://www.google.com/maps?q=${location.latitude},${location.longitude}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#006F51] hover:underline bg-white px-2 py-0.5 rounded border border-emerald-200"
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#006F51] hover:underline bg-white px-2 py-0.5 rounded-sm border border-emerald-200"
                 title="Verify location on Google Maps"
               >
                 <span>Map</span>
@@ -182,16 +182,16 @@ export default function LiveLocationPicker({
           </div>
 
           {location.address && (
-            <div className="text-[11px] text-gray-600 bg-white/70 px-2.5 py-1 rounded border border-emerald-100 flex items-center justify-between">
+            <div className="text-[11px] text-[#555C66] bg-white/70 px-2.5 py-1 rounded-sm border border-emerald-100 flex items-center justify-between">
               <span>Sector: <strong>{location.address}</strong></span>
-              <span className="text-[10px] text-emerald-700 font-bold uppercase">Ready for Routing</span>
+              <span className="text-[10px] text-emerald-700 font-bold uppercase tracking-wider">Ready for Routing</span>
             </div>
           )}
         </div>
       )}
 
       {error && (
-        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs flex items-center gap-2">
+        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
           <span>{error}</span>
         </div>

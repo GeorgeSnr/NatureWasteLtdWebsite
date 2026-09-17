@@ -112,7 +112,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-[#1A2026] py-8 px-6 shadow-xl rounded border border-white/10 sm:px-10 space-y-6">
+          <div className="bg-[#1A2026] py-8 px-6 shadow-xs rounded-sm border border-white/10 sm:px-10 space-y-6">
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
@@ -310,7 +310,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="md:hidden text-gray-400 hover:text-white p-1 rounded-lg"
+              className="md:hidden text-gray-400 hover:text-white p-1 rounded-sm"
             >
               <X className="w-5 h-5" />
             </button>
@@ -331,15 +331,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       key={item.href}
                       href={item.href}
                       onClick={() => setSidebarOpen(false)}
-                      className={`group flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                      className={`group flex items-center justify-between px-3 py-2 rounded-sm text-xs font-semibold transition-colors cursor-pointer ${
                         isActive
-                          ? "bg-[#006F51] text-white shadow-sm font-bold"
+                          ? "bg-[#006F51] text-white shadow-xs font-bold"
                           : "text-gray-300 hover:bg-white/5 hover:text-white"
                       }`}
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
                         <div
-                          className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors ${
+                          className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 transition-colors ${
                             isActive
                               ? "bg-[#FFCE00] text-[#1A1D20]"
                               : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-white/10"
@@ -351,7 +351,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       </div>
                       {item.badge && (
                         <span
-                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0 ${
+                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-sm shrink-0 ${
                             item.badgeColor || "bg-white/10 text-gray-300"
                           }`}
                         >
@@ -371,20 +371,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link
             href="/"
             target="_blank"
-            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs text-gray-300 hover:text-white transition-colors"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm text-xs text-gray-300 hover:text-white transition-colors"
           >
             <span className="flex items-center gap-2">
               <ExternalLink className="w-3.5 h-3.5 text-[#006F51]" />
               <span className="font-semibold">Preview Live Site</span>
             </span>
-            <span className="text-[10px] bg-[#006F51] text-white font-black px-1.5 py-0.5 rounded uppercase">
+            <span className="text-[10px] bg-[#006F51] text-white font-black px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
               dev
             </span>
           </Link>
 
-          <div className="p-2.5 bg-white/5 border border-white/5 rounded-lg flex items-center justify-between">
+          <div className="p-2.5 bg-white/5 border border-white/5 rounded-sm flex items-center justify-between">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-8 h-8 rounded-lg bg-[#006F51] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
+              <div className="w-8 h-8 rounded-sm bg-[#006F51] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
                 NW
               </div>
               <div className="text-[11px] leading-tight min-w-0">
@@ -398,7 +398,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
             <button
               onClick={handleLogout}
-              className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-white/10 rounded-lg transition-colors cursor-pointer shrink-0"
+              className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-white/10 rounded-sm transition-colors cursor-pointer shrink-0"
               title="Sign Out of Admin Portal"
             >
               <LogOut className="w-4 h-4" />
@@ -437,12 +437,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             {/* Direct Quick Link to Inquiries */}
             <Link
               href="/admin/requests"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#E9F4F0] border border-[#006F51]/20 rounded text-xs font-bold text-[#006F51] hover:bg-emerald-100/70 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#E9F4F0] border border-[#006F51]/20 rounded-sm text-xs font-bold text-[#006F51] hover:bg-[#d8ece4] transition-colors"
             >
               <Inbox className="w-3.5 h-3.5" />
               <span>Inquiries</span>
               {newRequestsCount > 0 && (
-                <span className="bg-[#006F51] text-white text-[10px] font-black px-1.5 py-0.2 rounded-full">
+                <span className="bg-[#006F51] text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm">
                   {newRequestsCount}
                 </span>
               )}
@@ -452,7 +452,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link
               href="/"
               target="_blank"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#1A1D20] hover:bg-black text-white rounded text-xs font-bold uppercase tracking-wider transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#1A1D20] hover:bg-black text-white rounded-sm text-xs font-bold uppercase tracking-wider transition-colors"
             >
               <span>View Website</span>
               <ExternalLink className="w-3.5 h-3.5" />

@@ -21,6 +21,8 @@ import {
   HelpCircle,
   ChevronLeft,
   ChevronRight,
+  Pause,
+  Play,
 } from "lucide-react";
 import { GooglePlayIcon } from "./GooglePlayButton";
 
@@ -71,15 +73,16 @@ const entebbeWasteSlides = [
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
 
-  // Auto-advance carousel every 4.5 seconds when not hovered
+  // Auto-advance carousel every 4.5 seconds when not hovered and not manually paused
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || isManuallyPaused) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % entebbeWasteSlides.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, isManuallyPaused]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) =>
@@ -245,14 +248,38 @@ export default function HeroSection() {
                   </div>
                 ))}
 
-                {/* Top Badge: Slide Tag & Location */}
-                <div className="absolute top-3.5 left-3.5 right-3.5 z-20 flex items-center justify-between">
+                {/* Top Badge: Slide Tag, Pause/Play Button & Counter */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 z-20 flex items-center justify-between gap-2">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-white bg-[#006F51]/95 px-2.5 py-1 rounded-sm shadow-xs border border-white/20">
                     {active.tag}
                   </span>
-                  <span className="text-[11px] font-bold text-white/90 bg-black/60 px-2 py-0.5 rounded-sm">
-                    {currentSlide + 1} / {entebbeWasteSlides.length}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsManuallyPaused((prev) => !prev);
+                      }}
+                      className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white bg-black/60 hover:bg-[#006F51] px-2 py-1 rounded-sm border border-white/20 transition-colors cursor-pointer"
+                      title={isManuallyPaused ? "Resume slide rotation" : "Pause slide rotation"}
+                      aria-label={isManuallyPaused ? "Play carousel" : "Pause carousel"}
+                    >
+                      {isManuallyPaused ? (
+                        <>
+                          <Play className="w-3 h-3 text-[#FFCE00] fill-[#FFCE00]" />
+                          <span>Play</span>
+                        </>
+                      ) : (
+                        <>
+                          <Pause className="w-3 h-3 text-white" />
+                          <span>Pause</span>
+                        </>
+                      )}
+                    </button>
+                    <span className="text-[11px] font-bold text-white/90 bg-black/60 px-2 py-0.5 rounded-sm border border-white/20">
+                      {currentSlide + 1} / {entebbeWasteSlides.length}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Left/Right Arrow Navigation Buttons */}
