@@ -319,7 +319,7 @@ export default function Footer() {
               NEMA Statutory Notice
             </Link>
             <span>&bull;</span>
-            <Link href="/admin" className="hover:text-[#FFCE00] transition-colors font-semibold text-gray-400">
+            <Link href="/login" className="hover:text-[#FFCE00] transition-colors font-semibold text-gray-400">
               Staff Portal
             </Link>
           </div>

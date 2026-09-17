@@ -24,6 +24,8 @@ import {
   ArrowRight,
   RefreshCw,
   Users,
+  UserCheck,
+  Scale,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
@@ -176,7 +178,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Navigation Items
   const navSections = [
     {
-      label: "OPERATIONS & REQUESTS",
+      label: "OPERATIONS & DIRECTORY",
       items: [
         {
           name: "Dashboard Overview",
@@ -192,11 +194,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           badgeColor: "bg-emerald-600 text-white",
         },
         {
-          name: "Registered Clients & Users",
+          name: "Clients Directory",
+          href: "/admin/clients",
+          icon: UserCheck,
+          badge: "Customers",
+          badgeColor: "bg-emerald-600/30 text-emerald-300 border border-emerald-500/30",
+        },
+        {
+          name: "Access Management",
           href: "/admin/users",
-          icon: Users,
-          badge: "Database",
-          badgeColor: "bg-blue-600/30 text-blue-300 border border-blue-500/30",
+          icon: ShieldCheck,
+          badge: "Operators",
+          badgeColor: "bg-purple-600/30 text-purple-300 border border-purple-500/30",
         },
       ],
     },
@@ -245,6 +254,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           href: "/admin/projects",
           icon: Award,
           badge: null,
+        },
+        {
+          name: "Privacy & Terms Manager",
+          href: "/admin/legal",
+          icon: Scale,
+          badge: "Legal",
+          badgeColor: "bg-blue-600/30 text-blue-300 border border-blue-500/30",
         },
       ],
     },

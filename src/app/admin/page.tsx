@@ -147,22 +147,22 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Metric 2: Registered Database Users */}
+        {/* Metric 2: Registered Clients */}
         <div className="bg-white p-5 rounded-xl border border-[#E5E7EB] shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-gray-500 mb-2">
-            <span className="text-[11px] font-bold uppercase tracking-wider">Registered Users</span>
-            <Users className="w-4 h-4 text-blue-600" />
+            <span className="text-[11px] font-bold uppercase tracking-wider">Clients Directory</span>
+            <Users className="w-4 h-4 text-emerald-600" />
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-black text-[#1A1D20]">{users.length}</span>
-            <span className="text-xs text-blue-700 font-bold">
-              {clientUsers.length} Clients
+            <span className="text-2xl sm:text-3xl font-black text-[#1A1D20]">{clientUsers.length}</span>
+            <span className="text-xs text-emerald-700 font-bold">
+              Subscribers
             </span>
           </div>
           <div className="text-[11px] text-gray-500 mt-2 flex items-center justify-between border-t border-gray-100 pt-2">
-            <span>{users.length - clientUsers.length} Staff</span>
-            <Link href="/admin/users" className="text-blue-600 font-bold hover:underline">
-              Manage &rarr;
+            <span>{users.length - clientUsers.length} Operators</span>
+            <Link href="/admin/clients" className="text-[#006F51] font-bold hover:underline">
+              Clients &rarr;
             </Link>
           </div>
         </div>
