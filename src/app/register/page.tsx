@@ -130,7 +130,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   required
-                  placeholder="Arthur Byaruhanga"
+                  placeholder="e.g. David Mukasa"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
@@ -144,7 +144,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Victoria Heights or Nile Breweries"
+                  placeholder="e.g. Victoria View Estates or Nile Breweries"
                   value={organization}
                   onChange={(e) => setOrganization(e.target.value)}
                   className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
@@ -159,7 +159,7 @@ export default function RegisterPage() {
                   <input
                     type="email"
                     required
-                    placeholder="arthur@company.com"
+                    placeholder="e.g. david@company.ug"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"

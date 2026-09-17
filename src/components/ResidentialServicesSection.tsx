@@ -46,7 +46,7 @@ export default function ResidentialServicesSection() {
           </p>
         </div>
 
-        {/* 2-Columns Grid: Left Image, Right Cards (Inverted from commercial section, exactly like Waste Connections) */}
+        {/* 2-Columns Grid: Left Image, Right Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left: Residential Customer Image */}

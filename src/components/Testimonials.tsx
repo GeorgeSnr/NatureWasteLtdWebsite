@@ -12,7 +12,7 @@ export default function Testimonials() {
     <section id="testimonials" className="w-full bg-white py-16 sm:py-20 select-none border-b border-[#E5E7EB]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
         
-        {/* Section Header (Waste Connections hcenter-reviews pattern) */}
+        {/* Section Header */}
         <div className="max-w-3xl mb-12 space-y-3">
           <div className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
             What Our Customers Say About Us
@@ -25,7 +25,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Reviews Grid (Matching Waste Connections 5.0 Star Cards) */}
+        {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {customerReviews.slice(0, 4).map((review) => (
             <div

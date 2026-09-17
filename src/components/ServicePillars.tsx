@@ -74,7 +74,7 @@ export default function ServicePillars() {
           </p>
         </div>
 
-        {/* 3 Core Pillar Cards (Matching Waste Connections sec_service-cards) */}
+        {/* 3 Core Pillar Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {pillars.map((pillar) => (
             <div

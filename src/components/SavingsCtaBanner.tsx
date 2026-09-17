@@ -10,7 +10,7 @@ export default function SavingsCtaBanner() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
           
-          {/* Headline matching Waste Connections copy */}
+          {/* Headline */}
           <div className="max-w-2xl space-y-2">
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#006F51] tracking-tight leading-tight">
               Say goodbye to waste and hello to savings with Nature Waste!
@@ -20,7 +20,7 @@ export default function SavingsCtaBanner() {
             </p>
           </div>
 
-          {/* Buttons matching Waste Connections */}
+          {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center lg:justify-end gap-4 shrink-0">
             <Link
               href="/#schedule-finder"

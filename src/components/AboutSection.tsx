@@ -59,7 +59,7 @@ export default function AboutSection() {
               A Higher Standard of Waste Management For Uganda
             </h2>
             <p className="text-[#555C66] text-sm sm:text-base leading-relaxed">
-              At Nature Waste Management Limited, we believe reliable sanitation is the bedrock of thriving communities. We combine corporate-grade logistics modeled after industry leaders like Waste Connections with passionate on-the-ground youth environmental stewardship.
+              At Nature Waste Management Limited, we believe reliable sanitation is the bedrock of thriving communities. We combine corporate-grade logistics modeled after global best practices with passionate on-the-ground youth environmental stewardship.
             </p>
           </div>
 

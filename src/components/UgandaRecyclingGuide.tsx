@@ -102,7 +102,7 @@ export default function UgandaRecyclingGuide() {
             What Goes Where? Uganda Waste Segregation Guide
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            Waste Connections and Nature Waste believe in making sustainability simple. Follow our color-coded guidelines to ensure maximum recycling efficiency and neighborhood cleanliness.
+            Nature Waste believes in making sustainability simple. Follow our color-coded guidelines to ensure maximum recycling efficiency and neighborhood cleanliness.
           </p>
         </div>
 

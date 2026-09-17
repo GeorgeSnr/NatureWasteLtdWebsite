@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   keywords: [
     "Nature Waste",
     "Nature Waste Management Ltd",
-    "Waste Connections Uganda",
     "Garbage pickup Kampala",
     "Dumpster rental Uganda",
     "Skip hire Kampala",

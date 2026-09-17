@@ -102,10 +102,10 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-8 py-8 sm:py-10 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* Left Column: Authoritative Clean Copy & Waste Connections Action Buttons */}
+          {/* Left Column: Authoritative Clean Copy & Action Buttons */}
           <div className="lg:col-span-7 space-y-5">
             
-            {/* Main Headline matching Waste Connections typography */}
+            {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-black text-[#1A1D20] leading-[1.15] tracking-tight">
               Reliable Garbage Pickup &amp; Waste Solutions
             </h1>
@@ -115,7 +115,7 @@ export default function HeroSection() {
               Home and business waste management services, scheduled curbside pickup, and roll-off dumpster rentals across Greater Kampala, Entebbe Road, and Wakiso.
             </p>
 
-            {/* Primary Waste Connections Action Button Group */}
+            {/* Primary Action Button Group */}
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
               {/* Yellow Primary Button */}
               <a

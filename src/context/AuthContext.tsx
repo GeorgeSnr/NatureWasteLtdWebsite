@@ -47,8 +47,6 @@ interface AuthContextType {
   toggleUserStatus: (userId: string) => void;
   deleteUser: (userId: string) => void;
   addUser: (user: UserProfile) => void;
-  loginAsDemoClient: (clientIndex?: number) => void;
-  loginAsDemoStaff: () => void;
 }
 
 const STORAGE_KEYS = {
@@ -152,18 +150,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Validate password if provided
     if (password && password.trim()) {
-      const validPass = user.passwordHash || user.password || (user.role === "client" ? "client2026" : "admin2026");
+      const validPass = user.passwordHash || user.password;
       const cleanPass = password.trim();
-      // Allow user's password, or system fallback passcodes
-      if (
-        cleanPass !== validPass &&
-        cleanPass !== "admin2026" &&
-        cleanPass !== "client2026" &&
-        cleanPass !== "Nature@2026"
-      ) {
+      if (validPass && cleanPass !== validPass) {
         return {
           success: false,
-          message: "Incorrect password entered. Please try again or contact dispatch desk.",
+          message: "Incorrect password entered. Please check your password and try again.",
         };
       }
     }
@@ -174,7 +166,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {
       success: true,
       user,
-      requiresMfa: true,
+      requiresMfa: user.mfaEnabled ?? false,
       mfaCode: generatedOtp,
     };
   };
@@ -233,9 +225,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       locationAddress: data.locationAddress,
       plan: data.plan || "Residential Connect",
       accountStatus: "active",
-      password: data.password || "client2026",
-      passwordHash: data.password || "client2026",
-      mfaEnabled: true,
+      password: data.password || "",
+      passwordHash: data.password || "",
+      mfaEnabled: false,
       ecoPoints: 150, // Welcome signup bonus
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
@@ -345,19 +337,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }).catch((err) => console.error("Error adding user to Neon:", err));
   };
 
-  // Quick Demo Logins
-  const loginAsDemoClient = (clientIndex: number = 0) => {
-    const clients = users.filter((u) => u.role === "client");
-    const client = clients[clientIndex % clients.length] || clients[0] || initialUsers[0];
-    saveCurrentUser(client);
-  };
-
-  const loginAsDemoStaff = () => {
-    const staff =
-      users.find((u) => u.role === "admin" || u.role === "dispatcher") || initialUsers[5];
-    saveCurrentUser(staff);
-  };
-
   const isAuthenticated = !!currentUser;
   const isStaff =
     currentUser?.role === "admin" ||
@@ -382,8 +361,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         toggleUserStatus,
         deleteUser,
         addUser,
-        loginAsDemoClient,
-        loginAsDemoStaff,
       }}
     >
       {children}

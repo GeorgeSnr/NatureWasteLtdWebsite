@@ -52,7 +52,7 @@ export default function SustainabilitySection() {
           </p>
         </div>
 
-        {/* 3 Pillar Cards (Exact Waste Connections sec_hcenter-3cards layout) */}
+        {/* 3 Pillar Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {cards.map((card, idx) => {
             const Icon = card.icon;

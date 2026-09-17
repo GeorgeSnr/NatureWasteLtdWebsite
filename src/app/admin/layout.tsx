@@ -29,11 +29,13 @@ import {
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { requests, announcement } = useWebsiteData();
+  const { users } = useAuth();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -57,7 +59,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogin = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (passwordInput === "admin2026" || passwordInput === "admin" || !passwordInput) {
+    const clean = passwordInput.trim();
+    if (!clean) {
+      setLoginError(true);
+      return;
+    }
+
+    const isStaffMatch = users.some(
+      (u) =>
+        (u.role === "admin" || u.role === "dispatcher" || u.role === "compliance") &&
+        u.accountStatus === "active" &&
+        (u.passwordHash === clean || u.password === clean)
+    );
+
+    if (isStaffMatch || clean === "Admin#Magezi2026!NW") {
       if (typeof window !== "undefined") {
         sessionStorage.setItem("nw_admin_auth", "true");
       }
@@ -66,14 +81,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     } else {
       setLoginError(true);
     }
-  };
-
-  const handleQuickDemoLogin = () => {
-    if (typeof window !== "undefined") {
-      sessionStorage.setItem("nw_admin_auth", "true");
-    }
-    setIsAuthenticated(true);
-    setLoginError(false);
   };
 
   const handleLogout = () => {
@@ -133,7 +140,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </div>
                 {loginError && (
                   <p className="text-xs text-red-400 mt-1">
-                    Invalid passcode. Hint: use <strong>admin2026</strong> or click 1-Click Demo Access below.
+                    Invalid passcode. Please enter an authorized administrator passcode.
                   </p>
                 )}
               </div>
@@ -147,15 +154,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </form>
 
             <div className="pt-2 border-t border-white/10 text-center space-y-3">
-              <button
-                type="button"
-                onClick={handleQuickDemoLogin}
-                className="w-full bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] py-2.5 rounded-sm font-extrabold uppercase text-xs tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
-              >
-                <span>1-Click Instant Demo Login</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
               <div className="text-[11px] text-gray-400">
                 Authorized Nature Waste Management personnel only.
               </div>

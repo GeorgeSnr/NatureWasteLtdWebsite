@@ -50,8 +50,6 @@ export default function PortalPage() {
     login,
     registerClient,
     logout,
-    loginAsDemoClient,
-    loginAsDemoStaff,
   } = useAuth();
 
   // Auth Gate state
@@ -122,14 +120,7 @@ export default function PortalPage() {
       return matched;
     }
 
-    // Demo fallback for reviewer evaluation if newly registered account has no logged requests yet
-    if (userName.includes("arthur") || (currentUser.suburb && currentUser.suburb.toLowerCase().includes("kitende"))) {
-      return requests.filter((r) => r.id === "REQ-2026-001" || r.suburb === "Kitende");
-    }
-    if (userName.includes("beatrice") || (currentUser.suburb && currentUser.suburb.toLowerCase().includes("lubowa"))) {
-      return requests.filter((r) => r.id === "REQ-2026-002" || r.id === "REQ-2026-003" || r.suburb === "Lubowa");
-    }
-    return requests.slice(0, 3);
+    return [];
   }, [requests, currentUser]);
 
   const activeRequests = useMemo(
@@ -360,7 +351,7 @@ export default function PortalPage() {
                         <input
                           type="text"
                           required
-                          placeholder="e.g. arthur@example.com or +256 772 123 456"
+                          placeholder="e.g. david.mukasa@ubl-logistics.ug or +256 772..."
                           value={loginIdentifier}
                           onChange={(e) => {
                             setLoginIdentifier(e.target.value);
@@ -377,13 +368,11 @@ export default function PortalPage() {
                         <label className="text-xs font-bold uppercase tracking-wider text-gray-700">
                           Password
                         </label>
-                        <span className="text-[11px] text-gray-400">
-                          (Leave blank or use any password in demo mode)
-                        </span>
                       </div>
                       <div className="relative">
                         <input
                           type="password"
+                          required
                           placeholder="••••••••"
                           value={loginPassword}
                           onChange={(e) => setLoginPassword(e.target.value)}
@@ -401,50 +390,6 @@ export default function PortalPage() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </form>
-
-                  {/* Quick 1-Click Demo Client Shortcuts */}
-                  <div className="pt-5 border-t border-gray-200">
-                    <div className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 text-center">
-                      Instant Reviewer Demo Access (1-Click)
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <button
-                        type="button"
-                        onClick={() => loginAsDemoClient(0)}
-                        className="p-3 text-left rounded-sm border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100 transition-colors cursor-pointer group"
-                      >
-                        <div className="text-xs font-bold text-[#006F51] group-hover:underline">
-                          Arthur Byaruhanga
-                        </div>
-                        <div className="text-[11px] text-[#555C66]">
-                          Residential Client &bull; Kitende (120L Bin)
-                        </div>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => loginAsDemoClient(1)}
-                        className="p-3 text-left rounded-sm border border-blue-200 bg-blue-50/60 hover:bg-blue-100 transition-colors cursor-pointer group"
-                      >
-                        <div className="text-xs font-bold text-blue-800 group-hover:underline">
-                          Beatrice Namuli
-                        </div>
-                        <div className="text-[11px] text-[#555C66]">
-                          Commercial Client &bull; Lubowa (660L Skip)
-                        </div>
-                      </button>
-                    </div>
-
-                    <div className="mt-3 text-center">
-                      <button
-                        type="button"
-                        onClick={() => loginAsDemoStaff()}
-                        className="text-[11px] text-purple-700 hover:text-purple-900 font-bold underline cursor-pointer"
-                      >
-                        Try as Dispatch &amp; Operations Staff (Geoffrey Magezi) &rarr;
-                      </button>
-                    </div>
-                  </div>
                 </div>
               )}
 

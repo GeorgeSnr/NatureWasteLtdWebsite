@@ -122,7 +122,7 @@ export default function Header() {
     <>
       {/* Sticky Top Bar & Navigation Wrapper: Stays pinned to top on mobile and desktop */}
       <div className="sticky top-0 z-40 w-full bg-white shadow-xs">
-        {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
+        {/* 1. Top Utility Bar */}
         <div className="bg-[#F8F9FA] text-[#363636] text-xs py-1.5 sm:py-2 px-3 sm:px-8 border-b border-[#E5E7EB] overflow-hidden">
           <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-4">
             {/* Left Cluster: Location & NEMA Registration */}
@@ -225,7 +225,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. Main Sticky Pages Bar (Waste Connections 'navbar-pages' Pattern) */}
+        {/* 2. Main Sticky Pages Bar */}
         <header className="bg-white border-b border-[#E5E7EB]">
           <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
           {/* Brand Logo - compact on mobile so it never forces header overflow */}
@@ -465,7 +465,7 @@ export default function Header() {
 
           </nav>
 
-          {/* Right: Phone link & High-Visibility Yellow CTA Button (Waste Connections signature) */}
+          {/* Right: Phone link & High-Visibility Yellow CTA Button */}
           <div className="flex items-center gap-3">
             {/* Phone Number Callout */}
             <a
@@ -485,7 +485,7 @@ export default function Header() {
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Signature Waste Connections Yellow Button: "Get Prices" */}
+            {/* Yellow CTA Button: "Get Prices" */}
             <Link
               href="/#schedule-finder"
               className="bg-[#FFCE00] hover:bg-[#E5B800] text-[#1A1D20] font-bold text-[11px] sm:text-xs uppercase tracking-wider px-2.5 sm:px-6 py-1.5 sm:py-2.5 rounded transition-colors shrink-0"

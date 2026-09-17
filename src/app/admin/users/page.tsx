@@ -85,7 +85,7 @@ export default function AdminAccessManagementPage() {
     email: "",
     phone: "",
     role: "dispatcher",
-    password: "admin2026",
+    password: "",
     accountStatus: "active",
     mfaEnabled: true,
     organization: "Nature Waste Ltd",
@@ -122,14 +122,15 @@ export default function AdminAccessManagementPage() {
 
   const handleCreateStaff = (e: React.FormEvent) => {
     e.preventDefault();
+    const generatedPass = form.password.trim() || `Staff#${Math.floor(1000 + Math.random() * 9000)}`;
     const newStaff: UserProfile = {
       id: `USR-S-${Date.now().toString().slice(-4)}`,
       name: form.name,
       email: form.email,
       phone: form.phone,
       role: form.role,
-      password: form.password || "admin2026",
-      passwordHash: form.password || "admin2026",
+      password: generatedPass,
+      passwordHash: generatedPass,
       accountStatus: form.accountStatus,
       mfaEnabled: form.mfaEnabled,
       organization: "Nature Waste Ltd",
@@ -145,9 +146,9 @@ export default function AdminAccessManagementPage() {
       email: "",
       phone: "",
       role: "dispatcher",
-      password: "admin2026",
+      password: "",
       accountStatus: "active",
-      mfaEnabled: true,
+      mfaEnabled: false,
       organization: "Nature Waste Ltd",
       suburb: "Kitende Headquarters",
     });

@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#1A2026] text-white select-none overflow-hidden">
       
-      {/* 1. Top Pre-Footer Callout Bar (Waste Connections Pattern) */}
+      {/* 1. Top Pre-Footer Callout Bar */}
       <div className="bg-[#14191E] border-b border-white/10 py-8 px-4 sm:px-8">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-center md:text-left">
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 2. Main 5-Column Navigation Grid (Exact Waste Connections sec_footer-main) */}
+      {/* 2. Main 5-Column Navigation Grid */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-14 sm:py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-10">
           
@@ -277,7 +277,7 @@ export default function Footer() {
 
         </div>
 
-        {/* 3. Middle Action Row with Logo & Buttons (Waste Connections footer-main_bottom-row) */}
+        {/* 3. Middle Action Row with Logo & Buttons */}
         <div className="pt-10 mt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center">
             <Logo variant="dark" size="md" showTagline />

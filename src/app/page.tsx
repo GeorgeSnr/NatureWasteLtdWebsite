@@ -21,7 +21,7 @@ import ContactSection from "@/components/ContactSection";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-white w-full max-w-full overflow-x-hidden">
-      {/* 1. Hero Section (Waste Connections Home Hero) */}
+      {/* 1. Hero Section */}
       <HeroSection />
 
       {/* 2. Customer Quick Actions (Self-Service Tiles) */}

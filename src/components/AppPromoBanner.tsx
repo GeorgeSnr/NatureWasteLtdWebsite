@@ -21,7 +21,7 @@ export default function AppPromoBanner() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          {/* Left Content (Waste Connections sec_banner-app pattern) */}
+          {/* Left Content */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-[#006F51]">

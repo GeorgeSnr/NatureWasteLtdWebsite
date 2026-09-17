@@ -33,7 +33,7 @@ export default function CommercialServicesSection() {
     <section className="w-full bg-[#F8F9FA] py-16 sm:py-20 select-none border-b border-[#E5E7EB]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8">
         
-        {/* Section Header (Waste Connections hcenter-wrapper pattern) */}
+        {/* Section Header */}
         <div className="max-w-3xl mb-12 space-y-3">
           <div className="text-xs font-bold uppercase tracking-wider text-[#006F51]">
             Nature Waste Commercial
@@ -90,7 +90,7 @@ export default function CommercialServicesSection() {
             </div>
           </div>
 
-          {/* Right: Waste Connections Commercial Customer Photography */}
+          {/* Right: Commercial Customer Photography */}
           <div className="lg:col-span-5">
             <div className="rounded overflow-hidden shadow-xs border border-[#E5E7EB] bg-white">
               <img

@@ -74,7 +74,7 @@ export default function ContainerGuide() {
             Choose the Right Container For Your Needs
           </h2>
           <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            Waste Connections and Nature Waste make finding the right container effortless. Explore our standard bins, commercial dumpsters, and heavy-duty roll-off skips below.
+            Nature Waste makes finding the right container effortless. Explore our standard bins, commercial dumpsters, and heavy-duty roll-off skips below.
           </p>
         </div>
 

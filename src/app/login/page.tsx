@@ -91,6 +91,20 @@ export default function LoginPage() {
       }
 
       if (res.user) {
+        if (!res.user.mfaEnabled) {
+          completeMfaLogin(res.user);
+          if (
+            res.user.role === "admin" ||
+            res.user.role === "dispatcher" ||
+            res.user.role === "compliance"
+          ) {
+            router.push("/admin");
+          } else {
+            router.push("/portal");
+          }
+          return;
+        }
+
         setPendingUser(res.user);
         const code = res.mfaCode || "256789";
         setGeneratedOtp(code);
@@ -183,12 +197,6 @@ export default function LoginPage() {
     setOtpError("");
   };
 
-  // Quick Demo account prefill
-  const quickFillAccount = (id: string, pass: string) => {
-    setIdentifier(id);
-    setPassword(pass);
-    setError("");
-  };
 
   return (
     <div className="min-h-screen bg-[#F4F5F7] flex flex-col justify-center py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
@@ -231,7 +239,7 @@ export default function LoginPage() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. arthur@victoriaheights.ug or +256 772..."
+                    placeholder="e.g. david.mukasa@ubl-logistics.ug or +256 772..."
                     value={identifier}
                     onChange={(e) => {
                       setIdentifier(e.target.value);
@@ -248,7 +256,6 @@ export default function LoginPage() {
                   <label className="text-xs font-bold uppercase tracking-wider text-gray-700">
                     Account Password *
                   </label>
-                  <span className="text-[10px] text-gray-400">Default: Nature@2026</span>
                 </div>
                 <div className="relative">
                   <input
@@ -281,36 +288,11 @@ export default function LoginPage() {
                   <RefreshCw className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    <span>Continue to Security Check</span>
+                    <span>Sign In to Account</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
-
-              {/* Demo 1-Click Credentials Shortcuts */}
-              <div className="pt-4 border-t border-gray-100 space-y-2.5">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-gray-400 text-center">
-                  Quick Demo Accounts
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <button
-                    type="button"
-                    onClick={() => quickFillAccount("arthur@victoriaheights.ug", "client2026")}
-                    className="p-2.5 text-left rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors cursor-pointer"
-                  >
-                    <div className="font-bold text-[#006F51]">Arthur B.</div>
-                    <div className="text-[10px] text-gray-500">Client Portal (Household)</div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => quickFillAccount("geoffrey@naturewaste.ug", "admin2026")}
-                    className="p-2.5 text-left rounded-lg border border-purple-200 bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer"
-                  >
-                    <div className="font-bold text-purple-800">Geoffrey M.</div>
-                    <div className="text-[10px] text-gray-500">Admin &amp; Operations</div>
-                  </button>
-                </div>
-              </div>
             </form>
           ) : (
             /* STEP 2: MULTI-FACTOR AUTHENTICATION (MFA) */
@@ -339,27 +321,6 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              {/* Live Demo Code Display Box (Ensures client can always test immediately) */}
-              <div className="p-3 bg-amber-50 border border-amber-300 rounded-xl flex items-center justify-between text-xs text-amber-900">
-                <div>
-                  <span className="font-bold uppercase text-[10px] tracking-wider text-amber-800 block">
-                    Demo OTP Code
-                  </span>
-                  <span className="font-mono text-base font-black tracking-widest text-amber-950">
-                    {generatedOtp}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOtpDigits(generatedOtp.split(""));
-                    setOtpError("");
-                  }}
-                  className="text-[11px] font-bold bg-amber-200/80 hover:bg-amber-300 text-amber-900 px-2.5 py-1 rounded transition-colors"
-                >
-                  Auto-Fill Code
-                </button>
-              </div>
 
               {otpError && (
                 <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs font-semibold flex items-center gap-2">

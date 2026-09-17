@@ -59,7 +59,7 @@ export default function AdminClientsPage() {
     suburb: "Kitende",
     address: "",
     plan: "Residential Connect (120L Wheelie Bin)",
-    password: "client2026",
+    password: "",
   });
 
   // Strictly filter client accounts
@@ -124,14 +124,15 @@ export default function AdminClientsPage() {
 
   const handleCreateClient = (e: React.FormEvent) => {
     e.preventDefault();
+    const generatedPass = form.password.trim() || `Client#${Math.floor(1000 + Math.random() * 9000)}`;
     const newClient: UserProfile = {
       id: `USR-C-${Date.now().toString().slice(-4)}`,
       name: form.name,
       email: form.email,
       phone: form.phone,
       role: "client",
-      password: form.password || "client2026",
-      passwordHash: form.password || "client2026",
+      password: generatedPass,
+      passwordHash: generatedPass,
       organization: form.organization || "Private Residence",
       suburb: form.suburb,
       address: form.address,
@@ -155,12 +156,12 @@ export default function AdminClientsPage() {
       suburb: "Kitende",
       address: "",
       plan: "Residential Connect (120L Wheelie Bin)",
-      password: "client2026",
+      password: "",
       latitude: undefined,
       longitude: undefined,
       locationAddress: undefined,
     });
-    setSavedSuccess(`Client ${newClient.name} registered and saved to Neon PostgreSQL!`);
+    setSavedSuccess(`Client ${newClient.name} registered with credentials saved to Neon!`);
     setTimeout(() => setSavedSuccess(null), 4000);
   };
 

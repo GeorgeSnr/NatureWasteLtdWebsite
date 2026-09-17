@@ -53,8 +53,8 @@ export async function POST(req: Request) {
     const passwordHash =
       body.password ||
       body.passwordHash ||
-      (body.role === "client" ? "client2026" : "admin2026");
-    const mfaEnabled = typeof body.mfaEnabled === "boolean" ? body.mfaEnabled : true;
+      (body.role === "client" ? `Client#${Math.floor(1000 + Math.random() * 9000)}` : `Staff#${Math.floor(1000 + Math.random() * 9000)}`);
+    const mfaEnabled = typeof body.mfaEnabled === "boolean" ? body.mfaEnabled : false;
     const accountStatus = body.accountStatus || "active";
 
     await sql`
