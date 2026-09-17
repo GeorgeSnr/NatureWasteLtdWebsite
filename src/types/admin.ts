@@ -30,6 +30,9 @@ export interface ClientRequest {
   organization?: string;
   suburb?: string;
   address?: string;
+  latitude?: number;
+  longitude?: number;
+  locationAddress?: string;
   volumeOrTier?: string;
   preferredDate?: string;
   message?: string;
@@ -57,6 +60,9 @@ export interface UserProfile {
   organization?: string;
   suburb?: string;
   address?: string;
+  latitude?: number;
+  longitude?: number;
+  locationAddress?: string;
   plan?: string;
   accountStatus: "active" | "pending" | "suspended";
   ecoPoints?: number;

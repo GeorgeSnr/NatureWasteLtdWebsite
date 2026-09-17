@@ -14,12 +14,18 @@ import {
   Smartphone,
 } from "lucide-react";
 import GooglePlayButton from "./GooglePlayButton";
+import LiveLocationPicker from "./LiveLocationPicker";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
 
 export default function ContactSection() {
   const { companySettings, submitRequest } = useWebsiteData();
   const [submitted, setSubmitted] = useState(false);
   const [inquiryType, setInquiryType] = useState("residential");
+  const [coords, setCoords] = useState<{
+    latitude?: number;
+    longitude?: number;
+    locationAddress?: string;
+  }>({});
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -35,6 +41,9 @@ export default function ContactSection() {
       phone: formData.phone,
       email: formData.email || undefined,
       suburb: formData.area,
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      locationAddress: coords.locationAddress,
       type:
         inquiryType === "missed"
           ? "missed_pickup"
@@ -313,6 +322,18 @@ export default function ContactSection() {
                     className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-sm text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
                   />
                 </div>
+
+                {/* Optional Live Location Pinning for Truck Navigation */}
+                <LiveLocationPicker
+                  label="Pickup / Gate Live GPS Location (Optional)"
+                  onLocationChange={(loc) => {
+                    setCoords({
+                      latitude: loc ? loc.latitude : undefined,
+                      longitude: loc ? loc.longitude : undefined,
+                      locationAddress: loc ? loc.address : undefined,
+                    });
+                  }}
+                />
 
                 <button
                   type="submit"

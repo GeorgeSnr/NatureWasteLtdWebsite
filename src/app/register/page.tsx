@@ -6,29 +6,51 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, CheckCircle2, ShieldCheck } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
+import { useAuth } from "@/context/AuthContext";
+import LiveLocationPicker from "@/components/LiveLocationPicker";
 
 export default function RegisterPage() {
   const router = useRouter();
   const { submitRequest } = useWebsiteData();
+  const { registerClient } = useAuth();
   const [plan, setPlan] = useState("commercial");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [organization, setOrganization] = useState("");
+  const [location, setLocation] = useState<{ latitude: number; longitude: number; address?: string } | null>(null);
   const [registered, setRegistered] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Register user in Neon database
+    registerClient({
+      name: fullName,
+      email: email,
+      phone: phone,
+      organization: organization || "Trial Client",
+      suburb: location?.address ? location.address.split("/")[0].trim() : "Kitende",
+      latitude: location?.latitude,
+      longitude: location?.longitude,
+      locationAddress: location?.address,
+      plan: `${plan.toUpperCase()} Tier`,
+      password: password,
+    });
+
     submitRequest({
       name: fullName,
       email: email,
       phone: phone,
       organization: organization,
+      latitude: location?.latitude,
+      longitude: location?.longitude,
+      locationAddress: location?.address,
       type: "trial_registration",
       title: `14-Day Free Trial Signup (${plan.toUpperCase()})`,
       volumeOrTier: `${plan.toUpperCase()} Tier`,
-      message: `Account registration for ${organization}. Password initialized.`,
+      message: `Account registration for ${organization}. Password initialized. GPS: ${location ? `${location.latitude}, ${location.longitude}` : "None"}.`,
       priority: "normal",
       status: "new",
       assignedTo: "Client Onboarding Team",
@@ -170,6 +192,16 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-[#F8F9FA] border border-[#D1D5DB] rounded-sm px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51]"
+                />
+              </div>
+
+              {/* Live Location Option */}
+              <div className="pt-1">
+                <LiveLocationPicker
+                  label="Office / Residence Gate Location"
+                  helperText="Attach your live GPS pin so our collection trucks can navigate directly to your gate."
+                  onLocationChange={(loc) => setLocation(loc)}
+                  initialLocation={location}
                 />
               </div>
 

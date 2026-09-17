@@ -17,6 +17,9 @@ interface AuthContextType {
     organization?: string;
     suburb?: string;
     address?: string;
+    latitude?: number;
+    longitude?: number;
+    locationAddress?: string;
     plan?: string;
     password?: string;
   }) => { success: boolean; user: UserProfile };
@@ -39,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [users, setUsers] = useState<UserProfile[]>(initialUsers);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
-  // Initialize from storage
+  // Initialize from storage and Neon
   useEffect(() => {
     try {
       if (typeof window !== "undefined") {
@@ -56,6 +59,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.error("Failed to load auth storage:", e);
     }
+
+    // Fetch live users from Neon PostgreSQL
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.users) && data.users.length > 0) {
+          setUsers(data.users);
+          if (typeof window !== "undefined") {
+            localStorage.setItem(STORAGE_KEYS.USERS_DB, JSON.stringify(data.users));
+          }
+        }
+      })
+      .catch((err) => console.warn("Could not fetch users from Neon API:", err));
   }, []);
 
   const saveUsers = (updated: UserProfile[]) => {
@@ -131,6 +147,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     organization?: string;
     suburb?: string;
     address?: string;
+    latitude?: number;
+    longitude?: number;
+    locationAddress?: string;
     plan?: string;
     password?: string;
   }): { success: boolean; user: UserProfile } => {
@@ -143,6 +162,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       organization: data.organization || "Private Household",
       suburb: data.suburb || "Kitende",
       address: data.address || "",
+      latitude: data.latitude,
+      longitude: data.longitude,
+      locationAddress: data.locationAddress,
       plan: data.plan || "Residential Connect",
       accountStatus: "active",
       ecoPoints: 150, // Welcome signup bonus
@@ -153,6 +175,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const updatedList = [newUser, ...users];
     saveUsers(updatedList);
     saveCurrentUser(newUser);
+
+    // Sync to Neon
+    fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    }).catch((err) => console.error("Error saving user to Neon:", err));
+
     return { success: true, user: newUser };
   };
 
@@ -171,6 +201,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (currentUser?.id === userId) {
       saveCurrentUser({ ...currentUser, accountStatus: status });
     }
+
+    fetch("/api/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: userId, accountStatus: status }),
+    }).catch((err) => console.error("Error updating user status in Neon:", err));
   };
 
   const deleteUser = (userId: string) => {
@@ -179,11 +215,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (currentUser?.id === userId) {
       logout();
     }
+
+    fetch(`/api/users?id=${userId}`, {
+      method: "DELETE",
+    }).catch((err) => console.error("Error deleting user in Neon:", err));
   };
 
   const addUser = (user: UserProfile) => {
     const updated = [user, ...users];
     saveUsers(updated);
+
+    fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    }).catch((err) => console.error("Error adding user to Neon:", err));
   };
 
   // Quick Demo Logins

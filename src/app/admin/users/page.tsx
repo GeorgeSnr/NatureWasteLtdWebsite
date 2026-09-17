@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { UserProfile, UserRole } from "@/types/admin";
+import LiveLocationPicker from "@/components/LiveLocationPicker";
 
 export default function AdminUsersPage() {
   const { users, updateUserStatus, deleteUser, addUser } = useAuth();
@@ -44,6 +45,9 @@ export default function AdminUsersPage() {
     suburb: string;
     address: string;
     plan: string;
+    latitude?: number;
+    longitude?: number;
+    locationAddress?: string;
   }>({
     name: "",
     email: "",
@@ -89,6 +93,9 @@ export default function AdminUsersPage() {
       organization: form.organization || (form.role === "client" ? "Private Residence" : "Nature Waste Ltd"),
       suburb: form.suburb,
       address: form.address,
+      latitude: form.latitude,
+      longitude: form.longitude,
+      locationAddress: form.locationAddress,
       plan: form.role === "client" ? form.plan : undefined,
       accountStatus: "active",
       ecoPoints: form.role === "client" ? 150 : undefined,
@@ -107,6 +114,9 @@ export default function AdminUsersPage() {
       suburb: "Kitende",
       address: "",
       plan: "Residential Connect",
+      latitude: undefined,
+      longitude: undefined,
+      locationAddress: undefined,
     });
     setSavedSuccess(true);
     setTimeout(() => setSavedSuccess(false), 3000);
@@ -295,6 +305,11 @@ export default function AdminUsersPage() {
                       <MapPin className="w-3 h-3 text-[#006F51]" />
                       <span>{u.suburb || "Kampala"}</span>
                     </div>
+                    {u.latitude && u.longitude && (
+                      <div className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#006F51] font-bold bg-[#E9F4F0] px-1.5 py-0.5 rounded border border-[#006F51]/20">
+                        <span>📍 GPS Tagged</span>
+                      </div>
+                    )}
                   </td>
 
                   <td className="p-4">
@@ -456,6 +471,59 @@ export default function AdminUsersPage() {
                   Registered {new Date(selectedUser.createdAt).toLocaleDateString()}
                 </span>
               </div>
+
+              {/* Client Gate / Premises Live Location Card */}
+              {selectedUser.latitude && selectedUser.longitude ? (
+                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#006F51]">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>Premises Gate GPS Pin</span>
+                    </div>
+                    <a
+                      href={`https://www.google.com/maps?q=${selectedUser.latitude},${selectedUser.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-bold text-[#006F51] hover:underline flex items-center gap-1"
+                    >
+                      <span>Open in Maps &rarr;</span>
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-mono font-bold text-gray-800">
+                      {selectedUser.latitude.toFixed(6)}, {selectedUser.longitude.toFixed(6)}
+                    </span>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${selectedUser.latitude},${selectedUser.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] uppercase font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 hover:bg-blue-100"
+                    >
+                      Route Compactor
+                    </a>
+                  </div>
+                  {selectedUser.locationAddress && (
+                    <div className="text-[11px] text-gray-600">
+                      Corridor: {selectedUser.locationAddress}
+                    </div>
+                  )}
+                  <div className="rounded overflow-hidden border border-gray-300 h-40 mt-2 bg-gray-100">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      title="User Gate GPS Location"
+                      src={`https://www.openstreetmap.org/export/embed.html?bbox=${selectedUser.longitude - 0.008}%2C${selectedUser.latitude - 0.008}%2C${selectedUser.longitude + 0.008}%2C${selectedUser.latitude + 0.008}&layer=mapnik&marker=${selectedUser.latitude}%2C${selectedUser.longitude}`}
+                      className="border-0 w-full h-full"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-500 text-[11px] flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                  <span>No live GPS coordinates captured for this account. Assigned to general route: {selectedUser.suburb || "Kampala"}.</span>
+                </div>
+              )}
             </div>
 
             <div className="p-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
@@ -612,6 +680,19 @@ export default function AdminUsersPage() {
                   </select>
                 </div>
               )}
+
+              {/* Pin Live Gate / Premises Location */}
+              <LiveLocationPicker
+                label="Pin Premises Gate GPS Location (Optional)"
+                onLocationChange={(loc) => {
+                  setForm((prev) => ({
+                    ...prev,
+                    latitude: loc ? loc.latitude : undefined,
+                    longitude: loc ? loc.longitude : undefined,
+                    locationAddress: loc ? loc.address : undefined,
+                  }));
+                }}
+              />
 
               <div className="pt-3 border-t border-gray-200 flex items-center justify-end gap-3">
                 <button

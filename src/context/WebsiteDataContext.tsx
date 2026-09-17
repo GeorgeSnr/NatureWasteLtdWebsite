@@ -88,7 +88,7 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
   const [customerReviews, setCustomerReviews] = useState<TestimonialItem[]>(testimonials);
   const [projectsList, setProjectsList] = useState<ProjectItem[]>(recentProjects);
 
-  // Initialize from localStorage in client
+  // Initialize from localStorage and Neon database in client
   useEffect(() => {
     try {
       if (typeof window !== "undefined") {
@@ -124,6 +124,45 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
     } finally {
       setIsLoaded(true);
     }
+
+    // Fetch live requests from Neon PostgreSQL
+    fetch("/api/requests")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.requests) && data.requests.length > 0) {
+          setRequests(data.requests);
+          if (typeof window !== "undefined") {
+            localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(data.requests));
+          }
+        }
+      })
+      .catch((err) => console.warn("Could not fetch requests from Neon API:", err));
+
+    // Fetch announcement from Neon
+    fetch("/api/announcement")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.announcement) {
+          setAnnouncement(data.announcement);
+          if (typeof window !== "undefined") {
+            localStorage.setItem(STORAGE_KEYS.ANNOUNCEMENT, JSON.stringify(data.announcement));
+          }
+        }
+      })
+      .catch(() => {});
+
+    // Fetch settings from Neon
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.settings) {
+          setCompanySettings(data.settings);
+          if (typeof window !== "undefined") {
+            localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(data.settings));
+          }
+        }
+      })
+      .catch(() => {});
   }, []);
 
   // Save requests
@@ -141,13 +180,21 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
   ): ClientRequest => {
     const newReq: ClientRequest = {
       ...data,
-      id: `REQ-2026-${String(requests.length + 1).padStart(3, "0")}`,
+      id: `REQ-${new Date().getFullYear()}-${String(requests.length + 1).padStart(3, "0")}`,
       status: data.status || "new",
       priority: data.priority || "normal",
       createdAt: new Date().toISOString(),
     };
     const updated = [newReq, ...requests];
     saveRequests(updated);
+
+    // Sync to Neon
+    fetch("/api/requests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newReq),
+    }).catch((err) => console.error("Error saving request to Neon:", err));
+
     return newReq;
   };
 
@@ -156,6 +203,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
       r.id === id ? { ...r, status, updatedAt: new Date().toISOString() } : r
     );
     saveRequests(updated);
+
+    fetch("/api/requests", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    }).catch((err) => console.error("Error updating status in Neon:", err));
   };
 
   const updateRequestPriority = (id: string, priority: RequestPriority) => {
@@ -163,6 +216,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
       r.id === id ? { ...r, priority, updatedAt: new Date().toISOString() } : r
     );
     saveRequests(updated);
+
+    fetch("/api/requests", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, priority }),
+    }).catch((err) => console.error("Error updating priority in Neon:", err));
   };
 
   const assignRequest = (id: string, assignedTo: string) => {
@@ -170,6 +229,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
       r.id === id ? { ...r, assignedTo, updatedAt: new Date().toISOString() } : r
     );
     saveRequests(updated);
+
+    fetch("/api/requests", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, assignedTo }),
+    }).catch((err) => console.error("Error assigning request in Neon:", err));
   };
 
   const addRequestNote = (requestId: string, content: string, author: string = "Admin Dispatch") => {
@@ -189,6 +254,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
         : r
     );
     saveRequests(updated);
+
+    fetch("/api/requests", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: requestId, note: { content, author } }),
+    }).catch((err) => console.error("Error adding note in Neon:", err));
   };
 
   const deleteRequest = (id: string) => {
@@ -203,6 +274,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEYS.ANNOUNCEMENT, JSON.stringify(updated));
     }
+
+    fetch("/api/announcement", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    }).catch((err) => console.error("Error updating banner in Neon:", err));
   };
 
   // Company Settings
@@ -212,6 +289,12 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(updated));
     }
+
+    fetch("/api/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    }).catch((err) => console.error("Error updating settings in Neon:", err));
   };
 
   // Coverage Areas

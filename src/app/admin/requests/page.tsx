@@ -23,6 +23,11 @@ import {
   FileText,
   Tag,
   Share2,
+  Map,
+  Navigation,
+  Compass,
+  Truck,
+  ExternalLink,
 } from "lucide-react";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
 import {
@@ -31,6 +36,7 @@ import {
   RequestPriority,
   RequestType,
 } from "@/types/admin";
+import LiveLocationPicker from "@/components/LiveLocationPicker";
 
 export default function AdminRequestsPage() {
   const {
@@ -43,6 +49,10 @@ export default function AdminRequestsPage() {
     deleteRequest,
   } = useWebsiteData();
 
+  // View mode switcher: Table or Live Map Dispatch
+  const [viewMode, setViewMode] = useState<"table" | "map">("table");
+  const [selectedMapRequestId, setSelectedMapRequestId] = useState<string | null>(null);
+
   // Filter and search states
   const [activeTab, setActiveTab] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
@@ -53,22 +63,53 @@ export default function AdminRequestsPage() {
   const [selectedRequest, setSelectedRequest] = useState<ClientRequest | null>(null);
   const [isManualModalOpen, setIsManualModalOpen] = useState<boolean>(false);
   const [newNoteText, setNewNoteText] = useState<string>("");
+  const [mapQuickNote, setMapQuickNote] = useState<string>("");
 
   // Manual request form state
-  const [manualForm, setManualForm] = useState({
+  const [manualForm, setManualForm] = useState<{
+    name: string;
+    phone: string;
+    email: string;
+    organization: string;
+    suburb: string;
+    address: string;
+    type: RequestType;
+    title: string;
+    volumeOrTier: string;
+    preferredDate: string;
+    message: string;
+    priority: RequestPriority;
+    latitude?: number;
+    longitude?: number;
+    locationAddress?: string;
+  }>({
     name: "",
     phone: "",
     email: "",
     organization: "",
     suburb: "Kitende",
     address: "",
-    type: "residential_inquiry" as RequestType,
+    type: "residential_inquiry",
     title: "",
     volumeOrTier: "",
     preferredDate: "",
     message: "",
-    priority: "normal" as RequestPriority,
+    priority: "normal",
   });
+
+  // Requests with live GPS coordinates
+  const gpsRequests = useMemo(() => {
+    return requests.filter((r) => typeof r.latitude === "number" && typeof r.longitude === "number");
+  }, [requests]);
+
+  // Active request for the Map Dispatch Console
+  const activeMapRequest = useMemo(() => {
+    if (selectedMapRequestId) {
+      const found = requests.find((r) => r.id === selectedMapRequestId);
+      if (found) return found;
+    }
+    return gpsRequests[0] || null;
+  }, [requests, selectedMapRequestId, gpsRequests]);
 
   // Unique suburbs from requests
   const uniqueSuburbs = useMemo(() => {
@@ -174,6 +215,9 @@ export default function AdminRequestsPage() {
       priority: manualForm.priority,
       status: "new",
       assignedTo: "Kitende Dispatch Desk",
+      latitude: manualForm.latitude,
+      longitude: manualForm.longitude,
+      locationAddress: manualForm.locationAddress,
     });
 
     setIsManualModalOpen(false);
@@ -190,6 +234,9 @@ export default function AdminRequestsPage() {
       preferredDate: "",
       message: "",
       priority: "normal",
+      latitude: undefined,
+      longitude: undefined,
+      locationAddress: undefined,
     });
     setSelectedRequest(created);
   };
@@ -286,6 +333,44 @@ export default function AdminRequestsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          {/* View Mode Switcher */}
+          <div className="bg-gray-100 p-1 rounded border border-gray-300 flex items-center gap-1">
+            <button
+              onClick={() => setViewMode("table")}
+              className={`px-3 py-1.5 rounded text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                viewMode === "table"
+                  ? "bg-[#1A1D20] text-white shadow-xs"
+                  : "text-gray-600 hover:text-black"
+              }`}
+            >
+              <Inbox className="w-3.5 h-3.5" />
+              <span>Table View</span>
+            </button>
+            <button
+              onClick={() => {
+                setViewMode("map");
+                if (!selectedMapRequestId && gpsRequests.length > 0) {
+                  setSelectedMapRequestId(gpsRequests[0].id);
+                }
+              }}
+              className={`px-3 py-1.5 rounded text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                viewMode === "map"
+                  ? "bg-[#006F51] text-white shadow-xs"
+                  : "text-gray-600 hover:text-[#006F51]"
+              }`}
+            >
+              <Map className="w-3.5 h-3.5" />
+              <span>Live Map Dispatch</span>
+              <span
+                className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
+                  viewMode === "map" ? "bg-white/25 text-white" : "bg-emerald-100 text-emerald-800"
+                }`}
+              >
+                {gpsRequests.length}
+              </span>
+            </button>
+          </div>
+
           <button
             onClick={() => setIsManualModalOpen(true)}
             className="bg-[#006F51] hover:bg-[#005a42] text-white px-4 py-2.5 rounded font-bold text-xs uppercase tracking-wider transition-colors shadow-xs flex items-center gap-2 cursor-pointer"
@@ -304,39 +389,331 @@ export default function AdminRequestsPage() {
         </div>
       </div>
 
-      {/* 2. Status Filter Tabs Bar */}
-      <div className="bg-white rounded border border-[#E5E7EB] shadow-xs p-1 flex flex-wrap items-center gap-1">
-        {[
-          { id: "all", label: "All Requests", count: countAll },
-          { id: "new", label: "New / Pending", count: countNew, highlight: countNew > 0 },
-          { id: "in_review", label: "In Review", count: countInReview },
-          { id: "in_progress", label: "In Progress", count: countInProgress },
-          { id: "resolved", label: "Resolved", count: countResolved },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-3 sm:px-4 py-2 rounded text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
-              activeTab === tab.id
-                ? "bg-[#006F51] text-white shadow-xs"
-                : "text-gray-600 hover:bg-gray-100 hover:text-black"
-            }`}
-          >
-            <span>{tab.label}</span>
-            <span
-              className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
-                activeTab === tab.id
-                  ? "bg-white/20 text-white"
-                  : tab.highlight
-                  ? "bg-emerald-100 text-emerald-800"
-                  : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              {tab.count}
-            </span>
-          </button>
-        ))}
-      </div>
+      {/* 2. Main Content: Live Map Dispatch Console OR Table Intake View */}
+      {viewMode === "map" ? (
+        <div className="space-y-4">
+          {/* Map Controls Header */}
+          <div className="bg-white p-4 rounded border border-[#E5E7EB] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded bg-[#E9F4F0] text-[#006F51] flex items-center justify-center border border-[#006F51]/20">
+                <Map className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-black text-[#1A1D20]">
+                  Entebbe-Kampala Live Route Dispatch Console
+                </h3>
+                <p className="text-xs text-gray-500">
+                  Visualizing {gpsRequests.length} GPS-tagged residential &amp; commercial collection points.
+                </p>
+              </div>
+            </div>
+
+            {/* Corridor Focus Presets */}
+            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+              <span className="text-[10px] font-bold uppercase text-gray-400 mr-1">Corridor Focus:</span>
+              {[
+                { label: "All Active", req: gpsRequests[0] },
+                { label: "Kitende", req: gpsRequests.find((r) => r.suburb === "Kitende") || gpsRequests[0] },
+                { label: "Lubowa", req: gpsRequests.find((r) => r.suburb === "Lubowa") || gpsRequests[0] },
+                { label: "Kajjansi", req: gpsRequests.find((r) => r.suburb === "Kajjansi") || gpsRequests[0] },
+                { label: "Entebbe", req: gpsRequests.find((r) => r.suburb === "Entebbe") || gpsRequests[0] },
+              ]
+                .filter((p) => p.req)
+                .map((preset) => (
+                  <button
+                    key={preset.label}
+                    onClick={() => preset.req && setSelectedMapRequestId(preset.req.id)}
+                    className="px-2.5 py-1 rounded text-[11px] font-bold bg-gray-100 hover:bg-[#006F51] hover:text-white text-gray-700 transition-colors cursor-pointer border border-gray-200"
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+            </div>
+          </div>
+
+          {/* Dispatch Grid: Left list, Right map + controller card */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            {/* Left 5 Cols: GPS Request Queue */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="bg-white p-3 rounded border border-[#E5E7EB] shadow-xs flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                  GPS Tagged Queue ({gpsRequests.length})
+                </span>
+                <span className="text-[10px] bg-emerald-100 text-[#006F51] font-black px-2 py-0.5 rounded-full">
+                  Live Coordinates
+                </span>
+              </div>
+
+              <div className="space-y-2.5 max-h-[640px] overflow-y-auto pr-1">
+                {gpsRequests.length === 0 ? (
+                  <div className="p-8 text-center bg-white rounded border border-gray-200">
+                    <MapPin className="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                    <p className="text-xs text-gray-500">No requests with GPS coordinates tagged yet.</p>
+                  </div>
+                ) : (
+                  gpsRequests.map((req) => {
+                    const isSelected = activeMapRequest?.id === req.id;
+                    return (
+                      <div
+                        key={req.id}
+                        onClick={() => setSelectedMapRequestId(req.id)}
+                        className={`p-3.5 rounded border transition-all cursor-pointer bg-white ${
+                          isSelected
+                            ? "border-[#006F51] ring-2 ring-[#006F51]/20 shadow-md bg-emerald-50/20"
+                            : "border-gray-200 hover:border-gray-300 hover:shadow-xs"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs font-black text-[#1A1D20]">
+                              {req.id}
+                            </span>
+                            <span
+                              className={`text-[9px] uppercase font-black px-1.5 py-0.2 rounded border ${getPriorityBadge(
+                                req.priority
+                              )}`}
+                            >
+                              {req.priority}
+                            </span>
+                          </div>
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded border ${getStatusBadge(
+                              req.status
+                            )}`}
+                          >
+                            {req.status.replace("_", " ")}
+                          </span>
+                        </div>
+
+                        <div className="font-bold text-sm text-[#1A1D20]">{req.name}</div>
+                        <div className="text-xs text-gray-600 line-clamp-1 mt-0.5">
+                          {req.title}
+                        </div>
+
+                        <div className="mt-2 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
+                          <div className="text-[#006F51] font-semibold flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            <span>{req.suburb || "Kampala"} &bull; {req.address || "Main Road"}</span>
+                          </div>
+                          <span className="font-mono text-[10px] text-gray-400">
+                            {req.latitude?.toFixed(4)}, {req.longitude?.toFixed(4)}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+
+            {/* Right 7 Cols: Interactive Map & Live Dispatch Controller */}
+            <div className="lg:col-span-7 space-y-4">
+              {activeMapRequest && typeof activeMapRequest.latitude === "number" && typeof activeMapRequest.longitude === "number" ? (
+                <div className="space-y-4">
+                  {/* Map Frame */}
+                  <div className="bg-white rounded border border-[#E5E7EB] shadow-xs overflow-hidden">
+                    <div className="p-3 bg-[#1A1D20] text-white flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-xs font-bold uppercase tracking-wider">
+                          Target Location: {activeMapRequest.name} &bull; {activeMapRequest.suburb}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[11px] text-[#FFCE00]">
+                        GPS: {activeMapRequest.latitude.toFixed(6)}, {activeMapRequest.longitude.toFixed(6)}
+                      </span>
+                    </div>
+
+                    <div className="h-80 sm:h-96 w-full relative bg-gray-100">
+                      <iframe
+                        key={`${activeMapRequest.id}-${activeMapRequest.latitude}`}
+                        width="100%"
+                        height="100%"
+                        loading="lazy"
+                        title="Active Client Request GPS Map"
+                        src={`https://www.openstreetmap.org/export/embed.html?bbox=${activeMapRequest.longitude - 0.012}%2C${activeMapRequest.latitude - 0.012}%2C${activeMapRequest.longitude + 0.012}%2C${activeMapRequest.latitude + 0.012}&layer=mapnik&marker=${activeMapRequest.latitude}%2C${activeMapRequest.longitude}`}
+                        className="border-0 w-full h-full"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Compactor Dispatch Controller Card */}
+                  <div className="bg-white rounded border border-[#E5E7EB] shadow-xs p-5 space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-200 pb-4">
+                      <div>
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#006F51]">
+                          Direct Truck Dispatch Controller
+                        </div>
+                        <h4 className="text-lg font-black text-[#1A1D20] mt-0.5">
+                          {activeMapRequest.title}
+                        </h4>
+                        <div className="text-xs text-gray-500 mt-0.5">
+                          Client: <strong>{activeMapRequest.name}</strong> &bull; {activeMapRequest.phone} {activeMapRequest.organization ? `(${activeMapRequest.organization})` : ""}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={`https://www.google.com/maps/dir/?api=1&destination=${activeMapRequest.latitude},${activeMapRequest.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-[#006F51] hover:bg-[#005a42] text-white px-4 py-2 rounded font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-colors shadow-xs"
+                        >
+                          <Truck className="w-4 h-4" />
+                          <span>Launch Truck Navigation</span>
+                        </a>
+                        <a
+                          href={`https://www.google.com/maps?q=${activeMapRequest.latitude},${activeMapRequest.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded font-bold text-xs uppercase tracking-wider flex items-center gap-1 transition-colors"
+                          title="Open in Google Maps"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Status & Quick Action Row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                          Workflow Status
+                        </span>
+                        <select
+                          value={activeMapRequest.status}
+                          onChange={(e) => updateRequestStatus(activeMapRequest.id, e.target.value as RequestStatus)}
+                          className="w-full bg-white border border-gray-300 rounded p-1.5 font-bold text-xs"
+                        >
+                          <option value="new">New (Pending)</option>
+                          <option value="in_review">In Review</option>
+                          <option value="in_progress">In Progress</option>
+                          <option value="resolved">Resolved</option>
+                          <option value="archived">Archived</option>
+                        </select>
+                      </div>
+
+                      <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                          Direct Client Contacts
+                        </span>
+                        <div className="flex items-center gap-2 mt-1">
+                          <a
+                            href={`https://wa.me/${activeMapRequest.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                              `Hello ${activeMapRequest.name}, Nature Waste compactor truck is scheduled to your GPS coordinates for ${activeMapRequest.title}.`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded font-bold text-xs flex items-center gap-1 flex-1 justify-center"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                          </a>
+                          <a
+                            href={`tel:${activeMapRequest.phone.replace(/\s+/g, "")}`}
+                            className="p-2 bg-[#006F51] hover:bg-[#004D38] text-white rounded font-bold text-xs flex items-center gap-1 flex-1 justify-center"
+                          >
+                            <Phone className="w-3.5 h-3.5" />
+                            <span>Call</span>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                          Quick Status Actions
+                        </span>
+                        <div className="flex items-center gap-2 mt-1">
+                          <button
+                            onClick={() => updateRequestStatus(activeMapRequest.id, "in_progress")}
+                            className="p-1.5 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded font-bold text-[11px] flex-1 cursor-pointer"
+                          >
+                            In Progress
+                          </button>
+                          <button
+                            onClick={() => updateRequestStatus(activeMapRequest.id, "resolved")}
+                            className="p-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded font-bold text-[11px] flex-1 cursor-pointer"
+                          >
+                            Resolved
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick dispatch note */}
+                    <div className="pt-2">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">
+                        Add Dispatcher Operational Note (e.g. Assigned Compactor UBA 491X)
+                      </label>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="Enter dispatch notes, truck registration, or ETA..."
+                          value={mapQuickNote}
+                          onChange={(e) => setMapQuickNote(e.target.value)}
+                          className="flex-1 px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:border-[#006F51] focus:bg-white"
+                        />
+                        <button
+                          onClick={() => {
+                            if (!mapQuickNote.trim()) return;
+                            addRequestNote(activeMapRequest.id, mapQuickNote.trim(), "Dispatcher Desk");
+                            setMapQuickNote("");
+                          }}
+                          className="bg-[#006F51] hover:bg-[#005a42] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-wider cursor-pointer"
+                        >
+                          Save Note
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white p-12 text-center rounded border border-gray-200 space-y-3">
+                  <MapPin className="w-12 h-12 text-gray-300 mx-auto" />
+                  <h4 className="text-base font-bold text-gray-700">Select a GPS Request from the Queue</h4>
+                  <p className="text-xs text-gray-500 max-w-sm mx-auto">
+                    Click any client pin on the left queue to view their live coordinates and launch compactor truck routing.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* 2. Status Filter Tabs Bar */}
+          <div className="bg-white rounded border border-[#E5E7EB] shadow-xs p-1 flex flex-wrap items-center gap-1">
+            {[
+              { id: "all", label: "All Requests", count: countAll },
+              { id: "new", label: "New / Pending", count: countNew, highlight: countNew > 0 },
+              { id: "in_review", label: "In Review", count: countInReview },
+              { id: "in_progress", label: "In Progress", count: countInProgress },
+              { id: "resolved", label: "Resolved", count: countResolved },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-3 sm:px-4 py-2 rounded text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                  activeTab === tab.id
+                    ? "bg-[#006F51] text-white shadow-xs"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-black"
+                }`}
+              >
+                <span>{tab.label}</span>
+                <span
+                  className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
+                    activeTab === tab.id
+                      ? "bg-white/20 text-white"
+                      : tab.highlight
+                      ? "bg-emerald-100 text-emerald-800"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              </button>
+            ))}
+          </div>
 
       {/* 3. Search & Secondary Filters Bar */}
       <div className="bg-white p-4 rounded border border-[#E5E7EB] shadow-xs grid grid-cols-1 sm:grid-cols-12 gap-3">
@@ -454,12 +831,30 @@ export default function AdminRequestsPage() {
                       )}
                     </td>
 
-                    {/* Suburb */}
+                    {/* Suburb & Location */}
                     <td className="p-4">
                       <div className="font-bold text-gray-800">{req.suburb || "Kampala"}</div>
                       <div className="text-gray-500 text-[11px] line-clamp-1">
                         {req.address || "Area Route"}
                       </div>
+                      {typeof req.latitude === "number" && typeof req.longitude === "number" && (
+                        <div className="mt-1 flex items-center gap-1.5">
+                          <span className="inline-flex items-center gap-1 text-[10px] text-[#006F51] font-bold bg-[#E9F4F0] px-1.5 py-0.5 rounded border border-[#006F51]/20">
+                            <MapPin className="w-2.5 h-2.5" />
+                            <span>GPS Pin</span>
+                          </span>
+                          <a
+                            href={`https://www.google.com/maps?q=${req.latitude},${req.longitude}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-[10px] text-blue-600 hover:underline font-mono"
+                            title="View on Google Maps"
+                          >
+                            {req.latitude.toFixed(3)}, {req.longitude.toFixed(3)}
+                          </a>
+                        </div>
+                      )}
                     </td>
 
                     {/* Preferred Date */}
@@ -495,6 +890,20 @@ export default function AdminRequestsPage() {
                         >
                           Details
                         </button>
+                        {typeof req.latitude === "number" && typeof req.longitude === "number" && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedMapRequestId(req.id);
+                              setViewMode("map");
+                            }}
+                            className="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-[#006F51] border border-emerald-200 rounded text-[11px] font-bold transition-colors cursor-pointer flex items-center gap-1"
+                            title="View on Route Dispatch Map"
+                          >
+                            <Map className="w-3 h-3" />
+                            <span>Map</span>
+                          </button>
+                        )}
                         <a
                           href={`https://wa.me/${req.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
                             `Hello ${req.name}, this is Nature Waste Management Ltd regarding your inquiry #${req.id} (${req.title}). How may we assist with your route scheduling?`
@@ -533,6 +942,8 @@ export default function AdminRequestsPage() {
           </div>
         )}
       </div>
+    </>
+  )}
 
       {/* 5. Request Detail Drawer / Modal */}
       {selectedRequest && (
@@ -681,6 +1092,69 @@ export default function AdminRequestsPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Verified Live GPS Location & Truck Routing Preview */}
+              {typeof selectedRequest.latitude === "number" && typeof selectedRequest.longitude === "number" ? (
+                <div className="p-4 bg-[#E9F4F0] rounded border border-[#006F51]/30 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="p-1.5 bg-[#006F51] text-white rounded">
+                        <Navigation className="w-4 h-4" />
+                      </span>
+                      <div>
+                        <h4 className="text-xs font-bold text-[#006F51] uppercase tracking-wider">
+                          Verified Premises Live GPS Pin
+                        </h4>
+                        <span className="font-mono text-xs font-black text-[#1A1D20]">
+                          {selectedRequest.latitude.toFixed(6)}, {selectedRequest.longitude.toFixed(6)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={`https://www.google.com/maps?q=${selectedRequest.latitude},${selectedRequest.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-800 border border-gray-300 rounded font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 transition-colors"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 text-gray-500" />
+                        <span>Google Maps</span>
+                      </a>
+                      <a
+                        href={`https://www.google.com/maps/dir/?api=1&destination=${selectedRequest.latitude},${selectedRequest.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 bg-[#006F51] hover:bg-[#005a42] text-white rounded font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 transition-colors shadow-xs"
+                      >
+                        <Truck className="w-3.5 h-3.5" />
+                        <span>Route Compactor</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {selectedRequest.locationAddress && (
+                    <div className="text-[11px] text-gray-700 bg-white/80 p-2 rounded border border-[#006F51]/20">
+                      <strong>Estimated Corridor / Zone:</strong> {selectedRequest.locationAddress}
+                    </div>
+                  )}
+
+                  <div className="rounded overflow-hidden border border-[#006F51]/30 h-44 w-full bg-gray-100 relative">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      title="Request GPS Location Preview"
+                      src={`https://www.openstreetmap.org/export/embed.html?bbox=${selectedRequest.longitude - 0.008}%2C${selectedRequest.latitude - 0.008}%2C${selectedRequest.longitude + 0.008}%2C${selectedRequest.latitude + 0.008}&layer=mapnik&marker=${selectedRequest.latitude}%2C${selectedRequest.longitude}`}
+                      className="border-0 w-full h-full"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="p-3 bg-gray-50 rounded border border-gray-200 text-gray-500 text-xs flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-gray-400 shrink-0" />
+                  <span>No live GPS coordinates captured for this ticket. Routing handled via standard suburb route ({selectedRequest.suburb || "Kampala"}).</span>
+                </div>
+              )}
 
               {/* Message / Special Instructions */}
               <div className="p-4 rounded border border-gray-200 bg-[#F8F9FA] space-y-1.5">
@@ -991,6 +1465,19 @@ export default function AdminRequestsPage() {
                   className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded text-xs focus:outline-none focus:border-[#006F51]"
                 />
               </div>
+
+              {/* Optional Live Location Pinning */}
+              <LiveLocationPicker
+                label="Pin Customer Gate / Site GPS Location (Optional)"
+                onLocationChange={(loc) => {
+                  setManualForm((prev) => ({
+                    ...prev,
+                    latitude: loc ? loc.latitude : undefined,
+                    longitude: loc ? loc.longitude : undefined,
+                    locationAddress: loc ? loc.address : undefined,
+                  }));
+                }}
+              />
 
               <div className="pt-2 flex items-center justify-end gap-3 border-t border-gray-200">
                 <button

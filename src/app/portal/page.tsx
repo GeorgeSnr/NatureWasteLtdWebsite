@@ -34,6 +34,7 @@ import Logo from "@/components/Logo";
 import GooglePlayButton from "@/components/GooglePlayButton";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
 import { useAuth } from "@/context/AuthContext";
+import LiveLocationPicker from "@/components/LiveLocationPicker";
 
 export default function PortalPage() {
   const { submitRequest } = useWebsiteData();
@@ -65,6 +66,7 @@ export default function PortalPage() {
     plan: "Residential Connect (120L)",
     password: "",
   });
+  const [regLocation, setRegLocation] = useState<{ latitude: number; longitude: number; address?: string } | null>(null);
   const [regError, setRegError] = useState("");
   const [regSuccess, setRegSuccess] = useState(false);
 
@@ -74,6 +76,7 @@ export default function PortalPage() {
   const [pickupType, setPickupType] = useState("Bulky Cardboard & E-Waste");
   const [pickupDate, setPickupDate] = useState("2026-09-18");
   const [pickupInstructions, setPickupInstructions] = useState("");
+  const [pickupLocation, setPickupLocation] = useState<{ latitude: number; longitude: number; address?: string } | null>(null);
   const [bagsOrdered, setBagsOrdered] = useState(false);
   const [momoPromptSent, setMomoPromptSent] = useState(false);
   const [momoPhone, setMomoPhone] = useState("");
@@ -118,6 +121,9 @@ export default function PortalPage() {
       organization: regForm.organization || "Private Residence",
       suburb: regForm.suburb,
       address: regForm.address,
+      latitude: regLocation?.latitude,
+      longitude: regLocation?.longitude,
+      locationAddress: regLocation?.address,
       plan: regForm.plan,
       password: regForm.password,
     });
@@ -133,6 +139,9 @@ export default function PortalPage() {
       email: currentUser?.email,
       suburb: currentUser?.suburb || "Kitende",
       address: currentUser?.address,
+      latitude: pickupLocation?.latitude || currentUser?.latitude,
+      longitude: pickupLocation?.longitude || currentUser?.longitude,
+      locationAddress: pickupLocation?.address || currentUser?.locationAddress,
       type: "on_demand_pickup",
       title: `On-Demand Pickup: ${pickupType}`,
       volumeOrTier: pickupType,
@@ -475,6 +484,16 @@ export default function PortalPage() {
                     />
                   </div>
 
+                  {/* Live GPS Location on First Registration */}
+                  <div className="pt-1">
+                    <LiveLocationPicker
+                      label="Primary Service Gate / Residence GPS Location"
+                      helperText="Enable live location so collection trucks can navigate directly to your gate without calling for directions."
+                      onLocationChange={(loc) => setRegLocation(loc)}
+                      initialLocation={regLocation}
+                    />
+                  </div>
+
                   <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between text-xs text-emerald-900">
                     <div className="flex items-center gap-2">
                       <Award className="w-4 h-4 text-emerald-700" />
@@ -754,6 +773,26 @@ export default function PortalPage() {
                         onChange={(e) => setPickupInstructions(e.target.value)}
                         placeholder={`e.g. Leave at gate in ${currentUser.suburb || "Kitende"}`}
                         className="w-full bg-[#F8F9FA] border border-gray-300 rounded-lg px-3.5 py-2.5 text-xs text-[#1A1D20] focus:outline-none focus:border-[#006F51] font-medium"
+                      />
+                    </div>
+
+                    {/* Live GPS Dispatch Gate Pin */}
+                    <div className="pt-1">
+                      <LiveLocationPicker
+                        label="Pickup GPS Gate Pin"
+                        helperText="Attach your live GPS pin so our collection crew routes directly to your collection point."
+                        onLocationChange={(loc) => setPickupLocation(loc)}
+                        initialLocation={
+                          pickupLocation ||
+                          (currentUser?.latitude && currentUser?.longitude
+                            ? {
+                                latitude: currentUser.latitude,
+                                longitude: currentUser.longitude,
+                                address: currentUser.locationAddress || currentUser.suburb,
+                              }
+                            : null)
+                        }
+                        compact
                       />
                     </div>
 

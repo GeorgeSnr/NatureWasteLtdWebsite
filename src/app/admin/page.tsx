@@ -296,6 +296,12 @@ export default function AdminDashboardPage() {
                   <td className="p-4">
                     <div className="font-bold text-gray-800">{req.suburb || "Kampala"}</div>
                     <div className="text-gray-500 text-[10px] line-clamp-1">{req.address || "Area Route"}</div>
+                    {typeof req.latitude === "number" && typeof req.longitude === "number" && (
+                      <div className="mt-1 inline-flex items-center gap-1 text-[10px] text-[#006F51] font-bold bg-[#E9F4F0] px-1.5 py-0.2 rounded border border-[#006F51]/20">
+                        <MapPin className="w-2.5 h-2.5" />
+                        <span>GPS Tagged</span>
+                      </div>
+                    )}
                   </td>
 
                   <td className="p-4">
