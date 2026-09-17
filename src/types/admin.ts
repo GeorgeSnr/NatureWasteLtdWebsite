@@ -46,6 +46,26 @@ export interface ClientRequest {
   }[];
 }
 
+export type UserRole = "client" | "admin" | "dispatcher" | "compliance";
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  organization?: string;
+  suburb?: string;
+  address?: string;
+  plan?: string;
+  accountStatus: "active" | "pending" | "suspended";
+  ecoPoints?: number;
+  assignedBinId?: string;
+  createdAt: string;
+  lastLogin?: string;
+  avatar?: string;
+}
+
 export interface AnnouncementBannerData {
   enabled: boolean;
   message: string;
@@ -84,4 +104,5 @@ export interface WebsiteDataStore {
   testimonials: TestimonialItem[];
   recentProjects: ProjectItem[];
   requests: ClientRequest[];
+  users: UserProfile[];
 }

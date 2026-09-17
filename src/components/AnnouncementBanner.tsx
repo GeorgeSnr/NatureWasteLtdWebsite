@@ -9,6 +9,30 @@ export default function AnnouncementBanner() {
   const { announcement } = useWebsiteData();
   const [dismissed, setDismissed] = useState(false);
 
+  React.useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const isDismissed = sessionStorage.getItem("nw_announcement_dismissed");
+        if (isDismissed === "true") {
+          setDismissed(true);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    try {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("nw_announcement_dismissed", "true");
+      }
+    } catch {
+      // ignore
+    }
+  };
+
   if (!announcement || !announcement.enabled || dismissed) {
     return null;
   }
@@ -52,7 +76,7 @@ export default function AnnouncementBanner() {
       </div>
 
       <button
-        onClick={() => setDismissed(true)}
+        onClick={handleDismiss}
         className="p-1 hover:bg-black/10 rounded transition-colors shrink-0 cursor-pointer"
         aria-label="Dismiss Announcement"
       >

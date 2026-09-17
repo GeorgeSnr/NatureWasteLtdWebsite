@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { WebsiteDataProvider } from "@/context/WebsiteDataContext";
+import { AuthProvider } from "@/context/AuthContext";
 import MainLayoutWrapper from "@/components/MainLayoutWrapper";
 
 export const metadata: Metadata = {
@@ -39,9 +40,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white antialiased text-[#363636] font-sans selection:bg-[#006F51] selection:text-white w-full max-w-full overflow-x-clip">
-        <WebsiteDataProvider>
-          <MainLayoutWrapper>{children}</MainLayoutWrapper>
-        </WebsiteDataProvider>
+        <AuthProvider>
+          <WebsiteDataProvider>
+            <MainLayoutWrapper>{children}</MainLayoutWrapper>
+          </WebsiteDataProvider>
+        </AuthProvider>
       </body>
     </html>
   );

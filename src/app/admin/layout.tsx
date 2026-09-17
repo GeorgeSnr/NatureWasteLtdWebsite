@@ -23,6 +23,7 @@ import {
   Lock,
   ArrowRight,
   RefreshCw,
+  Users,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
@@ -190,6 +191,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           badge: newRequestsCount > 0 ? `${newRequestsCount} New` : null,
           badgeColor: "bg-emerald-600 text-white",
         },
+        {
+          name: "Registered Clients & Users",
+          href: "/admin/users",
+          icon: Users,
+          badge: "Database",
+          badgeColor: "bg-blue-600/30 text-blue-300 border border-blue-500/30",
+        },
       ],
     },
     {
@@ -276,14 +284,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin" onClick={() => setSidebarOpen(false)}>
               <div className="flex flex-col">
                 <Logo variant="dark" size="sm" showTagline={false} />
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFCE00] mt-1 pl-0.5">
-                  ADMIN CONTROL PORTAL
-                </span>
+                <div className="flex items-center gap-1.5 mt-1.5 pl-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FFCE00]" />
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#FFCE00]">
+                    ADMIN CONTROL PORTAL
+                  </span>
+                </div>
               </div>
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="md:hidden text-gray-400 hover:text-white p-1"
+              className="md:hidden text-gray-400 hover:text-white p-1 rounded-lg"
             >
               <X className="w-5 h-5" />
             </button>
@@ -304,19 +315,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                       key={item.href}
                       href={item.href}
                       onClick={() => setSidebarOpen(false)}
-                      className={`flex items-center justify-between px-3 py-2 rounded-sm text-xs font-semibold transition-colors ${
+                      className={`group flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                         isActive
-                          ? "bg-[#006F51] text-white shadow-xs font-bold"
+                          ? "bg-[#006F51] text-white shadow-sm font-bold"
                           : "text-gray-300 hover:bg-white/5 hover:text-white"
                       }`}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <Icon className={`w-4 h-4 ${isActive ? "text-[#FFCE00]" : "text-gray-400"}`} />
-                        <span>{item.name}</span>
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div
+                          className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors ${
+                            isActive
+                              ? "bg-[#FFCE00] text-[#1A1D20]"
+                              : "bg-white/5 text-gray-400 group-hover:text-white group-hover:bg-white/10"
+                          }`}
+                        >
+                          <Icon className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="truncate">{item.name}</span>
                       </div>
                       {item.badge && (
                         <span
-                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
+                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0 ${
                             item.badgeColor || "bg-white/10 text-gray-300"
                           }`}
                         >
@@ -332,36 +351,39 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         {/* Bottom Actions & User Profile */}
-        <div className="p-4 border-t border-white/10 bg-[#101418] space-y-3">
+        <div className="p-4 border-t border-white/10 bg-[#0F1317] space-y-3">
           <Link
             href="/"
             target="_blank"
-            className="w-full flex items-center justify-between px-3 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm text-xs text-gray-300 hover:text-white transition-colors"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs text-gray-300 hover:text-white transition-colors"
           >
             <span className="flex items-center gap-2">
               <ExternalLink className="w-3.5 h-3.5 text-[#006F51]" />
-              <span>Preview Live Site</span>
+              <span className="font-semibold">Preview Live Site</span>
             </span>
-            <span className="text-[10px] bg-[#006F51] text-white font-bold px-1.5 py-0.2 rounded">
+            <span className="text-[10px] bg-[#006F51] text-white font-black px-1.5 py-0.5 rounded uppercase">
               dev
             </span>
           </Link>
 
-          <div className="flex items-center justify-between text-xs pt-1">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-[#006F51] text-white flex items-center justify-center font-black text-xs">
+          <div className="p-2.5 bg-white/5 border border-white/5 rounded-lg flex items-center justify-between">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-8 h-8 rounded-lg bg-[#006F51] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">
                 NW
               </div>
-              <div className="text-[11px] leading-tight">
-                <div className="font-bold text-white">Kitende Dispatch</div>
-                <div className="text-gray-400 text-[10px]">Super Admin</div>
+              <div className="text-[11px] leading-tight min-w-0">
+                <div className="font-bold text-white truncate">Kitende Dispatch HQ</div>
+                <div className="text-emerald-400 text-[10px] font-medium flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Super Admin Online</span>
+                </div>
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded transition-colors cursor-pointer"
-              title="Sign Out"
+              className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-white/10 rounded-lg transition-colors cursor-pointer shrink-0"
+              title="Sign Out of Admin Portal"
             >
               <LogOut className="w-4 h-4" />
             </button>

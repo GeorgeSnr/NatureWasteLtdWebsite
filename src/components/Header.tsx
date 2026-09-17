@@ -33,9 +33,11 @@ import {
 import Logo from "./Logo";
 import SearchModal from "./SearchModal";
 import GooglePlayButton, { GooglePlayIcon } from "./GooglePlayButton";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const pathname = usePathname();
+  const { currentUser, isAuthenticated } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -121,86 +123,101 @@ export default function Header() {
       <div className="sticky top-0 z-40 w-full bg-white shadow-xs">
         {/* 1. Top Utility Bar (Waste Connections 'navbar-clients' Pattern) */}
         <div className="bg-[#F8F9FA] text-[#363636] text-xs py-1.5 sm:py-2 px-3 sm:px-8 border-b border-[#E5E7EB] overflow-hidden">
-          <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-            {/* Left: Location & NEMA Registration Badge */}
-            <div className="flex items-center gap-2 sm:gap-4 text-[#555C66] text-[11px] sm:text-xs">
+          <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+            {/* Left Cluster: Location & NEMA Registration */}
+            <div className="flex items-center gap-2 sm:gap-3 text-[#555C66] text-[11px] sm:text-xs">
               <div className="flex items-center gap-1.5 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-[#006F51] shrink-0" />
-                <span className="hidden sm:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
+                <span className="hidden lg:inline">Kitende, Karl House, Room 9, Entebbe Road, Kampala</span>
+                <span className="hidden sm:inline lg:hidden">Kitende, Entebbe Rd, Kampala</span>
                 <span className="sm:hidden">Kitende, Kampala</span>
               </div>
-              <div className="hidden md:flex items-center gap-1.5 text-[#006F51] font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>NEMA Licensed &amp; Registered Waste Handler</span>
+              <div className="hidden xl:flex items-center gap-1.5 text-[#006F51] font-semibold pl-2 border-l border-gray-300">
+                <span className="w-2 h-2 rounded-full bg-[#006F51] animate-pulse" />
+                <span>NEMA Licensed Waste Handler</span>
               </div>
             </div>
 
-            {/* Right: Quick Customer Links matching Waste Connections */}
-            <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs">
-              <Link
-                href="/#schedule-finder"
-                className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
-              >
-                <Calendar className="w-3.5 h-3.5 text-[#006F51]" />
-                <span className="font-medium">Pickup Schedule</span>
-              </Link>
+            {/* Right Clusters: Cleanly Grouped Customer & Management Links */}
+            <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
+              {/* Group 1: Schedule & Pay Bill */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Link
+                  href="/#schedule-finder"
+                  className="flex items-center gap-1.5 text-gray-700 hover:text-[#006F51] font-medium transition-colors"
+                >
+                  <Calendar className="w-3.5 h-3.5 text-[#006F51]" />
+                  <span>Pickup Schedule</span>
+                </Link>
 
-              <Link
-                href="/#schedule-finder"
-                className="hidden lg:flex items-center gap-1 hover:text-[#006F51] transition-colors"
-              >
-                <AlertCircle className="w-3.5 h-3.5 text-[#006F51]" />
-                <span>Missed Pickup</span>
-              </Link>
+                <Link
+                  href="/portal"
+                  className="flex items-center gap-1.5 text-gray-700 hover:text-[#006F51] font-medium transition-colors"
+                >
+                  <CreditCard className="w-3.5 h-3.5 text-[#006F51]" />
+                  <span>Pay Bill</span>
+                </Link>
+              </div>
 
-              <Link
-                href="/portal"
-                className="flex items-center gap-1 hover:text-[#006F51] transition-colors"
-              >
-                <CreditCard className="w-3.5 h-3.5 text-[#006F51]" />
-                <span className="font-medium">Pay My Bill</span>
-              </Link>
+              <div className="h-3.5 w-px bg-gray-300 hidden sm:block" />
 
-              <Link
-                href="/#contact"
-                className="hidden sm:flex items-center gap-1 hover:text-[#006F51] transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#006F51]" />
-                <span>Customer Care</span>
-              </Link>
+              {/* Group 2: Support & Android App */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <a
+                  href="tel:+256766532915"
+                  className="hidden md:flex items-center gap-1.5 text-gray-700 hover:text-[#006F51] transition-colors"
+                  title="24/7 Dispatch Hotline"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#006F51]" />
+                  <span className="font-semibold">+256 766 532915</span>
+                </a>
 
-              <a
-                href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 font-bold text-emerald-800 bg-emerald-100/80 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition-colors shrink-0 text-[10px] sm:text-[11px]"
-                title="Download NatureWaste Connect on Google Play"
-              >
-                <GooglePlayIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                <span className="hidden xs:inline">Get App</span>
-                <span className="xs:hidden">App</span>
-              </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.naturewaste.customer_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-bold text-emerald-800 bg-emerald-100/80 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition-colors shrink-0 text-[10px] sm:text-[11px]"
+                  title="Download NatureWaste Connect Android App"
+                >
+                  <GooglePlayIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  <span>Get App</span>
+                </a>
+              </div>
 
-              <div className="h-3 w-px bg-gray-300 hidden sm:block" />
+              <div className="h-3.5 w-px bg-gray-300 hidden sm:block" />
 
-              <Link
-                href="/portal"
-                className="hidden xs:flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
-              >
-                <UserCheck className="w-3.5 h-3.5" />
-                <span>My Account</span>
-              </Link>
+              {/* Group 3: Client Account & Admin Portal */}
+              <div className="flex items-center gap-2">
+                {isAuthenticated && currentUser ? (
+                  <Link
+                    href="/portal"
+                    className="flex items-center gap-1.5 font-bold text-[#006F51] bg-[#E9F4F0] hover:bg-emerald-100/80 px-2.5 py-0.5 rounded border border-[#006F51]/20 transition-colors"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span>{currentUser.name.split(" ")[0]}</span>
+                    <span className="hidden sm:inline text-[10px] uppercase font-black text-emerald-800 bg-emerald-200/60 px-1 rounded">
+                      Account
+                    </span>
+                  </Link>
+                ) : (
+                  <Link
+                    href="/portal"
+                    className="flex items-center gap-1 font-semibold text-[#006F51] hover:text-[#004D38] transition-colors"
+                  >
+                    <UserCheck className="w-3.5 h-3.5" />
+                    <span>Client Sign In</span>
+                  </Link>
+                )}
 
-              <div className="h-3 w-px bg-gray-300 hidden md:block" />
-
-              <Link
-                href="/admin"
-                className="hidden md:flex items-center gap-1 font-bold text-gray-700 hover:text-[#006F51] transition-colors bg-gray-100 hover:bg-emerald-50 px-2 py-0.5 rounded border border-gray-200"
-                title="Dispatch Staff Portal"
-              >
-                <ShieldCheck className="w-3 h-3 text-[#006F51]" />
-                <span>Admin Portal</span>
-              </Link>
+                <Link
+                  href="/admin"
+                  className="hidden sm:flex items-center gap-1 font-bold text-gray-700 hover:text-[#006F51] transition-colors bg-white hover:bg-gray-100 px-2 py-0.5 rounded border border-gray-300 text-[10px] sm:text-[11px]"
+                  title="Internal Operations & Dispatch Portal"
+                >
+                  <ShieldCheck className="w-3 h-3 text-[#006F51]" />
+                  <span>Admin</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
