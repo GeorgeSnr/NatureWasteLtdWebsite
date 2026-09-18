@@ -91,7 +91,7 @@ export default function LoginPage() {
       }
 
       if (res.user) {
-        if (!res.user.mfaEnabled) {
+        if (res.user.role === "client" || !res.user.mfaEnabled) {
           completeMfaLogin(res.user);
           if (
             res.user.role === "admin" ||

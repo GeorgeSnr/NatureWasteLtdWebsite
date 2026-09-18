@@ -21,7 +21,7 @@ export async function GET() {
         plan,
         account_status as "accountStatus",
         password_hash as "passwordHash",
-        COALESCE(mfa_enabled, true) as "mfaEnabled",
+        CASE WHEN role = 'client' THEN false ELSE COALESCE(mfa_enabled, false) END as "mfaEnabled",
         eco_points as "ecoPoints",
         assigned_bin_id as "assignedBinId",
         created_at as "createdAt",

@@ -44,6 +44,7 @@ interface AuthContextType {
   ) => void;
   updateUserRole: (userId: string, role: UserRole) => void;
   updateUserPassword: (userId: string, newPass: string) => void;
+  updateUserMfa: (userId: string, enabled: boolean) => void;
   toggleUserStatus: (userId: string) => void;
   deleteUser: (userId: string) => void;
   addUser: (user: UserProfile) => void;
@@ -166,7 +167,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {
       success: true,
       user,
-      requiresMfa: user.mfaEnabled ?? false,
+      requiresMfa: user.role !== "client" && (user.mfaEnabled ?? false),
       mfaCode: generatedOtp,
     };
   };
@@ -312,6 +313,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }).catch((err) => console.error("Error updating password in Neon:", err));
   };
 
+  // Update User MFA / OTP requirement
+  const updateUserMfa = (userId: string, enabled: boolean) => {
+    const updated = users.map((u) => (u.id === userId ? { ...u, mfaEnabled: enabled } : u));
+    saveUsers(updated);
+    if (currentUser?.id === userId) {
+      saveCurrentUser({ ...currentUser, mfaEnabled: enabled });
+    }
+
+    fetch("/api/users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: userId, mfaEnabled: enabled }),
+    }).catch((err) => console.error("Error updating MFA in Neon:", err));
+  };
+
   // Delete User
   const deleteUser = (userId: string) => {
     const updated = users.filter((u) => u.id !== userId);
@@ -358,6 +374,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         updateUserStatus,
         updateUserRole,
         updateUserPassword,
+        updateUserMfa,
         toggleUserStatus,
         deleteUser,
         addUser,

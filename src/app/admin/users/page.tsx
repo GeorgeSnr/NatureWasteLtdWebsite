@@ -35,6 +35,7 @@ export default function AdminAccessManagementPage() {
     updateUserStatus,
     updateUserRole,
     updateUserPassword,
+    updateUserMfa,
     toggleUserStatus,
     deleteUser,
     addUser,
@@ -435,11 +436,20 @@ export default function AdminAccessManagementPage() {
                       </td>
 
                       {/* Security & MFA Status */}
-                      <td className="p-4">
-                        <div className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                          <span>MFA Enforced</span>
-                        </div>
+                      <td className="p-4" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          type="button"
+                          onClick={() => updateUserMfa(u.id, !u.mfaEnabled)}
+                          className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded border transition-colors cursor-pointer ${
+                            u.mfaEnabled
+                              ? "text-emerald-800 bg-emerald-50 border-emerald-300 hover:bg-emerald-100"
+                              : "text-gray-600 bg-gray-100 border-gray-300 hover:bg-gray-200"
+                          }`}
+                          title="Click to toggle 6-digit OTP verification for this staff operator"
+                        >
+                          <ShieldCheck className={`w-3.5 h-3.5 ${u.mfaEnabled ? "text-emerald-600" : "text-gray-400"}`} />
+                          <span>{u.mfaEnabled ? "OTP Active" : "OTP Off"}</span>
+                        </button>
                         <div className="text-gray-400 text-[10px] mt-1 flex items-center gap-1">
                           <Lock className="w-3 h-3" />
                           <span>Passcode Protected</span>
@@ -616,6 +626,38 @@ export default function AdminAccessManagementPage() {
                         <span>{selectedUser.accountStatus === "deactivated" ? "Deactivated" : "Active"}</span>
                       </button>
                     </div>
+                  </div>
+                </div>
+
+                {/* 6-Digit OTP Two-Factor Authentication */}
+                <div className="pt-2 border-t border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-600 block">
+                        6-Digit OTP Security (Admin & Staff Only)
+                      </span>
+                      <p className="text-[11px] text-gray-500 mt-0.5">
+                        {selectedUser.mfaEnabled
+                          ? "Enforced: User must verify with a 6-digit code upon signing in."
+                          : "Disabled: User signs in directly with identifier and personal passcode."}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = !selectedUser.mfaEnabled;
+                        updateUserMfa(selectedUser.id, next);
+                        setSelectedUser({ ...selectedUser, mfaEnabled: next });
+                      }}
+                      className={`px-3 py-1.5 rounded-sm font-bold text-xs uppercase cursor-pointer transition-colors flex items-center gap-1.5 shrink-0 ${
+                        selectedUser.mfaEnabled
+                          ? "bg-emerald-700 hover:bg-emerald-800 text-white"
+                          : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+                      }`}
+                    >
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <span>{selectedUser.mfaEnabled ? "OTP Active" : "OTP Off"}</span>
+                    </button>
                   </div>
                 </div>
 
