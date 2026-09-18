@@ -273,6 +273,7 @@ export function WebsiteDataProvider({ children }: { children: React.ReactNode })
     setAnnouncement(updated);
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEYS.ANNOUNCEMENT, JSON.stringify(updated));
+      sessionStorage.removeItem("nw_announcement_dismissed");
     }
 
     fetch("/api/announcement", {
