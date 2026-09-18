@@ -283,6 +283,36 @@ export default function AdminAccessManagementPage() {
         </div>
       </div>
 
+      {/* Portal Master Passcode Overview Banner */}
+      <div className="bg-white p-4 rounded border border-purple-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-purple-50/60 to-white">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-sm bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+            <Key className="w-4 h-4" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-xs text-[#1A1D20]">Admin Portal Master Passcode &amp; Relogin</span>
+              <span className="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.2 rounded-xs">
+                Supervisor Override Key
+              </span>
+            </div>
+            <p className="text-[11px] text-gray-500 mt-0.5">
+              In addition to individual staff accounts below, you can configure the Master Passcode or adjust device session persistence anytime.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/admin/settings#security"
+            className="px-3.5 py-1.5 bg-[#006F51] hover:bg-[#005a42] text-white rounded text-xs font-bold transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+          >
+            <Lock className="w-3.5 h-3.5" />
+            <span>Manage Master Passcode &rarr;</span>
+          </Link>
+        </div>
+      </div>
+
       {/* 3. Filter Tabs & Search */}
       <div className="bg-white p-4 rounded border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">

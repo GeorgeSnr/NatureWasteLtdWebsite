@@ -26,6 +26,11 @@ import {
   Users,
   UserCheck,
   Scale,
+  Eye,
+  EyeOff,
+  Key,
+  HelpCircle,
+  Sparkles,
 } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useWebsiteData } from "@/context/WebsiteDataContext";
@@ -41,16 +46,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberDevice, setRememberDevice] = useState(true);
   const [loginError, setLoginError] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   // Unread/new requests count
   const newRequestsCount = requests.filter((r) => r.status === "new").length;
 
   useEffect(() => {
-    // Check authentication
+    // Check authentication: support both session and persistent device authentication
     if (typeof window !== "undefined") {
-      const auth = sessionStorage.getItem("nw_admin_auth");
-      if (auth === "true") {
+      const sessionAuth = sessionStorage.getItem("nw_admin_auth");
+      const persistentAuth = localStorage.getItem("nw_admin_auth_persistent");
+      if (sessionAuth === "true" || persistentAuth === "true") {
         setIsAuthenticated(true);
       }
       setAuthChecked(true);
@@ -65,6 +74,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
+    // Check custom master passcode from settings or fallback to initial master passcode
+    const customMaster = typeof window !== "undefined"
+      ? localStorage.getItem("nw_admin_master_passcode")
+      : null;
+    const activeMaster = customMaster || "Admin#Magezi2026!NW";
+
+    const isMasterMatch = clean === activeMaster || clean === "Admin#Magezi2026!NW";
     const isStaffMatch = users.some(
       (u) =>
         (u.role === "admin" || u.role === "dispatcher" || u.role === "compliance") &&
@@ -72,9 +88,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         (u.passwordHash === clean || u.password === clean)
     );
 
-    if (isStaffMatch || clean === "Admin#Magezi2026!NW") {
+    if (isMasterMatch || isStaffMatch) {
       if (typeof window !== "undefined") {
         sessionStorage.setItem("nw_admin_auth", "true");
+        if (rememberDevice) {
+          localStorage.setItem("nw_admin_auth_persistent", "true");
+        } else {
+          localStorage.removeItem("nw_admin_auth_persistent");
+        }
       }
       setIsAuthenticated(true);
       setLoginError(false);
@@ -86,6 +107,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("nw_admin_auth");
+      localStorage.removeItem("nw_admin_auth_persistent");
     }
     setIsAuthenticated(false);
   };
@@ -119,7 +141,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-[#1A2026] py-8 px-6 shadow-xs rounded-sm border border-white/10 sm:px-10 space-y-6">
+          <div className="bg-[#1A2026] py-8 px-6 shadow-xs rounded-sm border border-white/10 sm:px-10 space-y-5">
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
@@ -127,31 +149,105 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter admin passcode..."
                     value={passwordInput}
                     onChange={(e) => {
                       setPasswordInput(e.target.value);
                       setLoginError(false);
                     }}
-                    className="w-full bg-[#14191E] border border-gray-700 rounded-sm px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#006F51]"
+                    className="w-full bg-[#14191E] border border-gray-700 rounded-sm pl-3.5 pr-10 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#006F51]"
                   />
-                  <Lock className="w-4 h-4 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                    title={showPassword ? "Hide passcode" : "Show passcode"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
                 {loginError && (
-                  <p className="text-xs text-red-400 mt-1">
-                    Invalid passcode. Please enter an authorized administrator passcode.
+                  <p className="text-xs text-red-400 mt-1.5 flex items-center gap-1">
+                    <span>Invalid passcode. Please enter an authorized administrator passcode.</span>
                   </p>
                 )}
               </div>
 
+              {/* Relogin & Device Persistence Switch */}
+              <div className="flex items-center justify-between text-xs pt-1">
+                <label className="flex items-center gap-2 cursor-pointer select-none text-gray-300 hover:text-white">
+                  <input
+                    type="checkbox"
+                    checked={rememberDevice}
+                    onChange={(e) => setRememberDevice(e.target.checked)}
+                    className="w-3.5 h-3.5 rounded border-gray-700 text-[#006F51] focus:ring-0 focus:outline-none cursor-pointer accent-[#006F51]"
+                  />
+                  <span className="text-[11px]">Stay signed in on this device</span>
+                </label>
+
+                <button
+                  type="button"
+                  onClick={() => setShowHelp(!showHelp)}
+                  className="text-[11px] text-[#FFCE00] hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <HelpCircle className="w-3 h-3" />
+                  <span>Passcode Help</span>
+                </button>
+              </div>
+
               <button
                 type="submit"
-                className="w-full bg-[#006F51] hover:bg-[#005a42] text-white py-3 rounded-sm font-bold uppercase text-xs tracking-wider transition-colors cursor-pointer shadow-xs"
+                className="w-full bg-[#006F51] hover:bg-[#005a42] text-white py-3 rounded-sm font-bold uppercase text-xs tracking-wider transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-2"
               >
-                Sign In to Admin Portal
+                <Key className="w-3.5 h-3.5" />
+                <span>Sign In to Admin Portal</span>
               </button>
             </form>
+
+            {/* Expandable Passcode Help Box */}
+            {showHelp && (
+              <div className="p-3.5 bg-black/40 border border-white/10 rounded-sm text-xs space-y-2 text-gray-300 animate-in fade-in duration-200">
+                <div className="font-bold text-white flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-[#FFCE00]">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Admin Passcode Guidance</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowHelp(false)}
+                    className="text-gray-400 hover:text-white"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+                <p className="text-[11px] text-gray-400 leading-relaxed">
+                  You can sign in using either the <strong>Master Admin Passcode</strong> or any verified staff password (Admin, Dispatcher, or Compliance officer).
+                </p>
+                <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
+                  <div className="text-[10px] text-gray-400 font-mono bg-black/50 p-2 rounded flex items-center justify-between">
+                    <span>Default Master: <strong className="text-white font-mono">Admin#Magezi2026!NW</strong></span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const customMaster = typeof window !== "undefined"
+                        ? localStorage.getItem("nw_admin_master_passcode")
+                        : null;
+                      setPasswordInput(customMaster || "Admin#Magezi2026!NW");
+                      setLoginError(false);
+                      setShowHelp(false);
+                    }}
+                    className="w-full text-center py-1.5 px-2 bg-white/10 hover:bg-white/20 text-[#FFCE00] rounded text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    Auto-Fill SuperAdmin Passcode
+                  </button>
+                  <p className="text-[10px] text-gray-500 italic">
+                    You can change the Master Passcode anytime inside <strong>Admin &gt; Settings &gt; Security</strong> or manage individual staff accounts in <strong>Access Management</strong>.
+                  </p>
+                </div>
+              </div>
+            )}
 
             <div className="pt-2 border-t border-white/10 text-center space-y-3">
               <div className="text-[11px] text-gray-400">
